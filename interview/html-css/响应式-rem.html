@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>梦幻独角兽</title>
+		<style type="text/css">
+		
+		@media only screen and (max-width: 374px) {
+			/* iphone5 或者更小的尺寸, 以 iphone5 的宽度(320px) 比例设置 font-size */
+			html {
+				font-size: 86px;
+			}
+		}
+		@media only screen and (min-width: 375px) and (max-width: 413px) {
+			/* iphone6/7/8 和 iphoneX */
+			html {
+				font-size: 100px;
+			}
+		}
+		@media only screen and (min-width: 414px) {
+			/* iphone6P 或更大尺寸 */
+			html {
+				font-size: 110px;
+			}
+		}
+		
+		body {
+			margin: 0;
+			font-size: 0.16rem;
+		}
+		
+		.tt {
+			width: 3rem;
+		}
+		/*
+			
+		*/
+		</style>
+	</head>
+	<body>
+		<!--
+			px: 绝对长度单位
+			em: 相对长度单位, 相对于父元素, 不常用
+			rem: 相对长度单位, 相对根元素, 常用于响应式布局  -root em
+				- 默认情况下 1rem = 16px
+				- 可修改 根元素的 html 的 font-size: 20px; 1rem = 20px
+				rem 弊端: 阶梯性 -尺寸的阶梯设置
+			网页视口尺寸
+				window.screen.height - 屏幕高度
+				window.innerHeight 	- 网页视口高度
+				document.body.clientHeight - body高度
+			
+			vw vh 网页视口高度与宽度 包含滚动条
+			vmax 取两者的最大值 		 vmin 取两者的最小值
+		-->
+		
+		<div class="tt">哈哈哈</div>
+		
+		<div style="
+		width: 10vmax;
+		height: 10vmax;
+		background-color: red;
+		"></div>
+
+	</body>
+	<script src="http://127.0.0.1:8848/dream-unicorn/utils.js"></script>
+	<script type="text/javascript">
+	window.onload = () => {
+		
+		
+
+	}
+	</script>
+</html>

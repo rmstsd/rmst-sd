@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+    <title>梦幻独角兽</title>
+    <style type="text/css">
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="ld">1212</div>
+  </body>
+  <script src="http://127.0.0.1:8848/dream-unicorn/utils.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script type="text/javascript">
+    window.onload = () => {
+      /*
+        1. http 状态码
+            状态码分类
+                1xx 服务器收到请求
+                2xx 请求成功
+                3xx 重定向
+                4xx 客户端错误
+                5xx 服务端错误
+
+            常见状态码
+                200 成功
+                301 永久重定向
+                302 临时重定向
+                304 资源未被修改		-- 请求服务端的时候发现与本地缓存的资源相同 	-- 协商缓存的时候会提现出来
+                404 资源未找到
+                403 没权限
+                500 服务器错误 	-- 后端代码bug
+                504 网关超时
+
+
+        2. http 常见的 header
+            # Request Headers
+                Accept:	浏览器可接收的数据格式
+                Accept-Encoding 浏览器可接收的压缩算法, 如 gzip
+                Accept-Language 浏览器可接收的语言
+                Connection: keep-alive		一次 TCP 连接重复使用
+                Cookie
+                Host	域名
+                User-Agent 简称 UA , 浏览器信息
+                Content-type 发送数据的格式
+            	
+            # Response Headers
+                Content-type 返回数据的格式
+                Content-length 返回的数据的大小, 多少字节
+                Content-Encoding 返回的数据的压缩算法
+                Set-Cookie 操作浏览器 Cookie
+
+                // 缓存相关的 headers
+                Cache-Control: 		// Expires 是比较老的, 已被代替
+                Last-Modified: If-Modified-Since		// 资源的最后修改时间
+                Etag: If-None-Match		// 资源的唯一标识
+                	
+        3. 什么是 Restful API
+            传统 API, 把每个 url 当做一个功能 			/api/list/?pageIndex=2
+            Restful API, 把每个 url 当做一个唯一的资源	/api/list/2
+            	
+                ## 传统API
+                    post: /api/create-blog
+                    post: /api/update-blog?id=100
+                    get: /api/get-blog?id=100
+                	
+                ## Restful API
+                    post: /api/blog
+                    patch: /api/blog
+                    get: /api/blog/100
+    	
+    	
+        4. 描述 http 缓存机制( 重要 )
+    	
+        # http 缓存
+            什么是缓存?
+                哪些资源可以被缓存? 静态资源(js, css, img)
+        
+            ## 强制缓存
+                - 首次向服务端请求资源的时候, 服务端决定是否向响应头里加入 Cache-Control 字段, 控制强制缓存的逻辑
+                    - 例如 Cache-Control: max-age=5184000	// 单位是秒
+                    - 二次访问的时候, 如果没过期, 就在本地找, 不会向服务器请求
+                - Cache-Control 的值
+                    max-age: 最大时间
+                    no-cache: 不强制缓存, 让服务端控制
+                    no-store: 不强制缓存, 不让服务端缓存
+                    private: 
+                    public: 
+                	
+            ## 协商缓存		要对比 服务端资源 和 客户端资源 是否一致
+                - 是一个服务端的缓存策略, 文件不是缓存在服务端, 服务端判断能不能用缓存的内容
+                - 服务端判断客户端资源是否和服务端一致, 一致则返回 304, 否则返回 200 和 最新的资源
+            	
+                ## 资源标识
+                    资源标识 在 Response Headers里, Last-Modified 和 Etag
+            	
+                Last-Modified 和 Etag 优先使用 Etag, Last-Modified 只能精确到秒级
+            	
+    	
+        # 不同的刷新操作, 不同的缓存策略
+            - 正常操作: 地址栏输入 url, 跳转链接, 前进后退
+            - 手动刷新: F5, 点击刷新按钮, 右击菜单刷新
+            - 强制刷新: Ctrl + F5
+
+            正常操作: 强制缓存 和 协商缓存都有效
+            手动刷新: 强制缓存失效, 协商缓存有效
+            强制刷新: 都失效		-全部返回最新资源
+        */
+    }
+  </script>
+</html>

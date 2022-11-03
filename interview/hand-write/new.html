@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body></body>
+  <script>
+    //
+
+    function User(name, age) {
+      this.name = name
+      this.age = age
+
+      return {}
+    }
+
+    console.log(new User('h', 66))
+
+    function fnNew() {
+      const o = {}
+      const ctor = Array.prototype.shift.call(arguments)
+      o.__proto__ = ctor.prototype
+
+      const res = ctor.apply(o, arguments)
+      return typeof res === 'object' ? res : o
+    }
+
+    console.log(fnNew(User, 'Leilei ', 24))
+
+    //
+  </script>
+</html>

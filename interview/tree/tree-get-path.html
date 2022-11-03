@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tree-get-path</title>
+    <style>
+      body {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      // 返回 树的path
+      const targetId = '1-3-2'
+      const data = [
+        {
+          id: '1',
+          children: [
+            { id: '1-1' },
+            { id: '1-2', children: [{ id: '1-2-1' }, { id: '1-2-2' }, { id: '1-2-3' }] },
+            { id: '1-3', children: [{ id: '1-3-1' }, { id: '1-3-2' }, { id: '1-3-3' }] }
+          ]
+        },
+        {
+          id: '2',
+          children: [{ id: '2-1' }, { id: '2-2' }, { id: '2-3' }]
+        },
+        {
+          id: '3',
+          children: [{ id: '3-1' }, { id: '3-2' }, { id: '3-3' }]
+        }
+      ]
+
+      const res = getStack(targetId, data)
+
+      console.log(res)
+
+      function getStack(targetId, data) {
+        const stack = []
+        iteratorFn(data)
+        return stack
+
+        function iteratorFn(data) {
+          for (const item of data) {
+            stack.push(item.id)
+            if (item.id === targetId) return true
+
+            if (item.children) {
+              const isFind = iteratorFn(item.children)
+              if (isFind) return true
+              else stack.pop()
+            } else {
+              stack.pop()
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

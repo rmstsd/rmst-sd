@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reg</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <style>
+      body {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const MyApp = () => {
+        return <div>react</div>
+      }
+
+      const container = document.getElementById('root')
+      const root = ReactDOM.createRoot(container)
+      root.render(<MyApp />)
+    </script>
+
+    <script>
+      const createElement = (tag, props, children) => {
+        const el = document.createElement(tag)
+        props.forEach(prop => {
+          el.setAttribute(prop, props[prop])
+        })
+
+        el.append(...[].concat(children))
+
+        return el
+      }
+
+      /*
+        * 零次或多次
+        + 一次或多次
+        ? 零次或一次 (写在两次后代表`非贪婪`)
+
+        \w 匹配字母、数字、下划线。等价于'[A-Za-z0-9_]'
+      */
+
+      const str =
+        '**a**s**da**sas[链接描述](http://localhost:9001/studio/4899)fdgfghgfh'.replaceAll(
+          /\[.+\]\(.+\)/g,
+
+          matchStr => {
+            console.log(matchStr)
+
+            // 断言
+            const desc = matchStr.match(/(?<=\[).*(?=\]\()/g)
+            console.log(desc)
+
+            const url = matchStr.match(/(?<=\]\().*(?=\))/g)
+            console.log(url)
+          }
+        )
+
+      console.log(str)
+
+      // 钱
+      const moneyReg = /\d+(\.{1}\d{1,2})?$/
+      console.log(moneyReg.test('11.222555'))
+
+      // 变量标识符
+      const varReg = /^\w+(.*\w+)?$/
+      const variableReg = /^[a-z]+([a-z.]*[a-z]+)?$/
+      console.log(varReg.test('a.b'))
+
+      // ? 量词后 -非贪婪
+      const wReg1 = /\d+/
+      const wReg2 = /\d+?/
+      console.log('123asd'.match(wReg1))
+      console.log('123asd'.match(wReg2))
+
+      var regex = /[ab]{2,5}c/g
+      var string = 'abc abbc abbbc abbbbc abbbbbc abbbbbbc'
+      console.log(string.match(regex))
+
+      // var regex = /\d{2,5}?/g
+      // var string = '123 1234 12345 123456'
+      // console.log(string.match(regex))
+
+      const regvvv = /^[A-Za-z0-9]\w*[A-Za-z0-9]+$/
+
+      console.log(regvvv.test('1111asasuiui_ff456456dasas666'))
+
+      console.log('-----------------------')
+
+      const pwdReg = /^\w{8,16}$/
+
+      // console.log(pwdReg.test('bcdbcdthbcdbcdth'))
+
+      // 请输入12位以上密码,数字,字母,字符至少包含两种,不能包含中文和空格
+      // const ans = /(?!^[0-9]+$) (?!^[A-z]+$) (?!^[^A-z0-9]+$) ^[^\s\u4e00-\u9fa5] {12,20}$/
+
+      const reg44 = /\d{3}/g
+
+      console.log([...'12345678'.matchAll(reg44)])
+
+      console.log('------------------------------')
+
+      const mds = '**a**bcd**efg**answer'
+
+      console.log(mds.match(/\*{2}\w+\*{2}/g))
+      console.log(mds.match(/(?<=\*\*)\w+(?=\*\*)/g))
+
+      console.log('------------------------------')
+
+      const thousandsStr = '1234567891234567.1234567'
+
+      const 没有小数点reg = /\d{1,3}(?=(\d{3})+$)/g
+
+      const 有小数点reg = /\d{1,3}(?=(\d{3})+\.)/g
+      // /\d{1,3}(  ?= (\d{3})+ ( ?:\.\d+ )?$  )/g
+
+      console.log(
+        thousandsStr.replace(有小数点reg, function () {
+          return `${arguments[0]},`
+        })
+      )
+
+      const pathKeys = [
+        './index.js',
+        './tC端账号状态变更时/index.js',
+        './查询用户信息/index.js',
+        './用户/查询用户信息/index.js'
+      ]
+
+      // 只匹配两个 `/` 的路径
+      const pathReg = /\.\/[^/]+\/index\.js/
+      console.log(pathReg.test('./用户/查询用户信息/index.js'))
+
+      const resPathKeys = pathKeys.filter(item => pathReg.test(item))
+      console.log(resPathKeys)
+
+      //
+    </script>
+  </body>
+</html>

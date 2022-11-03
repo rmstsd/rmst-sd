@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+    <title>梦幻独角兽</title>
+    <style type="text/css">
+      .a {
+        color: red;
+        border: 1px salmon solid;
+      }
+
+      .b {
+        font-size: 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1">
+      <p id="p1">1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+    </div>
+
+    <div id="div2"></div>
+  </body>
+  <script src="http://127.0.0.1:8848/dream-unicorn/utils.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script type="text/javascript">
+    window.onload = () => {
+      /*
+			DOM 是哪种数据结构		- 树
+			操作DOM的方式 property形式 与 attribute形式
+			两者都有可能引起DOM渲染, 优先使用 property 形式 
+		*/
+
+      const d1 = document.querySelector('#div1')
+      console.log(d1)
+
+      // property形式		-修改js变量
+      d1.style.width = '120px'
+      d1.className = 'a b'
+      d1.aaa = 1
+
+      // attribute形式		- 修改节点属性, 改变HTML结构
+      d1.setAttribute('data-nn', '雷雷')
+
+      /*
+        appendChild 对于DOM已有节点直接进行移动
+		  */
+      const np = document.createElement('p')
+      np.innerText = 'ppppp'
+
+      d1.appendChild(np)
+      document.querySelector('#div2').appendChild(document.querySelector('#p1'))
+
+      /*
+        # 事件
+        - 描述事件冒泡流程
+        - 无限下拉的图片列表, 如何监听每个图片的点击
+      */
+
+      /*
+        Ajax	-XMLHttpRequest		- 状态码
+          - readyState
+            0: 未调用send方法
+            1: 已经调用send, 正在发送请求
+            2: send执行完成, 已经接受到全部响应内容
+            3: 正在解析响应内容
+            4: 响应内容解析完成, 可以在客户端使用
+          - status 	 http状态码
+            200: 请求成功
+            3xx: 需要重定向, 浏览器直接跳转
+            4xx: 客户端请求错误
+            5xx: 服务端错误
+            
+        跨域的常用实现方式
+          -- 服务端没有同源策略
+        
+          <img src="" /> 	// 可用来统计打点
+          
+          # 解决跨域
+            所有解决跨域, 都必须经过 server 端的允许和配合
+            未经 server 端的允许实现跨域, 说明这是浏览器漏洞, 危险
+
+            - JSONP
+            - 跨域资源共享 CORS
+          
+      */
+      const xhr = new XMLHttpRequest()
+      // xhr.open('GET', 'http://localhost:8848/dream-unicorn/interview/js/data.json')
+      xhr.open('GET', './data.json')
+      // 第三个参数: 是否执行异步操作, 默认 true
+      xhr.onreadystatechange = () => {
+        console.log(xhr.readyState)
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            // console.log(JSON.parse(xhr.responseText))
+          }
+        }
+      }
+      xhr.send(null)
+
+      /*
+      cookie 的缺点		-- 本意是为了与服务端通信的
+        - 存储最大 4kb
+        - http 请求的时候需要发送到服务端, 增加请求数量
+        - 只能用 document.cookie = '' 来修改, 太简陋
+      
+      localStorage 与	sessionStorage	5M容量
+      */
+    }
+  </script>
+</html>

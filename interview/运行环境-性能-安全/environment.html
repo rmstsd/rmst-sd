@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<<<<<<< HEAD
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>梦幻独角兽</title>
+		<style type="text/css">
+		body {
+			margin: 0;
+		}
+		</style>
+	</head>
+	<body>
+
+	</body>
+	<script src="http://127.0.0.1:8848/dream-unicorn/utils.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+	<script type="text/javascript">
+	window.onload = () => {
+
+		/*
+=======
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+    <title>梦幻独角兽</title>
+    <style type="text/css">
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body></body>
+  <script src="http://127.0.0.1:8848/dream-unicorn/utils.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script type="text/javascript">
+    window.onload = () => {
+      /*
+>>>>>>> 69b8a98f4e7b7d6f5bfded5885c50c2e9e0901f7
+			1. 从输入 url 到渲染出页面的整个过程
+				1. DNS 解析: 域名 -> IP 地址
+				2. 浏览器根据ip地址向服务器发起 http 请求 ( 握手挥手什么的 )
+				3. 服务器接收到请求, 返回给浏览器
+		
+			2. window.onload 与 DOMContentLoaded 的区别
+				- onload 页面全部资源加载完执行, 包括图片视频
+				- DOMContentLoaded DOM 渲染完即可执行, 此时 图片 视频 可能还没加载完
+			
+		*/
+<<<<<<< HEAD
+
+		/*
+=======
+      /*
+>>>>>>> 69b8a98f4e7b7d6f5bfded5885c50c2e9e0901f7
+		加载资源的形式		-html, css, 媒体文件, js
+
+		渲染页面的过程
+			1. 根据 HTML 代码生成 DOM Tree
+			2. 根据 css 代码生成 CSSOM
+			3. DOM Tree 和 cssom 整合生成 Render Tree
+			4. 根据 Render Tree 渲染页面
+			5. 遇到 script 则停止渲染, 优先加载并执行 js 代码, 完成再继续
+			6. 直到 Render Tree 渲染完成
+			
+			
+				> css 放在 <head></head> 中
+				> js 放到 body 最后
+	   */
+<<<<<<< HEAD
+	  
+	  
+	  /*
+=======
+      /*
+>>>>>>> 69b8a98f4e7b7d6f5bfded5885c50c2e9e0901f7
+		# 性能优化
+			## 原则
+			- 多用内存, 缓存, 或者其他方法
+			- 减少 CPU 计算量, 减少网络加载耗时, 减少 Http 请求, 图片懒加载
+			- 适用于所有编程的性能优化, ——空间换时间
+			
+			## 从何入手
+			- 让加载更快
+				-- 减少资源体积, 压缩代码 ( 服务端开启 gzip 压缩 )
+				-- 减少访问次数, 合并代码( webpack 打包就是在合并代码 - 多个文件打包成一个文件  )
+				-- SSR 服务端渲染
+					
+				-- http 缓存
+					--- webpack 打包后 如果文件内容不变 -> hash 值不变 -> 生成的文件名不变, 触发 http 缓存机制, 返回 304
+				-- 使用更快的 CDN
+				
+			- 让渲染恒快
+				-- css 放 <head></head>, js 放 body 最后
+				-- 尽早执行js, 在 DOMContentLoaded 中执行js
+				-- 懒加载
+				-- 对 DOM 查询缓存
+				-- 节流, 防抖
+		
+	  */
+<<<<<<< HEAD
+
+
+
+	}
+	</script>
+=======
+    }
+  </script>
+>>>>>>> 69b8a98f4e7b7d6f5bfded5885c50c2e9e0901f7
+</html>

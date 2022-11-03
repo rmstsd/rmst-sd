@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>async-pool</title>
+
+    <style>
+      body {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      onload = async () => {
+        // lib es7
+        async function asyncPool_es7(poolLimit, data, asyncFunc) {
+          const ret = []
+          const executing = new Set()
+
+          for (const dataItem of data) {
+            const p = asyncFunc(dataItem)
+            executing.add(p)
+            ret.push(p)
+
+            p.finally(() => executing.delete(p))
+
+            if (executing.size >= poolLimit) {
+              await Promise.race(executing)
+            }
+          }
+
+          return Promise.all(ret)
+        }
+
+        // ----------------------------------------------------------------
+
+        // lib es6 -不用await
+        async function asyncPool_es6(poolLimit, data, asyncFunc) {
+          const ret = []
+          const executing = new Set()
+
+          let i = 0
+
+          const enqueueExecuting = () => {
+            console.log('enqueueExecuting')
+            if (i === data.length) {
+              return Promise.resolve()
+            }
+
+            const p = asyncFunc(data[i++])
+            ret.push(p)
+            executing.add(p)
+
+            p.finally(() => executing.delete(p))
+
+            let fop = Promise.resolve()
+            if (executing.size >= poolLimit) {
+              fop = Promise.race(executing)
+            }
+
+            return fop.then(() => {
+              enqueueExecuting()
+            })
+          }
+
+          return enqueueExecuting().then(() => Promise.all(ret))
+        }
+
+        // ----------------------------------------------------------------
+
+        const asyncFunc = item => {
+          return new Promise(resolve => {
+            const time = (2 + Math.floor(Math.random() * 2)) * 1000
+
+            console.log('发起', time, item)
+
+            setTimeout(() => {
+              resolve(item)
+            }, time)
+          })
+        }
+
+        const allRes = await asyncPool_es6(2, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], asyncFunc)
+
+        console.log(allRes)
+      }
+    </script>
+  </body>
+</html>

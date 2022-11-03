@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+
+  <body></body>
+  <script>
+    //
+
+    function Person(name) {
+      this.queue = []
+
+      this.queue.push(() => {
+        console.log(name)
+        this.exec()
+      })
+
+      setTimeout(() => {
+        this.exec()
+      }, 0)
+    }
+    Person.prototype.exec = function () {
+      const task = this.queue.shift()
+      task && task()
+    }
+
+    Person.prototype.eat = function (p) {
+      const task = () => {
+        console.log(p)
+        this.exec()
+      }
+
+      this.queue.push(task)
+
+      return this
+    }
+
+    Person.prototype.sleepTask = function (delay, isFirst) {
+      const task = () => {
+        setTimeout(() => {
+          console.log('sleep 等待了' + delay + '秒')
+          this.exec()
+        }, delay * 1000)
+      }
+
+      isFirst ? this.queue.unshift(task) : this.queue.push(task)
+      return this
+    }
+
+    Person.prototype.sleep = function (delay) {
+      this.sleepTask(delay, true)
+      return this
+    }
+    Person.prototype.sleepFirst = function (delay) {
+      this.sleepTask(delay, true)
+      return this
+    }
+
+    function LazyMan(name) {
+      const uu = new Person(name)
+      return uu
+    }
+
+    // LazyMan('雷雷').sleep(2).eat('橘子')
+    // LazyMan('雷雷').eat('橘子').eat('香蕉')
+    // LazyMan('雷雷').sleepFirst(2).eat('大蒜')
+  </script>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组的相对位置不变</title>
+    <style>
+      summary {
+        font-weight: bold;
+      }
+      li {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <!-- https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05735f24208c4b3a9d68cce2889cdea8~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp? -->
+  <body>
+    <script src="/source-code/vue-3.js"></script>
+
+    <main id="app">
+      <button @click="add">增加数据</button>
+      <hr />
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr)">
+        <details open>
+          <summary>原始数据</summary>
+          <ul>
+            <li v-for="(item, idx) in originalList" :key="item.id">
+              {{ item.id }} {{ item.value }}
+              <button @click="deleteParentItem(item.id, idx)">删除父项</button>
+
+              <ul>
+                <li v-for="(cItem, cIdx) in item.children" :key="item.id">
+                  {{ cItem.id }} {{ cItem.value }}
+                  <button @click="deleteChildItem(item.id, idx, cItem.id, cIdx)">删除子项</button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+
+        <details open>
+          <summary>已删除的组</summary>
+          <ul>
+            <li v-for="(item, idx) in deletedList" :key="item.id">
+              {{ item.id }} {{ item.value }}
+              <button @click="restoreParentItem(item.id, idx)">还原父项</button>
+
+              <ul>
+                <li v-for="(cItem, cIdx) in item.children" :key="item.id">
+                  {{ cItem.id }} {{ cItem.value }}
+                  <button @click="restoreChildItem(item.id, idx, cItem.id, cIdx)">还原子项</button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+        <details open>
+          <summary>映射map</summary>
+          <ul>
+            <li v-for="(item, key, idx) in indexMap" :key="item.id">
+              {{ key }}
+
+              <ul v-if="key.endsWith('cim')">
+                <li v-for="(item, key, idx) in item" :key="item.id">
+                  <span>{{ key }} {{ item }}</span>
+                </li>
+              </ul>
+
+              <span v-else>{{ item }}</span>
+            </li>
+          </ul>
+        </details>
+      </div>
+    </main>
+
+    <script>
+      const { createApp, reactive, onMounted, toRefs } = Vue
+
+      // @ts-check
+      function getInsertIdx(originIdx, idxArray) {
+        let ans = 0
+        for (let i = 0; i < idxArray.length; i++) {
+          if (originIdx > idxArray[i]) ans = i + 1
+        }
+        return ans
+      }
+
+      let id = 1234
+      let cId = 454
+      const generateData = length => {
+        return Array.from({ length }, (_, idx) => ({
+          id: ++id,
+          value: `父`,
+          children: Array.from({ length }, (_, kdx) => ({ id: ++cId, value: `子` }))
+        }))
+      }
+
+      const createIndexMap = (allData, initialIndex = 0) => {
+        return allData.reduce(
+          (parentAcc, parentItem, parentIndex) =>
+            Object.assign(parentAcc, {
+              [parentItem.id]: initialIndex + parentIndex,
+
+              [`${parentItem.id}cim`]: parentItem.children.reduce(
+                (childAcc, childItem, childIndex) => Object.assign(childAcc, { [childItem.id]: childIndex }),
+                {}
+              )
+            }),
+          {}
+        )
+      }
+
+      const app = createApp({
+        setup() {
+          const state = reactive({
+            originalList: [],
+            deletedList: [],
+            indexMap: {}
+          })
+
+          let total = 0
+
+          onMounted(() => {
+            setTimeout(() => {
+              const dataSource = generateData(4)
+              state.originalList = dataSource
+              total = dataSource.length
+              state.indexMap = createIndexMap(dataSource)
+
+              console.log(state.indexMap)
+            }, 100)
+          })
+
+          const deleteChildItem = (parentId, parentIdx, childId, childIdx) => {
+            moveChildItem(parentId, parentIdx, childId, childIdx, state.originalList, state.deletedList)
+          }
+
+          const restoreChildItem = (parentId, parentIdx, childId, childIdx) => {
+            moveChildItem(parentId, parentIdx, childId, childIdx, state.deletedList, state.originalList)
+          }
+
+          const deleteParentItem = (parentId, parentIdx) => {
+            moveParentItem(parentId, parentIdx, state.originalList, state.deletedList)
+          }
+
+          const restoreParentItem = (parentId, parentIdx) => {
+            moveParentItem(parentId, parentIdx, state.deletedList, state.originalList)
+          }
+
+          const moveParentItem = (srcPId, srcPIndex, srcList, targetList) => {
+            const [deletedItem] = srcList.splice(srcPIndex, 1)
+
+            const targetParentItem = targetList.find(item => item.id === srcPId)
+            if (targetParentItem) {
+              const childMap = state.indexMap[targetParentItem.id + 'cim']
+              targetParentItem.children = targetParentItem.children
+                .concat(deletedItem.children)
+                .sort((a, b) => childMap[a.id] - childMap[b.id])
+            } else {
+              const originIndex = state.indexMap[srcPId]
+              const originIndexArray = targetList.map(item => state.indexMap[item.id])
+              const insertIdx = getInsertIdx(originIndex, originIndexArray)
+
+              targetList.splice(insertIdx, 0, deletedItem)
+            }
+          }
+
+          const moveChildItem = (srcPId, srcPIndex, srcCId, srcCIndex, srcList, targetList) => {
+            const originalParentItem = srcList[srcPIndex]
+            const [deletedItem] = originalParentItem.children.splice(srcCIndex, 1)
+
+            const targetParentItem = targetList.find(item => item.id === srcPId)
+            if (targetParentItem) {
+              const originIndex = state.indexMap[srcPId + 'cim'][srcCId]
+              const originIndexArray = targetParentItem.children.map(
+                item => state.indexMap[srcPId + 'cim'][item.id]
+              )
+              const insertIdx = getInsertIdx(originIndex, originIndexArray)
+
+              targetParentItem.children.splice(insertIdx, 0, deletedItem)
+            } else {
+              const originIndex = state.indexMap[srcPId]
+              const originIndexArray = targetList.map(item => state.indexMap[item.id])
+              const insertIdx = getInsertIdx(originIndex, originIndexArray)
+
+              const nvParentItem = { ...originalParentItem, children: [deletedItem] }
+              targetList.splice(insertIdx, 0, nvParentItem)
+            }
+          }
+
+          const add = () => {
+            const nvData = generateData(3)
+            state.originalList.push(...nvData)
+            const nvIndexMap = createIndexMap(nvData, total)
+            total += nvData.length
+            Object.assign(state.indexMap, nvIndexMap)
+          }
+
+          return {
+            ...toRefs(state),
+            deleteParentItem,
+            restoreParentItem,
+            deleteChildItem,
+            restoreChildItem,
+            add
+          }
+        }
+      })
+
+      app.mount('#app')
+    </script>
+  </body>
+</html>

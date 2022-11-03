@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>popup</title>
+    <script src="../js/vue-3.js"></script>
+
+    <link rel="stylesheet" href="../js/element-plus.css">
+    <script src="../js/element-plus.js"></script>
+    <script src="./popup.js"></script>
+
+  </head>
+
+  <body>
+    <div id="app">
+      <input ref="inputDom" type="text" style="position: fixed; top: -100px" />
+
+      <section style="display: flex; justify-content: center; ">
+        <el-button type="primary" v-for="item of mList" @click="clickSearch(item.link)">{{ item.label }}</button>
+      </section>
+
+      <section style="display: flex; justify-content: center; margin-top: 10px">
+        <el-button v-for="item of cList" @click="clickSearch(item.link)">{{ item.label }}</button>
+      </section>
+    </div>
+  </body>
+</html>

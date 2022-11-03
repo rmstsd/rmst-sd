@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Blob Test</title>
+	</head>
+
+	<body>
+		<div>data64</div>
+		<input type="file" accept="" onchange="handleData64(this)" />
+		<img src="" style="width: 50%;" id="data64">
+		<video id="videoData" controls src="" style="width: 30%;"></video>
+
+
+		<div>blob</div>
+		<input type="file" accept="" onchange="handleBlob(this)" />
+		<img src="" style="width: 50%;" id="blob">
+		<video id="videoBlob" controls src="" style="width: 30%;"></video>
+
+
+
+		<img id="blob_img" src="" width="150px" />
+	</body>
+	<script>
+		console.log(Element)
+		// 转成  data64
+		function handleData64(e) {
+			var file = e.files[0]
+			var reader = new FileReader()
+			reader.readAsDataURL(file)
+			reader.onload = () => {
+				console.log(reader.result)
+				document.querySelector('#videoData').src = reader.result
+			}
+		}
+
+
+		// 转成  Blob
+		function handleBlob(e) {
+			var file = e.files[0]
+			let blob_url = URL.createObjectURL(file)
+			console.log(blob_url)
+			document.querySelector('#blob_img').src = blob_url
+			setTimeout(() => {
+				URL.revokeObjectURL(blob_url) // 释放
+			})
+
+		}
+
+
+
+		//canvas 转 blob_url
+		// canvas.toBlob(res => {
+		// 	let url = URL.createObjectURL(res)
+		// })
+
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "http://dryl.isart.me/1601265555536onvhoghf.png", true);
+		xhr.responseType = "blob";
+		xhr.onload = function() {
+			if (this.status == 200) {
+				var blob = this.response;
+				blob_img.onload = function(e) {
+					window.URL.revokeObjectURL(blob_img.src); // 清除释放
+				};
+				blob_img.src = window.URL.createObjectURL(blob);
+
+			}
+		}
+		xhr.send();
+
+
+
+
+		//
+	</script>
+</html>

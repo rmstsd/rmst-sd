@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>a.b.c.d</title>
+    <style>
+      body {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      let strArr = {
+        a_b_c: 1,
+        a_b_d: 2,
+        a_e_f: 3,
+        a_b_g_h: 4
+      }
+
+      // output
+      const ret = {
+        a: {
+          b: {
+            c: 1,
+            d: 2,
+            g: { h: 4 }
+          },
+          e: { f: 3 }
+        }
+      }
+
+      console.log(ansFunc(strArr))
+
+      function ansFunc(object) {
+        const res = {}
+
+        Object.keys(object).forEach(key => {
+          const keyArray = key.split('_')
+          keyArray.reduce((acc, item, index) => {
+            if (acc[item] === undefined) acc[item] = {}
+            if (index === keyArray.length - 1) acc[item] = object[key]
+            return acc[item]
+          }, res)
+        })
+
+        return res
+      }
+    </script>
+  </body>
+</html>

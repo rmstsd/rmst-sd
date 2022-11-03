@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+      /* 
+		 css 变量只能用作属性值， 不能用作属性名
+		 在 body 声明的是全局变量
+		 在某个 class 里声明的局部的
+		 */
+
+      body {
+        /* --foo: red */
+        --num: 30;
+        --scope: pink;
+      }
+
+      .div {
+        color: var(--foo, blue);
+        margin-top: calc(var(--num) * 1px);
+        transition: 0.2s;
+      }
+
+      @media screen and (min-width: 768px) {
+        .div {
+          color: orange;
+        }
+      }
+
+      .scope {
+        --scope: blue;
+        color: var(--scope);
+      }
+    </style>
+  </head>
+
+  <body></body>
+  <script type="text/javascript">
+    window.onload = async () => {
+      let api = (x, time) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (x > 10) resolve(x + ' 大于10')
+            else reject(x + ' 小于10')
+          }, time)
+        })
+
+      // all 当 所有的都成功, 总的才是成功
+      // 第一个失败的, all 的状态就会被立即改变
+      Promise.all([api(55, 6000), api(53, 2000)])
+        .then(res => {
+          console.log('all then', res)
+        })
+        .catch(err => {
+          // catch 得到第一个被 reject 的值
+          console.log('catch', err)
+        })
+
+      // 不管结果如何, 只处理最快的 最终状态由最快的那个状态决定
+      // Promise.race([api(3, 2000), api(5, 4000)]).then(res => {
+      // 	console.log('race then', res)
+      // }).catch(err => {		// catch 得到第一个被 reject 的值
+      // 	console.log('catch', err)
+      // })
+
+      // 等待所有状态改变完成, 只要有一个成功, 最终状态就是成功
+      // 都失败 则最终就是失败的
+      // Promise.any([api(3, 5000), api(2, 1000)]).then(res => {
+      // 	console.log('any then', res)
+      // }).catch(err => {		// catch 得到第一个被 reject 的值
+      // 	console.log('catch', err)
+      // })
+
+      // allSettled 只有 fulfilled 状态
+      // Promise.allSettled([api(15, 2000), api(3, 4000)]).then(res => {
+      // 	console.log('all then', res)
+      // })
+    }
+    //
+  </script>
+</html>

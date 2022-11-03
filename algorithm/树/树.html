@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+</body>
+
+
+<script>
+    // 数组转二叉树
+    function Node(val) {
+        this.value = val;
+    }
+    function arrayToBST(arr) {
+        if (!arr.length) {
+            return null;
+        }
+        if (arr.length === 1) {
+            return arr[0];
+        }
+        let mid = parseInt(arr.length / 2, 10);
+        root = new Node(arr[mid]);
+        root.left = arrayToBST(arr.slice(0, mid));
+        root.right = arrayToBST(arr.slice(mid + 1));
+        return root
+    }
+
+    // --------------------------------------------------------------------------------------------
+    // https://www.yuque.com/docs/share/a0c03f78-925a-4e3b-8402-e74a5bf02d3c?# 《二叉树遍历》
+
+    // 二叉树构造函数
+    function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val
+        this.left = left === undefined ? null : left
+        this.right = right === undefined ? null : right
+    }
+
+    /*
+        前序遍历 根节点 -> 左子树 -> 右子树
+        中序遍历 左子树 -> 根节点 -> 右子树
+        后序遍历 左子树 -> 右子树 -> 根节点
+    */
+
+    const tree = new TreeNode(0, new TreeNode(1, new TreeNode(3, new TreeNode(7, null, null), new TreeNode(8, null, null)), new TreeNode(4, new TreeNode(9, null, null), null)), new TreeNode(2, new TreeNode(5, null, null), new TreeNode(6, null, null)))
+    /*
+        前序遍历 [0, 1, 3, 7, 8, 4, 9, 2, 5, 6]
+        中序遍历 [7, 3, 8, 1, 9, 4, 0, 5, 2, 6]
+        后序遍历 [7, 8, 3, 9, 4, 1, 5, 6, 2, 0]
+    */
+    console.log(tree)
+
+</script>
+
+
+<!-- <script src="./112.%20路径总和.js"></script> -->
+<!-- <script src="./94.二叉树的前序遍历.js"></script> -->
+<!-- <script src="./145.二叉树的后序遍历.js"></script> -->
+
+<script src="./二叉树深度-层序遍历.js"></script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tree</title>
+
+    <script>
+      const tabular = [
+        { id: 1, pid: null, value: '哈哈' },
+        { id: 2, pid: 3, value: 'UI' },
+        { id: 3, pid: 4, value: '是否' },
+        { id: 4, pid: 5, value: '更好' },
+        { id: 5, pid: 1, value: '和办法' },
+        { id: 6, pid: null, value: '请问' },
+        { id: 7, pid: 1, value: '甘肃省' }
+      ]
+
+      console.log(buildTree(tabular, null))
+
+      console.log(tabular)
+      // 不可变数据 函数式编程 没有副作用 非常的nice
+      function buildTree(array, pid) {
+        const ans = array.filter(item => item.pid === pid)
+        return ans.map(item => {
+          const children = buildTree(array, item.id)
+          return Object.assign({}, item, { children })
+        })
+      }
+
+      // const tree = tabularToTree(tabular)
+      // 不太好的实现     `rc-tree-select` 也是这么实现的
+      function tabularToTree(array) {
+        const ans = []
+        array = array.map(x => ({ ...x }))
+        array.forEach(item => {
+          if (!item.pid) ans.push(item)
+          else {
+            const parentItem = array.find(x => x.id === item.pid)
+            if (!parentItem.children) parentItem.children = []
+            parentItem.children.push(item)
+          }
+        })
+        return ans
+      }
+    </script>
+  </head>
+
+  <body></body>
+</html>

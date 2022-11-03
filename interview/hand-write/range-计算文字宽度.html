@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+      body {
+        margin: 0;
+      }
+
+      .cell {
+        padding: 0 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .tooltip {
+        position: fixed;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="cell">红红火火恍恍惚惚或或或或或</div>
+    <div class="cell">符合基金</div>
+
+    <div class="tooltip" style="display: none">666</div>
+  </body>
+  <script>
+    //
+
+    const cells = document.querySelectorAll('.cell')
+
+    const tooltip = document.querySelector('.tooltip')
+
+    cells.forEach(cell => {
+      cell.onmouseenter = () => {
+        const range = document.createRange()
+
+        range.setStart(cell, 0)
+        range.setEnd(cell, 1)
+
+        const rangeWidth = range.getBoundingClientRect().width
+        if (rangeWidth + 20 > cell.offsetWidth) {
+          tooltip.style.display = 'block'
+          tooltip.style.top = cell.offsetTop - 20 + 'px'
+          tooltip.style.left = cell.offsetWidth / 2 + 'px'
+
+          tooltip.innerText = cell.innerText
+        }
+      }
+
+      cell.onmouseleave = () => {
+        tooltip.style.display = 'none'
+      }
+    })
+
+    //
+  </script>
+</html>
