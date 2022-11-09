@@ -31,42 +31,51 @@
     </script>
 
     <script>
-      const createElement = (tag, props, children) => {
-        const el = document.createElement(tag)
-        props.forEach(prop => {
-          el.setAttribute(prop, props[prop])
-        })
-
-        el.append(...[].concat(children))
-
-        return el
-      }
+      // @ts-check
 
       /*
         * 零次或多次
         + 一次或多次
-        ? 零次或一次 (写在两次后代表`非贪婪`)
+        ? 零次或一次 (写在量词后代表`非贪婪`)
 
         \w 匹配字母、数字、下划线。等价于'[A-Za-z0-9_]'
+        分组捕获？？？
       */
 
-      const str =
-        '**a**s**da**sas[链接描述](http://localhost:9001/studio/4899)fdgfghgfh'.replaceAll(
-          /\[.+\]\(.+\)/g,
+      const extra = '哈哈[xx](link11)哈风高放[uu](link22)火复工后'
 
-          matchStr => {
-            console.log(matchStr)
+      console.log(getMdArray(extra))
 
-            // 断言
-            const desc = matchStr.match(/(?<=\[).*(?=\]\()/g)
-            console.log(desc)
+      function getMdArray(sstr) {
+        const matchRes = [...sstr.matchAll(/\[.*?\]\(.*?\)/g)] // 非贪婪匹配
 
-            const url = matchStr.match(/(?<=\]\().*(?=\))/g)
-            console.log(url)
-          }
-        )
+        if (!matchRes.length) return [sstr]
 
-      console.log(str)
+        const answer = []
+
+        const getLinkObj = linkStr => {
+          const [label] = linkStr.match(/(?<=\[).*(?=\]\()/g)
+          const [href] = linkStr.match(/(?<=\]\().*(?=\))/g)
+
+          return { href, label }
+        }
+
+        let indexPoint = 0
+        matchRes.forEach((matchItem, index) => {
+          const matStr = matchItem[0]
+
+          answer.push(sstr.slice(indexPoint, matchItem.index))
+          answer.push(getLinkObj(matStr))
+
+          indexPoint = matchItem.index + matStr.length
+
+          if (index === matchRes.length - 1) answer.push(sstr.slice(indexPoint))
+        })
+
+        return answer
+      }
+
+      console.log('--------------------------------')
 
       // 钱
       const moneyReg = /\d+(\.{1}\d{1,2})?$/
