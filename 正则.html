@@ -14,6 +14,15 @@
       body {
         padding: 10px;
       }
+
+      .aaa:empty {
+        height: 20px;
+        background-color: red;
+      }
+
+      span {
+        display: none;
+      }
     </style>
   </head>
 
@@ -22,7 +31,14 @@
 
     <script type="text/babel">
       const MyApp = () => {
-        return <div>react</div>
+        return (
+          <div>
+            react
+            <div className="aaa">
+              <span></span>
+            </div>
+          </div>
+        )
       }
 
       const container = document.getElementById('root')
