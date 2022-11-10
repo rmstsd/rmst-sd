@@ -63,6 +63,10 @@
     {
       "matches": ["*://www.google.com.hk/*"],
       "css": ["./content_scripts/google/google.css"]
+    },
+    {
+      "matches": ["*://v.qq.com/*"],
+      "css": ["./content_scripts/腾讯视频/腾讯视频.css"]
     }
   ]
 }
