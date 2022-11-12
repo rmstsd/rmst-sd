@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>reg</title>
 
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
     <style>
       body {
         padding: 10px;
@@ -19,36 +15,13 @@
         height: 20px;
         background-color: red;
       }
-
-      span {
-        display: none;
-      }
     </style>
   </head>
 
   <body>
     <div id="root"></div>
 
-    <script type="text/babel">
-      const MyApp = () => {
-        return (
-          <div>
-            react
-            <div className="aaa">
-              <span></span>
-            </div>
-          </div>
-        )
-      }
-
-      const container = document.getElementById('root')
-      const root = ReactDOM.createRoot(container)
-      root.render(<MyApp />)
-    </script>
-
     <script>
-      // @ts-check
-
       /*
         * 零次或多次
         + 一次或多次
@@ -57,6 +30,19 @@
         \w 匹配字母、数字、下划线。等价于'[A-Za-z0-9_]'
         分组捕获？？？
       */
+
+      const reg = /(\d{4})-(\d{2})-(\d{2})/g
+      const text = '2015-12-25'
+      console.log([...text.matchAll(reg)])
+      const result = text.replace(reg, '$2__$1')
+      console.log(result)
+
+      console.log(text.split(reg))
+
+      const sppps = `<span>pig1</span><span>pig2</span>dog<span>pig3</span>`
+      console.log([...sppps.matchAll(/<span>.+?<\/span>/g)])
+
+      console.log('----------------------------------------------------------------')
 
       const extra = '哈哈[xx](link11)哈风高放[uu](link22)火复工后'
 

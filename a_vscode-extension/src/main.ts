@@ -9,7 +9,7 @@ interface FunctionNode {
 
 // 算法逻辑 业务逻辑
 export function getFunctionNode(code, index) {
-  const ast = parse(code)
+  const ast = parse(code, { plugins: ['typescript', 'jsx'], sourceType: 'unambiguous' })
 
   let funNode: FunctionNode
 
@@ -43,12 +43,17 @@ export function getFunctionNode(code, index) {
       }
     },
     ArrowFunctionExpression(path) {
-      // console.log('ArrowFunctionExpression path >:', path)
+      console.log('ArrowFunctionExpression path >:', path)
 
       const [name] = Object.keys(path.parentPath.getBindingIdentifiers())
 
       const VariableDeclarationPath = path.parentPath.parentPath
       if (VariableDeclarationPath?.isVariableDeclaration()) {
+        /**
+         * const func = () => {
+         *  console.log(111)
+         * }
+         */
         if (
           index >= VariableDeclarationPath.node.start &&
           index <= VariableDeclarationPath.node.end
@@ -57,6 +62,20 @@ export function getFunctionNode(code, index) {
             name: name,
             start: VariableDeclarationPath.node.loc.start,
             end: VariableDeclarationPath.node.loc.end
+          }
+        }
+      } else {
+        // 匿名函数 将只删除此匿名函数
+        /**
+         *  func(() => {
+              console.log(1)
+            })
+         */
+        if (index >= path.node.start && index <= path.node.end) {
+          funNode = {
+            name: name,
+            start: path.node.loc.start,
+            end: path.node.loc.end
           }
         }
       }
