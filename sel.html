@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sel</title>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      span {
+        color: purple;
+      }
+
+      .mark {
+        position: fixed;
+        top: 0;
+        left: 0;
+        border: 1px solid pink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>
+      此事件
+      <span>处理公高考题</span>
+      函数
+    </h1>
+
+    <h1>
+      设置 Range 包
+      <span>含某个节点及</span>
+      其它的内容
+    </h1>
+
+    <div class="mark"></div>
+
+    <!-- 
+    <img
+      style="border: 1px solid red"
+      src="https://naturobot-store.oss-cn-shanghai.aliyuncs.com/test1230/image/2022-11-11/895dad3c-e14d-4f4e-8048-8ec0556be05d.png?x-oss-process=image/format,jpg,/resize,m_pad,h_280,w_163,color_FFFFFF,/resize,m_pad,h_400,w_500,color_FFFFFF"
+      alt=""
+    /> -->
+    <script>
+      const mark = document.querySelector('.mark')
+
+      document.addEventListener('mouseup', () => {
+        const sel = window.getSelection()
+
+        const selRange = sel.getRangeAt(0)
+
+        console.log(selRange)
+
+        const { startContainer, startOffset, endContainer, endOffset } = selRange
+
+        const range = document.createRange()
+        if (range.collapsed) return
+
+        range.setStart(startContainer, startOffset)
+        range.setEnd(endContainer, endOffset)
+
+        const rect = range.getBoundingClientRect()
+
+        console.log(rect)
+
+        const { width, height, left, top } = rect
+
+        mark.style.width = width + 'px'
+        mark.style.height = height + 'px'
+        mark.style.left = left + 'px'
+        mark.style.top = top + 'px'
+      })
+    </script>
+  </body>
+</html>
