@@ -54,7 +54,7 @@
     },
     {
       "matches": ["<all_urls>"],
-      "js": ["./js/close-window.js"]
+      "js": ["./js/multi-select-range.js"]
     },
     {
       "matches": ["*://www.baidu.com/*"],
