@@ -20,8 +20,8 @@
   Object.keys(style).forEach(key => {
     canvas.style[key] = style[key]
   })
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+  canvas.width = document.body.clientWidth
+  canvas.height = document.body.clientHeight
 
   document.body.append(canvas)
 
@@ -41,7 +41,7 @@
 
     rects.forEach(rect => {
       ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
-      ctx.fillRect(rect.left, rect.top, rect.width, rect.height)
+      ctx.fillRect(rect.left + window.pageXOffset, rect.top + window.pageYOffset, rect.width, rect.height)
     })
   }
 
