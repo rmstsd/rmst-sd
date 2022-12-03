@@ -70,6 +70,12 @@
         top: 0;
         translate: 100% -100%;
       }
+
+      .overlap {
+        position: fixed;
+        background-color: pink;
+        pointer-events: none;
+      }
     </style>
   </head>
 
@@ -94,6 +100,8 @@
       <span class="left-bottom">(bx1, by1)</span>
       <span class="right-top">(bx2, by2)</span>
     </div>
+
+    <div class="overlap"></div>
 
     <script src="./辅助拖拽.js"></script>
 
