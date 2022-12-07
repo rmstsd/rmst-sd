@@ -21,6 +21,7 @@
       const btn = document.querySelector('button')
       btn.onclick = () => {
         ctx.clearRect(0, 0, 800, 600)
+        cancelAnimationFrame(rafId)
 
         setTimeout(() => {
           count = 0
@@ -37,7 +38,10 @@
 
       const line = { start: { x: Width / 2, y: Height }, length: 20, theta: -Math.PI / 2 }
 
+      let rafId
+
       step(line)
+
       const pendingTasks = []
 
       let count = 0
@@ -48,7 +52,7 @@
         const end = getEndPoint(line)
 
         count++
-        requestAnimationFrame(() => {
+        rafId = requestAnimationFrame(() => {
           if (Math.random() < 0.5 || depth < 3)
             step(
               {
@@ -89,7 +93,7 @@
             const end = getEndPoint({ start, length: perLength, theta: line.theta })
             lineTo(start, end)
 
-            requestAnimationFrame(() => dd(end))
+            rafId = requestAnimationFrame(() => dd(end))
           }
         })
       }
@@ -109,22 +113,6 @@
         }
         return end
       }
-
-      // let framesCount = 0
-      // function startFrame() {
-      //   requestAnimationFrame(() => {
-      //     framesCount += 1
-      //     if (framesCount % 60 === 0) frame()
-
-      //     startFrame()
-      //   })
-      // }
-      // function frame() {
-      //   const tasks = [...pendingTasks]
-      //   pendingTasks.length = 0
-      //   tasks.forEach(fn => fn())
-      // }
-      //
     </script>
   </body>
 </html>

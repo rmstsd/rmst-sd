@@ -1,4 +1,5 @@
 ;(() => {
+  return
   const selectTexts = []
 
   let altKey = false
