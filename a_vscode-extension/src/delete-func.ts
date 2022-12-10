@@ -7,7 +7,6 @@ interface FunctionNode {
   end?: { line: number; column: number }
 }
 
-// 算法逻辑 业务逻辑
 export function getFunctionNode(code, index) {
   const ast = parse(code, { plugins: ['typescript', 'jsx'], sourceType: 'unambiguous' })
 
@@ -30,10 +29,7 @@ export function getFunctionNode(code, index) {
 
       const VariableDeclarationPath = path.parentPath.parentPath
       if (VariableDeclarationPath?.isVariableDeclaration()) {
-        if (
-          index >= VariableDeclarationPath.node.start &&
-          index <= VariableDeclarationPath.node.end
-        ) {
+        if (index >= VariableDeclarationPath.node.start && index <= VariableDeclarationPath.node.end) {
           funNode = {
             name: name,
             start: VariableDeclarationPath.node.loc.start,
@@ -54,10 +50,7 @@ export function getFunctionNode(code, index) {
          *  console.log(111)
          * }
          */
-        if (
-          index >= VariableDeclarationPath.node.start &&
-          index <= VariableDeclarationPath.node.end
-        ) {
+        if (index >= VariableDeclarationPath.node.start && index <= VariableDeclarationPath.node.end) {
           funNode = {
             name: name,
             start: VariableDeclarationPath.node.loc.start,
