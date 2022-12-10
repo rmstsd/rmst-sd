@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { getFunctionNode } from './main'
+import { getFunctionNode } from './delete-func'
 
 // 命令触发的时候调用
 export function activate(context: vscode.ExtensionContext) {
@@ -30,5 +30,14 @@ export function activate(context: vscode.ExtensionContext) {
 
       vscode.window.showInformationMessage('已删除')
     })
+  })
+
+  vscode.commands.registerCommand('rmst-vscode-extension.rmst-jump-matched', () => {
+    const editor = vscode.window.activeTextEditor
+    if (!editor) return
+
+    const code = editor.document.getText()
+
+    const index = editor.document.offsetAt(editor.selection.active)
   })
 }

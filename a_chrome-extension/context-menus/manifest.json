@@ -57,14 +57,6 @@
       "js": ["./js/multi-select-range.js"]
     },
     {
-      "matches": ["*://www.baidu.com/*"],
-      "css": ["./content_scripts/baidu/baidu.css"]
-    },
-    {
-      "matches": ["*://www.google.com.hk/*"],
-      "css": ["./content_scripts/google/google.css"]
-    },
-    {
       "matches": ["*://v.qq.com/*"],
       "css": ["./content_scripts/腾讯视频/腾讯视频.css"]
     }
