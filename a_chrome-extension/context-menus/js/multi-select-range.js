@@ -1,50 +1,50 @@
+// @ts-check
 ;(() => {
-  return
   const selectTexts = []
 
   let altKey = false
 
   let rects = []
 
-  const canvas = document.createElement('canvas')
-  const ctx = canvas.getContext('2d')
-  const style = {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    zIndex: 999,
-    pointerEvents: 'none'
-  }
+  // const canvas = document.createElement('canvas')
+  // const ctx = canvas.getContext('2d')
+  // const style = {
+  //   position: 'absolute',
+  //   top: 0,
+  //   right: 0,
+  //   left: 0,
+  //   bottom: 0,
+  //   zIndex: 999,
+  //   pointerEvents: 'none'
+  // }
 
-  Object.keys(style).forEach(key => {
-    canvas.style[key] = style[key]
-  })
-  canvas.width = document.body.clientWidth
-  canvas.height = document.body.clientHeight
+  // Object.keys(style).forEach(key => {
+  //   canvas.style[key] = style[key]
+  // })
+  // canvas.width = document.body.clientWidth
+  // canvas.height = document.body.clientHeight
 
-  document.body.append(canvas)
+  // document.body.append(canvas)
 
-  function ctxClearRect() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-  }
+  // function ctxClearRect() {
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height)
+  // }
 
-  window.addEventListener('resize', () => {
-    canvas.width = document.body.clientWidth
-    canvas.height = document.body.clientHeight
+  // window.addEventListener('resize', () => {
+  //   canvas.width = document.body.clientWidth
+  //   canvas.height = document.body.clientHeight
 
-    drawRects(rects)
-  })
+  //   drawRects(rects)
+  // })
 
-  function drawRects(rects) {
-    ctxClearRect()
+  // function drawRects(rects) {
+  //   ctxClearRect()
 
-    rects.forEach(rect => {
-      ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
-      ctx.fillRect(rect.left + window.pageXOffset, rect.top + window.pageYOffset, rect.width, rect.height)
-    })
-  }
+  //   rects.forEach(rect => {
+  //     ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'
+  //     ctx.fillRect(rect.left + window.pageXOffset, rect.top + window.pageYOffset, rect.width, rect.height)
+  //   })
+  // }
 
   // ----------------------------------------------------------------
   document.addEventListener('keydown', evt => {
@@ -60,24 +60,24 @@
       copyExecCommand(text)
 
       selectTexts.length = 0
-      rects = []
-      ctxClearRect()
+      // rects = []
+      // ctxClearRect()
     }
   })
 
   document.addEventListener('mouseup', () => {
     if (altKey) {
       const sel = window.getSelection()
-      if (sel.isCollapsed) return
-
-      const range = sel.getRangeAt(0)
-      if (range.collapsed) return
 
       const selectText = sel.toString()
+      if (!selectText) return
+
       selectTexts.push(selectText)
 
-      rects.push(...Array.from(range.getClientRects()))
-      drawRects(rects)
+      console.log(selectTexts)
+
+      // rects.push(...Array.from(range.getClientRects()))
+      // drawRects(rects)
 
       sel.removeAllRanges()
     }
