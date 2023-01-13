@@ -35,15 +35,15 @@
     </div>
 
     <script>
-      let c = () => {}
+      let cancel = () => {}
       function addListener() {
         const domContainer = document.querySelector('.domContainer')
 
-        c = addMoveScrollListener(domContainer)
+        cancel = addMoveScrollListener(domContainer)
       }
 
       function cancelListener() {
-        c?.()
+        cancel?.()
       }
 
       addListener()
