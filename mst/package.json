@@ -1,0 +1,14 @@
+{
+  "name": "mst",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {},
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
