@@ -1,3 +1,8 @@
-// Object.prototype.toString.call([1, 2])
+Object.prototype.toString.call([1, 2]);
 
-// [1, 2, 3].toString()
+delete Array.prototype.toString;
+
+[1, 2].toString()
+
+export const a = 1
+

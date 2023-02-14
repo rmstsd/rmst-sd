@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const App = () => {
   const [count, setCount] = useState(0)
 
-  const Com = () => {
+  const Child = () => {
     useEffect(() => {
       console.log(1)
     }, [])
@@ -20,7 +20,7 @@ const App = () => {
       >
         {count}
       </button>
-      <Com />
+      <Child />
     </div>
   )
 }
