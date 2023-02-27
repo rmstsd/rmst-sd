@@ -4,28 +4,27 @@ import generate from '@babel/generator'
 import * as types from '@babel/types'
 import fse from 'fs-extra'
 import clearConsole from 'clear-console'
+import ncp from 'copy-paste'
 
 import commandResultArray from './commandResultArray'
 ;(() => {
   clearConsole()
 
-  // commandResultArray
+  const code = fse.readFileSync('./originSchema.ts', { encoding: 'utf8' })
 
-  // const code = fse.readFileSync('./originSchema.ts', { encoding: 'utf8' })
-  // const code = fse.readFileSync('./xiao.ts', { encoding: 'utf8' })
+  // const code = `
+  // const uu = {
+  //   type: 'bgetopen',
+  //   disabled: false,
+  //   inputs: {
+  //     type: 'chrome',
+  //     mode: 'dd'
+  //   },
+  //   outputs: {
 
-  const code = `
-  const uu = {
-    type: 'bgetopen',
-    disabled: false,
-    inputs: {
-      type: 'chrome'
-    },
-    outputs: {
-      
-    }
-  }
-  `
+  //   }
+  // }
+  // `
 
   const ast = parse(code)
 
@@ -38,43 +37,45 @@ import commandResultArray from './commandResultArray'
       if (keys.includes('type') && keys.includes('inputs') && keys.includes('outputs')) {
         const commandType = path.node.properties.find(nodeItem => nodeItem.key.name === 'type').value.value
 
-        console.log('单个指令', commandType)
+        // console.log('单个指令', commandType)
 
         path.node.properties.forEach(nodeItem => {
+          // 如果拿到的是指令对象
           if (nodeItem.key.name === 'inputs' || nodeItem.key.name === 'outputs') {
             const inputsProperties = nodeItem.value.properties
+            // inputsProperties.find(nodeItem => nodeItem.key.name === 'type')
 
-            console.log('--> ', inputsProperties)
+            // console.log('--> ', inputsProperties)
 
-            // const comment = getComment(commandType, nodeItem.key.name)
-            // if (comment) {
-            //   types.addComment(path.node, 'trailing', comment, true)
-            // }
+            inputsProperties.forEach(propertyItem => {
+              // console.log(propertyItem)
+
+              const comment = getComment(commandType, propertyItem.key.name)
+              if (comment) types.addComment(propertyItem, 'trailing', comment)
+            })
           }
         })
       }
-    },
-    Identifier(path) {
-      // console.log(path.getStatementParent())
-      // if (types.isIdentifier(path.node, { name: 'aa' })) {
-      //   console.log(1)
-      // }
-      // path.addComment('uu', 'ii')
-      // console.log(path.node.decorators)
-      // types.addComment(path.node, 'inner', '哈哈哈')
     }
   })
 
   const nvCode = generate(ast, {}).code
 
   console.log(nvCode)
+
+  ncp.copy(nvCode, function () {
+    console.log('复制完了')
+  })
 })()
 
 function getComment(commandType, key) {
-  console.log(commandType, key)
   const fop = getFieldOption(commandResultArray, commandType, key)
 
   if (!fop) return null
+
+  if (fop.dataSource) {
+    return `${fop.title}: 可选值: ${fop.dataSource.map(item => item.value).join(' | ')}`
+  }
 
   return fop.title
 }
