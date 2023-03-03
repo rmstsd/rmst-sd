@@ -59,6 +59,19 @@
     {
       "matches": ["*://v.qq.com/*"],
       "css": ["./content_scripts/腾讯视频/腾讯视频.css"]
+    },
+
+    {
+      "matches": [
+        "*://www.google.com.hk/*",
+        "*://www.baidu.com/*",
+        "*://search.bilibili.com/*",
+        "*://www.zhihu.com/*",
+        "*://www.npmjs.com/*",
+        "*://juejin.cn/*",
+        "*://developer.mozilla.org/*"
+      ],
+      "js": ["./content_scripts/focus-input.js"]
     }
   ]
 }
