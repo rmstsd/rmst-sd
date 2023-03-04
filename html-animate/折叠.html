@@ -55,7 +55,7 @@
       const btn = document.querySelector('.btn')
       const container = document.querySelector('.container')
 
-      const transition = 'all 3s'
+      const transition = 'all .3s'
 
       let isTargetClose = true // 目标状态 希望关闭 还是 打开
       let isTransitionend = true // 是否已经过渡完成
@@ -95,7 +95,7 @@
           container.style.overflow = 'hidden'
           container.style.transition = transition
 
-          let ooHeight = container.getBoundingClientRect().height
+          const ooHeight = container.getBoundingClientRect().height
 
           container.style.height = 'auto'
           const targetHeight = container.getBoundingClientRect().height
