@@ -72,6 +72,11 @@
         "*://developer.mozilla.org/*"
       ],
       "js": ["./content_scripts/focus-input.js"]
+    },
+
+    {
+      "matches": ["*://konvajs.org/*"],
+      "css": ["./content_scripts/konva.css"]
     }
   ]
 }
