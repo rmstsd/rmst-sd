@@ -77,6 +77,11 @@
     {
       "matches": ["*://konvajs.org/*"],
       "css": ["./content_scripts/konva.css"]
+    },
+    {
+      "matches": ["*://www.zhihu.com/*"],
+      "css": ["./content_scripts/zhihu.css"],
+      "js": ["./content_scripts/zhihu.js"]
     }
   ]
 }
