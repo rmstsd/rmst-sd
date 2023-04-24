@@ -17,3 +17,5 @@ export function createCanvas(containerWidth, containerHeight) {
 
   return { canvasElement, ctx }
 }
+
+// 123
