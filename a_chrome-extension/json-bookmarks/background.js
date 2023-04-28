@@ -1,5 +1,9 @@
 chrome.runtime.onMessageExternal.addListener(message => {
+  console.log('background message', message)
+
   chrome.tabs.query({}, tabs => {
+    console.log(tabs)
+
     const targetTab = tabs.find(item => item.title === '预览')
     if (!targetTab) return
 

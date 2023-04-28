@@ -16,13 +16,13 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["/js/send-method.js"],
+      "resources": ["/js/send-method.js", "/js/inject.js", "/js/json.js"],
       "matches": ["<all_urls>"]
     }
   ],
   "permissions": ["tabs", "bookmarks", "contextMenus"],
   "externally_connectable": {
-    "matches": ["*://localhost/*", "*://192.168.0.125/*", "http://192.168.254.102/*"]
+    "matches": ["*://localhost/*", "*://192.168.0.125/*", "http://101.132.35.226/*"]
   },
   "content_scripts": [
     {

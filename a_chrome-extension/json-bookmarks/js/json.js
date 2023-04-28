@@ -2,6 +2,7 @@
 
 // 监听 chrome.tabs.sendMessage 发送的消息
 chrome.runtime.onMessage.addListener(message => {
+  console.log('message', message)
   window.postMessage({ type: 'json-preview', value: message })
 
   copyToClipboard(message)

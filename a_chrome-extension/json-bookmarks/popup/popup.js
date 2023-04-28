@@ -1,5 +1,14 @@
 // @ts-check
 onload = async () => {
+  document.querySelector('.clear-btn').onclick = () => {
+    console.log(111)
+
+    console.log(Object.keys(localStorage))
+    console.log(chrome.tabs.query({ active: true }))
+
+    chrome.runtime.sendMessage('fbpofnfkeemfpepajlkhmhlbmdkimjep', '123456', { includeTlsChannelId: true })
+  }
+
   const getBookmarks = async () => {
     try {
       const bookmarks = await chrome.bookmarks.getTree()
@@ -38,5 +47,7 @@ onload = async () => {
     return a
   })
 
-  document.body.append(...aElement_array)
+  document.querySelector('.bookmark').append(...aElement_array)
 }
+
+console.log(window)

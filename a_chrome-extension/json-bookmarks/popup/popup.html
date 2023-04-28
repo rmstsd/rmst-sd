@@ -43,10 +43,24 @@
         background-color: #f9f9f9;
         text-decoration: underline;
       }
+
+      .clear-btn {
+        margin: 10px;
+        cursor: pointer;
+      }
     </style>
   </head>
 
   <body>
+    <div class="bookmark"></div>
+
+    <div class="clear-local-data">
+      <button class="clear-btn">
+        清除
+        <div>localStorage sessionStorage cookie</div>
+      </button>
+    </div>
+
     <script src="./popup.js"></script>
   </body>
 </html>
