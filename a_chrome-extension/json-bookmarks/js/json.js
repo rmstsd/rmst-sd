@@ -1,18 +1,13 @@
-// console.log('content_scripts-json')
-
 // 监听 chrome.tabs.sendMessage 发送的消息
 chrome.runtime.onMessage.addListener(message => {
-  console.log('message', message)
-  window.postMessage({ type: 'json-preview', value: message })
-
-  copyToClipboard(message)
+  // window.localStorage.clear()
+  // window.sessionStorage.clear()
+  // window.location.reload()
 })
 
-const copyToClipboard = str => {
-  const el = document.createElement('textarea')
-  el.value = str
-  document.body.appendChild(el)
-  el.select()
-  document.execCommand('copy')
-  document.body.removeChild(el)
-}
+// const script = document.createElement('script')
+// // 绝对路径, 扩展根目录
+// script.setAttribute('src', chrome.runtime.getURL('js/send-method.js'))
+
+// document.head.appendChild(script)
+//取cookies

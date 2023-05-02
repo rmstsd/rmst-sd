@@ -16,22 +16,16 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["/js/send-method.js", "/js/inject.js", "/js/json.js"],
+      "resources": ["/js/send-method.js", "/js/json.js"],
       "matches": ["<all_urls>"]
     }
   ],
-  "permissions": ["tabs", "bookmarks", "contextMenus"],
-  "externally_connectable": {
-    "matches": ["*://localhost/*", "*://192.168.0.125/*", "http://101.132.35.226/*"]
-  },
+  "host_permissions": ["<all_urls>"],
+  "permissions": ["tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["./js/json.js"]
-    },
-    {
-      "matches": ["<all_urls>"],
-      "js": ["./js/inject.js"]
     }
   ]
 }
