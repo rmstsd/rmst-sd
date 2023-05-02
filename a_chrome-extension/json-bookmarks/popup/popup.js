@@ -12,18 +12,11 @@ async function clearBtn() {
   chrome.storage.local.clear()
   deleteDomainCookies(new URL(currTab.url).host)
 
-  chrome.tabs.reload(currTab.id)
+  await chrome.tabs.sendMessage(currTab.id, '自定义消息')
 
-  return
-
-  // chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-  //   tabs[0].id
-
-  //   chrome.tabs.sendMessage(tabs[0].id, '自定义消息', res => {
-  //     // console.log('popup=>content')
-  //     // console.log(res)
-  //   })
-  // })
+  setTimeout(() => {
+    chrome.tabs.reload(currTab.id)
+  }, 300)
 }
 
 function stringToUrl(input) {

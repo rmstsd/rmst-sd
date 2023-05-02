@@ -1,8 +1,7 @@
 // 监听 chrome.tabs.sendMessage 发送的消息
 chrome.runtime.onMessage.addListener(message => {
-  // window.localStorage.clear()
-  // window.sessionStorage.clear()
-  // window.location.reload()
+  window.localStorage.clear()
+  window.sessionStorage.clear()
 })
 
 // const script = document.createElement('script')
