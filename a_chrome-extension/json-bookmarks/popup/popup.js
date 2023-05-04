@@ -9,14 +9,13 @@ async function clearBtn() {
   const [currTab] = await chrome.tabs.query({ active: true })
   console.log('currTab', currTab)
 
-  chrome.storage.local.clear()
-  deleteDomainCookies(new URL(currTab.url).host)
+  deleteDomainCookies(new URL(currTab.url).hostname)
 
   await chrome.tabs.sendMessage(currTab.id, '自定义消息')
 
   setTimeout(() => {
     chrome.tabs.reload(currTab.id)
-  }, 300)
+  }, 100)
 }
 
 function stringToUrl(input) {
@@ -37,6 +36,7 @@ function stringToUrl(input) {
 }
 
 async function deleteDomainCookies(domain) {
+  console.log(domain)
   let cookiesDeleted = 0
   try {
     const cookies = await chrome.cookies.getAll({ domain })
