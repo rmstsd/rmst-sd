@@ -36,7 +36,7 @@
       "
     >
       <!-- 圆环 -->
-      <!-- <path
+      <path
         class="cir"
         d="
         M 100 100
@@ -49,9 +49,9 @@
         Z
           "
         fill="rgb(84,112,198)"
-      ></path> -->
+      ></path>
       <!-- 扇环 -->
-      <path
+      <!-- <path
         d="
         M272 183.1
         A190.4 190.4 0 0 1 437.081 468.3706
@@ -64,9 +64,10 @@
         "
         fill="transparent"
         stroke="rgb(84,112,198)"
-      ></path>
-      <!-- <circle cx="100" cy="100" r="19" fill="red" /> -->
-      <!-- <circle cx="100" cy="130" r="2" fill="purple" /> -->
+      ></path> -->
+
+      <circle cx="100" cy="100" r="2" fill="red" />
+      <circle cx="100" cy="130" r="2" fill="purple" />
     </svg>
 
     <script>
@@ -76,16 +77,18 @@
         const outerM = `M ${centerX} ${outerM_y}`
         const outerA = `A ${outerRadius} ${outerRadius} 0 1 1 ${centerX - 0.01} ${outerM_y}`
 
-        const innerM = `M ${centerX} ${centerY - innerRadius}`
-        const innerA = `A ${innerRadius} ${innerRadius} 0 1 0 ${centerX + 0.01} ${centerY - innerRadius}`
+        const innerM_y = centerY - innerRadius
+
+        const innerM = `M ${centerX} ${innerM_y}`
+        const innerA = `A ${innerRadius} ${innerRadius} 0 1 0 ${centerX + 0.01} ${innerM_y}`
 
         return `${outerM} ${outerA} ${innerM} ${innerA} Z`
       }
 
-      const d = calcD(50, 10, 0, 360, 100, 100)
+      const d = calcD(100, 50, 0, 360, 100, 100)
 
       console.log(d)
-      // document.querySelector('.cir').setAttribute('d', d)
+      document.querySelector('.cir').setAttribute('d', d)
 
       //
     </script>
