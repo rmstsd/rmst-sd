@@ -17,23 +17,60 @@
       baseProfile="full"
       width="502"
       height="558"
-      style="position: absolute; left: 0; top: 0; user-select: none"
+      style="user-select: none; border: 1px solid red"
     >
-      <g clip-path="url(#zr0-c0)">
-        <path
-          d="M78.8857 274L136.2571 159.8667L193.6286 168.4267L251 176.9867L308.3714 295.4L365.7429 278.28L423.1143 117.0667"
-          fill="none"
-          stroke="rgb(84,112,198)"
-          stroke-width="20"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-      </g>
+      <path
+        clip-path="url(#zr0-c0)"
+        d="M78.8857 274L136.2571 159.8667L193.6286 168.4267L251 176.9867L308.3714 295.4L365.7429 278.28L423.1143 117.0667"
+        fill="none"
+        stroke="rgb(84,112,198)"
+        stroke-width="20"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
 
-      <defs>
-        <clipPath id="zr0-c0"><path d="M40 50l422 0l0 448l-422 0Z" fill="#000"></path></clipPath>
-      </defs>
+      <clipPath id="zr0-c0">
+        <path d="M51 50l345.4616 0l0 810l-345.4616 0Z" fill="#000"></path>
+      </clipPath>
     </svg>
-    <script></script>
+
+    <br />
+    <canvas width="600" height="600" style="border: 1px solid red"></canvas>
+
+    <script>
+      const ctx = document.querySelector('canvas').getContext('2d')
+
+      let limitWidth = 0
+      function exec() {
+        if (limitWidth >= 220) return
+        limitWidth += 2
+
+        ctx.clearRect(0, 0, 600, 600)
+
+        ctx.save()
+        ctx.beginPath()
+        ctx.rect(0, 0, limitWidth, 300)
+        ctx.clip()
+
+        ctx.beginPath()
+        ctx.lineJoin = 'round'
+        ctx.moveTo(20, 20)
+        ctx.lineTo(150, 150)
+        ctx.lineTo(200, 100)
+        ctx.strokeStyle = 'purple'
+        ctx.lineWidth = 20
+        ctx.stroke()
+
+        ctx.restore()
+        ctx.font = '40px Arial'
+        ctx.strokeText('人美声甜', 300, 100)
+
+        requestAnimationFrame(exec)
+      }
+
+      requestAnimationFrame(exec)
+
+      //
+    </script>
   </body>
 </html>
