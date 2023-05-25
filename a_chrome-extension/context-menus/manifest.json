@@ -51,10 +51,6 @@
       "js": ["./content_scripts/openLink/jianshu.js"]
     },
     {
-      "matches": ["<all_urls>"],
-      "js": ["./js/multi-select-range.js"]
-    },
-    {
       "matches": ["*://v.qq.com/*"],
       "css": ["./content_scripts/腾讯视频/腾讯视频.css"]
     },
