@@ -1,192 +1,22 @@
-2023/05/28 17:08:20 [notice] 22388#22024: signal process started
-2023/05/28 17:08:20 [error] 22388#22024: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:08:27 [notice] 5044#20988: signal process started
-2023/05/28 17:08:27 [error] 5044#20988: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:12:12 [notice] 22240#22284: signal process started
-2023/05/28 17:12:15 [notice] 5356#20820: signal process started
-2023/05/28 17:12:15 [error] 5356#20820: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:12:31 [notice] 21656#1472: signal process started
-2023/05/28 17:12:31 [error] 21656#1472: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:19:06 [emerg] 6956#23056: bind() to 0.0.0.0:1234 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2023/05/28 17:19:45 [notice] 23080#7616: signal process started
-2023/05/28 17:19:45 [error] 23080#7616: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:20:14 [notice] 20804#18848: signal process started
-2023/05/28 17:20:14 [error] 20804#18848: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:20:17 [emerg] 19616#7228: bind() to 0.0.0.0:1234 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2023/05/28 17:20:17 [notice] 11860#24044: signal process started
-2023/05/28 17:20:17 [error] 11860#24044: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:20:22 [emerg] 19952#22284: bind() to 0.0.0.0:1234 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2023/05/28 17:20:30 [emerg] 20556#23224: bind() to 0.0.0.0:1234 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2023/05/28 17:20:40 [notice] 12532#23968: signal process started
-2023/05/28 17:20:40 [error] 12532#23968: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:20:42 [notice] 21084#18488: signal process started
-2023/05/28 17:20:42 [error] 21084#18488: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:20:44 [notice] 20804#20756: signal process started
-2023/05/28 17:20:44 [error] 20804#20756: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:20:55 [notice] 9964#5788: signal process started
-2023/05/28 17:20:55 [error] 9964#5788: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:21:06 [notice] 16492#13252: signal process started
-2023/05/28 17:21:06 [error] 16492#13252: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:21:30 [notice] 19540#3384: signal process started
-2023/05/28 17:21:30 [error] 19540#3384: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:21:38 [notice] 20236#14720: signal process started
-2023/05/28 17:21:38 [error] 20236#14720: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 17:21:43 [emerg] 1356#13564: bind() to 0.0.0.0:1234 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2023/05/28 18:12:37 [emerg] 16196#16236: bind() to 0.0.0.0:1234 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2023/05/28 18:12:52 [notice] 1992#20604: signal process started
-2023/05/28 18:12:52 [error] 1992#20604: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:13:14 [error] 21848#11960: *1 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/"
-2023/05/28 18:13:25 [notice] 432#19496: signal process started
-2023/05/28 18:13:34 [notice] 6800#19744: signal process started
-2023/05/28 18:13:34 [error] 6800#19744: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:13:37 [notice] 10080#22672: signal process started
-2023/05/28 18:13:37 [error] 10080#22672: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:13:48 [error] 21728#10116: *1 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/"
-2023/05/28 18:14:33 [error] 21728#10116: *1 CreateFile() "E:\nginx-1.22.0/html/50x.htm" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /50x.htm HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:15:55 [error] 21728#10116: *1 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/50x.html"
-2023/05/28 18:15:57 [error] 21728#10116: *1 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/50x.html"
-2023/05/28 18:16:39 [notice] 1712#17392: signal process started
-2023/05/28 18:16:52 [notice] 17312#22104: signal process started
-2023/05/28 18:16:52 [error] 17312#22104: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:16:58 [notice] 9352#6736: signal process started
-2023/05/28 18:16:58 [error] 9352#6736: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:17:03 [notice] 22364#24564: signal process started
-2023/05/28 18:17:03 [error] 22364#24564: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:17:12 [notice] 21260#16096: signal process started
-2023/05/28 18:17:15 [notice] 20580#24028: signal process started
-2023/05/28 18:17:15 [error] 20580#24028: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:18:18 [error] 3552#7080: *1 CreateFile() "E:\nginx-1.22.0/pages/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/"
-2023/05/28 18:19:56 [notice] 8256#19844: signal process started
-2023/05/28 18:20:05 [notice] 22036#7776: signal process started
-2023/05/28 18:23:36 [error] 24216#24492: *1 "E:\nginx-1.22.0/html/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:23:39 [error] 24216#24492: *1 CreateFile() "E:\nginx-1.22.0/pages/u" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /u HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:23:45 [error] 24216#24492: *1 CreateFile() "E:\nginx-1.22.0/pages/u" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /u HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:23:47 [error] 24216#24492: *1 CreateFile() "E:\nginx-1.22.0/pages/u" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /u HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:23:49 [error] 24216#24492: *1 CreateFile() "E:\nginx-1.22.0/pages/u" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /u HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:23:50 [error] 24216#24492: *1 CreateFile() "E:\nginx-1.22.0/pages/u" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /u HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:23:55 [error] 24216#24492: *1 "E:\nginx-1.22.0/html/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:24:05 [error] 24216#24492: *1 "E:\nginx-1.22.0/html/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:24:09 [notice] 15432#24420: signal process started
-2023/05/28 18:24:10 [error] 24216#24492: *2 "E:\nginx-1.22.0/html/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:24:54 [error] 7196#17308: *3 CreateFile() "E:\nginx-1.22.0/pages/50.html" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /50.html HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:25:01 [error] 7196#17308: *3 CreateFile() "E:\nginx-1.22.0/pages/506.html" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /506.html HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:25:07 [error] 7196#17308: *3 CreateFile() "E:\nginx-1.22.0/pages/504.html" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /504.html HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:25:09 [error] 7196#17308: *3 CreateFile() "E:\nginx-1.22.0/pages/504.html" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /504.html HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:28:56 [error] 7196#17308: *5 CreateFile() "E:\nginx-1.22.0/pages/504.html" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /504.html HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:29:12 [notice] 23220#15952: signal process started
-2023/05/28 18:29:19 [error] 23844#24128: *7 CreateFile() "E:\nginx-1.22.0/pages/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/"
-2023/05/28 18:29:20 [error] 23844#24128: *7 CreateFile() "E:\nginx-1.22.0/pages/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/"
-2023/05/28 18:31:36 [notice] 17676#9584: signal process started
-2023/05/28 18:31:40 [error] 17856#16952: *9 CreateFile() "E:\nginx-1.22.0/pages/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/"
-2023/05/28 18:34:05 [error] 17856#16952: *11 CreateFile() "E:\nginx-1.22.0/pages/aaa" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /aaa HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:38:28 [notice] 11256#21296: signal process started
-2023/05/28 18:43:28 [notice] 17028#15480: signal process started
-2023/05/28 18:43:31 [error] 6464#20260: *17 directory index of "E:\nginx-1.22.0/pages/uu/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET /uu/ HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:43:33 [error] 6464#20260: *17 directory index of "E:\nginx-1.22.0/pages/uu/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET /uu/ HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:43:47 [notice] 2124#15424: signal process started
-2023/05/28 18:44:40 [notice] 2504#12180: signal process started
-2023/05/28 18:44:58 [notice] 15552#19988: signal process started
-2023/05/28 18:45:19 [notice] 19304#17128: signal process started
-2023/05/28 18:45:19 [error] 19304#17128: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 18:51:00 [notice] 12232#21844: signal process started
-2023/05/28 18:51:05 [error] 21932#15820: *5 "E:\nginx-1.22.0/html/uu/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /uu/ HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:51:06 [error] 21932#15820: *5 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/uu/"
-2023/05/28 18:51:22 [notice] 20476#13516: signal process started
-2023/05/28 18:51:24 [error] 21932#15820: *6 "E:\nginx-1.22.0/html/uu/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /uu/ HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:53:46 [notice] 20476#2844: signal process started
-2023/05/28 18:53:52 [error] 5692#22264: *9 CreateFile() "D:\桌面\壁纸头像/img" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:53:58 [error] 5692#22264: *9 CreateFile() "D:\桌面\壁纸头像/img1" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /img1 HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:54:00 [error] 5692#22264: *9 CreateFile() "D:\桌面\壁纸头像/img1" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /img1 HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:54:01 [error] 5692#22264: *9 CreateFile() "D:\桌面\壁纸头像/img1" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /img1 HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:54:20 [error] 5692#22264: *9 CreateFile() "D:\桌面\壁纸头像/img" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:54:22 [error] 5692#22264: *9 CreateFile() "D:\桌面\壁纸头像/imgaaa" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /imgaaa HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:55:21 [notice] 13992#20856: signal process started
-2023/05/28 18:55:22 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/imgaaa" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /imgaaa HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:55:23 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/imgaaa" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /imgaaa HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:55:24 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/img" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:55:28 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/img" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:56:10 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/img/壁纸" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/%E5%A3%81%E7%BA%B8 HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:56:16 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/img/壁纸/30.jpg" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/%E5%A3%81%E7%BA%B8/30.jpg HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:56:19 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/img/壁纸/30.jpg" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/%E5%A3%81%E7%BA%B8/30.jpg HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:56:46 [error] 21976#19232: *11 CreateFile() "D:/桌面/壁纸头像/img/壁纸/30.jpg" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/%E5%A3%81%E7%BA%B8/30.jpg HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:57:02 [notice] 18900#21104: signal process started
-2023/05/28 18:57:04 [error] 23636#21132: *13 CreateFile() "D:/桌面/壁纸头像/img/img/壁纸/30.jpg" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/%E5%A3%81%E7%BA%B8/30.jpg HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:57:05 [error] 23636#21132: *13 CreateFile() "D:/桌面/壁纸头像/img/img/壁纸/30.jpg" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/%E5%A3%81%E7%BA%B8/30.jpg HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:58:13 [notice] 21600#20500: signal process started
-2023/05/28 18:58:14 [error] 2188#2844: *15 CreateFile() "D:/桌面/壁纸头像/img/壁纸/30.jpg" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/%E5%A3%81%E7%BA%B8/30.jpg HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:59:21 [notice] 4104#22640: signal process started
-2023/05/28 18:59:35 [notice] 14540#13336: signal process started
-2023/05/28 18:59:37 [error] 7816#13108: *19 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img"
-2023/05/28 18:59:38 [error] 7816#13108: *19 CreateFile() "E:\nginx-1.22.0/html/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:59:38 [error] 7816#13108: *19 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img"
-2023/05/28 18:59:39 [error] 7816#13108: *19 CreateFile() "E:\nginx-1.22.0/html/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 18:59:40 [error] 7816#13108: *19 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img"
-2023/05/28 19:00:47 [error] 7816#13108: *21 CreateFile() "E:\nginx-1.22.0/html/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 19:00:50 [notice] 20240#21092: signal process started
-2023/05/28 19:00:52 [error] 7816#13108: *22 CreateFile() "E:\nginx-1.22.0/html/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 19:00:53 [error] 14036#23932: *23 CreateFile() "E:\nginx-1.22.0/html/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 19:00:55 [error] 14036#23932: *23 CreateFile() "D:/桌面/壁纸头像/img/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:20:20 [notice] 16504#19604: signal process started
-2023/05/28 20:20:25 [error] 11116#14880: *1 CreateFile() "D:/桌面/壁纸头像/img/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:20:27 [error] 11116#14880: *1 CreateFile() "D:/桌面/壁纸头像/img/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:20:41 [notice] 15196#3464: signal process started
-2023/05/28 20:20:47 [error] 11116#14880: *2 CreateFile() "D:/桌面/壁纸头像/img/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:21:14 [notice] 22260#14904: signal process started
-2023/05/28 20:21:16 [error] 23432#19352: *3 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:21:19 [error] 23432#19352: *3 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:21:22 [error] 23432#19352: *3 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:21:35 [notice] 20488#15456: signal process started
-2023/05/28 20:21:35 [error] 23432#19352: *4 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:21:37 [error] 1136#8704: *5 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:22:27 [notice] 12056#7800: signal process started
-2023/05/28 20:22:28 [error] 1136#8704: *6 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:22:30 [error] 13336#8412: *7 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:22:31 [error] 13336#8412: *7 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img/14.png"
-2023/05/28 20:22:31 [error] 13336#8412: *7 CreateFile() "D:/桌面/壁纸头像/reg/img/14.png" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img/14.png HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:22:31 [error] 13336#8412: *7 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img/14.png"
-2023/05/28 20:23:01 [error] 13336#8412: *7 CreateFile() "D:/桌面/壁纸头像/reg/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:23:03 [error] 13336#8412: *7 CreateFile() "D:/桌面/壁纸头像/reg/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:23:04 [error] 13336#8412: *7 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img"
-2023/05/28 20:24:34 [notice] 20304#20336: signal process started
-2023/05/28 20:24:36 [error] 3636#19576: *9 CreateFile() "E:/nginx-1.22.0/reg/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:24:37 [error] 3636#19576: *9 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img"
-2023/05/28 20:24:37 [error] 3636#19576: *9 CreateFile() "E:/nginx-1.22.0/reg/img" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /img HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:24:38 [error] 3636#19576: *9 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/img"
-2023/05/28 20:28:06 [notice] 21500#13156: signal process started
-2023/05/28 20:32:28 [emerg] 20652#14088: invalid number of arguments in "proxy_pass" directive in E:\nginx-1.22.0/conf/nginx.conf:44
-2023/05/28 20:33:15 [emerg] 22084#6028: invalid number of arguments in "proxy_pass" directive in E:\nginx-1.22.0/conf/nginx.conf:44
-2023/05/28 20:33:18 [emerg] 3660#15480: invalid number of arguments in "proxy_pass" directive in E:\nginx-1.22.0/conf/nginx.conf:44
-2023/05/28 20:33:22 [emerg] 23080#22744: invalid number of arguments in "proxy_pass" directive in E:\nginx-1.22.0/conf/nginx.conf:44
-2023/05/28 20:33:51 [emerg] 4956#22056: invalid number of arguments in "proxy_pass" directive in E:\nginx-1.22.0/conf/nginx.conf:44
-2023/05/28 20:34:11 [emerg] 17648#17804: invalid number of arguments in "proxy_pass" directive in E:\nginx-1.22.0/conf/nginx.conf:44
-2023/05/28 20:34:27 [emerg] 21220#24028: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:34:35 [notice] 2620#22252: signal process started
-2023/05/28 20:34:35 [error] 2620#22252: CreateFile() "E:\nginx-1.22.0/logs/nginx.pid" failed (2: The system cannot find the file specified)
-2023/05/28 20:34:43 [error] 20144#22332: *3 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://[::1]:5501/index.html", host: "localhost:10086", referrer: "http://localhost:10086/"
-2023/05/28 20:34:50 [emerg] 24192#13372: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:34:58 [emerg] 6864#12864: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:35:03 [emerg] 20876#20312: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:35:05 [emerg] 20488#18176: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:35:09 [emerg] 20312#20872: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:35:15 [error] 20144#22332: *3 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://[::1]:5501/", host: "localhost:10086"
-2023/05/28 20:35:35 [emerg] 1348#16704: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:35:35 [alert] 22796#14936: worker process 1348 exited with code 1
-2023/05/28 20:35:35 [alert] 22796#14936: could not respawn worker
-2023/05/28 20:35:43 [emerg] 6904#21020: invalid URL prefix in E:\nginx-1.22.0/conf/nginx.conf:42
-2023/05/28 20:36:57 [notice] 7056#19616: signal process started
-2023/05/28 20:36:57 [error] 7056#19616: OpenEvent("Global\ngx_reload_22796") failed (2: The system cannot find the file specified)
-2023/05/28 20:37:08 [error] 22740#16236: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://[::1]:5501/", host: "localhost:10086"
-2023/05/28 20:37:40 [error] 22740#16236: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://[::1]:5501/", host: "localhost:10086"
-2023/05/28 20:41:52 [error] 22740#16236: *15 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /static/%E5%A3%81%E7%BA%B8 HTTP/1.1", upstream: "http://[::1]:5501/index.html", host: "localhost:10086"
-2023/05/28 20:42:26 [error] 22740#16236: *15 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /static/36.jpg HTTP/1.1", upstream: "http://[::1]:5501/index.html", host: "localhost:10086"
-2023/05/28 20:42:47 [notice] 592#23888: signal process started
-2023/05/28 20:43:17 [notice] 11208#23036: signal process started
-2023/05/28 20:43:22 [error] 17932#21564: *32 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/aaa.png"
-2023/05/28 20:43:25 [notice] 24116#15992: signal process started
-2023/05/28 20:43:35 [error] 20796#6736: *1 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/aaa.png"
-2023/05/28 20:44:24 [notice] 18856#17848: signal process started
-2023/05/28 20:44:29 [error] 9056#20240: *3 CreateFile() "E:\nginx-1.22.0/html/static" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /static HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:44:33 [error] 9056#20240: *3 directory index of "E:/nginx-1.22.0/img/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET /static/ HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:44:35 [error] 9056#20240: *3 directory index of "E:/nginx-1.22.0/img/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET /static/ HTTP/1.1", host: "localhost:10086"
-2023/05/28 20:44:36 [error] 9056#20240: *3 CreateFile() "E:\nginx-1.22.0/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
-2023/05/28 20:46:36 [notice] 14392#20476: signal process started
+2023/05/28 21:26:20 [error] 21588#17392: *3 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:26:30 [error] 21588#17392: *5 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:27:29 [notice] 19080#25164: signal process started
+2023/05/28 21:27:34 [error] 4544#23088: *7 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:27:34 [error] 4544#23088: *7 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:27:35 [error] 4544#23088: *7 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:28:52 [notice] 19220#22620: signal process started
+2023/05/28 21:28:58 [error] 22276#8644: *9 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:29:00 [error] 22276#8644: *9 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:30:03 [notice] 25308#11596: signal process started
+2023/05/28 21:30:09 [error] 19664#1668: *11 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:30:10 [error] 19664#1668: *11 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:30:12 [error] 19664#1668: *11 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:30:16 [notice] 14152#13748: signal process started
+2023/05/28 21:30:26 [error] 19140#19852: *1 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:30:26 [error] 19140#19852: *1 CreateFile() "E:\rmst-sd\rmst-nginx/html/favicon.ico" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:33:51 [notice] 20940#22124: signal process started
+2023/05/28 21:34:23 [notice] 5892#20016: signal process started
+2023/05/28 21:37:00 [notice] 25200#21224: signal process started
+2023/05/28 21:37:01 [error] 17592#15964: *7 directory index of "E:/rmst-sd/rmst-nginx/img/avatar/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET /static/avatar/ HTTP/1.1", host: "localhost:10086", referrer: "http://localhost:10086/static/"
+2023/05/28 21:37:04 [error] 17592#15964: *7 directory index of "E:/rmst-sd/rmst-nginx/img/avatar/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET /static/avatar/ HTTP/1.1", host: "localhost:10086"
+2023/05/28 21:37:19 [notice] 4400#23320: signal process started
