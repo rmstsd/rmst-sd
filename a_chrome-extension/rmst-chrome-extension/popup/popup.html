@@ -8,7 +8,7 @@
     <style>
       body {
         margin: 0;
-        width: 140px;
+        width: 160px;
       }
 
       .icon {
@@ -44,19 +44,24 @@
         text-decoration: underline;
       }
 
-      .clear-btn {
+      .clear-local-data {
         margin: 10px;
+      }
+      button {
         cursor: pointer;
       }
     </style>
   </head>
 
   <body>
+    <div class="bookmark"></div>
+
+    <hr />
+
     <div class="clear-local-data">
       <button class="clear-btn">清除 Storage</button>
+      <button class="toLowercase-btn">小写</button>
     </div>
-
-    <div class="bookmark"></div>
 
     <script src="./popup.js"></script>
   </body>

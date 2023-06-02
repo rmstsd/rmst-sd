@@ -2,7 +2,15 @@
 onload = async () => {
   document.querySelector('.clear-btn').onclick = clearBtn
 
+  document.querySelector('.toLowercase-btn').onclick = toLowercaseBtn
+
   initBookMarkUi()
+}
+
+async function toLowercaseBtn() {
+  const [currTab] = await chrome.tabs.query({ active: true })
+
+  chrome.tabs.sendMessage(currTab.id, { evt: 'evt_to-lowercase' })
 }
 
 async function clearBtn() {

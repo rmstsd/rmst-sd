@@ -1,0 +1,57 @@
+{
+  "name": "rmst-chrome-extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "48": "image/cute.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "image/logo.png"
+    }
+  },
+  "host_permissions": ["<all_urls>"],
+  "permissions": ["tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./contentScripts/feat/clearStorage.js"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./contentScripts/feat/toLowercase.js"]
+    },
+
+    {
+      "matches": ["*://www.zhihu.com/*"],
+      "css": ["./contentScripts/thirdWeb/zhihu/zhihu.css"],
+      "js": ["./contentScripts/thirdWeb/zhihu/zhihu.js"]
+    },
+
+    {
+      "matches": ["*://link.zhihu.com/?target*"],
+      "js": ["./contentScripts/thirdWeb/openLink/zhihu.js"]
+    },
+    {
+      "matches": ["*://link.juejin.cn/?target*"],
+      "js": ["./contentScripts/thirdWeb/openLink/juejin.js"]
+    },
+    {
+      "matches": ["*://link.csdn.net/?target=*"],
+      "js": ["./contentScripts/thirdWeb/openLink/csdn.js"]
+    },
+    {
+      "matches": ["*://www.jianshu.com/go-wild*"],
+      "js": ["./contentScripts/thirdWeb/openLink/jianshu.js"]
+    },
+
+    {
+      "matches": ["*://konvajs.org/*"],
+      "css": ["./contentScripts/thirdWeb/konva.css"]
+    }
+  ]
+}

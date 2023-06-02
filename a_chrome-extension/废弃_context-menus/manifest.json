@@ -3,20 +3,18 @@
   "version": "1.0",
   "manifest_version": 3,
   "icons": {
-    "16": "image/cute.png",
-    "48": "image/cute.png",
-    "128": "image/cute.png"
+    "48": "image/cute.png"
   },
   "background": {
     "service_worker": "background.js"
   },
-  "options_ui": {
-    "page": "options/dist/index.html",
-    "open_in_tab": true
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "image/cute.png"
+    }
   },
-  "sandbox": {
-    "pages": ["popup/popup.html"]
-  },
+  "host_permissions": ["<all_urls>"],
   "permissions": [
     "activeTab",
     "alarms",
@@ -33,6 +31,10 @@
     "downloads",
     "tabs"
   ],
+  "options_ui": {
+    "page": "options/dist/index.html",
+    "open_in_tab": true
+  },
   "content_scripts": [
     {
       "matches": ["*://link.zhihu.com/?target*"],
@@ -50,32 +52,10 @@
       "matches": ["*://www.jianshu.com/go-wild*"],
       "js": ["./content_scripts/openLink/jianshu.js"]
     },
-    {
-      "matches": ["*://v.qq.com/*"],
-      "css": ["./content_scripts/腾讯视频/腾讯视频.css"]
-    },
-
-    {
-      "matches": [
-        "*://www.google.com.hk/*",
-        "*://www.baidu.com/*",
-        "*://search.bilibili.com/*",
-        "*://www.zhihu.com/*",
-        "*://www.npmjs.com/*",
-        "*://juejin.cn/*",
-        "*://developer.mozilla.org/*"
-      ],
-      "js": ["./content_scripts/focus-input.js"]
-    },
 
     {
       "matches": ["*://konvajs.org/*"],
       "css": ["./content_scripts/konva.css"]
-    },
-    {
-      "matches": ["*://www.zhihu.com/*"],
-      "css": ["./content_scripts/zhihu.css"],
-      "js": ["./content_scripts/zhihu.js"]
     }
   ]
 }

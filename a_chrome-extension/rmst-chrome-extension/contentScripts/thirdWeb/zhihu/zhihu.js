@@ -1,3 +1,4 @@
+// 隐藏登录弹窗
 const timer = setInterval(() => {
   const dom = document.querySelector('.Modal-wrapper')
 
