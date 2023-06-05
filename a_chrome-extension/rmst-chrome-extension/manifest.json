@@ -14,6 +14,10 @@
       "48": "image/logo.png"
     }
   },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
   "host_permissions": ["<all_urls>"],
   "permissions": ["tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage"],
   "content_scripts": [
