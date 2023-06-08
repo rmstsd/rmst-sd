@@ -7,10 +7,8 @@ const server = http.createServer((req, res) => {
   // 跨域
   res.setHeader('Access-Control-Allow-Origin', '*')
 
-  const buffer = fs.readFileSync('./esm.js')
-
   setTimeout(() => {
-    res.end(buffer)
+    res.end('123')
   }, 2000)
 })
 
