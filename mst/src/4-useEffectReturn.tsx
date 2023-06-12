@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 
 // 先点增加，再点隐藏，会不打印？
 const Child = () => {
@@ -23,3 +24,6 @@ const App = () => {
     </div>
   )
 }
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />)

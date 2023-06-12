@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createRoot } from 'react-dom/client'
 
 let outerCount = 1
 
@@ -26,3 +27,6 @@ const App = () => {
     </div>
   )
 }
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />)

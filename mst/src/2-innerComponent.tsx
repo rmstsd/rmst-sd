@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -24,3 +25,6 @@ const App = () => {
     </div>
   )
 }
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />)
