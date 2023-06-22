@@ -2,10 +2,15 @@ const Pending = 'Pending'
 const Fulfilled = 'Fulfilled'
 const Rejected = 'Rejected'
 
-const nextTick = setTimeout //: process.nextTick
+const onDefaultFulfilled = v => v
+const onDefaultRejected = reason => {
+  throw reason
+}
 
-function resolvePromise(x, promise2, resolve, reject) {
-  if (x === promise2) {
+const nextTick = queueMicrotask //: process.nextTick
+
+function resolvePromise(x, nextPromise, resolve, reject) {
+  if (x === nextPromise) {
     return reject(TypeError('Chaining cycle detected for promise #<Promise>'))
   }
 
@@ -24,7 +29,7 @@ function resolvePromise(x, promise2, resolve, reject) {
           y => {
             if (called) return
             called = true
-            resolvePromise(y, promise2, resolve, reject)
+            resolvePromise(y, nextPromise, resolve, reject)
           },
           r => {
             if (called) return
@@ -90,21 +95,15 @@ class RmstPromise {
   onRejectedCallbacks = []
 
   then(onFulfilled, onRejected) {
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v
-    onRejected =
-      typeof onRejected === 'function'
-        ? onRejected
-        : reason => {
-            throw reason
-          }
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : onDefaultFulfilled
+    onRejected = typeof onRejected === 'function' ? onRejected : onDefaultRejected
 
-    const promise2 = new RmstPromise((resolve, reject) => {
+    const nextPromise = new RmstPromise((resolve, reject) => {
       if (this.status === Fulfilled) {
-        // 应该是一个微任务
         nextTick(() => {
           try {
             const x = onFulfilled(this.value)
-            resolvePromise(x, promise2, resolve, reject)
+            resolvePromise(x, nextPromise, resolve, reject)
           } catch (error) {
             reject(error)
           }
@@ -115,7 +114,7 @@ class RmstPromise {
         nextTick(() => {
           try {
             const x = onRejected(this.reason)
-            resolvePromise(x, promise2, resolve, reject)
+            resolvePromise(x, nextPromise, resolve, reject)
           } catch (error) {
             reject(error)
           }
@@ -127,7 +126,7 @@ class RmstPromise {
           nextTick(() => {
             try {
               const x = onFulfilled(this.value)
-              resolvePromise(x, promise2, resolve, reject)
+              resolvePromise(x, nextPromise, resolve, reject)
             } catch (error) {
               reject(error)
             }
@@ -138,7 +137,7 @@ class RmstPromise {
           nextTick(() => {
             try {
               const x = onRejected(this.reason)
-              resolvePromise(x, promise2, resolve, reject)
+              resolvePromise(x, nextPromise, resolve, reject)
             } catch (error) {
               reject(error)
             }
@@ -147,7 +146,7 @@ class RmstPromise {
       }
     })
 
-    return promise2
+    return nextPromise
   }
 }
 
@@ -161,4 +160,4 @@ RmstPromise.deferred = function () {
   return dfd
 }
 
-module.exports = RmstPromise
+// module.exports = RmstPromise
