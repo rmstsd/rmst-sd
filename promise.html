@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promise</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      const Pending = 'p'
+      const Fulfilled = 'f'
+      const Rejected = 'r'
+
+      function resolvePromise(x, resolve) {
+        if (x instanceof RmstPromise) {
+          x.then(value => {
+            resolvePromise(value, resolve)
+          })
+        } else {
+          resolve(x)
+        }
+      }
+
+      class RmstPromise {
+        constructor(executor) {
+          const resolve = value => {
+            if (this.status === Pending) {
+              this.value = value
+              this.status = Fulfilled
+
+              this.fulfilledCbs.forEach(funcItem => {
+                funcItem()
+              })
+            }
+          }
+
+          const reject = reason => {
+            if (this.status === Pending) {
+              this.value = reason
+              this.status = Rejected
+            }
+          }
+
+          executor(resolve, reject)
+        }
+
+        status = Pending
+        value
+        reason
+
+        fulfilledCbs = []
+        rejectedCbs = []
+
+        then(onFulfilled, onRejected) {
+          onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v
+
+          const nextPromise = new RmstPromise((resolve, reject) => {
+            if (this.status === Fulfilled) {
+              queueMicrotask(() => {
+                const x = onFulfilled(this.value)
+
+                resolvePromise(x, resolve)
+              })
+            }
+
+            if (this.status === Pending) {
+              this.fulfilledCbs.push(() => {
+                queueMicrotask(() => {
+                  const x = onFulfilled(this.value)
+
+                  resolvePromise(x, resolve)
+                })
+              })
+            }
+          })
+
+          return nextPromise
+        }
+      }
+
+      const p = new RmstPromise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('suc')
+        }, 500)
+      })
+
+      p.then(value => {
+        console.log(1, value)
+
+        return new RmstPromise(resolve => {
+          setTimeout(() => {
+            resolve(
+              new RmstPromise(resolve => {
+                resolve('inner p')
+              })
+            )
+          }, 500)
+        })
+      }).then(value => {
+        console.log(2, value)
+
+        return 456
+      })
+
+      //
+    </script>
+  </body>
+</html>
