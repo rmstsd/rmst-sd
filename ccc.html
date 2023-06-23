@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ccc</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    123
+    <script>
+      document.addEventListener('copy', function (event) {
+        // clipboardData 对象是为通过编辑菜单、快捷菜单和快捷键执行的编辑操作所保留的，也就是你复制或者剪切内容
+        let clipboardData = event.clipboardData || window.clipboardData
+        console.log(clipboardData)
+        // 如果未复制或者未剪切，则return出去
+        if (!clipboardData) {
+          return
+        }
+        // Selection 对象，表示用户选择的文本范围或光标的当前位置。
+        //     声明一个变量接收 -- 用户输入的剪切或者复制的文本转化为字符串
+        let text = window.getSelection().toString()
+        if (text) {
+          // 如果文本存在，首先取消文本的默认事件
+          event.preventDefault()
+          // 通过调用常clipboardData对象的 setData(format, data) 方法；来设置相关文本
+
+          // setData(format, data);参数
+          // format
+          // 一个DOMString 表示要添加到 drag object的拖动数据的类型。
+          // data
+          // 一个 DOMString表示要添加到 drag object的数据。
+          clipboardData.setData('text/plain', text + '\n\n-----------\n asdasdasd')
+        }
+      })
+    </script>
+  </body>
+</html>

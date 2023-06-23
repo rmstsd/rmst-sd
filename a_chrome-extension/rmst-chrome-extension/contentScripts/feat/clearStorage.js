@@ -2,6 +2,8 @@
 chrome.runtime.onMessage.addListener(message => {
   window.localStorage.clear()
   window.sessionStorage.clear()
+
+  chrome.runtime.sendMessage({ domain: document.domain })
 })
 
 // 动态注入脚本
