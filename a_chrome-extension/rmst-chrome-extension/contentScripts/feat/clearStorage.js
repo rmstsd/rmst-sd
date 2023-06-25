@@ -7,7 +7,11 @@ chrome.runtime.onMessage.addListener(message => {
 
   function getRootDomain(domain) {
     const domainParts = domain.split('.')
-    const rootDomain = domainParts[domainParts.length - 2] + '.' + domainParts[domainParts.length - 1]
+
+    if (domainParts.length <= 2) {
+      return domain
+    }
+    const rootDomain = domainParts.at(-2) + '.' + domainParts.at(-1)
 
     return rootDomain
   }

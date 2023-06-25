@@ -26,11 +26,15 @@ async function clearCookieBtn() {
 
 async function deleteDomainCookies(domain, rootDomain) {
   let cookiesDeleted = 0
+
+  console.log(domain, rootDomain)
   try {
-    const cookies = await Promise.all([
-      chrome.cookies.getAll({ domain }),
-      chrome.cookies.getAll({ domain: rootDomain })
-    ]).then(([cookies1, cookies2]) => [...cookies1, ...cookies2])
+    const promises = [chrome.cookies.getAll({ domain })]
+    if (rootDomain && rootDomain !== domain && rootDomain.includes('.')) {
+      promises.push(chrome.cookies.getAll({ domain: rootDomain }))
+    }
+
+    const cookies = await Promise.all(promises).then(([cookies1, cookies2]) => [...cookies1, ...cookies2])
 
     if (cookies.length === 0) {
       return 'No cookies found'
