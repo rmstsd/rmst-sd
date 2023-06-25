@@ -8,9 +8,9 @@ onload = async () => {
 
 // 监听 clearStorage.js 发过来的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  const { domain } = message
+  const { domain, rootDomain } = message
 
-  deleteDomainCookies(domain)
+  deleteDomainCookies(domain, rootDomain)
 })
 
 async function clearCookieBtn() {
@@ -24,10 +24,14 @@ async function clearCookieBtn() {
   }, 100)
 }
 
-async function deleteDomainCookies(domain) {
+async function deleteDomainCookies(domain, rootDomain) {
   let cookiesDeleted = 0
   try {
-    const cookies = await chrome.cookies.getAll({ domain })
+    const cookies = await Promise.all([
+      chrome.cookies.getAll({ domain }),
+      chrome.cookies.getAll({ domain: rootDomain })
+    ]).then(([cookies1, cookies2]) => [...cookies1, ...cookies2])
+
     if (cookies.length === 0) {
       return 'No cookies found'
     }
@@ -36,7 +40,7 @@ async function deleteDomainCookies(domain) {
 
     cookiesDeleted = pending.length
   } catch (error) {
-    return `Unexpected error: ${error.message}`
+    console.error(`Unexpected error: ${error.message}`)
   }
 
   return `Deleted ${cookiesDeleted} cookie(s).`
