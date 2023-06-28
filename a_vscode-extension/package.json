@@ -46,6 +46,10 @@
       {
         "command": "rmst-vscode-extension.rmst-del-func",
         "title": "人美声甜: 删除光标所在的函数"
+      },
+      {
+        "command": "rmst-vscode-extension.rmst-case",
+        "title": "人美声甜: 转小写"
       }
     ]
   }

@@ -32,12 +32,18 @@ export function activate(context: vscode.ExtensionContext) {
     })
   })
 
-  vscode.commands.registerCommand('rmst-vscode-extension.rmst-jump-matched', () => {
+  vscode.commands.registerCommand('rmst-vscode-extension.rmst-case', () => {
     const editor = vscode.window.activeTextEditor
     if (!editor) return
 
-    const code = editor.document.getText()
+    const wordRange = editor.document.getWordRangeAtPosition(editor.selection.active)
 
-    const index = editor.document.offsetAt(editor.selection.active)
+    const wordText = editor.document.getText(wordRange)
+
+    console.log(wordText)
+
+    editor.edit(editBuilder => {
+      editBuilder.replace(wordRange, 'aaa')
+    })
   })
 }
