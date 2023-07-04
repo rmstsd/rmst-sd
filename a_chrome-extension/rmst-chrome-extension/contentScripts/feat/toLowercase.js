@@ -15,7 +15,9 @@ function isRenderedElement(element) {
 
 function logTextNodes(node) {
   if (node.nodeType === Node.TEXT_NODE && isRenderedElement(node.parentNode)) {
-    node.parentNode.style.textTransform = 'initial'
+    if (getComputedStyle(node.parentNode).getPropertyValue('text-transform') === 'uppercase') {
+      node.parentNode.style.textTransform = 'initial'
+    }
 
     if (/^[A-Z _-]+$/.test(node.textContent)) {
       node.textContent = node.textContent.toLowerCase()
