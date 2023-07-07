@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sd</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <button>sss</button>
+
+    <div class="cc" style="overflow: auto; height: 300px"></div>
+
+    <script>
+      document.querySelector('button').onclick = () => {
+        const div = Array.from({ length: 100 }, (_, idx) => {
+          const dd = document.createElement('div')
+          dd.innerText = idx
+          return dd
+        })
+
+        document.querySelector('.cc').append(...div)
+
+        document.querySelector('.cc').scrollTo({ top: 100 })
+      }
+    </script>
+  </body>
+</html>
