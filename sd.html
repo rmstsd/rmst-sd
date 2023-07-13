@@ -1,31 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sd</title>
-
-    <style></style>
+    <style>
+      #myCanvas {
+        border: 1px solid black;
+        cursor: move;
+      }
+    </style>
   </head>
-
   <body>
-    <button>sss</button>
-
-    <div class="cc" style="overflow: auto; height: 300px"></div>
+    <button>绘制矩形</button>
+    <div id="container">
+      <canvas id="myCanvas" width="400" height="400"></canvas>
+    </div>
 
     <script>
       document.querySelector('button').onclick = () => {
-        const div = Array.from({ length: 100 }, (_, idx) => {
-          const dd = document.createElement('div')
-          dd.innerText = idx
-          return dd
+        ctx.fillStyle = 'pink'
+        ctx.fillRect(0, 0, 100, 100)
+      }
+
+      // 获取 canvas 元素和上下文
+      var canvas = document.getElementById('myCanvas')
+      var ctx = canvas.getContext('2d')
+
+      // 定义画板的初始位置坐标
+      var canvasX = 0
+      var canvasY = 0
+
+      // 定义鼠标按下时的起始位置坐标
+      var startX
+      var startY
+
+      // 监听鼠标按下事件
+      canvas.addEventListener('mousedown', function (event) {
+        // 获取鼠标按下时的起始位置坐标
+        startX = event.clientX
+        startY = event.clientY
+
+        // 监听鼠标移动事件
+        document.addEventListener('mousemove', moveCanvas)
+
+        // 监听鼠标松开事件
+        document.addEventListener('mouseup', function () {
+          // 停止监听鼠标移动事件
+          document.removeEventListener('mousemove', moveCanvas)
         })
 
-        document.querySelector('.cc').append(...div)
+        // 鼠标移动事件处理函数
+        function moveCanvas(event) {
+          // 计算鼠标移动的距离
+          var moveX = event.clientX - startX
+          var moveY = event.clientY - startY
 
-        document.querySelector('.cc').scrollTo({ top: 100 })
+          // 更新画板的位置坐标
+          canvasX += moveX
+          canvasY += moveY
+
+          // 清空画布
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+          // 平移画板
+          ctx.translate(moveX, moveY)
+
+          // 绘制矩形
+          drawRectangle()
+
+          // 恢复画板的初始位置
+          // ctx.translate(-moveX, -moveY)
+
+          // 更新起始位置
+          startX = event.clientX
+          startY = event.clientY
+        }
+      })
+
+      // 绘制矩形
+      function drawRectangle() {
+        ctx.beginPath()
+        ctx.rect(50, 50, 200, 100)
+        ctx.fillStyle = 'blue'
+        ctx.fill()
+        ctx.closePath()
       }
+
+      // 初始绘制矩形
+      drawRectangle()
     </script>
   </body>
 </html>
