@@ -24,6 +24,7 @@
     {
       "matches": ["<all_urls>"],
       "js": [
+        "./contentScripts/thirdWeb/openLink/openLink.js",
         "./contentScripts/feat/clearStorage.js",
         "./contentScripts/feat/toLowercase.js",
         "./contentScripts/feat/copyPlain.js",
@@ -36,23 +37,6 @@
       "matches": ["*://www.zhihu.com/*"],
       "css": ["./contentScripts/thirdWeb/zhihu/zhihu.css"],
       "js": ["./contentScripts/thirdWeb/zhihu/zhihu.js"]
-    },
-
-    {
-      "matches": ["*://link.zhihu.com/?target*"],
-      "js": ["./contentScripts/thirdWeb/openLink/zhihu.js"]
-    },
-    {
-      "matches": ["*://link.juejin.cn/?target*"],
-      "js": ["./contentScripts/thirdWeb/openLink/juejin.js"]
-    },
-    {
-      "matches": ["*://link.csdn.net/?target=*"],
-      "js": ["./contentScripts/thirdWeb/openLink/csdn.js"]
-    },
-    {
-      "matches": ["*://www.jianshu.com/go-wild*"],
-      "js": ["./contentScripts/thirdWeb/openLink/jianshu.js"]
     },
 
     {

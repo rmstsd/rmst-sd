@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nn</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      var validSquare = function (p1, p2, p3, p4) {
+        const q = { value: 0, count: 0 }
+        const w = { value: 0, count: 0 }
+
+        const a = distance(p1, p2)
+        const b = distance(p1, p3)
+        const c = distance(p1, p4)
+        const d = distance(p2, p3)
+        const e = distance(p2, p4)
+        const f = distance(p3, p4)
+
+        const arr = [a, b, c, d, e, f]
+
+        console.log(arr)
+
+        if (arr.includes(0)) return false
+
+        const tt = arr.reduce((acc, item) => {
+          if (!acc[item]) {
+            acc[item] = []
+          }
+
+          acc[item].push(item)
+
+          return acc
+        }, {})
+
+        console.log(tt)
+
+        const vs = Object.values(tt)
+
+        if (
+          Object.keys(tt).length === 2 &&
+          vs.find(item => item.length === 2) &&
+          vs.find(item => item.length === 4)
+        ) {
+          return true
+        }
+
+        return false
+
+        function distance(p1, p2) {
+          return Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1], 2))
+        }
+      }
+
+      const p1 = [0, 0],
+        p2 = [1, 1],
+        p3 = [0, 0],
+        p4 = [1, 1]
+
+      console.log(validSquare(p1, p2, p3, p4))
+
+      function isSquare(point1, point2, point3, point4) {
+        // 计算四个点之间的距离
+        const d2 = (p1, p2) => {
+          const dx = p1[0] - p2[0]
+          const dy = p1[1] - p2[1]
+          return dx * dx + dy * dy
+        }
+
+        // 计算所有可能的边长
+        const distances = [
+          d2(point1, point2),
+          d2(point1, point3),
+          d2(point1, point4),
+          d2(point2, point3),
+          d2(point2, point4),
+          d2(point3, point4)
+        ]
+
+        // 找到最小和最大边长
+        const minDistance = Math.min(...distances)
+        const maxDistance = Math.max(...distances)
+
+        // 判断是否为正方形
+        return minDistance > 0 && minDistance === maxDistance
+      }
+    </script>
+  </body>
+</html>
