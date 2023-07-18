@@ -9,83 +9,37 @@
     </style>
   </head>
   <body>
-    <button>绘制矩形</button>
+    <button class="t">transform</button>
+    <button class="st">setTransform</button>
+
     <div id="container">
       <canvas id="myCanvas" width="400" height="400"></canvas>
     </div>
 
     <script>
-      document.querySelector('button').onclick = () => {
-        ctx.fillStyle = 'pink'
-        ctx.fillRect(0, 0, 100, 100)
+      document.querySelector('.t').onclick = () => {
+        ctx.clearRect(0, 0, 1000, 1000)
+        ctx.transform(1, 0, 0, 1, 10, 10)
+
+        drawRect()
+      }
+      document.querySelector('.st').onclick = () => {
+        ctx.clearRect(0, 0, 1000, 1000)
+        ctx.setTransform(1, 0, 0, 1, 10, 10)
+
+        drawRect()
       }
 
       // 获取 canvas 元素和上下文
-      var canvas = document.getElementById('myCanvas')
+      var canvas = document.querySelector('canvas')
       var ctx = canvas.getContext('2d')
 
-      // 定义画板的初始位置坐标
-      var canvasX = 0
-      var canvasY = 0
+      drawRect()
 
-      // 定义鼠标按下时的起始位置坐标
-      var startX
-      var startY
-
-      // 监听鼠标按下事件
-      canvas.addEventListener('mousedown', function (event) {
-        // 获取鼠标按下时的起始位置坐标
-        startX = event.clientX
-        startY = event.clientY
-
-        // 监听鼠标移动事件
-        document.addEventListener('mousemove', moveCanvas)
-
-        // 监听鼠标松开事件
-        document.addEventListener('mouseup', function () {
-          // 停止监听鼠标移动事件
-          document.removeEventListener('mousemove', moveCanvas)
-        })
-
-        // 鼠标移动事件处理函数
-        function moveCanvas(event) {
-          // 计算鼠标移动的距离
-          var moveX = event.clientX - startX
-          var moveY = event.clientY - startY
-
-          // 更新画板的位置坐标
-          canvasX += moveX
-          canvasY += moveY
-
-          // 清空画布
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-          // 平移画板
-          ctx.translate(moveX, moveY)
-
-          // 绘制矩形
-          drawRectangle()
-
-          // 恢复画板的初始位置
-          // ctx.translate(-moveX, -moveY)
-
-          // 更新起始位置
-          startX = event.clientX
-          startY = event.clientY
-        }
-      })
-
-      // 绘制矩形
-      function drawRectangle() {
-        ctx.beginPath()
-        ctx.rect(50, 50, 200, 100)
-        ctx.fillStyle = 'blue'
-        ctx.fill()
-        ctx.closePath()
+      function drawRect() {
+        ctx.fillStyle = 'pink'
+        ctx.fillRect(0, 0, 100, 100)
       }
-
-      // 初始绘制矩形
-      drawRectangle()
     </script>
   </body>
 </html>

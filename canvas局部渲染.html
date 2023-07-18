@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cc</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas style="border: 1px solid #333" width="600" height="400"></canvas>
+
+    <script>
+      const c = document.querySelector('canvas')
+
+      const color1 = 'rgba(0,0,0,0.5)'
+      const color2 = 'rgba(0,255,0,0.5)'
+
+      const ctx = c.getContext('2d')
+
+      ctx.fillStyle = color1
+      ctx.arc(300, 200, 50, 0, Math.PI * 2, false)
+      ctx.fill()
+
+      ctx.beginPath()
+      ctx.fillStyle = color2
+      ctx.arc(350, 150, 50, 0, Math.PI * 2, false)
+      ctx.fill()
+
+      ctx.beginPath()
+      ctx.fillStyle = 'rgba(0,0,255,0.6)'
+      ctx.arc(400, 100, 50, 0, Math.PI * 2, false)
+      ctx.fill()
+
+      ctx.beginPath()
+      ctx.clearRect(250, 150, 100, 100)
+      ctx.rect(250, 150, 100, 100)
+      ctx.clip()
+
+      ctx.beginPath()
+      ctx.fillStyle = color1
+      ctx.arc(300, 200, 50, 0, Math.PI * 2, false)
+      ctx.fill()
+
+      ctx.beginPath()
+      ctx.fillStyle = color2
+      ctx.arc(350, 150, 50, 0, Math.PI * 2, false)
+      ctx.fill()
+
+      //
+    </script>
+  </body>
+</html>

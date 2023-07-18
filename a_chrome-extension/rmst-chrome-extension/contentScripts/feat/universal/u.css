@@ -1,3 +1,7 @@
 .u {
   user-select: auto !important;
 }
+
+#webpack-dev-server-client-overlay {
+  display: none !important;
+}
