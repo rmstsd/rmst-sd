@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flip</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <div class="item item1" style="background-color: pink"></div>
+    </main>
+
+    <script>
+      const item1 = document.querySelector('.item1')
+
+      const oldRect = item1.getBoundingClientRect()
+
+      const item2 = document.createElement('div')
+      item2.classList.add('item', 'item2')
+      item2.style.backgroundColor = 'purple'
+      document.querySelector('main').prepend(item2)
+
+      const newRect = item1.getBoundingClientRect()
+      item2.animate([{ transform: `translateX(200px)` }, { transform: 'translateX(0px)' }], { duration: 500 })
+
+      const play = item1.animate(
+        [{ transform: `translateY(${oldRect.top - newRect.top}px)` }, { transform: 'translateY(0px)' }],
+        { duration: 500 }
+      )
+
+      play.addEventListener('finish', evt => {
+        console.log(evt)
+        console.log('finish')
+      })
+    </script>
+  </body>
+</html>
