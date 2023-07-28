@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+
+    <button style="position: absolute; top: 200px">aa</button>
+
+    <script>
+      function animate(timestamp) {
+        if (!start) start = timestamp
+
+        const elapsed = timestamp - start
+        const progress = Math.min(elapsed / duration, 1)
+
+        const x = progress * 500 // 计算矩形的 x 坐标
+
+        box.style.left = x + 'px'
+
+        if (elapsed < duration) {
+          requestAnimationFrame(animate)
+        } else {
+          // 动画结束
+        }
+      }
+
+      let start = null
+      const duration = 1000 // 动画总时间为 1000 毫秒
+      const box = document.getElementById('box')
+
+      document.querySelector('button').onclick = () => {
+        requestAnimationFrame(animate)
+      }
+    </script>
+  </body>
+</html>
