@@ -2,7 +2,7 @@
 <html>
   <head>
     <style>
-      #box {
+      #some-element-you-want-to-animate {
         width: 100px;
         height: 100px;
         background-color: red;
@@ -13,34 +13,37 @@
     </style>
   </head>
   <body>
-    <div id="box"></div>
+    <div id="some-element-you-want-to-animate"></div>
 
     <button style="position: absolute; top: 200px">aa</button>
 
     <script>
-      function animate(timestamp) {
-        if (!start) start = timestamp
+      const element = document.getElementById('some-element-you-want-to-animate')
+      let start, previousTimeStamp
+      let done = false
 
+      function step(timestamp) {
+        if (start === undefined) {
+          start = timestamp
+        }
         const elapsed = timestamp - start
-        const progress = Math.min(elapsed / duration, 1)
 
-        const x = progress * 500 // 计算矩形的 x 坐标
+        if (previousTimeStamp !== timestamp) {
+          const count = Math.min(0.1 * elapsed, 200)
+          element.style.transform = `translateX(${count}px)`
+          if (count === 200) done = true
+        }
 
-        box.style.left = x + 'px'
-
-        if (elapsed < duration) {
-          requestAnimationFrame(animate)
-        } else {
-          // 动画结束
+        if (elapsed < 2000) {
+          previousTimeStamp = timestamp
+          if (!done) {
+            window.requestAnimationFrame(step)
+          }
         }
       }
 
-      let start = null
-      const duration = 1000 // 动画总时间为 1000 毫秒
-      const box = document.getElementById('box')
-
       document.querySelector('button').onclick = () => {
-        requestAnimationFrame(animate)
+        window.requestAnimationFrame(step)
       }
     </script>
   </body>
