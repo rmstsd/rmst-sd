@@ -6,7 +6,7 @@ document.addEventListener('keydown', evt => {
     if (
       evt.target.tagName === 'INPUT' ||
       evt.target.tagName === 'TEXTAREA' ||
-      evt.target.getAttribute('contenteditable') === 'true'
+      evt.target.hasAttribute('contenteditable')
     ) {
       return
     }
