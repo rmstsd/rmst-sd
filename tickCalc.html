@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tickCalc</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script type="module">
+      const getStandarInterval = t => {
+        if (t <= 0.1) {
+          t = 0.1
+        } else if (t <= 0.2) {
+          t = 0.2
+        } else if (t <= 0.25) {
+          t = 0.25
+        } else if (t <= 0.4) {
+          t = 0.4
+        } else if (t <= 0.5) {
+          t = 0.5
+        } else if (t <= 0.6) {
+          t = 0.6
+        } else {
+          t = 1
+        }
+        return t
+      }
+      /**
+       * @param min 数据最小值
+       * @param max 数据最大值
+       * @param tickInterval 刻度区间
+       */
+      const calcR = (min, max, tickInterval) => {
+        let tempmin = 0
+        if (min < 0) {
+          while (tempmin > min) {
+            tempmin -= tickInterval
+          }
+        } else {
+          while (tempmin + tickInterval < min) {
+            tempmin += tickInterval
+          }
+        }
+        min = tempmin
+        let tickCount = 1
+        while (tickCount * tickInterval + min < max) {
+          tickCount++
+        }
+        max = tickCount * tickInterval + min
+        return [min, max, tickCount]
+      }
+      /**
+       * 获取符合bizcharts内置逻辑的最大值最小值分布
+       * @param list 数据列表
+       * @param tickCount 最大刻度数
+       * @param startWith0 最大值或者最小值是否从零开始
+       */
+      export function standardRange(list, tickCount = 5, startWith0 = true) {
+        list = list.map(i => (isNaN(Number(i)) ? 0 : Number(i)))
+
+        const log10 = n => Math.log(n) / Math.log(10)
+        let max = Math.max(...list)
+        let min = Math.min(...list)
+        // 数据全部分布在x轴同一侧，而且需要从零开始计算
+        if (startWith0 && min * max >= 0) {
+          min = min > 0 ? 0 : min
+          max = max < 0 ? 0 : max
+        }
+        if (max === min) {
+          const t = Math.abs(min)
+          const mag = t == 0 ? 1 : Math.pow(10, Math.floor(log10(t)))
+          return calcR(min, max, mag)
+        }
+
+        // 刻度区间长度，和长度数量级
+        let tickInterval, mag
+        const rawTickInterval = (max - min) / tickCount
+        // 计算数量级
+        mag = Math.pow(10, Math.floor(log10(rawTickInterval)))
+        if (mag == rawTickInterval) {
+          mag = rawTickInterval
+        } else {
+          mag = mag * 10
+        }
+        tickInterval = rawTickInterval / mag
+
+        //选取规范步长
+        const stepLen = getStandarInterval(tickInterval)
+        tickInterval = stepLen * mag
+
+        let res = calcR(min, max, tickInterval)
+
+        if (res[2] > tickCount) {
+          // 如果最后计算得出的刻度数大于计算值，步长扩大一级
+          tickInterval = getStandarInterval(stepLen + 0.1) * mag
+          res = calcR(min, max, tickInterval)
+        }
+        return res
+      }
+
+      const data = [100, 152, 620, 486, 325, 4452, 8715, 854646]
+
+      console.log(standardRange(data))
+    </script>
+  </body>
+</html>

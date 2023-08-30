@@ -10,7 +10,24 @@
   </head>
 
   <body>
-    sd
-    <script></script>
+    <input type="file" onchange="asdasd(this)" />
+    <img src="" alt="" />
+    <script>
+      function asdasd(evt) {
+        console.log(evt.files)
+
+        const [file] = evt.files
+
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+          const base64 = reader.result
+          console.log(base64)
+          document.querySelector('img').src = base64
+        }
+      }
+
+      //
+    </script>
   </body>
 </html>
