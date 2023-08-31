@@ -10,20 +10,26 @@
   </head>
 
   <body>
-    <input type="file" onchange="asdasd(this)" />
-    <img src="" alt="" />
+    <div style="border: 2px solid red; padding: 10px">
+      <input type="text" style="margin-bottom: 10px" oninput="ooii(this)" />
+
+      <div style="height: 100px; background-color: purple; transition: all 150ms" class="cc"></div>
+    </div>
+
     <script>
-      function asdasd(evt) {
-        console.log(evt.files)
+      const ccDom = document.querySelector('.cc')
 
-        const [file] = evt.files
+      const ooii = el => {
+        console.log(el.value)
 
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => {
-          const base64 = reader.result
-          console.log(base64)
-          document.querySelector('img').src = base64
+        if (el.value) {
+          ccDom.style.opacity = '0'
+          ccDom.style.marginTop = '-100px'
+          ccDom.style.visibility = 'hidden'
+        } else {
+          ccDom.style.opacity = '1'
+          ccDom.style.marginTop = '0'
+          ccDom.style.visibility = 'visible'
         }
       }
 
