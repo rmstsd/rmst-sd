@@ -10,6 +10,82 @@
   </head>
 
   <body>
-    <script></script>
+    <script>
+      // const grid = [
+      //   [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+      //   [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+      //   [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+      //   [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+      //   [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+      //   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+      //   [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+      //   [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
+      // ]
+
+      const grid = [
+        [1, 1, 0, 0, 0],
+        [1, 1, 0, 0, 0],
+        [0, 0, 0, 1, 1],
+        [0, 0, 0, 1, 1]
+      ]
+
+      maxAreaOfIsland()
+      function maxAreaOfIsland() {
+        const elapsedPosArr = []
+        let count = 0
+
+        for (let i = 0; i < grid.length; i++) {
+          for (let j = 0; j < grid[i].length; j++) {
+            const cellItem = grid[i][j]
+
+            if (cellItem === 0) {
+              continue
+            }
+
+            if (isElapsedPos(i, j)) {
+              continue
+            }
+
+            if (cellItem === 1) {
+              count++
+              elapsedPosArr.push({ i, j })
+
+              dfs(i, j)
+            }
+          }
+        }
+
+        console.log(count)
+
+        function isElapsedPos(i, j) {
+          return elapsedPosArr.find(item => item.i === i && item.j === j)
+        }
+
+        function dfs(i, j) {
+          let top = [i - 1, j]
+          let right = [i, j + 1]
+          let bottom = [i + 1, j]
+          let left = [i, j - 1]
+
+          const pos = [top, right, bottom, left].filter(
+            ([i, j]) => i >= 0 && i <= grid.length - 1 && j >= 0 && j <= grid[0].length - 1
+          )
+
+          pos.forEach(([i, j]) => {
+            if (grid[i][j] === 0) {
+              return
+            }
+            if (isElapsedPos(i, j)) {
+              return
+            }
+
+            if (grid[i][j] === 1) {
+              elapsedPosArr.push({ i, j })
+              dfs(i, j)
+            }
+          })
+        }
+      }
+    </script>
   </body>
 </html>
