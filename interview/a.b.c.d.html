@@ -40,9 +40,14 @@
 
         Object.keys(object).forEach(key => {
           const keyArray = key.split('_')
+
           keyArray.reduce((acc, item, index) => {
-            if (acc[item] === undefined) acc[item] = {}
-            if (index === keyArray.length - 1) acc[item] = object[key]
+            if (acc[item] === undefined) {
+              acc[item] = {}
+            }
+            if (index === keyArray.length - 1) {
+              acc[item] = object[key]
+            }
             return acc[item]
           }, res)
         })

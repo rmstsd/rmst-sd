@@ -5,9 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tree</title>
-
-    <script></script>
   </head>
 
-  <body></body>
+  <body>
+    <script>
+      const tree = [
+        {
+          id: 1,
+          pid: null,
+          value: '哈哈',
+          children: [
+            {
+              id: 5,
+              pid: 1,
+              value: '和办法',
+              children: [
+                {
+                  id: 4,
+                  pid: 5,
+                  value: '更好',
+                  children: [
+                    {
+                      id: 3,
+                      pid: 4,
+                      value: '是否',
+                      children: [
+                        {
+                          id: 2,
+                          pid: 3,
+                          value: 'UI',
+                          children: []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              id: 7,
+              pid: 1,
+              value: '甘肃省',
+              children: []
+            }
+          ]
+        },
+        {
+          id: 6,
+          pid: null,
+          value: '请问',
+          children: []
+        }
+      ]
+
+      console.log(flat(tree))
+
+      function flat(data) {
+        return data.reduce((acc, item) => {
+          const _item = { ...item }
+          acc.push(_item)
+
+          if (_item.children) {
+            acc.push(...flat(_item.children))
+
+            Reflect.deleteProperty(_item, 'children')
+          }
+
+          return acc
+        }, [])
+      }
+    </script>
+  </body>
 </html>

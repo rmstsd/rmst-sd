@@ -23,6 +23,7 @@
       // 不可变数据 函数式编程 没有副作用 非常的nice
       function buildTree(array, pid) {
         const ans = array.filter(item => item.pid === pid)
+
         return ans.map(item => {
           const children = buildTree(array, item.id)
           return Object.assign({}, item, { children })
