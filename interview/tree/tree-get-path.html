@@ -14,8 +14,7 @@
 
   <body>
     <script>
-      // 返回 树的path
-      const targetId = '1-3-2'
+      const targetId = '1-3-233'
       const data = [
         {
           id: '1',
@@ -35,28 +34,32 @@
         }
       ]
 
-      const res = getStack(targetId, data)
+      const result = findPath(data, targetId)
+      console.log(result)
 
-      console.log(res)
+      function findPath(treeData, targetId) {
+        const ans = []
 
-      function getStack(targetId, data) {
-        const stack = []
-        iteratorFn(data)
-        return stack
+        dfs(treeData)
 
-        function iteratorFn(data) {
+        return ans
+
+        function dfs(data) {
           for (const item of data) {
-            stack.push(item.id)
-            if (item.id === targetId) return true
+            ans.push(item.id)
 
             if (item.children) {
-              const isFind = iteratorFn(item.children)
-              if (isFind) return true
-              else stack.pop()
-            } else {
-              stack.pop()
+              dfs(item.children)
             }
+
+            if (ans.at(-1) === targetId) {
+              return
+            }
+
+            ans.pop()
           }
+
+          return ans
         }
       }
     </script>
