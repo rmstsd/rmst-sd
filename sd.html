@@ -6,32 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sd</title>
 
-    <style></style>
+    <style>
+      span {
+        display: inline-block;
+        width: 200px;
+        flex-shrink: 0;
+      }
+    </style>
   </head>
 
   <body>
-    <div style="border: 2px solid red; padding: 10px">
-      <input type="text" style="margin-bottom: 10px" oninput="ooii(this)" />
-
-      <div style="height: 100px; background-color: purple; transition: all 150ms" class="cc"></div>
+    <div style="width: 600px; border: 1px solid red; overflow: hidden" class="oo">
+      <div class="container" style="display: flex; flex-wrap: nowrap; transition: all 0.3s">
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+        <span>45</span>
+      </div>
     </div>
 
     <script>
-      const ccDom = document.querySelector('.cc')
+      //
 
-      const ooii = el => {
-        console.log(el.value)
+      const container = document.querySelector('.container')
 
-        if (el.value) {
-          ccDom.style.opacity = '0'
-          ccDom.style.marginTop = '-100px'
-          ccDom.style.visibility = 'hidden'
-        } else {
-          ccDom.style.opacity = '1'
-          ccDom.style.marginTop = '0'
-          ccDom.style.visibility = 'visible'
-        }
-      }
+      let left = 0
+
+      document.querySelector('.oo').addEventListener('wheel', evt => {
+        console.log(evt.wheelDeltaY)
+
+        left += evt.wheelDeltaY
+        container.style.transform = `translateX(${left}px)`
+        console.log(11)
+      })
 
       //
     </script>
