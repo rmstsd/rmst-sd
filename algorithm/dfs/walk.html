@@ -20,17 +20,17 @@
       
       */
       const grid = [
-        [0, 1, 0, 1, 1, 1],
+        [0, 1, 1, 1, 1, 1],
+        [1, 0, 0, 1, 1, 1],
         [1, 0, 0, 1, 0, 1],
-        [0, 1, 0, 1, 0, 0],
-        [0, 0, 0, 1, 0, 0],
-        [1, 0, 1, 1, 0, 1],
-        [1, 0, 0, 0, 1, 1]
+        [0, 0, 0, 1, 1, 0],
+        [1, 1, 0, 1, 1, 1],
+        [1, 0, 1, 0, 0, 1]
       ]
 
       const bug = {
-        start: { i: 1, j: 4 },
-        end: { i: 4, j: 4 }
+        start: { i: 1, j: 1 },
+        end: { i: 2, j: 2 }
       }
 
       const start = bug.start
@@ -42,12 +42,16 @@
         const { i, j } = start
 
         const counts = []
-        walk(i, j, 0)
+        walk(i, j, 0, [])
 
         console.log(counts)
 
-        function walk(i, j, count) {
+        function walk(i, j, count, elapsedCoord) {
           if (i < 0 || i > grid.length - 1 || j < 0 || j > grid[0].length - 1) {
+            return
+          }
+
+          if (elapsedCoord.some(item => item.i === i && item.j === j)) {
             return
           }
 
@@ -58,12 +62,13 @@
             }
 
             count = count + 1
-            grid[i][j] = 1
 
-            walk(i - 1, j, count) // 上
-            walk(i, j + 1, count) // 右
-            walk(i + 1, j, count) // 下
-            walk(i, j - 1, count) // 左
+            elapsedCoord.push({ i, j })
+
+            walk(i - 1, j, count, elapsedCoord.slice()) // 上
+            walk(i, j + 1, count, elapsedCoord.slice()) // 右
+            walk(i + 1, j, count, elapsedCoord.slice()) // 下
+            walk(i, j - 1, count, elapsedCoord.slice()) // 左
           }
         }
       }
