@@ -45,6 +45,25 @@
         })
         return ans
       }
+
+      // 无需指定根节点
+      function buildTreeRandom(arr) {
+        arr = arr.map(item => ({ ...item }))
+
+        for (let i = 0; i < arr.length; i++) {
+          const item = arr[i]
+
+          const pItem = findDeep(arr, item.parentId)
+          if (pItem) {
+            ;(pItem.children || (pItem.children = [])).push(item)
+
+            arr.splice(i, 1)
+            i -= 1
+          }
+        }
+
+        return arr
+      }
     </script>
   </head>
 

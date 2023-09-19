@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tt</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      function findDeep(_arr, parentId) {
+        for (const item of _arr) {
+          if (item.id === parentId) {
+            return item
+          }
+
+          if (item.children) {
+            const result = findDeep(item.children, parentId)
+            if (result) {
+              return result
+            }
+          }
+        }
+
+        return null
+      }
+
+      function buildTree(arr) {
+        arr = arr.map(item => ({ ...item }))
+
+        for (let i = 0; i < arr.length; i++) {
+          const item = arr[i]
+
+          const pItem = findDeep(arr, item.parentId)
+          if (pItem) {
+            ;(pItem.children || (pItem.children = [])).push(item)
+
+            arr.splice(i, 1)
+            i -= 1
+          }
+        }
+
+        return arr
+      }
+
+      var arr = [
+        { id: 1, parentId: 0 },
+        { id: 2, parentId: 1 },
+        { id: 3, parentId: 1 },
+        { id: 4, parentId: 2 },
+        { id: 5, parentId: 2 },
+        { id: 6, parentId: 3 },
+        { id: 7, parentId: 12 }
+      ]
+
+      var tree = buildTree(arr)
+      console.log(tree)
+
+      console.log(arr)
+
+      // console.log(flatChildren(tree))
+      function flatChildren(data) {
+        return data.reduce((acc, item) => {
+          acc.push(item)
+
+          if (item.children) {
+            acc.push(...flatChildren(item.children))
+
+            Reflect.deleteProperty(item, 'children')
+          }
+
+          return acc
+        }, [])
+      }
+    </script>
+  </body>
+</html>
