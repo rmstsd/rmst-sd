@@ -6,75 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tt</title>
 
-    <style></style>
+    <style>
+      .item {
+        height: 200px;
+      }
+    </style>
   </head>
 
   <body>
-    <script>
-      function findDeep(_arr, parentId) {
-        for (const item of _arr) {
-          if (item.id === parentId) {
-            return item
-          }
+    <div style="height: 200px"></div>
 
-          if (item.children) {
-            const result = findDeep(item.children, parentId)
-            if (result) {
-              return result
-            }
-          }
-        }
+    <div style="height: 400px; border: 1px solid red; overflow: auto" class="c">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </div>
 
-        return null
-      }
-
-      function buildTree(arr) {
-        arr = arr.map(item => ({ ...item }))
-
-        for (let i = 0; i < arr.length; i++) {
-          const item = arr[i]
-
-          const pItem = findDeep(arr, item.parentId)
-          if (pItem) {
-            ;(pItem.children || (pItem.children = [])).push(item)
-
-            arr.splice(i, 1)
-            i -= 1
-          }
-        }
-
-        return arr
-      }
-
-      var arr = [
-        { id: 1, parentId: 0 },
-        { id: 2, parentId: 1 },
-        { id: 3, parentId: 1 },
-        { id: 4, parentId: 2 },
-        { id: 5, parentId: 2 },
-        { id: 6, parentId: 3 },
-        { id: 7, parentId: 12 }
-      ]
-
-      var tree = buildTree(arr)
-      console.log(tree)
-
-      console.log(arr)
-
-      // console.log(flatChildren(tree))
-      function flatChildren(data) {
-        return data.reduce((acc, item) => {
-          acc.push(item)
-
-          if (item.children) {
-            acc.push(...flatChildren(item.children))
-
-            Reflect.deleteProperty(item, 'children')
-          }
-
-          return acc
-        }, [])
-      }
-    </script>
+    <script></script>
   </body>
 </html>
