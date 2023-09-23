@@ -1,4 +1,12 @@
 const dpr = window.devicePixelRatio || 1
+
+/**
+ *
+ * @param {*} containerWidth
+ * @param {*} containerHeight
+ * @returns {ctx: number}
+ */
+
 export function createCanvas(containerWidth, containerHeight) {
   const canvasElement = document.createElement('canvas')
   const canvasWidth = containerWidth * dpr
