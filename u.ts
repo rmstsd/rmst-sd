@@ -6,5 +6,5 @@ type Shape = Line | Bar | Pie
 
 const op: Shape = {
   type: 'bar',
-  aaa: 22
+  aaa: 33
 }
