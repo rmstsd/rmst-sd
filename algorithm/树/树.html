@@ -10,7 +10,7 @@
   <script>
     // 数组转二叉树
     function Node(val) {
-      this.value = val
+      this.val = val
     }
     function arrayToBST(arr) {
       if (!arr.length) {
@@ -30,10 +30,12 @@
     // https://www.yuque.com/docs/share/a0c03f78-925a-4e3b-8402-e74a5bf02d3c?# 《二叉树遍历》
 
     // 二叉树构造函数
-    function TreeNode(val, left, right) {
-      this.val = val === undefined ? 0 : val
-      this.left = left === undefined ? null : left
-      this.right = right === undefined ? null : right
+    class TreeNode {
+      constructor(val, left, right) {
+        this.val = val === undefined ? 0 : val
+        this.left = left === undefined ? null : left
+        this.right = right === undefined ? null : right
+      }
     }
   </script>
 
@@ -43,5 +45,5 @@
 
   <!-- <script src="./二叉树深度-层序遍历.js"></script> -->
 
-  <script src="./236. 二叉树的最近公共祖先.js"></script>
+  <script src="./129. 求根节点到叶节点数字之和.js"></script>
 </html>
