@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <section style="display: flex; height: 500px">
+      <aside style="width: 200px; border-right: 1px solid #333; flex-shrink: 0">112</aside>
+
+      <div style="flex-grow: 1; width: 0; overflow: hidden">
+        <div style="position: relative; height: 100%" id="container"></div>
+      </div>
+    </section>
+
+    <script src="./assets/echarts.min.js"></script>
+
+    <script type="text/javascript">
+      var dom = document.getElementById('container')
+      var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+      })
+      var app = {}
+
+      var option
+
+      option = {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'line'
+          }
+        ]
+      }
+
+      if (option && typeof option === 'object') {
+        myChart.setOption(option)
+      }
+
+      const ob = new ResizeObserver(() => {
+        myChart.resize()
+      })
+
+      ob.observe(dom)
+
+      // window.addEventListener('resize', myChart.resize)
+    </script>
+  </body>
+</html>
