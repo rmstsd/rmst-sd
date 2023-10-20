@@ -9,4 +9,9 @@ const dir = 'E:\\rmst-sd'
 
 // spawn(code, [dir], { detached: true })
 
-cmd.runSync(`D:\\WindowsTerminal\\wt.exe -d E:\\rmst-sd`)
+// cmd.runSync(`D:\\WindowsTerminal\\wt.exe -d E:\\rmst-sd`)
+// spawn(app, ['-d', dir], { shell: 'cmd.exe' })
+
+// const spawn = require('cross-spawn')
+// spawn(app, ['-d', dir], { shell: 'cmd.exe' })
+cmd.runSync(`${code} E:\\rmst-sd`)
