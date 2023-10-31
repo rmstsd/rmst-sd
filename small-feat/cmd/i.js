@@ -14,4 +14,5 @@ const dir = 'E:\\rmst-sd'
 
 // const spawn = require('cross-spawn')
 // spawn(app, ['-d', dir], { shell: 'cmd.exe' })
-cmd.runSync(`${code} E:\\rmst-sd`)
+// cmd.runSync(`${code} E:\\rmst-sd`)
+cmd.runSync(`code E:\\rmst-sd`)

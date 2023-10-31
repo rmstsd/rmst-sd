@@ -1,3 +1,9 @@
+const tree = new TreeNode(
+  4,
+  new TreeNode(9, new TreeNode(5, null, null), new TreeNode(1, null, null)),
+  new TreeNode(0, new TreeNode(5, null, null), null)
+)
+
 // 1. 递归
 console.log(postorderRecursion(tree))
 function postorderRecursion(root) {

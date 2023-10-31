@@ -6,59 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sd</title>
 
-    <style>
-      span {
-        display: inline-block;
-        width: 200px;
-        flex-shrink: 0;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <div style="width: 600px; border: 1px solid red; overflow: hidden" class="oo">
-      <div class="container" style="display: flex; flex-wrap: nowrap; transition: all 0.3s">
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
-        <span>45</span>
+    <div
+      style="
+        border: 0.75em solid;
+        box-sizing: border-box;
+        padding: 0.75em;
+        position: relative;
+        width: 100%;
+        min-height: 200px;
+        writing-mode: vertical-rl;
+      "
+    >
+      区位图啊实打实大撒
+      <div
+        style="
+          background-color: #ff0;
+          border: 3px solid red;
+          position: absolute;
+          inset-inline-start: 50px;
+          inline-size: 140px;
+          min-block-size: 80px;
+        "
+      >
+        考虑；就；考虑；金科路
       </div>
     </div>
 
     <script>
-      //
-
-      const container = document.querySelector('.container')
-
-      let left = 0
-
-      document.querySelector('.oo').addEventListener('wheel', evt => {
-        console.log(evt.wheelDeltaY)
-
-        left += evt.wheelDeltaY
-        container.style.transform = `translateX(${left}px)`
-        console.log(11)
+      window.addEventListener('click', () => {
+        console.log('click')
       })
+
+      // setTimeout(() => {
+      //   document.dispatchEvent(new PointerEvent('click', { pointerId: 1, bubbles: true }))
+      // }, 200)
 
       //
     </script>
