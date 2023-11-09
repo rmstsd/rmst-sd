@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ssd</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      // 1401. 圆和矩形是否有重叠
+
+      const radius = 1,
+        xCenter = 0,
+        yCenter = 0,
+        x1 = 1,
+        y1 = -1,
+        x2 = 3,
+        y2 = 1
+
+      console.log(checkOverlap(radius, xCenter, yCenter, x1, y1, x2, y2))
+
+      function checkOverlap(radius, xCenter, yCenter, x1, y1, x2, y2) {
+        if (xCenter >= x1 && xCenter <= x2 && yCenter >= y1 && yCenter <= y2) {
+          return true
+        }
+
+        if (xCenter >= x1 - radius && xCenter <= x1 && yCenter >= y1 && yCenter <= y2) {
+          return true
+        }
+        if (xCenter >= x1 && xCenter <= x2 && y2 <= yCenter && yCenter <= y2 + radius) {
+          return true
+        }
+        if (xCenter >= x2 && xCenter <= x2 + radius && y1 <= yCenter && yCenter <= y2) {
+          return true
+        }
+        if (xCenter >= x1 && xCenter <= x2 && y1 - radius <= yCenter && yCenter <= y1) {
+          return true
+        }
+
+        if ((xCenter - x1) ** 2 + (yCenter - y2) ** 2 <= radius ** 2) {
+          return true
+        }
+        if ((xCenter - x2) ** 2 + (yCenter - y2) ** 2 <= radius ** 2) {
+          return true
+        }
+        if ((xCenter - x2) ** 2 + (yCenter - y1) ** 2 <= radius ** 2) {
+          return true
+        }
+        if ((xCenter - x1) ** 2 + (yCenter - y1) ** 2 <= radius ** 2) {
+          return true
+        }
+
+        return false
+      }
+    </script>
+  </body>
+</html>

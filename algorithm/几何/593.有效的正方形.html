@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      //
+
+      const p1 = [1, 0]
+      p2 = [-1, 0]
+      p3 = [0, 1]
+      p4 = [0, -1]
+
+      console.log(validSquare(p1, p2, p3, p4))
+
+      function validSquare(p1, p2, p3, p4) {
+        const q1 = calcLength(p1, p2)
+        const q2 = calcLength(p1, p3)
+        const q3 = calcLength(p1, p4)
+        const q4 = calcLength(p2, p3)
+        const q5 = calcLength(p2, p4)
+        const q6 = calcLength(p3, p4)
+
+        console.log(q1, q2, q3, q4, q5, q6)
+
+        if ([q1, q2, q3, q4, q5, q6].some(o => o === 0)) {
+          return false
+        }
+
+        const aa = {}
+
+        for (const item of [q1, q2, q3, q4, q5, q6]) {
+          if (!aa[item]) {
+            aa[item] = 1
+          } else {
+            aa[item] += 1
+          }
+        }
+
+        const [c, v] = Object.values(aa)
+
+        const vs = Object.values(aa)
+
+        return vs.length === 2 && vs.some(o => o === 2) && vs.some(o => o === 4)
+
+        function calcLength(p1, p2) {
+          return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+        }
+      }
+
+      //
+    </script>
+  </body>
+</html>
