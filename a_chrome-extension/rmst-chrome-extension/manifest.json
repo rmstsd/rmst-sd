@@ -20,6 +20,12 @@
   },
   "host_permissions": ["<all_urls>"],
   "permissions": ["tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage"],
+  "web_accessible_resources": [
+    {
+      "resources": ["/contentScripts/feat/disabledWs/scriptSrc.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
