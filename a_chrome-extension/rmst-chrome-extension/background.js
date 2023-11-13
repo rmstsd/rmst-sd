@@ -1,5 +1,3 @@
-createContextMenus()
-
 function createContextMenus() {
   const linkMap = {
     google: 'https://www.google.com.hk/search?safe=strict&hl=zh-CN&q=',
@@ -30,3 +28,7 @@ function createContextMenus() {
     chrome.tabs.create({ url: link + selectionText })
   })
 }
+
+chrome.runtime.onInstalled.addListener(() => {
+  createContextMenus()
+})

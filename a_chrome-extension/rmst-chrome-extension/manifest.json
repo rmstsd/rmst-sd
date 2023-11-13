@@ -19,7 +19,17 @@
     "open_in_tab": true
   },
   "host_permissions": ["<all_urls>"],
-  "permissions": ["tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage"],
+  "permissions": [
+    "debugger",
+    "tabs",
+    "bookmarks",
+    "contextMenus",
+    "activeTab",
+    "cookies",
+    "storage",
+    "webRequest",
+    "webRequestAuthProvider"
+  ],
   "web_accessible_resources": [
     {
       "resources": ["/contentScripts/feat/disabledWs/scriptSrc.js"],

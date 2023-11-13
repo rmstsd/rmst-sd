@@ -12,6 +12,12 @@
   <body>
     <script>
       console.log('script luo')
+
+      setTimeout(() => {
+        fetch('https://enterprise.naturobot.com/auth/auth/getMenuList').then(async r => {
+          console.log(await r.json())
+        })
+      }, 2000)
     </script>
   </body>
 </html>
