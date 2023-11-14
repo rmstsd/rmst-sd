@@ -28,7 +28,6 @@ function createContextMenus() {
     chrome.tabs.create({ url: link + selectionText })
   })
 }
+createContextMenus()
 
-chrome.runtime.onInstalled.addListener(() => {
-  createContextMenus()
-})
+chrome.runtime.onInstalled.addListener(() => {})

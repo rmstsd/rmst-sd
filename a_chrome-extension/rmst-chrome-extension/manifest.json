@@ -27,8 +27,7 @@
     "activeTab",
     "cookies",
     "storage",
-    "webRequest",
-    "webRequestAuthProvider"
+    "webRequest"
   ],
   "web_accessible_resources": [
     {

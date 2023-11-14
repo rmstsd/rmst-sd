@@ -39,7 +39,36 @@ declare function stringOrNum(x: string | number): number | string
 type T1 = ReturnType<typeof stringOrNum>
 
 // 分布式条件类型
-type Ta<T> = [T] extends [string | number] ? T[] : never
+type Ta<T> = T extends string | number ? T[] : never
 type sn = Ta<string | number>
 
 type H = 1 extends object ? true : false
+
+// ------------------------
+
+type tt = 'a' | 'b' | 'c'
+type uu = 'c'
+
+type distributive1 = Extract<tt, uu>
+type distributive2 = tt extends uu ? tt : never
+
+type IsString<T> = T extends string ? true : false
+
+type B5 = IsString<1 | 2>
+// type B5 = false
+type B6 = IsString<1 | '1'>
+// type B6 = boolean
+
+interface Op {
+  a
+  b
+  c
+  d
+  e
+}
+
+type removeKey<O, Keys extends keyof O> = {
+  [k in keyof O as k extends Keys ? never : k]: O[k]
+}
+
+type aas = removeKey<Op, 'a' | 'c'>
