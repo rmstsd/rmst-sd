@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mixin</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      class U {
+        un = 'un'
+
+        Ufn() {}
+      }
+
+      class I {
+        in = 'in'
+
+        Ifn() {}
+      }
+
+      mixin(U, I)
+
+      console.log(U.prototype)
+      console.log(I.prototype)
+
+      function mixin(target, source) {
+        target = 'prototype' in target ? target.prototype : target
+        source = 'prototype' in source ? source.prototype : source
+
+        const keyList = Object.getOwnPropertyNames(source).filter(item => item !== 'constructor')
+        console.log(keyList)
+
+        for (const key of keyList) {
+          if (target[key] == null) {
+            target[key] = source[key]
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

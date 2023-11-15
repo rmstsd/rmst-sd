@@ -1,3 +1,5 @@
+export type NnNn = 'aa'
+
 interface IdLabel {
   id: number /* some fields */
 }
@@ -72,3 +74,101 @@ type removeKey<O, Keys extends keyof O> = {
 }
 
 type aas = removeKey<Op, 'a' | 'c'>
+
+type CreateMutable<Type> = {
+  [Property in keyof Type]-?: Type[Property]
+}
+type LockedAccount = {
+  id?: string
+  name: string
+}
+type UnlockedAccount = CreateMutable<LockedAccount>
+
+type tuuu = keyof LockedAccount
+
+type Getters<T> = {
+  [k in keyof T as `get${Capitalize<string & k>}`]: () => T[k]
+}
+
+interface User {
+  name: string
+  age: number
+}
+
+type Gt = Getters<User>
+
+//-----------------------------
+
+type EventConfig<T extends { kind: string }> = {
+  [k in T as k['kind']]: (event: k) => void
+}
+
+type SquareEvent = { kind: 'square'; x: number; y: number }
+type CircleEvent = { kind: 'circle'; radius: number }
+type Config = EventConfig<SquareEvent | CircleEvent>
+
+// type Config = {
+//   square: (event: SquareEvent) => void
+//   circle: (event: CircleEvent) => void
+// }
+
+const fggg = (<string>(<unknown>undefined)).startsWith
+
+interface St {
+  n: string
+  m: string
+  k: string
+}
+
+type mp<T> = {
+  [k in keyof T as `${Uppercase<string & k>}_${string & k}`]: T[k]
+}
+
+type sst = mp<St>
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+type PropEventSource<T> = {
+  on<Key extends string & keyof T>(eventName: `${Key}Changed`, callback: (newValue: T[Key]) => void): void
+}
+
+type OnPropEventSource<T> = {
+  [k in keyof T as `on${Capitalize<string & k>}`]: (newValue: T[k]) => void
+}
+
+declare function makeWatchedObject<Type>(obj: Type): Type & PropEventSource<Type> & OnPropEventSource<Type>
+
+const person = makeWatchedObject({
+  firstName: 'Saoirse',
+  lastName: 'Ronan',
+  age: 26
+})
+
+person.on('firstNameChanged', newValue => {
+  console.log(`firstName was changed to ${newValue}!`)
+})
+
+person.on('ageChanged', newValue => {
+  console.log(`firstName was changed to ${newValue}!`)
+})
+
+person.onFirstName = newValue => {}
+person.onAge = newValue => {}
+
+function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
+  return arr1.concat(arr2)
+}
+
+combine<string | number>([1], ['a'])
+
+function mmForEach<T>(arr: T[], cb: (item: T, index: number) => void) {
+  arr.forEach((item, idx) => {
+    cb(item, idx)
+  })
+}
+
+const arree = ['']
+
+mmForEach(arree, (item, index) => {
+  index.toString
+})
