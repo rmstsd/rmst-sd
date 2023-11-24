@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>screen</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+      div {
+        border-radius: 50%;
+        background-color: pink;
+        position: fixed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div></div>
+
+    <script type="module">
+      console.log(window.screen)
+      console.log(window.screenTop)
+      console.log(window.screenLeft)
+
+      requestAnimationFrame(function exec() {
+        setPos()
+
+        // requestAnimationFrame(exec)
+      })
+
+      function setPos() {
+        const rectSize = 200
+        const halfSize = rectSize / 2
+
+        const div = document.querySelector('div')
+        div.style.setProperty('width', rectSize + 'px')
+        div.style.setProperty('height', rectSize + 'px')
+
+        const x = window.screen.availWidth / 2 - halfSize - window.screenLeft
+        const y = window.screen.availHeight / 2 - halfSize - window.screenTop
+
+        div.style.setProperty('left', x + 'px')
+        div.style.setProperty('top', y + 'px')
+      }
+
+      //
+    </script>
+  </body>
+</html>
