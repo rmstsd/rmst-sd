@@ -14,83 +14,25 @@
   </head>
 
   <body>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      version="1.1"
-      baseProfile="full"
-      width="502"
-      height="558"
-      style="user-select: none; border: 1px solid red"
-    >
-      <path
-        clip-path="url(#zr0-c0)"
-        d="M78.8857 274L136.2571 159.8667L193.6286 168.4267L251 176.9867L308.3714 295.4L365.7429 278.28L423.1143 117.0667"
-        fill="none"
-        stroke="rgb(84,112,198)"
-        stroke-width="20"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      ></path>
-
-      <path
-        d="M-0.5421 -0.8857A0.6 0.6 0 1 1 0.5421 -0.8857C0.3878 -0.5605 0 -0.42 0 0C0 -0.42 -0.3878 -0.5605 -0.5421 -0.8857Z"
-        transform="matrix(25, 0, 0, 25, 30, 30)"
-        fill="red"
-      ></path>
-
-      <clipPath id="zr0-c0">
-        <path d="M51 50l345.4616 0l0 810l-345.4616 0Z" fill="#000"></path>
-      </clipPath>
-    </svg>
-
-    <br />
     <canvas width="600" height="600" style="border: 1px solid red"></canvas>
 
     <script>
-      const ctx = document.querySelector('canvas').getContext('2d')
+      ;(() => {
+        const ctx = document.querySelector('canvas').getContext('2d')
 
-      let path
-
-      let limitWidth = 0
-      function exec() {
-        if (limitWidth >= 220) return
-        limitWidth += 2
-
-        ctx.clearRect(0, 0, 600, 600)
-
-        ctx.save()
+        // Create circular clipping region
         ctx.beginPath()
-        ctx.rect(0, 0, limitWidth, 300)
+        ctx.arc(100, 75, 50, 0, Math.PI * 2)
         ctx.clip()
 
-        ctx.beginPath()
-        ctx.lineJoin = 'round'
+        // Draw stuff that gets clipped
+        ctx.fillStyle = 'blue'
+        ctx.fillRect(0, 0, 200, 200)
+        ctx.fillStyle = 'orange'
+        ctx.fillRect(0, 0, 100, 100)
 
-        path = new Path2D()
-        path.moveTo(20, 20)
-        path.lineTo(150, 150)
-        path.lineTo(200, 100)
-
-        ctx.strokeStyle = 'purple'
-        ctx.lineWidth = 20
-        ctx.stroke(path)
-
-        ctx.restore()
-        ctx.font = '40px Arial'
-
-        requestAnimationFrame(exec)
-      }
-
-      requestAnimationFrame(exec)
-
-      document.querySelector('canvas').onclick = evt => {
-        const { offsetX, offsetY } = evt
-
-        console.log(ctx.isPointInPath(path, offsetX, offsetY))
-      }
-
-      //
+        //
+      })()
     </script>
   </body>
 </html>

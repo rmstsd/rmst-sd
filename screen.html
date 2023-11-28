@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>screen</title>
 
     <style>
@@ -21,7 +18,24 @@
   <body>
     <div></div>
 
-    <script type="module">
+    <button onclick="oo()">oo</button>
+
+    <script>
+      navigator.permissions.query({ name: 'window-management' }).then(result => {
+        console.log(result.state)
+
+        if (result.state === 'granted') {
+        }
+      })
+
+      async function oo() {
+        const screenDetails = await window.getScreenDetails()
+
+        console.log(screenDetails)
+      }
+
+      ;(async () => {})()
+
       console.log(window.screen)
       console.log(window.screenTop)
       console.log(window.screenLeft)
@@ -29,7 +43,7 @@
       requestAnimationFrame(function exec() {
         setPos()
 
-        // requestAnimationFrame(exec)
+        requestAnimationFrame(exec)
       })
 
       function setPos() {
