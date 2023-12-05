@@ -11,14 +11,17 @@
 
   <body>
     <script>
-      class U {
-        aa = 1
+      const ws = new WebSocket('ws://localhost:8765')
 
-        t() {}
+      ws.onopen = () => {
+        console.log('open')
+
+        ws.send('123')
       }
 
-      const u = new U()
-      console.log(u)
+      ws.onmessage = evt => {
+        console.log(evt.data)
+      }
     </script>
   </body>
 </html>
