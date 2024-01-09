@@ -10,18 +10,15 @@
   </head>
 
   <body>
+    <canvas></canvas>
+
     <script>
-      const ws = new WebSocket('ws://localhost:8765')
+      const ctx = document.querySelector('canvas').getContext('2d')
 
-      ws.onopen = () => {
-        console.log('open')
-
-        ws.send('123')
-      }
-
-      ws.onmessage = evt => {
-        console.log(evt.data)
-      }
+      ctx.beginPath()
+      ctx.rect(50, 50, 100, 100)
+      ctx.fillStyle = 'rgba(0, 255, 0, 0.4)'
+      ctx.fill()
     </script>
   </body>
 </html>
