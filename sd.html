@@ -10,16 +10,41 @@
   </head>
 
   <body>
-    <canvas></canvas>
-
     <script>
-      const ctx = document.querySelector('canvas').getContext('2d')
+      const list = Array.from({ length: 20 }, (_, index) => {
+        return () => {
+          return fetch('http://localhost:1250' + '?time=' + Math.ceil(Math.random() * 10)).then(() => index)
+        }
+      })
 
-      ctx.beginPath()
-      ctx.rect(50, 50, 100, 100)
-      ctx.fillStyle = 'rgba(0, 255, 0, 0.4)'
-      ctx.fill()
-      2
+      console.log(list)
+
+      asyncPool(2, list).then(ans => {
+        console.log(ans)
+      })
+
+      async function asyncPool(limit, list) {
+        const ret = []
+        const requestIng = []
+
+        for (const iteratorFunc of list) {
+          const itemPromise = iteratorFunc()
+          ret.push(itemPromise)
+
+          if (limit < list.length) {
+            requestIng.push(itemPromise)
+            itemPromise.then(() => {
+              requestIng.splice(requestIng.indexOf(itemPromise), 1)
+            })
+
+            if (requestIng.length >= limit) {
+              await Promise.race(requestIng)
+            }
+          }
+        }
+
+        return Promise.all(ret)
+      }
     </script>
   </body>
 </html>

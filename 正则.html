@@ -33,130 +33,157 @@
         分组捕获 ()()
       */
 
-      // 分组捕获
-      const reg = /(\d{4})-(\d{2})-(\d{2})/g
-      const text = '2015-12-25'
-      console.log([...text.matchAll(reg)])
-      const result = text.replace(reg, '$2__$1')
-      console.log(result)
+      {
+        // 分组捕获
+        const reg = /(\d{4})-(\d{2})-(\d{2})/g
+        const text = '2015-12-25'
+        console.log([...text.matchAll(reg)])
+        const result = text.replace(reg, '$2__$1')
+        console.log(result)
 
-      console.log(text.split(reg))
-
-      const sppps = `<span>pig1</span><span>pig2</span>dog<span>pig3</span>`
-      console.log([...sppps.matchAll(/<span>.+?<\/span>/g)])
+        console.log(text.split(reg))
+      }
 
       console.log('----------------------------------------------------------------')
 
-      const extra = '哈哈[xx](link11)哈风高放[uu](link22)火复工后'
+      {
+        const sppps = `<span>pig1</span><span>pig2</span>dog<span>pig3</span>`
+        console.log([...sppps.matchAll(/<span>.+?<\/span>/g)])
+      }
 
-      console.log(getMdArray(extra))
+      console.log('----------------------------------------------------------------')
 
-      function getMdArray(sstr) {
-        const matchRes = [...sstr.matchAll(/\[.*?\]\(.*?\)/g)] // 非贪婪匹配
+      {
+        const extra = '哈哈[xx](link11)哈风高放[uu](link22)火复工后'
 
-        if (!matchRes.length) return [sstr]
+        console.log(getMdArray(extra))
 
-        const answer = []
+        function getMdArray(sstr) {
+          const matchRes = [...sstr.matchAll(/\[.*?\]\(.*?\)/g)] // 非贪婪匹配
 
-        const getLinkObj = linkStr => {
-          const [label] = linkStr.match(/(?<=\[).*(?=\]\()/g)
-          const [href] = linkStr.match(/(?<=\]\().*(?=\))/g)
+          if (!matchRes.length) return [sstr]
 
-          return { href, label }
+          const answer = []
+
+          const getLinkObj = linkStr => {
+            const [label] = linkStr.match(/(?<=\[).*(?=\]\()/g)
+            const [href] = linkStr.match(/(?<=\]\().*(?=\))/g)
+
+            return { href, label }
+          }
+
+          let indexPoint = 0
+          matchRes.forEach((matchItem, index) => {
+            const matStr = matchItem[0]
+
+            answer.push(sstr.slice(indexPoint, matchItem.index))
+            answer.push(getLinkObj(matStr))
+
+            indexPoint = matchItem.index + matStr.length
+
+            if (index === matchRes.length - 1) answer.push(sstr.slice(indexPoint))
+          })
+
+          return answer
         }
-
-        let indexPoint = 0
-        matchRes.forEach((matchItem, index) => {
-          const matStr = matchItem[0]
-
-          answer.push(sstr.slice(indexPoint, matchItem.index))
-          answer.push(getLinkObj(matStr))
-
-          indexPoint = matchItem.index + matStr.length
-
-          if (index === matchRes.length - 1) answer.push(sstr.slice(indexPoint))
-        })
-
-        return answer
       }
 
       console.log('--------------------------------')
 
-      // 钱
-      const moneyReg = /\d+(\.{1}\d{1,2})?$/
-      console.log(moneyReg.test('11.222555'))
+      {
+        // 钱
+        const moneyReg = /\d+(\.{1}\d{1,2})?$/
+        console.log(moneyReg.test('11.222555'))
+      }
 
-      // 变量标识符
-      const varReg = /^\w+(.*\w+)?$/
-      const variableReg = /^[a-z]+([a-z.]*[a-z]+)?$/
-      console.log(varReg.test('a.b'))
+      {
+        // 变量标识符
+        const varReg = /^\w+(.*\w+)?$/
+        const variableReg = /^[a-z]+([a-z.]*[a-z]+)?$/
+        console.log(varReg.test('a.b'))
+      }
 
-      // ? 量词后 -非贪婪
-      const wReg1 = /\d+/
-      const wReg2 = /\d+?/
-      console.log('123asd'.match(wReg1))
-      console.log('123asd'.match(wReg2))
+      {
+        // ? 量词后 -非贪婪
+        const wReg1 = /\d+/
+        const wReg2 = /\d+?/
+        console.log('123asd'.match(wReg1))
+        console.log('123asd'.match(wReg2))
+      }
 
-      var regex = /[ab]{2,5}c/g
-      var string = 'abc abbc abbbc abbbbc abbbbbc abbbbbbc'
-      console.log(string.match(regex))
+      {
+        var regex = /[ab]{2,5}c/g
+        var string = 'abc abbc abbbc abbbbc abbbbbc abbbbbbc'
+        console.log(string.match(regex))
 
-      // var regex = /\d{2,5}?/g
-      // var string = '123 1234 12345 123456'
-      // console.log(string.match(regex))
+        // var regex = /\d{2,5}?/g
+        // var string = '123 1234 12345 123456'
+        // console.log(string.match(regex))
+      }
 
-      const regvvv = /^[A-Za-z0-9]\w*[A-Za-z0-9]+$/
+      {
+        const regvvv = /^[A-Za-z0-9]\w*[A-Za-z0-9]+$/
 
-      console.log(regvvv.test('1111asasuiui_ff456456dasas666'))
+        console.log(regvvv.test('1111asasuiui_ff456456dasas666'))
+      }
 
       console.log('-----------------------')
 
-      const pwdReg = /^\w{8,16}$/
+      {
+        const pwdReg = /^\w{8,16}$/
 
-      // console.log(pwdReg.test('bcdbcdthbcdbcdth'))
+        // console.log(pwdReg.test('bcdbcdthbcdbcdth'))
+      }
 
       // 请输入12位以上密码,数字,字母,字符至少包含两种,不能包含中文和空格
       // const ans = /(?!^[0-9]+$) (?!^[A-z]+$) (?!^[^A-z0-9]+$) ^[^\s\u4e00-\u9fa5] {12,20}$/
+      {
+        const reg44 = /\d{3}/g
 
-      const reg44 = /\d{3}/g
-
-      console.log([...'12345678'.matchAll(reg44)])
-
-      console.log('------------------------------')
-
-      const mds = '**a**bcd**efg**answer'
-
-      console.log(mds.match(/\*{2}\w+\*{2}/g))
-      console.log(mds.match(/(?<=\*\*)\w+(?=\*\*)/g))
+        console.log([...'12345678'.matchAll(reg44)])
+      }
 
       console.log('------------------------------')
 
-      const thousandsStr = '1234567891234567.1234567'
+      {
+        const mds = '**a**bcd**efg**answer'
 
-      const 没有小数点reg = /\d{1,3}(?=(\d{3})+$)/g
+        console.log(mds.match(/\*{2}[^*]+\*{2}/g))
+        console.log(mds.match(/(?<=\*\*)\w+(?=\*\*)/g))
+      }
 
-      const 有小数点reg = /\d{1,3}(?=(\d{3})+\.)/g
-      // /\d{1,3}(  ?= (\d{3})+ ( ?:\.\d+ )?$  )/g
+      console.log('------------------------------')
 
-      console.log(
-        thousandsStr.replace(有小数点reg, function () {
-          return `${arguments[0]},`
-        })
-      )
+      {
+        const thousandsStr = '1234567891234567.1234567'
 
-      const pathKeys = [
-        './index.js',
-        './tC端账号状态变更时/index.js',
-        './查询用户信息/index.js',
-        './用户/查询用户信息/index.js'
-      ]
+        const 没有小数点reg = /\d{1,3}(?=(\d{3})+$)/g
 
-      // 只匹配两个 `/` 的路径
-      const pathReg = /\.\/[^/]+\/index\.js/
-      console.log(pathReg.test('./用户/查询用户信息/index.js'))
+        const 有小数点reg = /\d{1,3}(?=(\d{3})+\.)/g
+        // /\d{1,3}(  ?= (\d{3})+ ( ?:\.\d+ )?$  )/g
 
-      const resPathKeys = pathKeys.filter(item => pathReg.test(item))
-      console.log(resPathKeys)
+        console.log(
+          thousandsStr.replace(有小数点reg, function () {
+            return `${arguments[0]},`
+          })
+        )
+      }
+
+      {
+        const pathKeys = [
+          './index.js',
+          './tC端账号状态变更时/index.js',
+          './查询用户信息/index.js',
+          './用户/查询用户信息/index.js'
+        ]
+
+        // 只匹配两个 `/` 的路径
+        const pathReg = /\.\/[^/]+\/index\.js/
+        console.log(pathReg.test('./用户/查询用户信息/index.js'))
+
+        const resPathKeys = pathKeys.filter(item => pathReg.test(item))
+        console.log(resPathKeys)
+      }
 
       //
     </script>

@@ -19,16 +19,7 @@
     "open_in_tab": true
   },
   "host_permissions": ["<all_urls>"],
-  "permissions": [
-    "debugger",
-    "tabs",
-    "bookmarks",
-    "contextMenus",
-    "activeTab",
-    "cookies",
-    "storage",
-    "webRequest"
-  ],
+  "permissions": ["debugger", "tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage", "webRequest"],
   "web_accessible_resources": [
     {
       "resources": ["/contentScripts/feat/disabledWs/scriptSrc.js"],
@@ -52,6 +43,11 @@
       "matches": ["*://www.zhihu.com/*"],
       "css": ["./contentScripts/thirdWeb/zhihu/zhihu.css"],
       "js": ["./contentScripts/thirdWeb/zhihu/zhihu.js"]
+    },
+
+    {
+      "matches": ["*://www.huya.com/*"],
+      "css": ["./contentScripts/thirdWeb/huya.css"]
     },
 
     {

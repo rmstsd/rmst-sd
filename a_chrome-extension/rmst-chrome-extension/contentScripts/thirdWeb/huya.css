@@ -1,0 +1,7 @@
+#player-ctrl-wrap {
+  bottom: 0 !important;
+}
+
+#player-wrap {
+  height: calc(100% - 44px) !important;
+}

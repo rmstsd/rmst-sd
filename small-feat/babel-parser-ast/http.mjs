@@ -5,7 +5,11 @@ const app = express()
 
 app.use(cors())
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+  console.log(req.query)
+  await new Promise(resolve => {
+    setTimeout(resolve, Number(req.query.time) * 1000)
+  })
   res.send('hello world')
 })
 
