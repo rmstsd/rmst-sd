@@ -76,7 +76,7 @@
           isPressDown = false
           isExecLock = false
           resetDirection()
-          clearTimeout(timer)
+          cancelAnimationFrame(timer)
         }
 
         function handleDocumentMousemove(evt) {
@@ -111,7 +111,7 @@
           ) {
             resetDirection()
 
-            clearTimeout(timer)
+            cancelAnimationFrame(timer)
             isExecLock = false
             return
           }
@@ -154,11 +154,10 @@
             const itemDirection = fourDirection[item]
             if (!itemDirection) return
 
-            domContainer[itemDirection.scrollAttr] =
-              domContainer[itemDirection.scrollAttr] + itemDirection.scrollPer
+            domContainer[itemDirection.scrollAttr] = domContainer[itemDirection.scrollAttr] + itemDirection.scrollPer
           })
 
-          timer = setTimeout(execTask, 0)
+          timer = requestAnimationFrame(execTask)
         }
 
         domContainer.addEventListener('mousedown', handleContainerMousedown)

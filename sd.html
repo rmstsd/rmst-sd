@@ -10,41 +10,52 @@
   </head>
 
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
     <script>
-      const list = Array.from({ length: 20 }, (_, index) => {
-        return () => {
-          return fetch('http://localhost:1250' + '?time=' + Math.ceil(Math.random() * 10)).then(() => index)
-        }
-      })
+      ;(() => {
+        const b = { c: 1 }
+        b.a = b
 
-      console.log(list)
+        const ans = deepClone(b)
+        // ans.a.c = 2
 
-      asyncPool(2, list).then(ans => {
         console.log(ans)
-      })
+        console.log(b)
 
-      async function asyncPool(limit, list) {
-        const ret = []
-        const requestIng = []
+        console.log(ans.a === b.a)
 
-        for (const iteratorFunc of list) {
-          const itemPromise = iteratorFunc()
-          ret.push(itemPromise)
+        // const llans = _.cloneDeep(b)
+        // console.log(llans.a === b.a)
 
-          if (limit < list.length) {
-            requestIng.push(itemPromise)
-            itemPromise.then(() => {
-              requestIng.splice(requestIng.indexOf(itemPromise), 1)
-            })
+        function deepClone(obj) {
+          const map = new Map()
 
-            if (requestIng.length >= limit) {
-              await Promise.race(requestIng)
+          return clone(obj)
+
+          function clone(value) {
+            if (typeof value !== 'object' && value !== null) {
+              return value
             }
+
+            if (map.has(value)) {
+              return map.get(value)
+            }
+
+            const newValue = Array.isArray(value) ? [] : {}
+
+            map.set(value, newValue)
+
+            for (const key in value) {
+              newValue[key] = clone(value[key])
+            }
+
+            return newValue
           }
         }
+      })()
 
-        return Promise.all(ret)
-      }
+      //
     </script>
   </body>
 </html>
