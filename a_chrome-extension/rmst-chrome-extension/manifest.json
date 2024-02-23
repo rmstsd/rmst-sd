@@ -53,6 +53,11 @@
     {
       "matches": ["*://konvajs.org/*"],
       "css": ["./contentScripts/thirdWeb/konva.css"]
+    },
+
+    {
+      "matches": ["*://blog.csdn.net/*"],
+      "css": ["./contentScripts/thirdWeb/csdn.css"]
     }
   ]
 }

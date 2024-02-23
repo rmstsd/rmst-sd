@@ -10,14 +10,97 @@
   </head>
 
   <body>
-    <script src="./promise.js"></script>
+    <!-- <script src="./promise.js"></script> -->
 
     <script>
-      let p = new Promise(resolve => resolve(1))
+      const Pending = 'Pending'
+      const Fulfilled = 'Fulfilled'
+      const Rejected = 'Rejected'
+
+      const resolvePromise = (x, nextPromise, resolve) => {
+        if (x instanceof RmstPromise) {
+          x.then(v => {
+            resolvePromise(v, nextPromise, resolve)
+          })
+        } else {
+          resolve(x)
+        }
+      }
+
+      class RmstPromise {
+        status = Pending
+        value = undefined
+        reason = undefined
+
+        onFulfilledCallbacks = []
+        onRejectedCallbacks = []
+
+        constructor(executor) {
+          const resolve = value => {
+            if (this.status === Pending) {
+              this.status = Fulfilled
+              this.value = value
+
+              this.onFulfilledCallbacks.forEach(funcItem => {
+                funcItem()
+              })
+            }
+          }
+
+          const reject = reason => {
+            if (this.status === Pending) {
+              this.status = Rejected
+              this.reason = reason
+
+              this.onRejectedCallbacks.forEach(funcItem => {
+                funcItem()
+              })
+            }
+          }
+
+          executor(resolve, reject)
+        }
+
+        then(onFulfilled, onRejected) {
+          const nextPromise = new RmstPromise(resolve => {
+            if (this.status === Fulfilled) {
+              queueMicrotask(() => {
+                const x = onFulfilled(this.value)
+                resolvePromise(x, nextPromise, resolve)
+              })
+            }
+
+            if (this.status === Pending) {
+              this.onFulfilledCallbacks.push(() => {
+                queueMicrotask(() => {
+                  const x = onFulfilled(this.value)
+                  resolvePromise(x, nextPromise, resolve)
+                })
+              })
+            }
+          })
+
+          return nextPromise
+        }
+      }
+
+      let p = new RmstPromise(resolve => {
+        setTimeout(() => {
+          resolve(1)
+        })
+      })
 
       p.then(v => {
         console.log(v)
+
+        return new RmstPromise(resolve => {
+          resolve(2)
+        })
+      }).then(v => {
+        console.log(v)
       })
+
+      console.log(0)
 
       //
     </script>

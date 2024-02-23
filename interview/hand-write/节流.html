@@ -28,7 +28,7 @@
       const container = document.querySelector('.container')
       let count = 1
 
-      function throttle(fn) {
+      function throttle(fn, delay = 3000) {
         let prevTime = 0
 
         let timer
@@ -36,7 +36,7 @@
         return () => {
           const cur = Date.now()
 
-          if (cur - prevTime > 3000) {
+          if (cur - prevTime > delay) {
             prevTime = cur
             if (timer) {
               clearTimeout(timer)
@@ -51,7 +51,7 @@
               timer = null
 
               fn()
-            }, 3000)
+            }, delay)
           }
         }
       }
