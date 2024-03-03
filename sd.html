@@ -10,50 +10,34 @@
   </head>
 
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <div style="height: 200px; background: pink; margin-left: 500px; position: relative">
+      0
+
+      <mark style="display: block; width: 300px; height: 50px; position: absolute; left: -400px">1</mark>
+    </div>
 
     <script>
-      ;(() => {
-        const b = { c: 1 }
-        b.a = b
+      const outer = document.querySelector('div')
+      const inner = document.querySelector('mark')
 
-        const ans = deepClone(b)
-        // ans.a.c = 2
+      outer.addEventListener('click', evt => {
+        console.log(evt)
+      })
 
-        console.log(ans)
-        console.log(b)
+      outer.addEventListener('mouseenter', evt => {
+        console.log(evt)
+        console.log('outer enter')
+      })
+      outer.addEventListener('mouseleave', () => {
+        console.log('outer leave')
+      })
 
-        console.log(ans.a === b.a)
-
-        // const llans = _.cloneDeep(b)
-        // console.log(llans.a === b.a)
-
-        function deepClone(obj) {
-          const map = new Map()
-
-          return clone(obj)
-
-          function clone(value) {
-            if (typeof value !== 'object' && value !== null) {
-              return value
-            }
-
-            if (map.has(value)) {
-              return map.get(value)
-            }
-
-            const newValue = Array.isArray(value) ? [] : {}
-
-            map.set(value, newValue)
-
-            for (const key in value) {
-              newValue[key] = clone(value[key])
-            }
-
-            return newValue
-          }
-        }
-      })()
+      inner.addEventListener('mouseenter', () => {
+        console.log('inner enter')
+      })
+      inner.addEventListener('mouseleave', () => {
+        console.log('inner leave')
+      })
 
       //
     </script>

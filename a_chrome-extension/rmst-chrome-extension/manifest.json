@@ -58,6 +58,11 @@
     {
       "matches": ["*://blog.csdn.net/*"],
       "css": ["./contentScripts/thirdWeb/csdn.css"]
+    },
+
+    {
+      "matches": ["*://www.bilibili.com/*"],
+      "css": ["./contentScripts/thirdWeb/bilibili.css"]
     }
   ]
 }
