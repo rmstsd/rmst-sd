@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>f</title>
+
+    <style>
+      .float::after {
+        content: '';
+        display: block;
+        clear: left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="float">
+      <div style="float: left; width: 100px; background: rgba(0, 0, 255, 0.5)">1</div>
+      <div style="float: right; width: 40px; background: rgba(0, 0, 255, 0.5)">啊实打撒所</div>
+    </div>
+
+    <div style="background-color: rgb(253, 224, 224)">
+      啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多
+    </div>
+
+    <script>
+      class A {
+        ss = 1
+
+        func = () => {}
+      }
+
+      const aa = new A()
+
+      Reflect.defineProperty(A.prototype, 'dd', {
+        value: 77,
+        enumerable: true
+      })
+
+      const ks = []
+      for (const key in aa) {
+        ks.push(key)
+      }
+
+      console.log(aa)
+
+      console.log(ks)
+
+      console.log(Object.keys(aa))
+      console.log(Reflect.ownKeys(aa))
+      console.log(Object.getOwnPropertyNames(aa))
+
+      console.log('---')
+    </script>
+  </body>
+</html>
