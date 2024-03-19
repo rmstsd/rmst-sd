@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. 两数之和</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      const nums = [3, 2, 4]
+      const target = 6
+
+      // 输出：[0,1]
+
+      console.log(twoSum(nums, target))
+
+      function twoSum(nums, target) {
+        const map = new Map()
+
+        for (let i = 0; i < nums.length; ++i) {
+          const other = target - nums[i]
+
+          if (map.has(other)) {
+            return [i, map.get(other)]
+          }
+
+          map.set(nums[i], i)
+        }
+
+        return [0]
+      }
+
+      //
+    </script>
+  </body>
+</html>

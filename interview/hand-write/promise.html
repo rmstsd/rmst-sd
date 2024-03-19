@@ -84,23 +84,52 @@
         }
       }
 
-      let p = new RmstPromise(resolve => {
-        setTimeout(() => {
-          resolve(1)
+      // let p = new RmstPromise(resolve => {
+      //   setTimeout(() => {
+      //     resolve(1)
+      //   })
+      // })
+
+      // p.then(v => {
+      //   console.log(v)
+
+      //   return new RmstPromise(resolve => {
+      //     resolve(2)
+      //   })
+      // }).then(v => {
+      //   console.log(v)
+      // })
+
+      // console.log(0)
+
+      const RmstPromiseResolve = v => {
+        return new RmstPromise(resolve => resolve(v))
+      }
+      RmstPromiseResolve()
+        .then(() => {
+          console.log(0)
+          return RmstPromiseResolve(4)
         })
-      })
-
-      p.then(v => {
-        console.log(v)
-
-        return new RmstPromise(resolve => {
-          resolve(2)
+        .then(res => {
+          console.log(res)
         })
-      }).then(v => {
-        console.log(v)
-      })
 
-      console.log(0)
+      RmstPromiseResolve()
+        .then(() => {
+          console.log(1)
+        })
+        .then(() => {
+          console.log(2)
+        })
+        .then(() => {
+          console.log(3)
+        })
+        .then(() => {
+          console.log(5)
+        })
+        .then(() => {
+          console.log(6)
+        })
 
       //
     </script>

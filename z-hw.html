@@ -10,9 +10,80 @@
   </head>
 
   <body>
+    <button onclick="a200()">200</button>
+    <button onclick="a500()">500</button>
+
+    <div
+      style="
+        transition-duration: 200ms;
+        transition-timing-function: linear;
+        width: 100px;
+        height: 100px;
+        background: pink;
+        position: absolute;
+        left: 0px;
+        top: 200px;
+      "
+    ></div>
+
     <script>
-      // 5.最长回文子串
-      // 384.打乱数组
+      document.addEventListener('mousemove', evt => {
+        div.style.transform = `translateX(${evt.clientX}px)`
+      })
+      const div = document.querySelector('div')
+
+      let startTime = 0
+      div.ontransitionend = () => {
+        // console.log(Date.now() - startTime)
+      }
+
+      function a200() {
+        startTime = Date.now()
+        div.style.transform = 'translateX(200px)'
+      }
+
+      function a500() {
+        div.style.transform = 'translateX(500px)'
+      }
+
+      ;(() => {
+        return
+
+        const newspaperSpinning = [{ transform: 'translateX(200px)' }]
+        const newspaperTiming = { duration: 2000, iterations: 1 }
+
+        div.animate(newspaperSpinning, newspaperTiming)
+
+        function exec() {
+          const newspaperSpinning = [{ transform: 'translateX(400px)' }]
+          const newspaperTiming = { duration: 2000, iterations: 1 }
+          div.animate(newspaperSpinning, newspaperTiming)
+        }
+      })()
+
+      const curry = func => {
+        const curried = (...args) => {
+          if (args.length < func.length) {
+            return (...rest) => curried(...args, ...rest)
+          }
+
+          return func(...args)
+        }
+
+        return curried
+      }
+
+      const isType = (type, val) => {
+        return typeof val === type
+      }
+
+      const curriedType = curry(isType)
+
+      const isString = curriedType('string')
+
+      console.log(isString('s'))
+
+      //
     </script>
   </body>
 </html>

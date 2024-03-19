@@ -185,6 +185,20 @@
         console.log(resPathKeys)
       }
 
+      // 把 html 字符串内的 标签换成 空字符串
+      function replaceHtml(str) {
+        const reg = /<\/?.+?\/?>/g
+
+        console.log(str.match(reg))
+        console.log(Array.from(str.matchAll(reg)))
+
+        return str.replace(reg, '')
+      }
+
+      const html = `<section class="p-[10px] flex-grow"><button>click</button><input autocomplete="off" role="spinbutton" aria-valuenow="5000" step="1" class="ant-input-number-input" value="5000"><div class="absolute" style="left: 800px;">Hello World</div></section> aaa`
+
+      console.log(replaceHtml(html))
+
       //
     </script>
   </body>

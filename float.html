@@ -25,6 +25,100 @@
       啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多啊实打撒所多
     </div>
 
+    <div
+      id="dragElement"
+      style="position: absolute; top: 0; left: 0; width: 100px; height: 100px; background-color: red"
+    ></div>
+
+    <script>
+      // 获取要拖动的元素
+      var dragElement = document.getElementById('dragElement')
+
+      // 初始化变量
+      var isDragging = false
+      var startPosition = { x: 0, y: 0 }
+      var currentOffset = { x: 0, y: 0 }
+      var velocity = { x: 0, y: 0 }
+      var damping = 0.8
+
+      // 添加鼠标事件监听器
+      dragElement.addEventListener('mousedown', startDrag)
+      document.addEventListener('mousemove', drag)
+      document.addEventListener('mouseup', endDrag)
+
+      // 开始拖动
+      function startDrag(event) {
+        isDragging = true
+        startPosition.x = event.clientX
+        startPosition.y = event.clientY
+      }
+
+      // 拖动中
+      function drag(event) {
+        if (isDragging) {
+          var offsetX = event.clientX - startPosition.x
+          var offsetY = event.clientY - startPosition.y
+          currentOffset.x += offsetX
+          currentOffset.y += offsetY
+          startPosition.x = event.clientX
+          startPosition.y = event.clientY
+
+          // 更新元素位置
+          dragElement.style.transform = `translate(${currentOffset.x}px, ${currentOffset.y}px)`
+
+          // 更新速度
+          velocity.x = offsetX
+          velocity.y = offsetY
+        }
+      }
+
+      // 停止拖动
+      function endDrag() {
+        isDragging = false
+
+        // 应用阻尼效果
+        animate()
+      }
+
+      // 动画循环
+      // 初始化变量
+      var damping = 0.9 // 增加阻尼系数
+      var minVelocity = 0.1 // 最小速度阈值
+      var maxOffset = 500 // 元素的最大偏移量
+
+      // 动画循环
+      function animate() {
+        if (
+          Math.abs(velocity.x) > minVelocity ||
+          Math.abs(velocity.y) > minVelocity ||
+          Math.abs(currentOffset.x) > maxOffset ||
+          Math.abs(currentOffset.y) > maxOffset
+        ) {
+          currentOffset.x += velocity.x
+          currentOffset.y += velocity.y
+          velocity.x *= damping
+          velocity.y *= damping
+
+          // 边界限制
+          if (currentOffset.x > maxOffset) {
+            currentOffset.x = maxOffset
+          } else if (currentOffset.x < -maxOffset) {
+            currentOffset.x = -maxOffset
+          }
+          if (currentOffset.y > maxOffset) {
+            currentOffset.y = maxOffset
+          } else if (currentOffset.y < -maxOffset) {
+            currentOffset.y = -maxOffset
+          }
+
+          // 更新元素位置
+          dragElement.style.transform = `translate(${currentOffset.x}px, ${currentOffset.y}px)`
+
+          // 下一帧动画
+          requestAnimationFrame(animate)
+        }
+      }
+    </script>
     <script>
       class A {
         ss = 1
