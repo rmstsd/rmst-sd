@@ -68,3 +68,24 @@ const aoo = {
 
 console.log(aoo.bv)
 console.log(aoo)
+
+console.log('-----------')
+
+// [@@toPrimitive]()（将 default 作为 hint 值）、valueOf() 和 toString()
+;(() => {
+  const o = {
+    [Symbol.toPrimitive]() {
+      return 1
+    },
+    // valueOf() {
+    //   return 2
+    // },
+    toString() {
+      return 3
+    }
+  }
+
+  console.log(o)
+
+  console.log(o + 1)
+})()

@@ -1,4 +1,4 @@
-Object.defineProperty(Object.prototype, 'gg', {
+Reflect.defineProperty(Object.prototype, 'gg', {
   get() {
     return this
   }

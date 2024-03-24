@@ -83,6 +83,34 @@
 
       console.log(isString('s'))
 
+      const arrr = [
+        ['a', 'b', 'c'],
+        ['1', '2', '3'],
+        ['d', 'e', 'f']
+      ]
+
+      getAns(arrr)
+
+      function getAns(arr) {
+        const ans = []
+
+        exec(0, [])
+
+        console.log(ans)
+
+        function exec(idx, temp) {
+          if (idx === arr.length) {
+            ans.push(temp.slice())
+            return
+          }
+
+          const arrItem = arr[idx]
+          for (const item of arrItem) {
+            exec(idx + 1, temp.concat(item))
+          }
+        }
+      }
+
       //
     </script>
   </body>
