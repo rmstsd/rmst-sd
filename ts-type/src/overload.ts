@@ -1,3 +1,12 @@
+import type * as TypeNs from './type'
+import type TypeNsde from './type'
+
+import type { People } from './type'
+
+type qq = TypeNs.People
+
+let pp: People
+
 export type NnNn = 'aa'
 
 interface IdLabel {
@@ -62,11 +71,11 @@ type B6 = IsString<1 | '1'>
 // type B6 = boolean
 
 interface Op {
-  a
-  b
-  c
-  d
-  e
+  a: any
+  b: any
+  c: any
+  d: any
+  e: any
 }
 
 type removeKey<O, Keys extends keyof O> = {
@@ -172,3 +181,15 @@ const arree = ['']
 mmForEach(arree, (item, index) => {
   index.toString
 })
+
+type X = Promise<string>
+type Y = Promise<{ field: number }>
+type Z = Promise<Promise<string | number>>
+type Z1 = Promise<Promise<Promise<string | boolean>>>
+type T = { then: (onfulfilled: (arg: number) => any) => any }
+
+type MyAwaited<T> = T extends PromiseLike<infer R> //
+  ? R extends PromiseLike<unknown>
+    ? MyAwaited<R>
+    : R
+  : never

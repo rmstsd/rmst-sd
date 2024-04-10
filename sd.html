@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sd</title>
+
+    <style>
+      .div {
+        position: fixed;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div" style="left: 0; top: 0"></div>
+
+    <script>
+      const div = document.querySelector('div')
+
+      console.log(window.screenTop)
+
+      console.log(window.innerHeight)
+
+      console.log(window.outerHeight)
+
+      // div.style.top = window.screenTop + 'px'
+
+      function randomColor() {
+        const r = Math.floor(Math.random() * 255)
+        const g = Math.floor(Math.random() * 255)
+        const b = Math.floor(Math.random() * 255)
+
+        return `rgb(${r}, ${g}, ${b})`
+      }
+
+      div.style.backgroundColor = randomColor()
+
+      const bc = new BroadcastChannel('internal_notification')
+
+      bc.addEventListener('message', evt => {
+        // setCoord(evt.data)
+      })
+
+      let down = false
+      let prevX = 0
+      let prevY = 0
+      div.onmousedown = evt => {
+        prevX = evt.clientX
+        prevY = evt.clientY
+        down = true
+      }
+
+      document.onmousemove = evt => {
+        if (!down) {
+          return
+        }
+
+        const dx = evt.clientX - prevX
+        const dy = evt.clientY - prevY
+
+        setCoord({ dx, dy })
+
+        bc.postMessage({ dx, dy })
+
+        prevX = evt.clientX
+        prevY = evt.clientY
+      }
+
+      document.onmouseup = () => {
+        down = false
+      }
+
+      function setCoord({ dx, dy }) {
+        div.style.left = parseFloat(div.style.left) + dx + 'px'
+        div.style.top = parseFloat(div.style.top) + dy + 'px'
+      }
+
+      function setCoordPos(left, top) {
+        div.style.left = left + 'px'
+        div.style.top = top + 'px'
+      }
+
+      requestAnimationFrame(function exec() {
+        console.log(window.screenLeft)
+        // setCoordPos(window.screenLeft)
+
+        // requestAnimationFrame(exec)
+      })
+
+      //
+    </script>
+  </body>
+</html>

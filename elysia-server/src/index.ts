@@ -8,6 +8,8 @@ app.use(cors())
 
 app.get('/', () => new Response('Hello Elysia', { headers: { 'content-type': 'text/html' } }))
 
+app.post('/gpt', () => {})
+
 app.get('/js/:fileName', async ({ query, params }) => {
   const delay = Number(query.delay || 0)
 

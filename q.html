@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>q</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <button>执行</button>
+    <button class="插队">插队</button>
+
+    <div style="display: flex; flex-wrap: wrap"></div>
+
+    <script>
+      const btn = document.querySelector('button')
+      const 插队Btn = document.querySelector('.插队')
+      const container = document.querySelector('div')
+
+      btn.onclick = () => {
+        btn.innerText = '已点击，插入中'
+
+        requestIdleCallback(performWorkUnit)
+      }
+
+      插队Btn.onclick = () => {
+        highPriorityTask()
+      }
+
+      // 创建优先级更高的任务
+      function highPriorityTask() {
+        const startTime = performance.now()
+        let span = document.createElement('span')
+        span.style.color = 'red'
+        span.innerHTML = '<strong>插队任务</strong>'
+
+        while (performance.now() - startTime < 1) {
+          // 阻塞 1 ms
+        }
+        container.appendChild(span)
+      }
+
+      function task() {
+        let span = document.createElement('span')
+        span.innerText = 1
+        const startTime = performance.now()
+        while (performance.now() - startTime < 1) {
+          // 阻塞 1 ms
+        }
+
+        container.appendChild(span)
+      }
+
+      const taskQueue = Array.from({ length: 100000 }, () => task)
+
+      function performWorkUnit() {
+        // 任务执行完毕后结束递归
+        if (taskQueue.length === 0) {
+          btn.innerText = '执行'
+          return
+        }
+
+        requestIdleCallback(deadline => {
+          let task
+          while ((task = taskQueue.pop()) && !deadline.didTimeout && deadline.timeRemaining() > 0) {
+            task()
+          }
+          performWorkUnit()
+        })
+      }
+    </script>
+  </body>
+</html>

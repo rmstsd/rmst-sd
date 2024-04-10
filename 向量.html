@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>c</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas width="800" height="600" style="border: 1px solid red"></canvas>
+
+    <script>
+      /*
+       * 定义二维向量
+       * */
+      class Vector2D extends Array {
+        constructor(x = 1, y = 0) {
+          super(x, y)
+        }
+        get x() {
+          return this[0]
+        }
+        set x(value) {
+          this[0] = value
+        }
+        get y() {
+          return this[1]
+        }
+        set y(value) {
+          this[1] = value
+        }
+        // 获取向量的长度
+        get len() {
+          // x、y的平方和的平方根
+          return Math.hypot(this.x, this.y)
+        }
+        // 获取向量与X轴的夹角
+        get dir() {
+          // 向量与X轴的夹角
+          return Math.atan2(this.y, this.x)
+        }
+        // 复制向量
+        copy() {
+          return new Vector2D(this.x, this.y)
+        }
+        // 向量的加法
+        add(v) {
+          this.x += v.x
+          this.y += v.y
+          return this
+        }
+        // 向量旋转
+        rotate(rad) {
+          const c = Math.cos(rad),
+            s = Math.sin(rad)
+          const [x, y] = this
+
+          this.x = x * c - y * s
+          this.y = x * s + y * c
+
+          return this
+        }
+        scale(length) {
+          this.x *= length
+          this.y *= length
+
+          return this
+        }
+        // 向量的点乘
+        dot(v) {
+          return this.x * v.x + this.y * v.y
+        }
+        // 向量的叉乘
+        cross(v) {
+          return this.x * v.y - v.x * this.y
+        }
+        reverse() {
+          return this.copy().scale(-1)
+        }
+        // 向量的减法
+        minus(v) {
+          return this.copy().add(v.reverse())
+        }
+        // 向量归一化
+        normalize() {
+          return this.copy().scale(1 / this.len)
+        }
+      }
+
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      ctx.translate(canvas.width / 2, canvas.height / 2)
+      ctx.scale(1, -1)
+
+      let map = new Map()
+      let v0 = new Vector2D(200, 100),
+        v1 = new Vector2D(100, 0),
+        v2 = new Vector2D(-100, 0)
+
+      map.set('C', v0)
+      map.set('A', v1)
+      map.set('B', v2)
+
+      draw()
+
+      function draw() {
+        drawAxis()
+
+        for (const p of map) {
+          drawPoint(p[1], p[0])
+        }
+
+        drawLines()
+      }
+
+      function drawLine(start, end, color) {
+        ctx.beginPath()
+        ctx.save()
+        ctx.lineWidth = '4px'
+        ctx.strokeStyle = color
+        ctx.moveTo(...start)
+        ctx.lineTo(...end)
+        ctx.stroke()
+        ctx.restore()
+        ctx.closePath()
+      }
+
+      function drawAxis() {
+        drawLine([-canvas.width / 2, 0], [canvas.width / 2, 0], '#333')
+        drawLine([0, canvas.height / 2], [0, -canvas.height / 2], '#333')
+      }
+
+      function drawPoint(v, name, color = '#333') {
+        ctx.beginPath()
+        ctx.save()
+        ctx.fillStyle = color
+        ctx.arc(v.x, v.y, 2, 0, Math.PI * 2)
+        ctx.scale(1, -1)
+        ctx.fillText(`${name}`, v.x, 16 - v.y)
+        ctx.restore()
+        ctx.fill()
+      }
+
+      function drawLines() {
+        let AC = map.get('C').minus(map.get('A'))
+        let AB = map.get('B').minus(map.get('A'))
+        let BC = map.get('C').minus(map.get('B'))
+        let result = AC.dot(AB)
+        let d, dLine // distance
+
+        let crossProduct = AC.cross(AB)
+        dLine = Math.abs(crossProduct) / AB.len
+        let pd = getD()
+        map.set('D', pd)
+        if (result < 0) {
+          // 角CAB为钝角
+          drawLine(map.get('A'), map.get('C'), 'red')
+          drawLine(map.get('C'), pd, 'green')
+          d = AC.len
+        } else if (result > Math.pow(AB.len, 2)) {
+          // 角CBA为钝角
+          drawLine(map.get('B'), map.get('C'), 'red')
+          drawLine(map.get('C'), pd, 'green')
+          d = BC.len
+        } else {
+          d = dLine
+          drawLine(map.get('C'), pd, 'red')
+        }
+
+        let text = `点C到线段AB的距离：${Math.floor(d)}, 点C到AB所在直线的距离为${Math.floor(dLine)}`
+        drawText(text)
+      }
+
+      function getD() {
+        let AC = map.get('C').minus(map.get('A'))
+        let AB = map.get('B').minus(map.get('A'))
+        let A = map.get('A') // 即：向量OA
+        // 已知：AD为AC在AB上的投影
+        // AD = (AB / |AB|) * (AC·AB / |AB|)
+        //    = AB * (AC·AB / |AB|²)
+        // D.x - A.x = AD.x, D.y - A.y = AD.y
+        let AD = AB.scale(AC.dot(AB) / AB.len ** 2)
+        let D = new Vector2D(AD.x + A.x, AD.y + A.y)
+        return D
+      }
+
+      function drawText(distance) {
+        ctx.beginPath()
+        ctx.save()
+        ctx.font = '16px serif'
+        ctx.scale(1, -1)
+        ctx.fillText(`${distance}`, -250, 240)
+        ctx.restore()
+      }
+
+      initEvents()
+
+      function initEvents() {
+        canvas.addEventListener('mousemove', e => {
+          const rect = canvas.getBoundingClientRect()
+          ctx.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height)
+          let x = e.pageX - rect.left - canvas.width / 2
+          let y = -(e.pageY - rect.top - canvas.height / 2)
+
+          v0 = new Vector2D(x - 20, y + 20)
+          map.set('C', v0)
+          draw()
+        })
+      }
+
+      //
+    </script>
+  </body>
+</html>
