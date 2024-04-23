@@ -37,7 +37,7 @@
 
           ctx.translate(rectOpt.x, rectOpt.y)
           ctx.scale(1.5, 1.5)
-          // ctx.rotate(j2h(45))
+          ctx.rotate(j2h(30))
           ctx.translate(-rectOpt.x, -rectOpt.y)
 
           ctx.lineWidth = 10
@@ -90,19 +90,19 @@
         })
 
         draw()
-        draw()
 
         function draw() {
+          console.log(1)
           ctx.clearRect(-1000, -1000, 200000, 2000000)
 
-          ctx.strokeRect(rectOpt.x, rectOpt.y, rectOpt.width, rectOpt.height)
+          // ctx.strokeRect(rectOpt.x, rectOpt.y, rectOpt.width, rectOpt.height)
 
           ctx.save()
 
-          ctx.translate(rectOpt.x, rectOpt.y)
+          ctx.translate(rectCenter.x, rectCenter.y)
           ctx.scale(1.5, 1.5)
-          // ctx.rotate(j2h(45))
-          ctx.translate(-rectOpt.x, -rectOpt.y)
+          ctx.rotate(j2h(30))
+          ctx.translate(-rectCenter.x, -rectCenter.y)
 
           ctx.beginPath()
 
@@ -115,7 +115,7 @@
 
           ctx.restore()
 
-          ctx.fillRect(rectOpt.x, rectOpt.y, 4, 4)
+          // ctx.fillRect(rectCenter.x, rectCenter.y, 4, 4)
         }
       })()
       //

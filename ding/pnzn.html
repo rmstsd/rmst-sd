@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pnzn</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+      .sc {
+        height: 600px;
+        background-color: orange;
+        width: 90%;
+        margin: auto;
+        transform-origin: top;
+      }
+      footer {
+        height: 1200px;
+        text-align: center;
+        line-height: 1200px;
+        font-size: 40px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="height: calc(100vh - 200px); background: pink"></div>
+
+    <div class="sc"></div>
+
+    <footer>footer</footer>
+
+    <script src="./createAnimation.js"></script>
+
+    <script>
+      ;(() => {
+        const sc = document.querySelector('.sc')
+
+        const scrollEnd = sc.getBoundingClientRect().bottom - window.innerHeight
+
+        console.log(scrollEnd)
+        const scaleAnimation = createAnimation(0, scrollEnd, 0.8, 1)
+
+        updateStyle()
+
+        function updateStyle() {
+          sc.style.transform = `scale(${scaleAnimation(window.scrollY)})`
+        }
+
+        window.onscroll = () => {
+          updateStyle()
+        }
+
+        //
+      })()
+    </script>
+  </body>
+</html>

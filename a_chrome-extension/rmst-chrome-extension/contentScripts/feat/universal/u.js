@@ -1,4 +1,6 @@
-document.body.classList.add('u')
+if (window.location.hostname !== 'localhost') {
+  document.body.classList.add('u')
+}
 
 // 防止 QQ 浏览器 按退格键
 document.addEventListener('keydown', evt => {
