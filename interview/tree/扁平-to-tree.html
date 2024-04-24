@@ -9,17 +9,17 @@
     <script>
       const tabular = [
         { id: 1, pid: null, value: '哈哈' },
-        { id: 2, pid: 3, value: 'UI' },
-        { id: 3, pid: 4, value: '是否' },
-        { id: 4, pid: 5, value: '更好' },
-        { id: 5, pid: 1, value: '和办法' },
-        { id: 6, pid: null, value: '请问' },
-        { id: 7, pid: 1, value: '甘肃省' }
+        { id: 2, pid: 1, value: 'UI' },
+        { id: 3, pid: 2, value: '是否' },
+        { id: 4, pid: 2, value: '更好' }
+        // { id: 5, pid: 1, value: '和办法' },
+        // { id: 6, pid: null, value: '请问' },
+        // { id: 7, pid: 1, value: '甘肃省' }
       ]
 
-      console.log(buildTree(tabular, null))
+      // console.log(buildTree(tabular, null))
 
-      console.log(tabular)
+      // console.log(tabular)
       // 不可变数据 函数式编程 没有副作用 非常的nice
       function buildTree(array, pid) {
         const ans = array.filter(item => item.pid === pid)
@@ -36,15 +36,23 @@
         const ans = []
         array = array.map(x => ({ ...x }))
         array.forEach(item => {
-          if (!item.pid) ans.push(item)
-          else {
+          if (!item.pid) {
+            ans.push(item)
+          } else {
             const parentItem = array.find(x => x.id === item.pid)
-            if (!parentItem.children) parentItem.children = []
+            if (!parentItem.children) {
+              parentItem.children = []
+            }
             parentItem.children.push(item)
           }
         })
+
         return ans
       }
+
+      const ans = buildTreeRandom(tabular)
+      console.log(ans)
+      console.log(tabular)
 
       // 无需指定根节点
       function buildTreeRandom(arr) {
@@ -53,7 +61,7 @@
         for (let i = 0; i < arr.length; i++) {
           const item = arr[i]
 
-          const pItem = findDeep(arr, item.parentId)
+          const pItem = findParentItemByPidDeep(arr, item.pid)
           if (pItem) {
             ;(pItem.children || (pItem.children = [])).push(item)
 
@@ -63,6 +71,23 @@
         }
 
         return arr
+
+        function findParentItemByPidDeep(list, pid) {
+          for (const item of list) {
+            if (item.id === pid) {
+              return item
+            }
+
+            if (item.children) {
+              const parent = findParentItemByPidDeep(item.children, pid)
+              if (parent) {
+                return parent
+              }
+            }
+          }
+
+          return null
+        }
       }
     </script>
   </head>

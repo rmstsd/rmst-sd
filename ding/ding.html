@@ -96,6 +96,7 @@
 
     <footer>footer</footer>
 
+    <script src="./createAnimation.js"></script>
     <script>
       ;(() => {
         const items = document.querySelectorAll('.list-item')
@@ -113,20 +114,6 @@
 
         updateStyles()
 
-        function createAnimation(scrollStart, scrollEnd, valueStart, valueEnd) {
-          return function (scroll) {
-            if (scroll <= scrollStart) {
-              return valueStart
-            }
-
-            if (scroll >= scrollEnd) {
-              return valueEnd
-            }
-
-            return valueStart + (valueEnd - valueStart) * ((scroll - scrollStart) / (scrollEnd - scrollStart))
-          }
-        }
-
         function updateMap() {
           animationMap.clear()
 
@@ -134,8 +121,8 @@
 
           const listRect = list.getBoundingClientRect()
 
-          const scrollStart = playgroundRect.top + window.scrollY
-          const scrollEnd = playgroundRect.bottom + window.scrollY - list.clientHeight
+          const scrollStart = playgroundRect.top + window.scrollY - 280
+          const scrollEnd = playgroundRect.bottom + window.scrollY - list.clientHeight - 200
 
           animationMap.set(list, getContainerAnimation(scrollStart, scrollEnd))
 
@@ -175,7 +162,7 @@
         }
 
         function getLogoAnimation(scrollStart, scrollEnd) {
-          const opacityAnimation = createAnimation(scrollStart, scrollEnd, 0, 1)
+          const opacityAnimation = createAnimation(scrollStart, scrollEnd, 0, 1, true)
           const opacity = function (scroll) {
             return opacityAnimation(scroll)
           }
