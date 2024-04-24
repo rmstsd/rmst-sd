@@ -11,10 +11,11 @@
         { id: 1, pid: null, value: '哈哈' },
         { id: 2, pid: 1, value: 'UI' },
         { id: 3, pid: 2, value: '是否' },
-        { id: 4, pid: 2, value: '更好' }
-        // { id: 5, pid: 1, value: '和办法' },
-        // { id: 6, pid: null, value: '请问' },
-        // { id: 7, pid: 1, value: '甘肃省' }
+        { id: 4, pid: 2, value: '更好' },
+        { id: 5, pid: 1, value: '和办法' },
+        { id: 6, pid: null, value: '请问' },
+        { id: 7, pid: 1, value: '甘肃省' },
+        { id: 8, pid: 3, value: '甘肃省' }
       ]
 
       // console.log(buildTree(tabular, null))
@@ -50,8 +51,13 @@
         return ans
       }
 
-      const ans = buildTreeRandom(tabular)
-      console.log(ans)
+      const ans1 = buildTreeRandom(tabular)
+      console.log(ans1)
+      console.log(tabular)
+
+      console.log('---')
+      const ans2 = buildTreeRandom_2(tabular)
+      console.log(ans2)
       console.log(tabular)
 
       // 无需指定根节点
@@ -89,6 +95,29 @@
           return null
         }
       }
+
+      function buildTreeRandom_2(arr) {
+        arr = arr.map(item => ({ ...item }))
+
+        const deletions = new Set()
+
+        for (const item of arr) {
+          const pItem = arr.find(o => o.id === item.pid)
+
+          if (pItem) {
+            deletions.add(item.id)
+
+            pItem.children ??= []
+            pItem.children.push(item)
+          }
+        }
+
+        arr = arr.filter(item => !deletions.has(item.id))
+
+        return arr
+      }
+
+      console.log(JSON.stringify(ans1) === JSON.stringify(ans2))
     </script>
   </head>
 

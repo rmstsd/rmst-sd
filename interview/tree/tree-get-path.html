@@ -63,6 +63,38 @@
           }
         }
       }
+
+      const result_2 = findPath_v2(data, targetId)
+      console.log(result_2)
+
+      function findPath_v2(treeData, targetId) {
+        for (const item of treeData) {
+          const ans = findPath(item, [])
+
+          if (ans) {
+            return ans
+          }
+        }
+
+        return null
+
+        function findPath(node, path) {
+          if (node.id === targetId) {
+            return path.concat(node.id)
+          }
+
+          if (node.children) {
+            for (const item of node.children) {
+              const ans = findPath(item, path.concat(node.id))
+              if (ans) {
+                return ans
+              }
+            }
+          }
+
+          return null
+        }
+      }
     </script>
   </body>
 </html>
