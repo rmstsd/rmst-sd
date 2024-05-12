@@ -85,7 +85,8 @@ console.log('-----------')
     }
   }
 
-  console.log(o)
+  console.log(o == 1)
 
-  console.log(o + 1)
+  // console.log(o)
+  // console.log(o + 1)
 })()
