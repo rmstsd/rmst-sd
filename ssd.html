@@ -13,7 +13,7 @@
     <canvas id="myCanvas"></canvas>
 
     <script>
-      const canvas = document.getElementById('myCanvas')
+      const canvas = document.querySelector('canvas')
       const ctx = canvas.getContext('2d')
 
       const rectX = 50
@@ -35,6 +35,10 @@
       for (let i = 0; i < words.length; i++) {
         const testLine = line + words[i] + ' '
         const metrics = ctx.measureText(testLine)
+
+        // qq 浏览器只返回了 `width`
+        const textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent || parseInt(ctx.font)
+
         const testWidth = metrics.width
 
         if (testWidth > rectWidth && i > 0) {
