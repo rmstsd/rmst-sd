@@ -72,19 +72,51 @@ const combatUnitList = [
     // 技能
     skill: [
       {
-        effectId: 609,
-        effectTypeClass: 1,
-        name: '移除buff集效果',
-        description: '',
-        _nodeType: 83,
-        nodeId: 1579,
-        effectParam: '1|222',
-        effectType: 1010,
-        matchParam: '',
-        prob: 222,
-        scaleRule: '1',
-        triggerConditionParam: '',
-        triggerType: ''
+        owner: 3,
+        maxLevel: 5,
+        autoUpgrade: 0,
+        initLevel: 1,
+        name: '奥数飞弹',
+        description: '技能备注',
+        id: 100042,
+        tag: 9,
+        type: 1,
+        _nodeType: 91,
+        nodeId: 1560,
+        openCondition: '91|22|100000182',
+        effects: [
+          {
+            effectId: 329,
+            effectTypeClass: 1,
+            name: '冰冻',
+            description: '',
+            _nodeType: 83,
+            nodeId: 1579,
+            effectParam: '3|10',
+            effectType: 109,
+            matchParam: '',
+            prob: 100,
+            scaleRule: '',
+            triggerConditionParam: '1|1|1$2$3;2|1||2|',
+            triggerType: ''
+          },
+          {
+            parentEffectId: 329,
+            effectId: 330,
+            effectTypeClass: 1,
+            name: '冰冻',
+            description: '',
+            _nodeType: 83,
+            nodeId: 1579,
+            effectParam: '3|10',
+            effectType: 109,
+            matchParam: '',
+            prob: 100,
+            scaleRule: '',
+            triggerConditionParam: '1|1|1$2$3;2|1||2|',
+            triggerType: ''
+          }
+        ]
       }
     ],
     buff: [
