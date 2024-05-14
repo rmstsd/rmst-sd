@@ -50,22 +50,62 @@ const combatUnitList = [
     // 属性
     property: [
       {
-        propertyName: '最大生命',
-        propertyValue: 111
+        min: 10,
+        name: '奥术飞弹冷却时间',
+        id: 1001093,
+        type: 1,
+        _nodeType: 17,
+        nodeId: 1593,
+        max: 1000,
+        displayName: '奥术飞弹冷却时间222',
+        displayType: 0,
+        funcLabel: 'CurHP',
+        isBroadcastProp: 1,
+        isClientProp: 1,
+        objType: '1|3',
+        score: 22,
+        source: '1001076',
+        tag: 0,
+        valueType: 0
       }
     ],
     // 技能
     skill: [
       {
-        skillName: '火球术',
-        skillSort: 1,
-        技能详情数据: {} // 技能详情数据 是 json  // 效果嵌套
+        effectId: 609,
+        effectTypeClass: 1,
+        name: '移除buff集效果',
+        description: '',
+        _nodeType: 83,
+        nodeId: 1579,
+        effectParam: '1|222',
+        effectType: 1010,
+        matchParam: '',
+        prob: 222,
+        scaleRule: '1',
+        triggerConditionParam: '',
+        triggerType: ''
       }
     ],
     buff: [
       {
-        buffValue: '攻击上升23%',
-        buff数据: {} // buff数据 是 json
+        continueTime: '1000',
+        continueEffect: '138|2000201|80000',
+        stackLayer: '1',
+        label: '8',
+        _nodeType: 81,
+        coolDown: '0',
+        funcLabelClass: '15',
+        stackMode: '3',
+        buffId: 11,
+        isSyncGameProp: 1,
+        minContinueTime: '1000',
+        name: '改变怪物移动速度百分比',
+        class: 6,
+        disRule: '1|4|3',
+        isClentProp: 0,
+        nodeId: 166,
+        order: 1
       }
     ]
   }
