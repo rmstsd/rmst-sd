@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>leafer</title>
+
+    <style></style>
+
+    <script src="./leafer-ui.js"></script>
+    <script src="./text.js"></script>
+  </head>
+
+  <body>
+    <div style="width: 700px; height: 400px; border: 1px solid red"></div>
+
+    <canvas></canvas>
+
+    <script>
+      ;(() => {
+        const btn = document.querySelector('button')
+
+        const { Leafer, Path, Box, Text, Rect } = LeaferUI
+
+        const leafer = new Leafer({ view: document.querySelector('div') })
+        const text = new Text({
+          width: 100,
+          fill: 'rgb(50,205,121)',
+          text: 'Welcome to LeaferJS to LeaferJS to LeaferJS to LeaferJS'
+        })
+
+        leafer.add(text)
+      })()
+
+      Platform.canvas = document.querySelector('canvas')
+      Platform.canvas.measureText = Platform.canvas.getContext('2d').measureText
+
+      const ans = getDrawData('Welcome to LeaferJS to LeaferJS to LeaferJS to LeaferJS', {
+        width: 100,
+        __font: '16px 微软雅黑'
+      })
+      console.log(ans)
+      // ...
+    </script>
+  </body>
+</html>
