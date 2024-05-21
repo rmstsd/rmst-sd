@@ -11502,6 +11502,7 @@ var LeaferUI = (function (exports) {
         height -= padding[top] + padding[bottom]
       }
     }
+    debugger
     const drawData = {
       bounds: { x, y, width, height },
       rows: [],
