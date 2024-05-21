@@ -40,15 +40,27 @@ const register = {
 
 // event(key, value)
 // event(onplay, value)
-
+// { label: '职业', value: 'playerClass' },
+//               { label: '宠物', value: 'pet' },
+//               { label: '怪物', value: 'monster' },
 // 战斗单位列表
 const combatUnitList = [
   {
-    camp: '敌方', // 敌方/友方
-    unit: '法师(1001)', // 单位
-    unitCategory: '职业', // 单位类型: 职业 | 宠物 | 怪物
+    camp: 'enemy', // 敌友: enemy: 敌方; teammate: 友方
+    unitCategory: 'playerClass', // 单位类型: playerClass - 职业, pet - 宠物, monster- 怪物
+    // 单位
+    unitId: 22,
+    unit: {
+      attr: '1001123|111;2000251|222;1001124|333',
+      id: 22,
+      name: '雷雷职业',
+      nodeId: 312,
+      skill: '100129|2;100130|3',
+      world: 1003,
+      _nodeType: 21
+    },
     // 属性
-    property: [
+    attr: [
       {
         min: 10,
         name: '奥术飞弹冷却时间',
