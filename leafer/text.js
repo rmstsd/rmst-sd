@@ -1,10 +1,6 @@
 ;(() => {
   const { top = 0, right = 1, bottom = 2, left = 3 } = {}
 
-  const Platform = {
-    canvas: undefined
-  }
-
   function getDrawData(content, style) {
     if (typeof content !== 'string') content = String(content)
     let x = 0,
@@ -62,7 +58,7 @@
     if (textOverflow !== 'hide') {
       if (textOverflow === 'ellipsis') textOverflow = '...'
       let char, charRight
-      const ellipsisWidth = Platform.canvas.getContext('2d').measureText(textOverflow).width
+      const ellipsisWidth = Platform.canvas.measureText(textOverflow).width
       const right = style.x + style.width - ellipsisWidth
       const list = style.textWrap === 'none' ? rows : [rows[overflow - 1]]
       list.forEach(row => {
@@ -272,7 +268,7 @@
         } else {
           charType = getCharType(char)
           if (charType === Letter && textCase !== 'none') char = getTextCase(char, textCase, !wordWidth)
-          charWidth = canvas.getContext('2d').measureText(char).width
+          charWidth = canvas.measureText(char).width
           if (__letterSpacing) {
             if (__letterSpacing < 0) charSize = charWidth
             charWidth += __letterSpacing
@@ -373,10 +369,19 @@
 
   function layoutText(drawData, style) {
     const { rows, bounds } = drawData
-    const { __lineHeight = 20, __baseLine, __letterSpacing, __clipText, textAlign, verticalAlign, paraSpacing } = style
+    const {
+      __lineHeight = 20,
+      __baseLine = 0,
+      __letterSpacing,
+      __clipText,
+      textAlign,
+      verticalAlign,
+      paraSpacing = 0
+    } = style
     let { x, y, width, height } = bounds,
       realHeight = __lineHeight * rows.length + (paraSpacing ? paraSpacing * (drawData.paraNumber - 1) : 0)
     let starY = __baseLine
+
     if (__clipText && realHeight > height) {
       realHeight = Math.max(height, __lineHeight)
       drawData.overflow = rows.length
@@ -401,7 +406,9 @@
         case 'right':
           row.x += width - row.width
       }
-      if (row.paraStart && paraSpacing && i > 0) starY += paraSpacicng
+      if (row.paraStart && paraSpacing && i > 0) starY += paraSpacing
+      console.log(paraSpacing)
+      console.log(starY)
       row.y = starY
       starY += __lineHeight
       if (drawData.overflow > i && starY > realHeight) {
@@ -505,8 +512,6 @@
     })
     row.data = null
   }
-
-  window.Platform = Platform
 
   window.getDrawData = getDrawData
   // --

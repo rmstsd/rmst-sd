@@ -10,6 +10,8 @@ var LeaferUI = (function (exports) {
     }
   }
 
+  console.log(Platform)
+
   const Creator = {}
 
   const IncrementId = {
@@ -8341,7 +8343,7 @@ var LeaferUI = (function (exports) {
     __updateTextDrawData() {
       const data = this.__
       data.__textDrawData = TextConvert.getDrawData(data.text, this.__)
-      console.log(data.__textDrawData)
+      console.log('offi', data.__textDrawData)
     }
     __updateBoxBounds() {
       const data = this.__
@@ -11502,7 +11504,7 @@ var LeaferUI = (function (exports) {
         height -= padding[top] + padding[bottom]
       }
     }
-    debugger
+
     const drawData = {
       bounds: { x, y, width, height },
       rows: [],
