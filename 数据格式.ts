@@ -38,11 +38,6 @@ const register = {
 
 // logList: []
 
-// event(key, value)
-// event(onplay, value)
-// { label: '职业', value: 'playerClass' },
-//               { label: '宠物', value: 'pet' },
-//               { label: '怪物', value: 'monster' },
 // 战斗单位列表
 const combatUnitList = [
   {
