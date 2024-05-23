@@ -21,14 +21,6 @@ interface Field {
   interaction?: { click?: boolean }
 
   ext?: any
-
-  style?: {
-    keyStyle?: {}
-    valueStyle?: {}
-  }
-  // 样式怎么弄?
-  // 基本通用样式 - 可点击的地方使用内置样式
-  // 高度自定义样式 - 通过插件机制 达到
 }
 
 const data: Node[] = [

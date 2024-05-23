@@ -1,0 +1,20 @@
+id: string
+title: string
+
+acceptType: string
+
+fieldList:
+  - key: string
+    label: string
+    value: string
+    renderType: text
+
+    slot: Field # 描述 key 的额外信息
+
+    contactNodeIds: string
+    emitType: string # 可以连接的类型
+
+    interaction:
+      click: true
+
+    ext: any

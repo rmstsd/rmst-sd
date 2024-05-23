@@ -5,10 +5,7 @@ chrome.runtime.onMessage.addListener(data => {
 })
 
 window.onload = () => {
-  if (window.location.hostname === 'localhost') {
-    return
-  }
-  logTextNodes(document.body)
+  // logTextNodes(document.body)
 }
 
 function isRenderedElement(element) {
