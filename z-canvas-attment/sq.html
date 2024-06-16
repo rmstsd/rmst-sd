@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sq</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas style="border: 1px solid red" width="600" height="600"></canvas>
+    <div></div>
+
+    <script type="module">
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      const dis = 0.1
+
+      canvas.onwheel = evt => {
+        return
+        if (evt.deltaY < 0) {
+          console.log('放大')
+          scale += dis
+        } else {
+          console.log('缩小')
+          scale -= dis
+        }
+
+        const ratio = scale / prevScale
+        translateX = evt.offsetX - (evt.offsetX - prevTranslateX) * ratio
+        translateY = evt.offsetY - (evt.offsetY - prevTranslateY) * ratio
+
+        drawStage()
+
+        prevScale = scale
+        prevTranslateX = translateX
+        prevTranslateY = translateY
+      }
+
+      let translateX = 0
+      let translateY = 0
+
+      let prevTranslateX = 0
+      let prevTranslateY = 0
+
+      let scale = 1
+      let prevScale = 1
+
+      // drawStage()
+
+      function drawStage() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        ctx.save()
+        ctx.translate(translateX, translateY)
+        ctx.scale(scale, scale)
+
+        drawShape()
+
+        ctx.restore()
+      }
+
+      canvas.addEventListener('mousemove', evt => {
+        const bool = ctx.isPointInPath(evt.offsetX, evt.offsetY)
+
+        document.querySelector('div').textContent = bool
+      })
+
+      function drawShape() {
+        ctx.beginPath()
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)'
+        ctx.rect(1, 1, 100, 100)
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.fillStyle = 'rgba(224, 22, 0, 0.3)'
+        ctx.rect(600 - 100, 600 - 100, 99, 99)
+        ctx.fill()
+      }
+
+      {
+        const centerX = canvas.width / 2
+        const centerY = canvas.height / 2
+
+        let tx = 0
+        let ty = 0
+
+        let downX = 0
+        let downY = 0
+
+        let scale = 1
+        const ct = { x: 0, y: 0 }
+        ;(async () => {
+          canvas.onclick = evt => {
+            const pp = transformedPoint(evt.offsetX, evt.offsetY)
+
+            ctx.beginPath()
+            ctx.rect(pp.x, pp.y, 50, 50)
+            ctx.fill()
+          }
+
+          canvas.addEventListener('wheel', evt => {
+            if (evt.deltaY < 0) {
+              console.log('放大')
+              scale += dis
+            } else {
+              console.log('缩小')
+              scale -= dis
+            }
+
+            const pp = transformedPoint(evt.offsetX, evt.offsetY, scale)
+            ct.x = pp.x // evt.offsetX * scale
+            ct.y = pp.y // evt.offsetY * scale
+            drawStageTest()
+          })
+
+          drawStageTest()
+
+          let down = false
+          canvas.addEventListener('mousedown', evt => {
+            downX = evt.offsetX
+            downY = evt.offsetY
+
+            down = true
+          })
+          canvas.addEventListener('mouseup', evt => {
+            down = false
+          })
+          canvas.addEventListener('mousemove', evt => {
+            if (down) {
+              const mt = ctx.getTransform()
+              const prevTx = mt.e
+              const prevTy = mt.f
+
+              console.log(prevTx, prevTy)
+              tx = prevTx + evt.movementX // - downX
+              ty = prevTy + evt.movementY // - downY
+
+              drawStageTest()
+            }
+          })
+
+          function drawStageTest() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+            const _tx = ct.x - scale * ct.x
+            const _ty = ct.y - scale * ct.y
+
+            ctx.setTransform(scale, 0, 0, scale, _tx, _ty)
+
+            drawShape()
+          }
+        })()
+      }
+
+      function sleep() {
+        return new Promise(r => {
+          setTimeout(() => {
+            r()
+          }, 2000)
+        })
+      }
+
+      function transformedPoint(x, y, scale) {
+        var point = { x: x, y: y }
+        var transform = ctx.getTransform()
+
+        const a = scale ?? transform.a
+        const d = scale ?? transform.d
+
+        // 使用逆矩阵进行坐标转换
+        var determinant = a * d - transform.b * transform.c
+        point.x = (d * (x - transform.e) - transform.c * (y - transform.f)) / determinant
+        point.y = (-transform.b * (x - transform.e) + a * (y - transform.f)) / determinant
+
+        return point
+      }
+
+      //
+    </script>
+  </body>
+</html>
