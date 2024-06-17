@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ssssssddd</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas id="myCanvas"></canvas>
+
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById('myCanvas')
+      const ctx = canvas.getContext('2d')
+
+      // 定义初始缩放比例和偏移量
+      let scale = 1
+      let offsetX = 0
+      let offsetY = 0
+
+      // 添加鼠标滚轮事件监听器
+      canvas.addEventListener('wheel', handleWheel)
+
+      function handleWheel(event) {
+        // 获取鼠标在 canvas 上的位置
+        const rect = canvas.getBoundingClientRect()
+        const mouseX = event.clientX - rect.left
+        const mouseY = event.clientY - rect.top
+
+        // 计算缩放比例
+        const delta = Math.sign(event.deltaY) * -0.1
+        scale += delta
+        scale = Math.max(0.1, Math.min(4, scale)) // 限制缩放范围
+
+        // 计算偏移量,使鼠标位置保持不变
+        offsetX += (mouseX - offsetX) * delta
+        offsetY += (mouseY - offsetY) * delta
+
+        // 应用变换
+        ctx.setTransform(scale, 0, 0, scale, offsetX, offsetY)
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        // 重新绘制内容
+        drawContent()
+      }
+
+      function drawContent() {
+        // 在这里绘制你的 canvas 内容
+        ctx.fillRect(0, 0, 100, 100)
+      }
+    </script>
+  </body>
+</html>
