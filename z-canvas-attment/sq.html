@@ -82,8 +82,8 @@
       }
 
       {
-        const centerX = canvas.width / 2
-        const centerY = canvas.height / 2
+        const centerX = canvas.width / 4
+        const centerY = canvas.height / 4
 
         let tx = 0
         let ty = 0
@@ -91,8 +91,12 @@
         let downX = 0
         let downY = 0
 
+        let offsetX = 0
+        let offsetY = 0
         let scale = 1
-        const ct = { x: 0, y: 0 }
+        const ct = { x: centerX, y: centerY }
+        let maxScale = 10 // 最大缩放值
+        let minScale = 0.1 // 最小缩放值
         ;(async () => {
           canvas.onclick = evt => {
             const pp = transformedPoint(evt.offsetX, evt.offsetY)
@@ -101,19 +105,28 @@
             ctx.rect(pp.x, pp.y, 50, 50)
             ctx.fill()
           }
-
+          let step = 0.1
           canvas.addEventListener('wheel', evt => {
-            if (evt.deltaY < 0) {
-              console.log('放大')
-              scale += dis
+            var x = evt.offsetX - offsetX
+            var y = evt.offsetY - offsetY
+
+            var nnoffsetX = (x / scale) * step
+            var nnoffsetY = (y / scale) * step
+
+            if (evt.wheelDelta > 0) {
+              offsetX -= scale >= maxScale ? 0 : nnoffsetX
+              offsetY -= scale >= maxScale ? 0 : nnoffsetY
+
+              scale += step
             } else {
-              console.log('缩小')
-              scale -= dis
+              offsetX += scale <= minScale ? 0 : nnoffsetX
+              offsetY += scale <= minScale ? 0 : nnoffsetY
+
+              scale -= step
             }
 
-            const pp = transformedPoint(evt.offsetX, evt.offsetY, scale)
-            ct.x = pp.x // evt.offsetX * scale
-            ct.y = pp.y // evt.offsetY * scale
+            scale = Math.min(maxScale, Math.max(scale, minScale))
+
             drawStageTest()
           })
 
@@ -146,12 +159,20 @@
           function drawStageTest() {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-            const _tx = ct.x - scale * ct.x
-            const _ty = ct.y - scale * ct.y
+            // const _tx = ct.x - scale * ct.x
+            // const _ty = ct.y - scale * ct.y
+            // ctx.setTransform(scale, 0, 0, scale, _tx, _ty)
 
-            ctx.setTransform(scale, 0, 0, scale, _tx, _ty)
+            ctx.setTransform(scale, 0, 0, scale, offsetX, offsetY)
+
+            // ctx.save()
+
+            // ctx.translate(ct.x, ct.y)
+            // ctx.scale(scale, scale)
+            // ctx.translate(-ct.x, -ct.y)
 
             drawShape()
+            // ctx.restore()
           }
         })()
       }
