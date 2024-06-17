@@ -27,41 +27,46 @@
         let downX = 0
         let downY = 0
 
-        let offsetX = 0
-        let offsetY = 0
+        let translateX = 0
+        let translateY = 0
         let scale = 1
         const ct = { x: centerX, y: centerY }
-        let maxScale = 10 // 最大缩放值
+        let maxScale = 5 // 最大缩放值
         let minScale = 0.1 // 最小缩放值
+        let step = 0.1
         ;(async () => {
-          canvas.onclick = evt => {
-            const pp = transformedPoint(evt.offsetX, evt.offsetY)
-
-            ctx.beginPath()
-            ctx.rect(pp.x, pp.y, 50, 50)
-            ctx.fill()
-          }
-          let step = 0.1
           canvas.addEventListener('wheel', evt => {
-            const x = evt.offsetX - offsetX
-            const y = evt.offsetY - offsetY
+            const x = evt.offsetX - translateX
+            const y = evt.offsetY - translateY
 
             const nnoffsetX = (x / scale) * step
             const nnoffsetY = (y / scale) * step
 
             if (evt.wheelDelta > 0) {
-              offsetX -= scale >= maxScale ? 0 : nnoffsetX
-              offsetY -= scale >= maxScale ? 0 : nnoffsetY
+              console.log('放大')
 
               scale += step
+
+              const isYj = scale >= maxScale
+              if (isYj) {
+                scale = maxScale
+              }
+
+              translateX = translateX - (isYj ? 0 : nnoffsetX)
+              translateY = translateY - (isYj ? 0 : nnoffsetY)
             } else {
-              offsetX += scale <= minScale ? 0 : nnoffsetX
-              offsetY += scale <= minScale ? 0 : nnoffsetY
+              console.log('缩小')
 
               scale -= step
-            }
 
-            scale = Math.min(maxScale, Math.max(scale, minScale))
+              const isYj = scale <= minScale
+              if (isYj) {
+                scale = minScale
+              }
+
+              translateX = translateX + (isYj ? 0 : nnoffsetX)
+              translateY = translateY + (isYj ? 0 : nnoffsetY)
+            }
 
             drawStageTest()
           })
@@ -71,7 +76,7 @@
           function drawStageTest() {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-            ctx.setTransform(scale, 0, 0, scale, offsetX, offsetY)
+            ctx.setTransform(scale, 0, 0, scale, translateX, translateY)
 
             drawShape()
           }
