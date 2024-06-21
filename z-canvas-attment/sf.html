@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sf</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas style="border: 1px solid red" width="600" height="600"></canvas>
+
+    <script type="module">
+      // https://juejin.cn/post/6913835124681342989#heading-7
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      {
+        const centerX = canvas.width / 4
+        const centerY = canvas.height / 4
+
+        let tx = 0
+        let ty = 0
+
+        let downX = 0
+        let downY = 0
+
+        let translateX = 0
+        let translateY = 0
+        let scale = 1
+        const ct = { x: centerX, y: centerY }
+        let maxScale = 5 // 最大缩放值
+        let minScale = 0.1 // 最小缩放值
+        let step = 0.1
+        ;(async () => {
+          canvas.addEventListener('wheel', evt => {
+            const x = evt.offsetX - translateX
+            const y = evt.offsetY - translateY
+
+            const nnoffsetX = (x / scale) * step
+            const nnoffsetY = (y / scale) * step
+
+            if (evt.wheelDelta > 0) {
+              console.log('放大')
+
+              scale += step
+
+              const isYj = scale >= maxScale
+              if (isYj) {
+                scale = maxScale
+              }
+
+              translateX = translateX - (isYj ? 0 : nnoffsetX)
+              translateY = translateY - (isYj ? 0 : nnoffsetY)
+            } else {
+              console.log('缩小')
+
+              scale -= step
+
+              const isYj = scale <= minScale
+              if (isYj) {
+                scale = minScale
+              }
+
+              translateX = translateX + (isYj ? 0 : nnoffsetX)
+              translateY = translateY + (isYj ? 0 : nnoffsetY)
+            }
+
+            drawStageTest()
+          })
+
+          drawStageTest()
+
+          function drawStageTest() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+            ctx.setTransform(scale, 0, 0, scale, translateX, translateY)
+
+            drawShape()
+          }
+        })()
+      }
+
+      function drawShape() {
+        ctx.beginPath()
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)'
+        ctx.rect(1, 1, 100, 100)
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.fillStyle = 'rgba(224, 22, 0, 0.3)'
+        ctx.rect(600 - 100, 600 - 100, 99, 99)
+        ctx.fill()
+      }
+
+      //
+    </script>
+  </body>
+</html>

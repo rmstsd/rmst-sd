@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sf2</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas style="border: 1px solid red" width="600" height="600"></canvas>
+
+    <script>
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      canvas.addEventListener('wheel', onMousewheel)
+
+      class CanDr {
+        canvas = canvas
+        ctx = ctx
+
+        onMousewheel(e) {
+          e.preventDefault()
+
+          let dx, dy
+
+          this.mousePosition.x = e.offsetX // 记录当前鼠标点击的横坐标
+          this.mousePosition.y = e.offsetY // 记录当前鼠标点击的纵坐标
+          if (e.wheelDelta > 0) {
+            // 放大
+            this.scale = parseFloat((this.scaleStep + this.scale).toFixed(2)) // 解决小数点运算丢失精度的问题
+            if (this.scale > this.maxScale) {
+              this.scale = this.maxScale
+              return
+            }
+          } else {
+            // 缩小
+            this.scale = parseFloat((this.scale - this.scaleStep).toFixed(2)) // 解决小数点运算丢失精度的问题
+            if (this.scale < this.minScale) {
+              this.scale = this.minScale
+              return
+            }
+          }
+
+          this.offset.x = this.mousePosition.x - ((this.mousePosition.x - this.offset.x) * this.scale) / this.preScale
+          this.offset.y = this.mousePosition.y - ((this.mousePosition.y - this.offset.y) * this.scale) / this.preScale
+
+          this.paint(this.ctx)
+          this.preScale = this.scale
+          this.curOffset.x = this.offset.x
+          this.curOffset.y = this.offset.y
+        }
+
+        paint() {
+          this.clear()
+          this.ctx.translate(this.offset.x, this.offset.y)
+          this.ctx.scale(this.scale, this.scale)
+          this.draw()
+        }
+
+        draw() {
+          this.ctx.beginPath()
+          this.ctx.rect(100, 100, 100, 100)
+          this.ctx.fill()
+        }
+
+        clear() {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        }
+      }
+    </script>
+  </body>
+</html>
