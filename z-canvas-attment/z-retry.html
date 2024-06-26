@@ -20,22 +20,22 @@
 
       const step = 0.1
       canvas.addEventListener('wheel', evt => {
-        const P1 = {
-          x: ((evt.offsetX - testTrans.translateX) / testTrans.zoom) * step,
-          y: ((evt.offsetY - testTrans.translateY) / testTrans.zoom) * step
-        }
+        const prevZoom = testTrans.zoom
 
         if (evt.deltaY < 0) {
-          console.log('dds')
-          testTrans.zoom += step
-          testTrans.translateX -= P1.x
-          testTrans.translateY -= P1.y
+          console.log('放大')
+          testTrans.zoom *= 1.1
         } else {
-          testTrans.zoom -= step
-          testTrans.translateX += P1.x
-          testTrans.translateY += P1.y
+          testTrans.zoom *= 0.9
         }
 
+        const p2 = {
+          x: ((evt.offsetX - testTrans.translateX) / prevZoom) * (testTrans.zoom - prevZoom),
+          y: ((evt.offsetY - testTrans.translateY) / prevZoom) * (testTrans.zoom - prevZoom)
+        }
+
+        testTrans.translateX -= p2.x
+        testTrans.translateY -= p2.y
         draw()
       })
 
