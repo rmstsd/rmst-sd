@@ -18,30 +18,28 @@
 
       const testTrans = { zoom: 1, translateX: 0, translateY: 0 }
 
+      const step = 0.1
       canvas.addEventListener('wheel', evt => {
-        let scale
-        if (evt.deltaY > 0) {
-          scale = 0.9
-        } else {
-          scale = 1.1
+        const P1 = {
+          x: ((evt.offsetX - testTrans.translateX) / testTrans.zoom) * step,
+          y: ((evt.offsetY - testTrans.translateY) / testTrans.zoom) * step
         }
 
-        testTrans.zoom *= scale
-
-        const P1 = { x: evt.offsetX + testTrans.translateX, y: evt.offsetY + testTrans.translateY }
-        console.log(P1)
-
-        const P2 = { x: P1.x * (1 / scale), y: P1.y * (1 / scale) }
-
-        P2.x = P2.x - P1.x
-        P2.y = P2.y - P1.y
-
-        testTrans.translateX += P2.x
-        testTrans.translateY += P2.y
+        if (evt.deltaY < 0) {
+          console.log('dds')
+          testTrans.zoom += step
+          testTrans.translateX -= P1.x
+          testTrans.translateY -= P1.y
+        } else {
+          testTrans.zoom -= step
+          testTrans.translateX += P1.x
+          testTrans.translateY += P1.y
+        }
 
         draw()
       })
 
+      draw()
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
 
