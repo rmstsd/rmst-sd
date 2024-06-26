@@ -18,7 +18,6 @@
 
       const testTrans = { zoom: 1, translateX: 0, translateY: 0 }
 
-      const step = 0.1
       canvas.addEventListener('wheel', evt => {
         const prevZoom = testTrans.zoom
 
@@ -37,6 +36,24 @@
         testTrans.translateX -= p2.x
         testTrans.translateY -= p2.y
         draw()
+      })
+
+      let idMd = false
+      canvas.addEventListener('mousedown', evt => {
+        idMd = true
+      })
+      document.addEventListener('mousemove', evt => {
+        if (!idMd) {
+          return
+        }
+
+        testTrans.translateX += evt.movementX
+        testTrans.translateY += evt.movementY
+
+        draw()
+      })
+      document.addEventListener('mouseup', evt => {
+        idMd = false
       })
 
       draw()
