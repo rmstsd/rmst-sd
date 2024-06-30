@@ -16,24 +16,38 @@
       const canvas = document.querySelector('canvas')
       const ctx = canvas.getContext('2d')
 
+      function offsetToCanvas(ox, oy, tx, ty, scaleX, scaleY) {
+        const x = (ox - tx) / scaleX
+        const y = (oy - ty) / scaleY
+
+        return { x, y }
+      }
+
       const transMt = { zoom: 1, translateX: 0, translateY: 0 }
 
       let idMd = false
+      let prev = { x: 0, y: 0 }
       canvas.addEventListener('mousedown', evt => {
-        console.log(evt.offsetX, evt.offsetY)
+        prev.x = evt.offsetX
+        prev.y = evt.offsetY
+
         const { x, y } = getCanvasCoords(evt.offsetX, evt.offsetY)
-        console.log(x, y)
-        ctx.fillRect(x, y, 50, 50)
+        ctx.fillRect(x, y, 100, 100)
         idMd = true
       })
       document.addEventListener('mousemove', evt => {
-        return
         if (!idMd) {
           return
         }
 
-        transMt.translateX += evt.movementX
-        transMt.translateY += evt.movementY
+        const dx = evt.offsetX - prev.x
+        const dy = evt.offsetY - prev.y
+
+        prev.x = evt.offsetX
+        prev.y = evt.offsetY
+
+        transMt.translateX += dx
+        transMt.translateY += dy
 
         draw()
       })
@@ -44,6 +58,15 @@
       canvas.addEventListener('wheel', evt => {
         const prevZoom = transMt.zoom
 
+        const { x: mx, y: my } = offsetToCanvas(
+          evt.offsetX,
+          evt.offsetY,
+          transMt.translateX,
+          transMt.translateY,
+          transMt.zoom,
+          transMt.zoom
+        )
+
         if (evt.deltaY < 0) {
           console.log('放大')
           transMt.zoom *= 1.1
@@ -51,21 +74,12 @@
           transMt.zoom *= 0.9
         }
 
-        const mx = getCanvasCoords(evt.offsetX, evt.offsetY).x //evt.offsetX
-        const my = getCanvasCoords(evt.offsetX, evt.offsetY).y //evt.offsetY
+        // const { x: mx, y: my } = getCanvasCoords(evt.offsetX, evt.offsetY)
+        const dx = mx * (transMt.zoom - prevZoom)
+        const dy = my * (transMt.zoom - prevZoom)
 
-        // const dx = ((mx - transMt.translateX) / prevZoom) * (transMt.zoom - prevZoom)
-        // const dy = ((my - transMt.translateY) / prevZoom) * (transMt.zoom - prevZoom)
-
-        const dx = -mx * (transMt.zoom - prevZoom)
-        const dy = -my * (transMt.zoom - prevZoom)
-
-        console.log(dx, dy)
-
-        transMt.translateX += dx
-        transMt.translateY += dy
-
-        console.log(transMt.translateX, transMt.translateY)
+        transMt.translateX -= dx
+        transMt.translateY -= dy
 
         draw()
       })
@@ -74,10 +88,9 @@
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-        // ctx.save()
-
         ctx.setTransform(transMt.zoom, 0, 0, transMt.zoom, transMt.translateX, transMt.translateY)
 
+        // ctx.save()
         // ctx.translate(transMt.translateX, transMt.translateY)
         // ctx.scale(transMt.zoom, transMt.zoom)
 
