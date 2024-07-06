@@ -11,36 +11,7 @@
 
   <body>
     <script>
-      window.addEventListener('mousedown', evt => {
-        if (evt.spaceKey) {
-        }
-      })
-
-      window.addEventListener('keydown', evt => {})
-      window.addEventListener('keyup', evt => {})
-
-      let pressedKeys = []
-
-      document.addEventListener('keydown', event => {
-        if (!pressedKeys.includes(event.key)) {
-          pressedKeys.push(event.key)
-          console.log('键盘按下:', pressedKeys)
-        }
-      })
-
-      document.addEventListener('keyup', event => {
-        // 从列表中移除松开的键
-        const index = pressedKeys.indexOf(event.key)
-        if (index !== -1) {
-          console.log('键盘松开:', event.key)
-
-          pressedKeys.splice(index, 1)
-        }
-      })
-
-      setInterval(() => {
-        localStorage.cc = pressedKeys
-      }, 50)
+      fetch('https://rmst-server.vercel.app/')
     </script>
   </body>
 </html>
