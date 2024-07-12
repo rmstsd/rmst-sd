@@ -10,8 +10,55 @@
   </head>
 
   <body>
+    <img src="./assets/avatar-100x100.png" style="width: 100px; height: 100px; display: none" />
+
     <script>
-      fetch('https://rmst-server.vercel.app/')
+      console.log(window.devicePixelRatio)
+
+      const img = document.querySelector('img')
+
+      console.log(img.naturalWidth, img.naturalHeight)
+
+      img.style.width = img.naturalWidth / window.devicePixelRatio + 'px'
+      img.style.height = img.naturalHeight / window.devicePixelRatio + 'px'
+    </script>
+
+    <canvas style="border: 1px solid black; display: block"></canvas>
+
+    <script>
+      const cssWidth = 500
+      const cssHeight = 500
+
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      canvas.width = cssWidth * window.devicePixelRatio
+      canvas.height = cssHeight * window.devicePixelRatio
+
+      canvas.style.width = cssWidth + 'px'
+      canvas.style.height = cssHeight + 'px'
+
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+
+      ctx.fillRect(100, 100, 100, 100)
+
+      ctx.arc(400, 200, 40, 0, Math.PI * 2)
+      ctx.fillStyle = 'orange'
+      ctx.strokeStyle = 'red'
+      ctx.lineWidth = 10
+      ctx.stroke()
+      ctx.fill()
+
+      ctx.font = '24px 微软雅黑'
+      ctx.fillStyle = 'purple'
+      ctx.fillText('hello', 50, 50)
+
+      // ctx.moveTo(0, 0)
+      // ctx.lineTo(10, 0)
+
+      // ctx.lineWidth = 1
+      // ctx.strokeStyle = 'red'
+      // ctx.stroke()
     </script>
   </body>
 </html>
