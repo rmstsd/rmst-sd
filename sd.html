@@ -6,11 +6,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ssd</title>
 
-    <style></style>
+    <style>
+      main {
+        /* animation-name: width;
+        animation-duration: 1s;
+        animation-iteration-count: infinite; */
+      }
+
+      @keyframes width {
+        from {
+          width: 100px;
+        }
+        to {
+          width: 200px;
+        }
+      }
+
+      .div2 {
+        /* animation-name: tx;
+        animation-duration: 1s;
+        animation-iteration-count: infinite; */
+      }
+
+      @keyframes tx {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(100px);
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <img src="./assets/avatar-100x100.png" style="width: 100px; height: 100px; display: none" />
+    <div style="padding: 10px; margin: 50px; background-color: papayawhip">
+      <div style="padding: 10px; margin: 50px; background-color: purple; perspective: 100px"></div>
+    </div>
+
+    <img src="./assets/avatar-100x100.png" style="aspect-ratio: 16/9" />
+
+    <header style="background: pink; will-change: transform">header</header>
+
+    <div style="background-color: red; aspect-ratio: 10/1; min-height: 0">
+      胜多负少的胜多负少的胜
+
+      <main style="background-color: orange">main</main>
+    </div>
+
+    <div style="background-color: pink; width: 200px" class="div2">1</div>
+
+    <div style="">translate3d(0, 0, 0);</div>
+
+    <script>
+      const div = document.querySelector('main')
+      const div2 = document.querySelector('.div2')
+
+      let width = 100
+
+      // animate(() => {
+      //   div.style.width = width + 'px'
+      //   div2.style.transform = `translateX(${width}px)`
+      // })
+
+      function animate(cb) {
+        requestAnimationFrame(() => {
+          if (width > 500) {
+            width = 100
+          }
+          width += 1
+
+          cb(width)
+
+          animate(cb)
+        })
+      }
+
+      setTimeout(() => {
+        let t = Date.now()
+
+        // while (Date.now() - t < 2000) {
+        //   console.log(1)
+        // }
+      }, 1000)
+      let t = Date.now()
+    </script>
 
     <script>
       console.log(window.devicePixelRatio)
@@ -18,10 +98,17 @@
       const img = document.querySelector('img')
 
       console.log(img.naturalWidth, img.naturalHeight)
+      console.log(img.width, img.height)
 
-      img.style.width = img.naturalWidth / window.devicePixelRatio + 'px'
-      img.style.height = img.naturalHeight / window.devicePixelRatio + 'px'
+      // img.style.width = img.naturalWidth / window.devicePixelRatio + 'px'
+      // img.style.height = img.naturalHeight / window.devicePixelRatio + 'px'
     </script>
+
+    <br />
+
+    <div style="height: 1px; background-color: red"></div>
+
+    <br />
 
     <canvas style="border: 1px solid black; display: block"></canvas>
 
@@ -29,16 +116,20 @@
       const cssWidth = 500
       const cssHeight = 500
 
+      const dpr = window.devicePixelRatio
+
+      console.log('dpr', dpr)
+
       const canvas = document.querySelector('canvas')
       const ctx = canvas.getContext('2d')
 
-      canvas.width = cssWidth * window.devicePixelRatio
-      canvas.height = cssHeight * window.devicePixelRatio
+      canvas.width = cssWidth * dpr
+      canvas.height = cssHeight * dpr
 
       canvas.style.width = cssWidth + 'px'
       canvas.style.height = cssHeight + 'px'
 
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+      ctx.scale(dpr, dpr)
 
       ctx.fillRect(100, 100, 100, 100)
 
@@ -53,12 +144,56 @@
       ctx.fillStyle = 'purple'
       ctx.fillText('hello', 50, 50)
 
-      // ctx.moveTo(0, 0)
-      // ctx.lineTo(10, 0)
+      ctx.moveTo(10, 10)
+      ctx.lineTo(20, 10)
 
-      // ctx.lineWidth = 1
-      // ctx.strokeStyle = 'red'
-      // ctx.stroke()
+      ctx.lineWidth = 1
+      ctx.strokeStyle = 'red'
+      ctx.stroke()
+
+      function getDis(element, direction) {
+        return element.getBoundingClientRect()[direction]
+      }
+      function curry(originFunc) {
+        const curried = (...args) => {
+          if (args.length < originFunc.length) {
+            return (...others) => curried(...args, ...others)
+          }
+          return originFunc(...args)
+        }
+
+        return curried
+      }
+
+      console.log(getDis(canvas, 'top'))
+      console.log(getDis(canvas, 'left'))
+      console.log(getDis(canvas, 'right'))
+
+      console.log('-------------------')
+
+      const getCanvasDis = curry(getDis)(canvas)
+
+      console.log(getCanvasDis('top'))
+      console.log(getCanvasDis('left'))
+      console.log(getCanvasDis('right'))
+    </script>
+
+    <div id="app" style="width: 200px; height: 200px; background-color: red; display: none; transition: all 0.5s">
+      app
+    </div>
+
+    <button>ttttt</button>
+
+    <script>
+      document.querySelector('button').onclick = function () {
+        const app = document.querySelector('#app')
+
+        app.style.display = 'block'
+
+        app.offsetHeight
+
+        app.style.transform = 'translateX(200px)'
+      }
     </script>
   </body>
 </html>
