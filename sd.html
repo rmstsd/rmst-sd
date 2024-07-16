@@ -36,6 +36,15 @@
           transform: translateX(100px);
         }
       }
+
+      .t-div {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
     </style>
   </head>
 
@@ -56,7 +65,7 @@
 
     <div style="background-color: pink; width: 200px" class="div2">1</div>
 
-    <div style="">translate3d(0, 0, 0);</div>
+    <div>translate3d(0, 0, 0);</div>
 
     <script>
       const div = document.querySelector('main')
@@ -194,6 +203,96 @@
 
         app.style.transform = 'translateX(200px)'
       }
+    </script>
+
+    <script>
+      console.log('-----------------------------')
+
+      const shape = {
+        x: 10,
+        y: 10,
+        width: 100,
+        height: 100,
+        color: 'red'
+      }
+
+      function createOverload() {
+        const callMap = new Map()
+
+        function overload(...args) {
+          const fn = callMap.get(args.length)
+
+          if (fn) {
+            fn.apply(this, args)
+          }
+        }
+
+        overload.addImpl = function (fn) {
+          if (typeof fn !== 'function') {
+            return
+          }
+          callMap.set(fn.length, fn)
+        }
+
+        return overload
+      }
+
+      const updateShape = createOverload()
+
+      updateShape.addImpl(obj => {
+        Object.assign(shape, obj)
+      })
+      updateShape.addImpl((attr, value) => {
+        Object.assign(shape, { [attr]: value })
+      })
+
+      console.log(shape)
+
+      updateShape('x', 20)
+      console.log(shape)
+
+      updateShape({ width: 200, height: 200 })
+      console.log(shape)
+
+      class U {
+        constructor() {
+          const up = createOverload()
+          up.addImpl((attr, value) => {
+            console.log(attr, value)
+          })
+          up.addImpl(obj => {
+            console.log(obj)
+          })
+          this.overloadUpdateShape = up
+        }
+
+        overloadUpdateShape
+        updateShape(...args) {
+          this.overloadUpdateShape(...args)
+        }
+
+        updateAnimate() {
+          console.log(1)
+        }
+      }
+
+      const u = new U()
+
+      u.updateShape({})
+      u.updateShape('width', 100)
+
+      //
+
+      const tdiv = document.createElement('div')
+
+      tdiv.classList.add('t-div')
+      document.body.appendChild(tdiv)
+      tdiv.style.transition = 'all 0.5s'
+      tdiv.style.transform = 'translateX(100px)'
+
+      tdiv.offsetWidth
+
+      tdiv.style.transform = 'translateX(300px)'
     </script>
   </body>
 </html>

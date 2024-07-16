@@ -46,7 +46,7 @@ class UiGood {
 }
 
 // 整个购物车, 内部管理着多个商品
-class Card {
+class Cart {
   constructor(goods, deliveryCost, deliveryThreshold) {
     this.goods = goods.map(item => new UiGood(item))
     this.deliveryCost = deliveryCost
@@ -80,13 +80,13 @@ class Card {
   }
 }
 
-const card = new Card(goodData, 5, 30)
+const card = new Cart(goodData, 5, 30)
 
 console.log(card)
 
 class UiView {
   constructor() {
-    this.card = new Card(goodData, 5, 60)
+    this.card = new Cart(goodData, 5, 60)
 
     this.createGoodsHtml()
     this.updateFooter()
@@ -96,7 +96,7 @@ class UiView {
     }
   }
 
-  card = new Card(goodData, 5, 30)
+  card = new Cart(goodData, 5, 30)
 
   doms = {
     goodContainer: document.querySelector('.good-container'),
