@@ -95,6 +95,33 @@
           return null
         }
       }
+
+      // ------------------------
+      const ans = getnn(data)
+
+      console.log(ans)
+
+      function getnn(treeData) {
+        return getPaths(treeData[0])
+
+        function getPaths(node) {
+          const result = []
+          dfs(node, [])
+          return result
+
+          function dfs(node, ans) {
+            ans.push(node.id)
+
+            if (node.children) {
+              for (const item of node.children) {
+                dfs(item, ans.slice())
+              }
+            } else {
+              result.push(ans)
+            }
+          }
+        }
+      }
     </script>
   </body>
 </html>
