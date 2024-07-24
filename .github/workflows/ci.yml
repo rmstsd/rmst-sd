@@ -48,6 +48,6 @@ jobs:
         with:
           draft: false
           files: |
-            *.html
+            /*.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
