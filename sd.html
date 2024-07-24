@@ -4,295 +4,45 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ssd</title>
+    <title>sd</title>
 
     <style>
-      main {
-        /* animation-name: width;
-        animation-duration: 1s;
-        animation-iteration-count: infinite; */
-      }
-
-      @keyframes width {
-        from {
-          width: 100px;
-        }
-        to {
-          width: 200px;
-        }
-      }
-
-      .div2 {
-        /* animation-name: tx;
-        animation-duration: 1s;
-        animation-iteration-count: infinite; */
-      }
-
-      @keyframes tx {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(100px);
-        }
-      }
-
-      .t-div {
-        position: fixed;
-        top: 0;
-        left: 0;
+      .abs {
+        position: absolute;
         width: 100px;
         height: 100px;
-        background-color: pink;
       }
     </style>
   </head>
 
   <body>
-    <div style="padding: 10px; margin: 50px; background-color: papayawhip">
-      <div style="padding: 10px; margin: 50px; background-color: purple; perspective: 100px"></div>
+    <!-- <div
+      style="
+        width: 100px;
+        position: relative;
+        padding: 20px;
+        background-color: pink;
+        height: 100px;
+        margin: 10%;
+        border: 10px solid red;
+      "
+    >
+      <div style="position: absolute; background-color: orange; width: 50px; height: 50px; left: 0; top: 0"></div>
+    </div> -->
+
+    <div class="abs d1" style="background-color: red; z-index: 10; left: 10px; top: 10px">
+      <!-- <div class="abs d2" style="background-color: pink; z-index: 20; left: 20px; top: 20px"></div> -->
     </div>
 
-    <img src="./assets/avatar-100x100.png" style="aspect-ratio: 16/9" />
-
-    <header style="background: pink; will-change: transform">header</header>
-
-    <div style="background-color: red; aspect-ratio: 10/1; min-height: 0">
-      胜多负少的胜多负少的胜
-
-      <main style="background-color: orange">main</main>
+    <div class="abs d3" style="background-color: orange; z-index: 15; left: 40px; top: 40px">
+      <!-- <div class="abs d4" style="background-color: purple; z-index: -100; left: 40px; top: 40px"></div> -->
     </div>
 
-    <div style="background-color: pink; width: 200px" class="div2">1</div>
-
-    <div>translate3d(0, 0, 0);</div>
-
     <script>
-      const div = document.querySelector('main')
-      const div2 = document.querySelector('.div2')
+      const div = document.querySelector('div')
+      console.log(div.clientHeight)
 
-      let width = 100
-
-      // animate(() => {
-      //   div.style.width = width + 'px'
-      //   div2.style.transform = `translateX(${width}px)`
-      // })
-
-      function animate(cb) {
-        requestAnimationFrame(() => {
-          if (width > 500) {
-            width = 100
-          }
-          width += 1
-
-          cb(width)
-
-          animate(cb)
-        })
-      }
-
-      setTimeout(() => {
-        let t = Date.now()
-
-        // while (Date.now() - t < 2000) {
-        //   console.log(1)
-        // }
-      }, 1000)
-      let t = Date.now()
-    </script>
-
-    <script>
-      console.log(window.devicePixelRatio)
-
-      const img = document.querySelector('img')
-
-      console.log(img.naturalWidth, img.naturalHeight)
-      console.log(img.width, img.height)
-
-      // img.style.width = img.naturalWidth / window.devicePixelRatio + 'px'
-      // img.style.height = img.naturalHeight / window.devicePixelRatio + 'px'
-    </script>
-
-    <br />
-
-    <div style="height: 1px; background-color: red"></div>
-
-    <br />
-
-    <canvas style="border: 1px solid black; display: block"></canvas>
-
-    <script>
-      const cssWidth = 500
-      const cssHeight = 500
-
-      const dpr = window.devicePixelRatio
-
-      console.log('dpr', dpr)
-
-      const canvas = document.querySelector('canvas')
-      const ctx = canvas.getContext('2d')
-
-      canvas.width = cssWidth * dpr
-      canvas.height = cssHeight * dpr
-
-      canvas.style.width = cssWidth + 'px'
-      canvas.style.height = cssHeight + 'px'
-
-      ctx.scale(dpr, dpr)
-
-      ctx.fillRect(100, 100, 100, 100)
-
-      ctx.arc(400, 200, 40, 0, Math.PI * 2)
-      ctx.fillStyle = 'orange'
-      ctx.strokeStyle = 'red'
-      ctx.lineWidth = 10
-      ctx.stroke()
-      ctx.fill()
-
-      ctx.font = '24px 微软雅黑'
-      ctx.fillStyle = 'purple'
-      ctx.fillText('hello', 50, 50)
-
-      ctx.moveTo(10, 10)
-      ctx.lineTo(20, 10)
-
-      ctx.lineWidth = 1
-      ctx.strokeStyle = 'red'
-      ctx.stroke()
-
-      function getDis(element, direction) {
-        return element.getBoundingClientRect()[direction]
-      }
-      function curry(originFunc) {
-        const curried = (...args) => {
-          if (args.length < originFunc.length) {
-            return (...others) => curried(...args, ...others)
-          }
-          return originFunc(...args)
-        }
-
-        return curried
-      }
-
-      console.log(getDis(canvas, 'top'))
-      console.log(getDis(canvas, 'left'))
-      console.log(getDis(canvas, 'right'))
-
-      console.log('-------------------')
-
-      const getCanvasDis = curry(getDis)(canvas)
-
-      console.log(getCanvasDis('top'))
-      console.log(getCanvasDis('left'))
-      console.log(getCanvasDis('right'))
-    </script>
-
-    <div id="app" style="width: 200px; height: 200px; background-color: red; display: none; transition: all 0.5s">
-      app
-    </div>
-
-    <button>ttttt</button>
-
-    <script>
-      document.querySelector('button').onclick = function () {
-        const app = document.querySelector('#app')
-
-        app.style.display = 'block'
-
-        app.offsetHeight
-
-        app.style.transform = 'translateX(200px)'
-      }
-    </script>
-
-    <script>
-      console.log('-----------------------------')
-
-      const shape = {
-        x: 10,
-        y: 10,
-        width: 100,
-        height: 100,
-        color: 'red'
-      }
-
-      function createOverload() {
-        const callMap = new Map()
-
-        function overload(...args) {
-          const fn = callMap.get(args.length)
-
-          if (fn) {
-            fn.apply(this, args)
-          }
-        }
-
-        overload.addImpl = function (fn) {
-          if (typeof fn !== 'function') {
-            return
-          }
-          callMap.set(fn.length, fn)
-        }
-
-        return overload
-      }
-
-      const updateShape = createOverload()
-
-      updateShape.addImpl(obj => {
-        Object.assign(shape, obj)
-      })
-      updateShape.addImpl((attr, value) => {
-        Object.assign(shape, { [attr]: value })
-      })
-
-      console.log(shape)
-
-      updateShape('x', 20)
-      console.log(shape)
-
-      updateShape({ width: 200, height: 200 })
-      console.log(shape)
-
-      class U {
-        constructor() {
-          const up = createOverload()
-          up.addImpl((attr, value) => {
-            console.log(attr, value)
-          })
-          up.addImpl(obj => {
-            console.log(obj)
-          })
-          this.overloadUpdateShape = up
-        }
-
-        overloadUpdateShape
-        updateShape(...args) {
-          this.overloadUpdateShape(...args)
-        }
-
-        updateAnimate() {
-          console.log(1)
-        }
-      }
-
-      const u = new U()
-
-      u.updateShape({})
-      u.updateShape('width', 100)
-
-      //
-
-      const tdiv = document.createElement('div')
-
-      tdiv.classList.add('t-div')
-      document.body.appendChild(tdiv)
-      tdiv.style.transition = 'all 0.5s'
-      tdiv.style.transform = 'translateX(100px)'
-
-      tdiv.offsetWidth
-
-      tdiv.style.transform = 'translateX(300px)'
+      console.log(div.getBoundingClientRect())
     </script>
   </body>
 </html>
