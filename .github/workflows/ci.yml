@@ -30,7 +30,4 @@ jobs:
         with:
           draft: false
           files: |
-            *.html
-            cart/*.html
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            a_vscode-extension/src/*.ts
