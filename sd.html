@@ -19,8 +19,6 @@
   </head>
 
   <body>
-    <div></div>
-
     <script>
       const chars = [
         'a',
@@ -50,65 +48,96 @@
         'y',
         'z'
       ]
-
       function getRandomChar() {
         return chars[Math.floor(Math.random() * chars.length)]
       }
 
-      const div = document.querySelector('div')
+      class Animator {
+        constructor(duration = 1000) {
+          this.duration = duration
+        }
 
-      div.onmouseenter = () => {
-        execItem(0)
+        duration = 1000
+
+        start() {
+          const start = performance.now()
+
+          const frameCb = () => {
+            const elapsed = Math.min(performance.now() - start, this.duration)
+
+            if (elapsed === this.duration) {
+              this.onDone?.()
+            } else {
+              this.onUpdate?.()
+
+              setTimeout(frameCb, 1000 / 20)
+            }
+          }
+
+          setTimeout(frameCb, 1000 / 20)
+        }
+
+        onDone() {}
+
+        onUpdate() {}
       }
 
-      const text = 'rmstasdifgh'
-
-      execItem(0)
-      function execItem(index) {
-        if (index > text.length - 1) {
-          return
+      class SingleWord {
+        constructor(word) {
+          this.word = word
         }
 
-        const charItem = text[index]
+        root = document.createElement('div')
 
-        const cSpan = div.children[index]
+        word = ''
+        totalTime = 200
 
-        const span = cSpan ?? document.createElement('span')
-        span.textContent = charItem
-
-        if (!div.children[index]) {
-          div.appendChild(span)
+        get interval() {
+          return this.totalTime / this.word.length
         }
 
-        animateChar(700, isEnd => {
-          if (isEnd) {
-            span.textContent = charItem
-          } else {
+        startRender() {
+          const dispatchItem = index => {
+            if (index > this.word.length - 1) {
+              return
+            }
+
+            this.renderCharItem(index)
+            setTimeout(() => {
+              dispatchItem(index + 1)
+            }, this.interval)
+          }
+
+          dispatchItem(0)
+        }
+
+        renderCharItem(index) {
+          console.log(index)
+          const charItem = this.word.charAt(index)
+          const animator = new Animator(200)
+
+          const span = document.createElement('span')
+          this.root.append(span)
+
+          animator.onUpdate = () => {
             const char = getRandomChar()
             span.textContent = char
           }
-        })
-
-        setTimeout(() => {
-          execItem(index + 1)
-        }, 60)
-      }
-
-      function animateChar(duration, cb) {
-        let start = performance.now()
-        function rafCb() {
-          const elapsed = performance.now() - start
-
-          if (elapsed >= duration) {
-            cb(true)
-            return
+          animator.onDone = () => {
+            span.textContent = charItem
           }
-          cb(false)
-          setTimeout(rafCb, 1000 / 20)
+          animator.start()
         }
-
-        rafCb()
       }
+
+      const text = 'rmstasdifghasdasdasd'
+      const word = new SingleWord(text)
+
+      document.body.append(word.root)
+
+      console.log(word)
+
+      word.startRender()
     </script>
   </body>
 </html>
