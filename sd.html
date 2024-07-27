@@ -7,42 +7,108 @@
     <title>sd</title>
 
     <style>
-      .abs {
-        position: absolute;
-        width: 100px;
-        height: 100px;
+      body {
+        font-family: monospace;
+        font-size: 16px;
+      }
+
+      div {
+        display: inline-block;
       }
     </style>
   </head>
 
   <body>
-    <!-- <div
-      style="
-        width: 100px;
-        position: relative;
-        padding: 20px;
-        background-color: pink;
-        height: 100px;
-        margin: 10%;
-        border: 10px solid red;
-      "
-    >
-      <div style="position: absolute; background-color: orange; width: 50px; height: 50px; left: 0; top: 0"></div>
-    </div> -->
-
-    <div class="abs d1" style="background-color: red; z-index: 10; left: 10px; top: 10px">
-      <!-- <div class="abs d2" style="background-color: pink; z-index: 20; left: 20px; top: 20px"></div> -->
-    </div>
-
-    <div class="abs d3" style="background-color: orange; z-index: 15; left: 40px; top: 40px">
-      <!-- <div class="abs d4" style="background-color: purple; z-index: -100; left: 40px; top: 40px"></div> -->
-    </div>
+    <div></div>
 
     <script>
-      const div = document.querySelector('div')
-      console.log(div.clientHeight)
+      const chars = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+      ]
 
-      console.log(div.getBoundingClientRect())
+      function getRandomChar() {
+        return chars[Math.floor(Math.random() * chars.length)]
+      }
+
+      const div = document.querySelector('div')
+
+      div.onmouseenter = () => {
+        execItem(0)
+      }
+
+      const text = 'rmstasdifgh'
+
+      execItem(0)
+      function execItem(index) {
+        if (index > text.length - 1) {
+          return
+        }
+
+        const charItem = text[index]
+
+        const cSpan = div.children[index]
+
+        const span = cSpan ?? document.createElement('span')
+        span.textContent = charItem
+
+        if (!div.children[index]) {
+          div.appendChild(span)
+        }
+
+        animateChar(700, isEnd => {
+          if (isEnd) {
+            span.textContent = charItem
+          } else {
+            const char = getRandomChar()
+            span.textContent = char
+          }
+        })
+
+        setTimeout(() => {
+          execItem(index + 1)
+        }, 60)
+      }
+
+      function animateChar(duration, cb) {
+        let start = performance.now()
+        function rafCb() {
+          const elapsed = performance.now() - start
+
+          if (elapsed >= duration) {
+            cb(true)
+            return
+          }
+          cb(false)
+          setTimeout(rafCb, 1000 / 20)
+        }
+
+        rafCb()
+      }
     </script>
   </body>
 </html>
