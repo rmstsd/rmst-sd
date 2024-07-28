@@ -1,0 +1,8 @@
+@import 'antd/dist/antd.css';
+
+html,
+body,
+#root {
+  height: 100%;
+  font-size: 16px;
+}
