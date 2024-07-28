@@ -13,7 +13,11 @@
       }
 
       div {
-        display: inline-block;
+        width: fit-content;
+        cursor: pointer;
+        padding: 4px;
+        background-color: #eee;
+        margin: 4px;
       }
     </style>
   </head>
@@ -63,18 +67,19 @@
           const start = performance.now()
 
           const frameCb = () => {
-            const elapsed = Math.min(performance.now() - start, this.duration)
+            setTimeout(() => {
+              const elapsed = Math.min(performance.now() - start, this.duration)
 
-            if (elapsed === this.duration) {
-              this.onDone?.()
-            } else {
-              this.onUpdate?.()
-
-              setTimeout(frameCb, 1000 / 20)
-            }
+              if (elapsed === this.duration) {
+                this.onDone?.()
+              } else {
+                this.onUpdate?.()
+                frameCb()
+              }
+            }, 1000 / 20)
           }
 
-          setTimeout(frameCb, 1000 / 20)
+          frameCb()
         }
 
         onDone() {}
@@ -85,6 +90,10 @@
       class SingleWord {
         constructor(word) {
           this.word = word
+
+          this.root.onmouseenter = () => {
+            this.startRender()
+          }
         }
 
         root = document.createElement('div')
@@ -111,13 +120,23 @@
           dispatchItem(0)
         }
 
-        renderCharItem(index) {
-          console.log(index)
-          const charItem = this.word.charAt(index)
-          const animator = new Animator(200)
+        getSpan(index) {
+          const charSpan = this.root.children[index]
+          if (charSpan) {
+            return charSpan
+          }
 
           const span = document.createElement('span')
           this.root.append(span)
+
+          return span
+        }
+
+        renderCharItem(index) {
+          const charItem = this.word.charAt(index)
+          const animator = new Animator(200)
+
+          const span = this.getSpan(index)
 
           animator.onUpdate = () => {
             const char = getRandomChar()
@@ -133,11 +152,16 @@
       const text = 'rmstasdifghasdasdasd'
       const word = new SingleWord(text)
 
+      const text2 = 'zxcvbnmlk'
+      const word2 = new SingleWord(text2)
+
       document.body.append(word.root)
+      document.body.append(word2.root)
 
       console.log(word)
 
       word.startRender()
+      word2.startRender()
     </script>
   </body>
 </html>
