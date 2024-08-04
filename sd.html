@@ -3,165 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <title>sd</title>
 
     <style>
       body {
-        font-family: monospace;
-        font-size: 16px;
+        margin: 0;
+        /* background-color: pink; */
+      }
+      :root {
+        --sc: 0.9;
+        --foo: blue;
+        --pop: rgba(0, 0, 0, var(--sc));
+        --gap: 20;
       }
 
-      div {
-        width: fit-content;
-        cursor: pointer;
-        padding: 4px;
-        background-color: #eee;
-        margin: 4px;
+      .container {
+        color: var(--foo, oran, ge);
+        font-size: 33px;
+        padding: var(--pd, 12px 0);
+      }
+
+      main {
+        margin-top: calc(var(--gap) * 1px);
+      }
+
+      @media screen and (min-width: 768px) {
+        :root {
+          --foo: red;
+        }
       }
     </style>
   </head>
 
   <body>
-    <script>
-      const chars = [
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f',
-        'g',
-        'h',
-        'i',
-        'j',
-        'k',
-        'l',
-        'm',
-        'n',
-        'o',
-        'p',
-        'q',
-        'r',
-        's',
-        't',
-        'u',
-        'v',
-        'w',
-        'x',
-        'y',
-        'z'
-      ]
-      function getRandomChar() {
-        return chars[Math.floor(Math.random() * chars.length)]
-      }
-
-      class Animator {
-        constructor(duration = 1000) {
-          this.duration = duration
-        }
-
-        duration = 1000
-
-        start() {
-          const start = performance.now()
-
-          const frameCb = () => {
-            setTimeout(() => {
-              const elapsed = Math.min(performance.now() - start, this.duration)
-
-              if (elapsed === this.duration) {
-                this.onDone?.()
-              } else {
-                this.onUpdate?.()
-                frameCb()
-              }
-            }, 1000 / 20)
-          }
-
-          frameCb()
-        }
-
-        onDone() {}
-
-        onUpdate() {}
-      }
-
-      class SingleWord {
-        constructor(word) {
-          this.word = word
-
-          this.root.onmouseenter = () => {
-            this.startRender()
-          }
-        }
-
-        root = document.createElement('div')
-
-        word = ''
-        totalTime = 200
-
-        get interval() {
-          return this.totalTime / this.word.length
-        }
-
-        startRender() {
-          const dispatchItem = index => {
-            if (index > this.word.length - 1) {
-              return
-            }
-
-            this.renderCharItem(index)
-            setTimeout(() => {
-              dispatchItem(index + 1)
-            }, this.interval)
-          }
-
-          dispatchItem(0)
-        }
-
-        getSpan(index) {
-          const charSpan = this.root.children[index]
-          if (charSpan) {
-            return charSpan
-          }
-
-          const span = document.createElement('span')
-          this.root.append(span)
-
-          return span
-        }
-
-        renderCharItem(index) {
-          const charItem = this.word.charAt(index)
-          const animator = new Animator(200)
-
-          const span = this.getSpan(index)
-
-          animator.onUpdate = () => {
-            const char = getRandomChar()
-            span.textContent = char
-          }
-          animator.onDone = () => {
-            span.textContent = charItem
-          }
-          animator.start()
-        }
-      }
-
-      const text = 'rmstasdifghasdasdasd'
-      const word = new SingleWord(text)
-
-      const text2 = 'zxcvbnmlk'
-      const word2 = new SingleWord(text2)
-
-      document.body.append(word.root)
-      document.body.append(word2.root)
-
-      console.log(word)
-
-      word.startRender()
-      word2.startRender()
-    </script>
+    <div style="margin: 0 16px; margin-top: 20px; height: 196px; background-color: #f6f6f6; border-radius: 8px"></div>
   </body>
 </html>

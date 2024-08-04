@@ -1,5 +1,5 @@
 if (window.location.hostname !== 'localhost') {
-  document.body.classList.add('u')
+  document.body.classList.add('rmst-u')
 }
 
 // 防止 QQ 浏览器 按退格键
