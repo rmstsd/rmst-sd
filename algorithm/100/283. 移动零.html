@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>283. 移动零</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      const nums = [0, 1, 0, 3, 12]
+      // 输出: [1,3,12,0,0]
+
+      console.log(moveZeroes_2(nums))
+
+      console.log(nums)
+
+      function moveZeroes(nums) {
+        let length = nums.length
+
+        let i = 0
+        while (i < length) {
+          const element = nums[i]
+
+          if (element === 0) {
+            const [t] = nums.splice(i, 1)
+
+            nums.push(t)
+            length--
+          } else {
+            i++
+          }
+        }
+      }
+
+      function moveZeroes_2(nums) {
+        const n = nums.length
+        let left = 0
+        let right = 0
+
+        while (right < n) {
+          if (nums[right] !== 0) {
+            swap(nums, left, right)
+            left++
+          }
+          right++
+        }
+
+        function swap(nums, left, right) {
+          let temp = nums[left]
+          nums[left] = nums[right]
+          nums[right] = temp
+        }
+      }
+    </script>
+  </body>
+</html>

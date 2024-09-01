@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ding</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+      header {
+        height: 300px;
+        text-align: center;
+        line-height: 300px;
+        font-size: 40px;
+      }
+      footer {
+        height: 1200px;
+        text-align: center;
+        line-height: 1200px;
+        font-size: 40px;
+      }
+
+      .playground {
+        height: 700px;
+        background-color: #303030;
+        color: white;
+      }
+
+      .animation-container {
+        position: sticky;
+        top: 0;
+        background-color: #eaa118;
+      }
+
+      .list {
+        width: 80%;
+        margin: auto;
+        height: 300px;
+        display: grid;
+        grid-template-columns: repeat(7, 80px);
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 192, 203, 1);
+        border-radius: 20px;
+      }
+
+      .list-item {
+        width: 80px;
+        height: 80px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(255, 66, 98);
+      }
+
+      .logo {
+        font-size: 30px;
+        line-height: 90px;
+        text-align: center;
+        position: relative;
+        z-index: 5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>header</header>
+
+    <div class="playground">
+      <div class="animation-container">
+        <div class="logo">人美声甜</div>
+
+        <div class="list">
+          <div data-order="0" class="list-item"></div>
+          <div data-order="1" class="list-item"></div>
+          <div data-order="2" class="list-item"></div>
+          <div data-order="3" class="list-item"></div>
+          <div data-order="2" class="list-item"></div>
+          <div data-order="1" class="list-item"></div>
+          <div data-order="0" class="list-item"></div>
+
+          <div data-order="0" class="list-item"></div>
+          <div data-order="1" class="list-item"></div>
+          <div data-order="2" class="list-item"></div>
+          <div data-order="3" class="list-item"></div>
+          <div data-order="2" class="list-item"></div>
+          <div data-order="1" class="list-item"></div>
+          <div data-order="0" class="list-item"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>footer</footer>
+
+    <script src="./createAnimation.js"></script>
+    <script>
+      ;(() => {
+        const items = document.querySelectorAll('.list-item')
+        const playground = document.querySelector('.playground')
+        const list = document.querySelector('.list')
+
+        const logo = document.querySelector('.logo')
+
+        const animationMap = new Map()
+
+        window.onscroll = () => {
+          updateStyles()
+        }
+        updateMap()
+
+        updateStyles()
+
+        function updateMap() {
+          animationMap.clear()
+
+          const playgroundRect = playground.getBoundingClientRect()
+
+          const listRect = list.getBoundingClientRect()
+
+          const scrollStart = playgroundRect.top + window.scrollY - 280
+          const scrollEnd = playgroundRect.bottom + window.scrollY - list.clientHeight - 200
+
+          animationMap.set(list, getContainerAnimation(scrollStart, scrollEnd))
+
+          animationMap.set(logo, getLogoAnimation(scrollStart, scrollEnd))
+
+          for (const item of items) {
+            animationMap.set(item, getItemAnimation(item, scrollStart, scrollEnd))
+          }
+        }
+
+        function updateStyles() {
+          const scrollY = window.scrollY
+
+          for (const [dom, value] of animationMap) {
+            for (const cssProp in value) {
+              dom.style[cssProp] = value[cssProp](scrollY)
+            }
+          }
+        }
+
+        //
+
+        function getContainerAnimation(scrollStart, scrollEnd) {
+          const backgroundColorAnimation = createAnimation(scrollStart, scrollEnd, 0, 1)
+          const backgroundColor = scroll => {
+            return `rgba(255, 192, 203, ${backgroundColorAnimation(scroll)})`
+          }
+          const scaleAnimation = createAnimation(scrollStart, scrollEnd, 0.7, 1)
+          const transform = function (scroll) {
+            return `scale(${scaleAnimation(scroll)})`
+          }
+
+          return {
+            backgroundColor,
+            transform
+          }
+        }
+
+        function getLogoAnimation(scrollStart, scrollEnd) {
+          const opacityAnimation = createAnimation(scrollStart, scrollEnd, 0, 1, true)
+          const opacity = function (scroll) {
+            return opacityAnimation(scroll)
+          }
+
+          const yAnimation = createAnimation(scrollStart, scrollEnd, 300, 0)
+
+          const scaleAnimation = createAnimation(scrollStart, scrollEnd, 0.3, 1)
+          const transform = function (scroll) {
+            return `translateY(${yAnimation(scroll)}px) scale(${scaleAnimation(scroll)})`
+          }
+
+          return { opacity, transform }
+        }
+
+        function getItemAnimation(dom, scrollStart, scrollEnd) {
+          const order = Number(dom.dataset.order)
+
+          scrollStart += (order * list.clientHeight) / 8
+
+          const opacityAnimation = createAnimation(scrollStart, scrollEnd, 0, 1)
+          const opacity = scroll => {
+            return opacityAnimation(scroll)
+          }
+
+          const xAnimation = createAnimation(
+            scrollStart,
+            scrollEnd,
+            list.offsetLeft + list.clientWidth / 2 - dom.offsetLeft - dom.clientWidth / 2,
+            0
+          )
+          const yAnimation = createAnimation(
+            scrollStart,
+            scrollEnd,
+            list.offsetTop + list.clientHeight / 2 - dom.offsetTop - dom.clientHeight / 2,
+            0
+          )
+
+          const scaleAnimation = createAnimation(scrollStart, scrollEnd, 0.5, 1)
+          const transform = function (scroll) {
+            return `translate(${xAnimation(scroll)}px, ${yAnimation(scroll)}px) scale(${scaleAnimation(scroll)})`
+          }
+
+          return {
+            opacity,
+            transform
+          }
+        }
+      })()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promise</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <!-- <script src="./promise.js"></script> -->
+
+    <script>
+      const Pending = 'Pending'
+      const Fulfilled = 'Fulfilled'
+      const Rejected = 'Rejected'
+
+      const resolvePromise = (x, nextPromise, resolve) => {
+        if (x instanceof RmstPromise) {
+          x.then(v => {
+            resolvePromise(v, nextPromise, resolve)
+          })
+        } else {
+          resolve(x)
+        }
+      }
+
+      class RmstPromise {
+        status = Pending
+        value = undefined
+        reason = undefined
+
+        onFulfilledCallbacks = []
+        onRejectedCallbacks = []
+
+        constructor(executor) {
+          const resolve = value => {
+            if (this.status === Pending) {
+              this.status = Fulfilled
+              this.value = value
+
+              this.onFulfilledCallbacks.forEach(funcItem => {
+                funcItem()
+              })
+            }
+          }
+
+          const reject = reason => {
+            if (this.status === Pending) {
+              this.status = Rejected
+              this.reason = reason
+
+              this.onRejectedCallbacks.forEach(funcItem => {
+                funcItem()
+              })
+            }
+          }
+
+          executor(resolve, reject)
+        }
+
+        then(onFulfilled, onRejected) {
+          const nextPromise = new RmstPromise(resolve => {
+            if (this.status === Fulfilled) {
+              queueMicrotask(() => {
+                const x = onFulfilled(this.value)
+                resolvePromise(x, nextPromise, resolve)
+              })
+            }
+
+            if (this.status === Pending) {
+              this.onFulfilledCallbacks.push(() => {
+                queueMicrotask(() => {
+                  const x = onFulfilled(this.value)
+                  resolvePromise(x, nextPromise, resolve)
+                })
+              })
+            }
+          })
+
+          return nextPromise
+        }
+      }
+
+      // let p = new RmstPromise(resolve => {
+      //   setTimeout(() => {
+      //     resolve(1)
+      //   })
+      // })
+
+      // p.then(v => {
+      //   console.log(v)
+
+      //   return new RmstPromise(resolve => {
+      //     resolve(2)
+      //   })
+      // }).then(v => {
+      //   console.log(v)
+      // })
+
+      // console.log(0)
+
+      const RmstPromiseResolve = v => {
+        return new RmstPromise(resolve => resolve(v))
+      }
+      RmstPromiseResolve()
+        .then(() => {
+          console.log(0)
+          return RmstPromiseResolve(4)
+        })
+        .then(res => {
+          console.log(res)
+        })
+
+      RmstPromiseResolve()
+        .then(() => {
+          console.log(1)
+        })
+        .then(() => {
+          console.log(2)
+        })
+        .then(() => {
+          console.log(3)
+        })
+        .then(() => {
+          console.log(5)
+        })
+        .then(() => {
+          console.log(6)
+        })
+
+      //
+    </script>
+  </body>
+</html>

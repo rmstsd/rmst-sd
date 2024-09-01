@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. 无重复字符的最长子串</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      const s = 'abcabcbb'
+      // 输出: 3
+
+      console.log(lengthOfLongestSubstring(s))
+
+      function lengthOfLongestSubstring(s) {
+        const set = new Set()
+        let r = 0
+
+        let ans = 0
+
+        for (let i = 0; i < s.length; i++) {
+          while (r < s.length && !set.has(s[r])) {
+            set.add(s[r])
+
+            r++
+          }
+
+          set.delete(s[i])
+
+          ans = Math.max(ans, r - i)
+        }
+      }
+    </script>
+  </body>
+</html>

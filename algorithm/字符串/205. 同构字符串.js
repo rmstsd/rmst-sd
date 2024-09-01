@@ -1,29 +1,22 @@
-
-const s = "abcd", t = "wwer"
+const s = 'abcd',
+  t = 'wwer'
 
 console.log(isIsomorphic(s, t))
 function isIsomorphic(s, t) {
+  const sMap = new Map()
+  const tMap = new Map()
 
-    const sMap = new Map()
-    const tMap = new Map()
+  for (const [idx, sVal] of Array.from(s).entries()) {
+    const tVal = t[idx]
 
-    for (const [idx, sVal] of Array.from(s).entries()) {
+    if ((sMap.has(sVal) && sMap.get(sVal) !== tVal) || (tMap.has(tVal) && tMap.get(tVal) !== sVal))
+      return false
 
-        const tVal = t[idx]
+    sMap.set(sVal, tVal)
+    tMap.set(tVal, sVal)
+  }
 
-        if (
-            (sMap.has(sVal) && sMap.get(sVal) !== tVal)
-            ||
-            (tMap.has(tVal) && tMap.get(tVal) !== sVal)
-        ) return false
+  console.log(sMap, tMap)
 
-        sMap.set(sVal, tVal)
-        tMap.set(tVal, sVal)
-    }
-
-    console.log(sMap, tMap)
-
-    return true
+  return true
 }
-
-

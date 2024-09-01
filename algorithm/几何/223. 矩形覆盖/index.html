@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ss</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+      .axis {
+        position: fixed;
+      }
+      .axis-x {
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 2px;
+        background-color: #b4ccdb;
+      }
+      .axis-y {
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #b4ccdb;
+      }
+      .rect {
+        width: 200px;
+        height: 200px;
+
+        border: 2px solid;
+
+        position: fixed;
+        left: 300px;
+        top: 300px;
+      }
+      .rect_A {
+        border-color: red;
+      }
+      .rect_B {
+        width: 150px;
+        height: 150px;
+        border-color: purple;
+      }
+
+      .left-top {
+        position: absolute;
+        left: 0;
+        top: 0;
+        translate: -100% -100%;
+      }
+      .right-bottom {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        translate: 100% 100%;
+      }
+      .left-bottom {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        translate: -100% 100%;
+      }
+      .right-top {
+        position: absolute;
+        right: 0;
+        top: 0;
+        translate: 100% -100%;
+      }
+
+      .overlap {
+        position: fixed;
+        background-color: pink;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="axis axis-x"></div>
+    <div class="axis axis-y"></div>
+
+    <div class="rect rect_A">
+      rect_A
+      <span class="left-top">(ax1, ay2)</span>
+      <span class="right-bottom">(ax2, ay1)</span>
+
+      <span class="left-bottom">(ax1, ay1)</span>
+      <span class="right-top">(ax2, ay2)</span>
+    </div>
+
+    <div class="rect rect_B">
+      rect_B
+      <span class="left-top">(bx1, by2)</span>
+      <span class="right-bottom">(bx2, by1)</span>
+
+      <span class="left-bottom">(bx1, by1)</span>
+      <span class="right-top">(bx2, by2)</span>
+    </div>
+
+    <div class="overlap"></div>
+
+    <script src="./辅助拖拽.js"></script>
+
+    <script>
+      const ax1 = -3,
+        ay1 = 0,
+        ax2 = 3,
+        ay2 = 4,
+        bx1 = 0,
+        by1 = -1,
+        bx2 = 9,
+        by2 = 2
+
+      function computeArea(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2) {
+        const total = (ay2 - ay1) * (ax2 - ax1) + (by2 - by1) * (bx2 - bx1)
+
+        let overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1)
+        if (overlapWidth < 0) overlapWidth = 0
+
+        let overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1)
+        if (overlapHeight < 0) overlapHeight = 0
+
+        return total - overlapWidth * overlapHeight
+      }
+    </script>
+  </body>
+</html>

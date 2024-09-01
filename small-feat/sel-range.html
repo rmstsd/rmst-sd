@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sd</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <div onmousedown="return false">
+      <button onclick="setRange(0, 2)">setSelectionRange(0, 2)</button>
+      <button onclick="setRange(3, 3)">setSelectionRange(3, 3)</button>
+      <button onclick="selectAll()">selectAll</button>
+      <button onclick="getSelectionPos()">getSelectionPos</button>
+      <button onclick="setText()">setText</button>
+    </div>
+
+    <input type="text" value="考虑过快递费两个地方" style="width: 400px" />
+
+    <hr />
+
+    <div onmousedown="return false">
+      <button onclick="normalSelect()">select</button>
+      <button onclick="moveTwo()">move 第二个 textNode</button>
+      <button onclick="selectFree()">selectFree</button>
+      <button onclick="insertNode()">insertNode</button>
+      <button onclick="moveRedOuter()">移动到红色外面</button>
+      <button onclick="surroundContent()">包裹标签</button>
+      <button onclick="containsNode()">selection.containsNode()</button>
+    </div>
+
+    <div class="editor" contenteditable style="padding: 5px"></div>
+
+    <script>
+      let range = document.createRange()
+      let selection = window.getSelection()
+
+      setInterval(() => {
+        selection = window.getSelection()
+        if (selection.rangeCount !== 0) {
+          range = selection.getRangeAt(0)
+        }
+      }, 20)
+      const inputDom = document.querySelector('input')
+
+      const editorDom = document.querySelector('div.editor')
+
+      editorDom.innerHTML = `哈哈哈<span id="red-span" style="color: red">阿双方</span>广告商`
+
+      function setRange(start, end) {
+        inputDom.setSelectionRange(start, end)
+        inputDom.focus()
+      }
+
+      function selectAll() {
+        inputDom.select()
+        inputDom.focus()
+      }
+
+      function getSelectionPos() {
+        console.log(inputDom.selectionStart, inputDom.selectionEnd)
+      }
+
+      function setText() {
+        const text = '1234'
+        inputDom.setRangeText(text, 2)
+        const selPos = inputDom.selectionStart
+        inputDom.setSelectionRange(selPos + text.length, selPos + text.length)
+      }
+
+      function normalSelect() {
+        const span = document.querySelector('span')
+        const range = document.createRange()
+
+        // range.setStart(span, 0)
+        // range.setEnd(span, 1)
+
+        range.selectNode(span)
+        console.log(range)
+
+        const r2 = document.createRange()
+        r2.selectNodeContents(span)
+        console.log(r2)
+
+        const sel = window.getSelection()
+        sel.removeAllRanges()
+        sel.addRange(range)
+
+        editorDom.focus()
+      }
+
+      function moveTwo() {
+        const range = document.createRange()
+        const towNode = editorDom.childNodes[1]
+
+        range.setStart(towNode, 0)
+        range.setEnd(towNode, 0)
+
+        const sel = window.getSelection()
+        sel.removeAllRanges()
+        sel.addRange(range)
+      }
+
+      function selectFree() {
+        const [startNode, startOffset, endNode, endOffset] = getNodeAndOffset(editorDom, 2, 2)
+
+        const range = document.createRange()
+        const towNode = editorDom.childNodes[1]
+
+        range.setStart(startNode, startOffset)
+        range.setEnd(endNode, endOffset)
+
+        const sel = window.getSelection()
+        sel.removeAllRanges()
+        sel.addRange(range)
+      }
+
+      function insertNode() {
+        const text = document.createTextNode('新闻办')
+
+        const sel = window.getSelection()
+        const range = sel.getRangeAt(0)
+        range.deleteContents()
+        range.insertNode(text)
+
+        // range.collapse()
+        // range.setStartBefore(text.nextSibling)
+        // range.setStartAfter(text)
+
+        // range.setEndAfter(text.previousSibling)
+        // range.setEndBefore(text)
+      }
+
+      function moveRedOuter() {
+        const redSpan = document.querySelector('#red-span')
+
+        range.setStart(redSpan.nextSibling, 0)
+        range.setEnd(redSpan.nextSibling, 0)
+      }
+
+      function surroundContent() {
+        const mark = document.createElement('mark')
+        // range.surroundContents(mark)
+        // range.collapse()
+
+        mark.append(range.extractContents())
+
+        range.insertNode(mark)
+        range.collapse()
+      }
+
+      function containsNode() {
+        console.log(selection.containsNode(document.querySelector('#red-span'), true))
+      }
+
+      document.addEventListener('keyup', evt => {
+        console.log(evt.key)
+        evt.preventDefault()
+
+        if (evt.key === 'Alt') {
+          const sel = window.getSelection()
+          console.log(sel)
+
+          console.log(sel.getRangeAt(0))
+        }
+      })
+
+      function getNodeAndOffset(wrap_dom, start = 0, end = 0) {
+        const txtList = []
+        const map = function (chlids) {
+          ;[...chlids].forEach(el => {
+            if (el.nodeName === '#text') {
+              txtList.push(el)
+            } else {
+              map(el.childNodes)
+            }
+          })
+        }
+        // 递归遍历，提取出所有 #text
+        map(wrap_dom.childNodes)
+        // 计算文本的位置区间 [0,3]、[3, 8]、[8,10]
+        const clips = txtList.reduce((arr, item, index) => {
+          const end = item.textContent.length + (arr[index - 1] ? arr[index - 1][2] : 0)
+          arr.push([item, end - item.textContent.length, end])
+          return arr
+        }, [])
+        // 查找满足条件的范围区间
+        const startNode = clips.find(el => start >= el[1] && start < el[2])
+        const endNode = clips.find(el => end >= el[1] && end < el[2])
+        return [startNode[0], start - startNode[1], endNode[0], end - endNode[1]]
+      }
+    </script>
+  </body>
+</html>

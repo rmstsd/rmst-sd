@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>z</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      /*
+
+      给出一个 m * n 的矩阵, 由 1 或者 0 组成, 1 代表墙, 0 代表路, 现在给出起点为 (a, b), 终点为 (c, d), 问从起点走到终点经历的最小步数是多少?
+      (起点和终点均是 0, 只能上下左右走, 不能斜着走, 遇到 1 不可以走, 一定可以走到终点)
+
+      使用 js 实现此算法
+      
+      */
+      const grid = [
+        [0, 1, 1, 1, 1, 1],
+        [1, 0, 0, 1, 1, 1],
+        [1, 0, 0, 1, 0, 1],
+        [0, 0, 0, 1, 1, 0],
+        [1, 1, 0, 1, 1, 1],
+        [1, 0, 1, 0, 0, 1]
+      ]
+
+      const bug = {
+        start: { i: 1, j: 1 },
+        end: { i: 2, j: 2 }
+      }
+
+      const start = bug.start
+      const end = bug.end
+
+      getMinAns(grid, start, end)
+
+      function getMinAns(grid, start, end) {
+        const { i, j } = start
+
+        const counts = []
+        walk(i, j, 0, [])
+
+        console.log(counts)
+
+        function walk(i, j, count, elapsedCoord) {
+          if (i < 0 || i > grid.length - 1 || j < 0 || j > grid[0].length - 1) {
+            return
+          }
+
+          if (elapsedCoord.some(item => item.i === i && item.j === j)) {
+            return
+          }
+
+          if (grid[i][j] === 0) {
+            if (i === end.i && j === end.j) {
+              counts.push(count)
+              return
+            }
+
+            count = count + 1
+
+            elapsedCoord.push({ i, j })
+
+            walk(i - 1, j, count, elapsedCoord.slice()) // 上
+            walk(i, j + 1, count, elapsedCoord.slice()) // 右
+            walk(i + 1, j, count, elapsedCoord.slice()) // 下
+            walk(i, j - 1, count, elapsedCoord.slice()) // 左
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

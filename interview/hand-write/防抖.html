@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      function debounce(fn) {
+        let timer
+
+        return () => {
+          if (!timer) {
+            fn()
+          }
+
+          clearTimeout(timer)
+
+          timer = setTimeout(() => {
+            timer = null
+            fn()
+          }, 1000)
+        }
+      }
+
+      const cb = debounce(() => {
+        console.log(1)
+      })
+
+      document.addEventListener('mousemove', cb)
+    </script>
+  </body>
+</html>

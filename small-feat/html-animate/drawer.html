@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ani</title>
+
+    <style>
+      .wrapper {
+        position: fixed;
+        display: none;
+        inset: 0;
+      }
+      .mask {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.3);
+        inset: 0;
+      }
+      .content {
+        width: 200px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="open">cf</button>
+    <div class="wrapper"></div>
+
+    <script>
+      const wrapper = document.querySelector('.wrapper')
+
+      document.querySelector('.open').onclick = open
+
+      function open() {
+        wrapper.style.display = 'block'
+
+        const mask = document.createElement('div')
+        mask.classList.add('mask')
+        mask.style.opacity = 0
+        mask.style.transition = 'all .3s'
+        wrapper.append(mask)
+        setTimeout(() => {
+          mask.style.opacity = 1
+        })
+
+        mask.onclick = () => {
+          mask.style.opacity = 0
+          content.style.translate = '100% 0'
+          mask.ontransitionend = () => {
+            mask.remove()
+            wrapper.style.display = 'none'
+
+            content.remove()
+          }
+        }
+
+        const content = document.createElement('div')
+        content.classList.add('content')
+        content.style.translate = '100% 0'
+        content.style.transition = 'all .3s'
+
+        wrapper.append(content)
+
+        setTimeout(() => {
+          content.style.translate = ''
+        }, 0)
+      }
+    </script>
+  </body>
+</html>

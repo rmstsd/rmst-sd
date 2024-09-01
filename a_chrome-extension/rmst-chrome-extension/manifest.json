@@ -1,0 +1,112 @@
+{
+  "name": "rmst-chrome-extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "48": "image/cute.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "image/logo.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "permissions": [
+    "debugger",
+    "tabs",
+    "bookmarks",
+    "contextMenus",
+    "activeTab",
+    "cookies",
+    "storage",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "/contentScripts/feat/disabledWs/scriptSrc.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./contentScripts/thirdWeb/openLink/openLink.js",
+        "./contentScripts/feat/clearStorage.js",
+        "./contentScripts/feat/toLowercase.js",
+        "./contentScripts/feat/copyPlain.js",
+        "./contentScripts/feat/universal/u.js"
+      ],
+      "css": [
+        "./contentScripts/feat/universal/u.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.zhihu.com/*"
+      ],
+      "css": [
+        "./contentScripts/thirdWeb/zhihu/zhihu.css"
+      ],
+      "js": [
+        "./contentScripts/thirdWeb/zhihu/zhihu.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.huya.com/*"
+      ],
+      "css": [
+        "./contentScripts/thirdWeb/huya.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://konvajs.org/*"
+      ],
+      "css": [
+        "./contentScripts/thirdWeb/konva.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://blog.csdn.net/*"
+      ],
+      "css": [
+        "./contentScripts/thirdWeb/csdn.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.bilibili.com/*"
+      ],
+      "css": [
+        "./contentScripts/thirdWeb/bilibili.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.jianshu.com/*"
+      ],
+      "css": [
+        "./contentScripts/thirdWeb/jianshu.css"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sd</title>
+
+    <style>
+      .text-style {
+        font-size: 18px;
+        line-height: 60px;
+        display: block;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        font-family: 微软雅黑;
+        padding: 0 10px;
+      }
+
+      .hide-input {
+        width: 100%;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        color: transparent;
+        caret-color: black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      style="
+        height: 60px;
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+        display: inline-block;
+        border: 1px solid rgb(255, 7, 7);
+      "
+    >
+      <div id="content" class="text-style" style="white-space: pre; min-width: 8px"></div>
+      <input class="text-style hide-input" />
+    </div>
+
+    <script>
+      const input = document.querySelector('input')
+      const span = document.querySelector('#content')
+
+      input.oninput = evt => {
+        console.log(input.value)
+        span.textContent = input.value
+      }
+    </script>
+  </body>
+</html>
+
+dev1
+dev2

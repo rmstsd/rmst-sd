@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas-mCtrl-translate-scale</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas width="800" height="600" style="border: 1px solid red"></canvas>
+
+    <script>
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      function offsetToCanvas(ox, oy, tx, ty, scaleX, scaleY) {
+        const x = (ox - tx) / scaleX
+        const y = (oy - ty) / scaleY
+
+        return { x, y }
+      }
+
+      const transMt = { zoom: 1, translateX: 0, translateY: 0 }
+
+      let idMd = false
+      let prev = { x: 0, y: 0 }
+      canvas.addEventListener('mousedown', evt => {
+        prev.x = evt.offsetX
+        prev.y = evt.offsetY
+
+        const { x, y } = getCanvasCoords(evt.offsetX, evt.offsetY)
+        ctx.fillRect(x, y, 100, 100)
+        idMd = true
+      })
+      document.addEventListener('mousemove', evt => {
+        if (!idMd) {
+          return
+        }
+
+        const dx = evt.offsetX - prev.x
+        const dy = evt.offsetY - prev.y
+
+        prev.x = evt.offsetX
+        prev.y = evt.offsetY
+
+        transMt.translateX += dx
+        transMt.translateY += dy
+
+        draw()
+      })
+      document.addEventListener('mouseup', evt => {
+        idMd = false
+      })
+
+      canvas.addEventListener('wheel', evt => {
+        const prevZoom = transMt.zoom
+
+        const { x: mx, y: my } = offsetToCanvas(
+          evt.offsetX,
+          evt.offsetY,
+          transMt.translateX,
+          transMt.translateY,
+          transMt.zoom,
+          transMt.zoom
+        )
+
+        if (evt.deltaY < 0) {
+          console.log('放大')
+          transMt.zoom *= 1.1
+        } else {
+          transMt.zoom *= 0.9
+        }
+
+        // const { x: mx, y: my } = getCanvasCoords(evt.offsetX, evt.offsetY)
+        const dx = mx * (transMt.zoom - prevZoom)
+        const dy = my * (transMt.zoom - prevZoom)
+
+        transMt.translateX -= dx
+        transMt.translateY -= dy
+
+        draw()
+      })
+
+      draw()
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        // ctx.setTransform(transMt.zoom, 0, 0, transMt.zoom, transMt.translateX, transMt.translateY)
+
+        ctx.save()
+        ctx.translate(transMt.translateX, transMt.translateY)
+        ctx.scale(transMt.zoom, transMt.zoom)
+
+        ctx.fillRect(100, 100, 100, 100)
+
+        ctx.restore()
+      }
+
+      ;(() => {
+        return
+        testDraw('black')
+
+        let mx = 150
+        let my = 150
+
+        let scale = 1
+
+        let prevScale = 1
+        scale = 1.5
+        let tx = -mx * (scale - prevScale)
+        let ty = -my * (scale - prevScale)
+
+        ctx.save()
+        ctx.translate(tx, ty)
+        ctx.scale(scale, scale)
+        testDraw('rgba(255,0,0,0.5)')
+        ctx.restore()
+
+        //
+        prevScale = scale
+        scale = 2
+
+        ctx.save()
+        ctx.translate(tx + -mx * (scale - prevScale), ty + -my * (scale - prevScale))
+        ctx.scale(scale, scale)
+        testDraw('rgba(255,0,0,0.5)')
+        ctx.restore()
+
+        function testDraw(fs) {
+          ctx.fillStyle = fs
+          ctx.fillRect(100, 100, 100, 100)
+        }
+      })()
+
+      toCanvas(0, 0)
+      function toCanvas(x, y) {
+        const mt = ctx.getTransform()
+
+        const scaleX = mt.a
+        const scaleY = mt.d
+
+        const tX = mt.e
+        const tY = mt.f
+
+        console.log(mt)
+      }
+
+      function getCanvasCoords(ox, oy) {
+        const transform = ctx.getTransform()
+        const { a, b, c, d, e, f } = transform
+        const x = (ox - e) / a
+        const y = (oy - f) / d
+
+        return { x, y }
+      }
+    </script>
+  </body>
+</html>

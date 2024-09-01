@@ -9,20 +9,22 @@
     <script>
       const tabular = [
         { id: 1, pid: null, value: '哈哈' },
-        { id: 2, pid: 3, value: 'UI' },
-        { id: 3, pid: 4, value: '是否' },
-        { id: 4, pid: 5, value: '更好' },
+        { id: 2, pid: 1, value: 'UI' },
+        { id: 3, pid: 2, value: '是否' },
+        { id: 4, pid: 2, value: '更好' },
         { id: 5, pid: 1, value: '和办法' },
         { id: 6, pid: null, value: '请问' },
-        { id: 7, pid: 1, value: '甘肃省' }
+        { id: 7, pid: 1, value: '甘肃省' },
+        { id: 8, pid: 3, value: '甘肃省' }
       ]
 
-      console.log(buildTree(tabular, null))
+      // console.log(buildTree(tabular, null))
 
-      console.log(tabular)
+      // console.log(tabular)
       // 不可变数据 函数式编程 没有副作用 非常的nice
       function buildTree(array, pid) {
         const ans = array.filter(item => item.pid === pid)
+
         return ans.map(item => {
           const children = buildTree(array, item.id)
           return Object.assign({}, item, { children })
@@ -35,15 +37,87 @@
         const ans = []
         array = array.map(x => ({ ...x }))
         array.forEach(item => {
-          if (!item.pid) ans.push(item)
-          else {
+          if (!item.pid) {
+            ans.push(item)
+          } else {
             const parentItem = array.find(x => x.id === item.pid)
-            if (!parentItem.children) parentItem.children = []
+            if (!parentItem.children) {
+              parentItem.children = []
+            }
             parentItem.children.push(item)
           }
         })
+
         return ans
       }
+
+      const ans1 = buildTreeRandom(tabular)
+      console.log(ans1)
+      console.log(tabular)
+
+      console.log('---')
+      const ans2 = buildTreeRandom_2(tabular)
+      console.log(ans2)
+      console.log(tabular)
+
+      // 无需指定根节点
+      function buildTreeRandom(arr) {
+        arr = arr.map(item => ({ ...item }))
+
+        for (let i = 0; i < arr.length; i++) {
+          const item = arr[i]
+
+          const pItem = findParentItemByPidDeep(arr, item.pid)
+          if (pItem) {
+            ;(pItem.children || (pItem.children = [])).push(item)
+
+            arr.splice(i, 1)
+            i -= 1
+          }
+        }
+
+        return arr
+
+        function findParentItemByPidDeep(list, pid) {
+          for (const item of list) {
+            if (item.id === pid) {
+              return item
+            }
+
+            if (item.children) {
+              const parent = findParentItemByPidDeep(item.children, pid)
+              if (parent) {
+                return parent
+              }
+            }
+          }
+
+          return null
+        }
+      }
+
+      function buildTreeRandom_2(arr) {
+        arr = arr.map(item => ({ ...item }))
+
+        const deletions = new Set()
+
+        for (const item of arr) {
+          const pItem = arr.find(o => o.id === item.pid)
+
+          if (pItem) {
+            deletions.add(item.id)
+
+            pItem.children ??= []
+            pItem.children.push(item)
+          }
+        }
+
+        arr = arr.filter(item => !deletions.has(item.id))
+
+        return arr
+      }
+
+      console.log(JSON.stringify(ans1) === JSON.stringify(ans2))
     </script>
   </head>
 

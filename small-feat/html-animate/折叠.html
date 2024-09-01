@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trans</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <button class="btn">切换</button>
+
+    <div class="container">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+    </div>
+
+    <hr />
+
+    <div class="container-2">
+      <ul>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+      </ul>
+    </div>
+
+    <button class="btn-2">wid</button>
+    <div class="box" style="width: 100px; transition: all 2s; height: 60px; background-color: pink">5666</div>
+
+    <script>
+      let bool = true
+      const box = document.querySelector('.box')
+
+      box.ontransitionend = () => {
+        console.log('box ontransition end')
+      }
+
+      document.querySelector('.btn-2').onclick = () => {
+        bool = !bool
+        box.style.width = bool ? '400px' : '100px'
+      }
+    </script>
+
+    <script>
+      const btn = document.querySelector('.btn')
+      const container = document.querySelector('.container')
+
+      const transition = 'all .3s'
+
+      let isTargetClose = true // 目标状态 希望关闭 还是 打开
+      let isTransitionend = true // 是否已经过渡完成
+
+      btn.onclick = () => {
+        container.ontransitionstart = () => {
+          isTransitionend = false
+        }
+
+        container.ontransitionend = () => {
+          isTransitionend = true
+
+          if (!isTargetClose) {
+            container.style.display = 'none'
+          } else {
+            container.style.display = ''
+            container.style.height = 'auto'
+          }
+        }
+
+        if (isTargetClose) {
+          isTargetClose = false
+          const { height } = container.getBoundingClientRect()
+          container.style.height = height + 'px'
+          container.style.opacity = 1
+          container.style.overflow = 'hidden'
+          container.style.transition = transition
+
+          setTimeout(() => {
+            container.style.height = 0
+            container.style.opacity = 0
+          })
+        } else {
+          isTargetClose = true
+          container.style.display = ''
+          container.style.opacity = 0
+          container.style.overflow = 'hidden'
+          container.style.transition = transition
+
+          const ooHeight = container.getBoundingClientRect().height
+
+          container.style.height = 'auto'
+          const targetHeight = container.getBoundingClientRect().height
+
+          if (isTransitionend) container.style.height = 0
+          else container.style.height = ooHeight + 'px'
+
+          setTimeout(() => {
+            container.style.height = targetHeight + 'px'
+            container.style.opacity = 1
+          })
+        }
+      }
+    </script>
+  </body>
+</html>

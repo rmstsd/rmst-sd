@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>curry</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      // @ts-check
+
+      function isTypeClosure(typing) {
+        return val => {
+          return typeof val === typing
+        }
+      }
+
+      function curry(originFunc) {
+        const curried = (...args) => {
+          if (args.length < originFunc.length) {
+            return (...others) => curried(...args, ...others)
+          }
+
+          return originFunc(...args)
+        }
+
+        return curried
+      }
+
+      function sum(a, b, c) {
+        return a + b + c
+      }
+
+      const currySum = curry(sum)
+      console.log(currySum(1)(2)(3))
+
+      // function isType(typing, val) {
+      //   return typeof val === typing
+      // }
+
+      // const isString = curry(isType)('string')
+      // console.log(isString(112))
+
+      // add(1)(2) = 3
+
+      // const curry = () => {}
+
+      const mmCurry = func => {
+        const curried = (...args) => {
+          if (args.length < func.length) {
+            return (...others) => curried(...args, ...others)
+          }
+
+          return func(...args)
+        }
+
+        return curried
+      }
+
+      const addp = (a, b, c) => {
+        return a + b + c
+      }
+      const addCurry = mmCurry(addp)
+      const ass = addCurry(1)(2)(3)
+      console.log(ass)
+
+      const isType = (type, value) => {
+        return typeof value === type
+      }
+
+      console.log(isType('string', 'a'))
+
+      const isString = mmCurry(isType)('string')
+      console.log(isString('s'))
+
+      console.log('----------')
+
+      const add = (...rest) => {
+        const arr = [...rest]
+
+        const calc = (...args) => {
+          arr.push(...args)
+
+          return calc
+        }
+
+        calc.toString = () => {
+          return arr.reduce((acc, item) => acc + item)
+        }
+
+        return calc
+      }
+      var a = add(1)(2)(3)(4)(5)
+
+      console.log(a + 0)
+
+      // // 可以利用隐式转换的特性参与计算
+      // console.log(a + 10) // 20
+      // console.log(b + 20) // 30
+      // console.log(c + 30) // 40
+      // console.log(d + 40) // 50
+
+      // // 也可以继续传入参数，得到的结果再次利用隐式转换参与计算
+      // console.log(a(10) + 100) // 120
+      // console.log(b(10) + 100) // 120
+      // console.log(c(10) + 100) // 120
+      // console.log(d(10) + 100) // 120
+      //
+    </script>
+  </body>
+</html>

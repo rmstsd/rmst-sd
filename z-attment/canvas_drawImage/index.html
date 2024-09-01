@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+      img {
+        width: 200px;
+      }
+
+      .animate {
+        position: fixed;
+        right: 50px;
+        top: 50px;
+        width: 100px;
+        height: 100px;
+        background: pink;
+        animation-name: rot;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-direction: alternate;
+      }
+
+      @keyframes rot {
+        from {
+          /* transform: rotate(0); */
+          right: 50px;
+        }
+        to {
+          /* transform: rotate(360deg); */
+          right: 200px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <button onclick="loadImageToMemory()">加载图片到内存中</button>
+
+    <button onclick="clickRenderImage()">渲染图片</button>
+
+    <button onclick="test()">测试</button>
+
+    <div class="animate"></div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

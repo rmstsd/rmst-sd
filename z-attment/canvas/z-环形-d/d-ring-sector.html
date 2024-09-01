@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SVG Circle</title>
+    <style></style>
+  </head>
+  <body>
+    <!-- 
+
+      A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+
+      rx：椭圆的 x 轴半径
+      ry：椭圆的 y 轴半径
+      x-axis-rotation：椭圆相对于 x 轴的旋转角度，以度为单位
+      large-arc-flag：布尔值，表示是否使用大弧度的圆弧（1 表示使用大，0 表示使用小弧度）
+      sweep-flag：布尔值，表示弧线的方向（1 表示顺时针，0 表示逆时针）
+      x：弧线终点的 x 坐标
+      y：弧线终点的 y 坐标
+
+
+     -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+      baseProfile="full"
+      width="1000"
+      height="1000"
+      style="
+        position: absolute;
+        left: 0;
+        top: 0;
+        user-select: non;
+        border: 1px solid red;
+        background-color: rgb(255, 238, 255);
+      "
+    >
+      <!-- 扇环 -->
+      <path
+        class="cir"
+        d="
+        M272 183.1
+        A190.4 190.4 0 0 1 437.081 468.3706
+
+        L366.332 427.7118
+
+        A108.8 108.8 0 0 0 272 264.7
+        Z
+        
+        "
+        fill="rgb(84,112,198)"
+        stroke="rgb(84,112,198)"
+      ></path>
+
+      <!-- 
+
+        M 200 100 
+        A 100 100 0 1 1 200 99.99999999999997 
+        L150 99.99999999999999 
+        A 50 50 0 1 0 150 100 
+        Z
+
+
+       -->
+
+      <circle cx="100" cy="100" r="2" fill="red" />
+      <circle cx="100" cy="130" r="2" fill="purple" />
+    </svg>
+
+    <script>
+      // large-arc-flag 决定弧线是大于还是小于 180 度，0 表示小角度弧，1 表示大角度弧
+      // sweep-flag 表示弧线的方向，0 表示从起点到终点沿逆时针画弧，1 表示从起点到终点沿顺时针画弧
+
+      const calcD = (outerRadius, innerRadius, startAngle, endAngle, centerX, centerY) => {
+        const outerM_y = centerY - outerRadius
+
+        const outerStart = getPointOnArc(centerX, centerY, outerRadius, startAngle)
+        const outerEnd = getPointOnArc(centerX, centerY, outerRadius, endAngle)
+
+        const largeArcFlag = endAngle - startAngle >= 180 ? 1 : 0
+
+        const outerM = `M ${outerStart.x} ${outerStart.y}`
+        const outerA = `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerEnd.x} ${outerEnd.y}`
+
+        const innerStart = getPointOnArc(centerX, centerY, innerRadius, startAngle)
+        const innerEnd = getPointOnArc(centerX, centerY, innerRadius, endAngle)
+
+        const moveL = `L${innerEnd.x} ${innerEnd.y}`
+
+        const innerA = `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStart.x} ${innerStart.y}`
+
+        return `${outerM} ${outerA} ${moveL} ${innerA} Z`
+      }
+
+      const d = calcD(100, 50, 0, 60, 100, 100)
+
+      console.log(d)
+      document.querySelector('.cir').setAttribute('d', d)
+
+      function getPointOnArc(x0, y0, r, deg) {
+        const alpha = deg2rad(deg)
+
+        const x = x0 + r * Math.cos(alpha) // Math.cos 传入弧度
+        const y = y0 + r * Math.sin(alpha)
+
+        return { x, y }
+      }
+
+      // 角度转弧度
+      function deg2rad(deg) {
+        return (deg * Math.PI) / 180
+      }
+
+      //
+    </script>
+  </body>
+</html>

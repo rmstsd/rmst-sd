@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>438. 找到字符串中所有字母异位词</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      const s = 'abab'
+      const p = 'ab'
+      // 输出: [0, 1, 2]
+
+      console.log(findAnagrams(s, p))
+
+      function findAnagrams(s, p) {
+        let sLen = s.length
+        let pLen = p.length
+
+        if (sLen < pLen) {
+          return []
+        }
+
+        const ans = []
+
+        const sArr = new Array(26).fill(0)
+        const pArr = new Array(26).fill(0)
+
+        for (let i = 0; i < pLen; i++) {
+          sArr[s[i].charCodeAt() - 'a'.charCodeAt()]++
+          pArr[p[i].charCodeAt() - 'a'.charCodeAt()]++
+        }
+
+        if (sArr.toString() === pArr.toString()) {
+          ans.push(0)
+        }
+
+        for (let i = 0; i < sLen - pLen; i++) {
+          sArr[s[i].charCodeAt() - 'a'.charCodeAt()]--
+          sArr[s[i + pLen].charCodeAt() - 'a'.charCodeAt()]++
+
+          if (sArr.toString() === pArr.toString()) {
+            ans.push(i + 1)
+          }
+        }
+
+        return ans
+      }
+    </script>
+  </body>
+</html>

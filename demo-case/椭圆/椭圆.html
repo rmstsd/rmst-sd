@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>svg</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+      .rect {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <svg
+      width="500"
+      height="500"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      style="border: 1px solid red"
+    >
+      <path d="M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" stroke="black" fill="transparent" />
+
+      <circle cx="150" cy="150" r="2" fill="red" />
+      <circle cx="180" cy="80" r="2" fill="blue" />
+
+      <path d="M 10,200 Q 50,50 100,200 T 190,200" stroke="black" fill="none" />
+
+      <circle cx="300" cy="100" r="2" fill="blue" />
+      <text x="300" y="100">
+        哈哈哈
+        <tspan>First line</tspan>
+      </text>
+
+      <circle cx="300" cy="200" r="2" fill="blue" />
+      <path d="M 300,200 A 40,20,0,1,1,300,200.0001" stroke="orange" fill="none" />
+
+      <line x1="20" y1="400" x2="90" y2="400" stroke-width="4" stroke="#333" />
+      <rect x="90" y="400" width="44" height="44" fill="red" transform="translate(0 -22)" />
+    </svg> -->
+
+    <canvas width="600" height="600" style="border: 1px solid red"></canvas>
+
+    <script type="module">
+      import { focalPoint, standardRadian, findPointInEllipseByRadian } from './tt.js'
+
+      // 角度转弧度函数
+      function rad(angle) {
+        return (angle * Math.PI) / 180
+      }
+
+      // 弧度转角度函数
+      function deg(angle) {
+        return (angle * 180) / Math.PI
+      }
+
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      const pp = { x: 100, y: 100 }
+
+      const ellipse = { cx: 300, cy: 300, radiusX: 50, radiusY: 70, startAngle: rad(0), endAngle: rad(360) }
+
+      drawCanvas()
+      function drawCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        drawArc(pp.x, pp.y, 'red')
+
+        ctx.beginPath()
+        ctx.ellipse(ellipse.cx, ellipse.cy, ellipse.radiusX, ellipse.radiusY, 0, ellipse.startAngle, ellipse.endAngle)
+        ctx.stroke()
+
+        drawArc(ellipse.cx, ellipse.cy, 'powderblue', 4)
+
+        const { jd1, jd2 } = focalPoint(ellipse)
+        drawArc(jd1.x, jd1.y, 'blue')
+        drawArc(jd2.x, jd2.y, 'blue')
+
+        {
+          let theta = Math.atan2(pp.y - ellipse.cy, pp.x - ellipse.cx)
+
+          const stRadian = standardRadian(theta)
+          const p = findPointInEllipseByRadian(ellipse, stRadian)
+          drawArc(p.x, p.y, 'green', 4)
+        }
+
+        ctx.beginPath()
+        ctx.moveTo(ellipse.cx, ellipse.cy)
+        ctx.lineTo(pp.x, pp.y)
+        ctx.stroke()
+
+        // isInPosition(pp, ellipse.cx, ellipse.cy, ellipse.radiusX, ellipse.radiusY)
+
+        // const dis = getDist2Arc(pp.x, pp.y, arcParams)
+        // console.log(dis)
+      }
+
+      function drawArc(cx, cy, fillStyle = 'red', r = 2) {
+        ctx.beginPath()
+        ctx.arc(cx, cy, r, 0, Math.PI * 2)
+        ctx.fillStyle = fillStyle
+        ctx.fill()
+      }
+
+      canvas.onmousemove = evt => {
+        pp.x = evt.offsetX
+        pp.y = evt.offsetY
+
+        drawCanvas()
+      }
+
+      // ArcParams {
+      //   cx: number
+      //   cy: number
+      //   r: number
+      //   startAngle: number
+      //   endAngle: number
+      //   startPointAngle: number
+      //   endPointAngle: number
+      //   case: number
+      //   d: string
+      // }
+
+      // 给定点，和三点圆弧数据，返回到圆弧的距离
+      // 如果不在弧线所处的扇形内，返回null
+      function getDist2Arc(x, y, params) {
+        const angle = calcAngle(x - params.cx, y - params.cy)
+        const biggerA = Math.max(params.endAngle, params.startAngle)
+        const smallerA = Math.min(params.endAngle, params.startAngle)
+        const angleInBetween = angle < biggerA && angle > smallerA
+        const posCase = params.case
+        // let angleMatch = (angleInBetween && posCase === 1) || (posCase === 2 && !angleInBetween);
+        // 只有两个case:
+        const angleMatch = angleInBetween != (posCase === 2)
+
+        const dist = ((x - params.cx) ** 2 + (y - params.cy) ** 2) ** 0.5 - params.r
+        if (angleMatch) {
+          return Math.abs(dist)
+        } else {
+          return null
+        }
+      }
+
+      function calcAngle(x, y) {
+        const atan2Result = Math.atan2(y, x)
+        if (atan2Result < 0) {
+          return 2 * Math.PI + atan2Result
+        } else {
+          return atan2Result
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<!-- 
+  - 普通点 （LM 点）Location Mark
+  - 动作点（AP 点）Action Point
+  - 充电点 （CP 点）Charge Point
+  - 停靠点（PP 点）Park Point
+  - 切换地图点（SM 点）Switch Map
+-->

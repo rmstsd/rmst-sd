@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>leafer</title>
+
+    <style></style>
+
+    <script src="./leafer-ui.js"></script>
+
+    <script src="./LeaferCanvas.js"></script>
+
+    <script src="./text.js"></script>
+  </head>
+
+  <body>
+    <div style="width: 700px; height: 400px; border: 1px solid red"></div>
+
+    <canvas class="asd"></canvas>
+
+    <script>
+      ;(() => {
+        const btn = document.querySelector('button')
+
+        const { Leafer, Path, Box, Text, Rect } = LeaferUI
+
+        const leafer = new Leafer({ view: document.querySelector('div') })
+        const text = new Text({
+          width: 100,
+          fill: 'rgb(50,205,121)',
+          text: '用最通俗易懂的话讲最难的知识点是我的座右铭',
+          fontSize: 16,
+          fontFamily: '微软雅黑'
+        })
+
+        leafer.add(text)
+      })()
+
+      // ---------------
+
+      const ctx = document.querySelector('.asd').getContext('2d')
+      const ans = getDrawData('用最通俗易懂的话讲最难的知识点是我的座右铭', {
+        width: 100,
+        __font: '16px 微软雅黑'
+      })
+      console.log('my', ans)
+
+      console.log(JSON.parse(JSON.stringify(ans.rows)))
+      ctx.textBaseline = 'hanging'
+      ctx.font = '16px 微软雅黑'
+      ans.rows.forEach(item => {
+        ctx.fillText(item.text, item.x, item.y)
+      })
+      // ...
+    </script>
+  </body>
+</html>

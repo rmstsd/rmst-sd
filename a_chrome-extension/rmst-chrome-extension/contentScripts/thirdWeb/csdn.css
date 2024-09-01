@@ -1,0 +1,8 @@
+.recommend-right1 {
+  display: block !important;
+}
+
+.blog_container_aside,
+.left-toolbox {
+  display: none !important;
+}

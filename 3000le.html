@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>leafer-ui</title>
+
+    <style></style>
+    <script src="https://unpkg.com/leafer-ui@1.0.2/dist/web.min.js"></script>
+  </head>
+
+  <body>
+    <script>
+      var leafer = new LeaferUI.Leafer({ view: window })
+      leafer.config.move.drag = true
+
+      const randomRects = Array.from({ length: 4000 }, () => {
+        const x = Math.floor(Math.random() * window.innerWidth)
+        const y = Math.floor(Math.random() * window.innerHeight)
+        const width = Math.floor(Math.random() * 30)
+        const height = Math.floor(Math.random() * 30)
+        const fill = '#' + Math.floor(Math.random() * 16777215).toString(16)
+        return new LeaferUI.Rect({ x, y, width, height, fill })
+      })
+
+      randomRects.forEach(rect => {
+        leafer.add(rect)
+      })
+    </script>
+  </body>
+</html>

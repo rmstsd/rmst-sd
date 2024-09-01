@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>popup</title>
+    <style>
+      body {
+        margin: 0;
+        width: 160px;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        line-height: 20px;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 10px;
+        color: #464646;
+        font-size: 14px;
+        line-height: 1.5715;
+        text-decoration: none;
+        background-color: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.1s linear;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      a:hover {
+        color: #02369e;
+        background-color: #f9f9f9;
+        text-decoration: underline;
+      }
+
+      .clear-local-data {
+        margin: 10px;
+      }
+      button {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bookmark"></div>
+
+    <hr />
+
+    <div class="clear-local-data">
+      <button class="clear-btn">清除 Storage</button>
+      <button class="toLowercase-btn">小写</button>
+    </div>
+
+    <script src="./popup.js"></script>
+  </body>
+</html>

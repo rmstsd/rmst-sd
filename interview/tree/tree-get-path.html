@@ -14,8 +14,7 @@
 
   <body>
     <script>
-      // 返回 树的path
-      const targetId = '1-3-2'
+      const targetId = '1-3-1'
       const data = [
         {
           id: '1',
@@ -35,26 +34,90 @@
         }
       ]
 
-      const res = getStack(targetId, data)
+      const result = findPath(data, targetId)
+      console.log(result)
 
-      console.log(res)
+      function findPath(treeData, targetId) {
+        const ans = []
 
-      function getStack(targetId, data) {
-        const stack = []
-        iteratorFn(data)
-        return stack
+        dfs(treeData)
 
-        function iteratorFn(data) {
+        return ans
+
+        function dfs(data) {
           for (const item of data) {
-            stack.push(item.id)
-            if (item.id === targetId) return true
+            ans.push(item.id)
+            if (ans.at(-1) === targetId) {
+              return
+            }
 
             if (item.children) {
-              const isFind = iteratorFn(item.children)
-              if (isFind) return true
-              else stack.pop()
+              dfs(item.children)
+            }
+
+            if (ans.at(-1) === targetId) {
+              return
+            }
+
+            ans.pop()
+          }
+        }
+      }
+
+      const result_2 = findPath_v2(data, targetId)
+      console.log(result_2)
+
+      function findPath_v2(treeData, targetId) {
+        for (const item of treeData) {
+          const ans = findPath(item, [])
+
+          if (ans) {
+            return ans
+          }
+        }
+
+        return null
+
+        function findPath(node, path) {
+          if (node.id === targetId) {
+            return path.concat(node.id)
+          }
+
+          if (node.children) {
+            for (const item of node.children) {
+              const ans = findPath(item, path.concat(node.id))
+              if (ans) {
+                return ans
+              }
+            }
+          }
+
+          return null
+        }
+      }
+
+      // ------------------------
+      const ans = getnn(data)
+
+      console.log(ans)
+
+      function getnn(treeData) {
+        return getPaths(treeData[0])
+
+        function getPaths(node) {
+          const result = []
+          dfs(node, [])
+          return result
+
+          function dfs(node, ans) {
+            ans.push(node.id)
+
+            if (node.children) {
+              for (const item of node.children) {
+                dfs(item, ans.slice())
+              }
             } else {
-              stack.pop()
+              result.push(ans)
             }
           }
         }

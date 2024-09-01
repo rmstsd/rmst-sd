@@ -1,16 +1,16 @@
 {
-  "name": "rmst-vscode-extension",
-  "displayName": "rmst-vscode-extension",
+  "name": "rmst-vscode-tools",
+  "displayName": "rmst-vscode-tools",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "rmst",
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
-    "lint": "eslint src --ext ts",
+    "pretest": "yarn run compile",
+    "vsce-build-vsix": "vsce package",
     "test": "vitest --run"
   },
   "dependencies": {
@@ -23,10 +23,7 @@
     "@types/mocha": "^10.0.0",
     "@types/node": "16.x",
     "@types/vscode": "^1.72.0",
-    "@typescript-eslint/eslint-plugin": "^5.38.1",
-    "@typescript-eslint/parser": "^5.38.1",
     "@vscode/test-electron": "^2.1.5",
-    "eslint": "^8.24.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
     "typescript": "^4.8.4",
@@ -39,13 +36,18 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:rmst-vscode-extension.rmst-del-func"
+    "onCommand:rmst-vscode-tools.delete-func",
+    "onCommand:rmst-vscode-tools.convert-word"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "rmst-vscode-extension.rmst-del-func",
-        "title": "人美声甜: 删除光标所在的函数"
+        "command": "delete-func",
+        "title": "rmst: 删除光标所在的函数"
+      },
+      {
+        "command": "convert-word",
+        "title": "rmst: 转成其他形式"
       }
     ]
   }

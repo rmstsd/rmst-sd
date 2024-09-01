@@ -39,35 +39,34 @@
         // ----------------------------------------------------------------
 
         // lib es6 -不用await
-        async function asyncPool_es6(poolLimit, data, asyncFunc) {
+        function asyncPool_es6(poolLimit, iterable, iteratorFn) {
+          iterable = iterable.slice()
+
           const ret = []
           const executing = new Set()
 
-          let i = 0
+          return enqueue().then(() => {
+            console.log('ffff')
 
-          const enqueueExecuting = () => {
-            console.log('enqueueExecuting')
-            if (i === data.length) {
+            return Promise.all(ret)
+          })
+
+          function enqueue() {
+            const item = iterable.shift()
+            if (!item) {
               return Promise.resolve()
             }
 
-            const p = asyncFunc(data[i++])
+            const p = iteratorFn(item, iterable)
             ret.push(p)
             executing.add(p)
 
             p.finally(() => executing.delete(p))
 
-            let fop = Promise.resolve()
-            if (executing.size >= poolLimit) {
-              fop = Promise.race(executing)
-            }
+            const r = executing.size >= poolLimit ? Promise.race(executing) : Promise.resolve()
 
-            return fop.then(() => {
-              enqueueExecuting()
-            })
+            return r.then(() => enqueue())
           }
-
-          return enqueueExecuting().then(() => Promise.all(ret))
         }
 
         // ----------------------------------------------------------------
@@ -86,7 +85,7 @@
 
         const allRes = await asyncPool_es6(2, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], asyncFunc)
 
-        console.log(allRes)
+        console.log('allRes', allRes)
       }
     </script>
   </body>

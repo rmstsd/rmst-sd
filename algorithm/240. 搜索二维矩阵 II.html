@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>240. 搜索二维矩阵 II</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      var searchMatrix = function (matrix, target) {
+        for (let i = 0; i < matrix.length; i++) {
+          const row = matrix[i]
+
+          const idx = search(row, target)
+          if (idx >= 0) {
+            return true
+          }
+        }
+
+        return false
+      }
+
+      const search = (nums, target) => {
+        let low = 0,
+          high = nums.length - 1
+        while (low <= high) {
+          const mid = Math.floor((high - low) / 2) + low
+          const num = nums[mid]
+          if (num === target) {
+            return mid
+          } else if (num > target) {
+            high = mid - 1
+          } else {
+            low = mid + 1
+          }
+        }
+        return -1
+      }
+
+      const matrix = [
+          [1, 4, 7, 11, 15],
+          [2, 5, 8, 12, 19],
+          [3, 6, 9, 16, 22],
+          [10, 13, 14, 17, 24],
+          [18, 21, 23, 26, 30]
+        ],
+        target = 5
+
+      console.log(searchMatrix(matrix, target))
+    </script>
+  </body>
+</html>

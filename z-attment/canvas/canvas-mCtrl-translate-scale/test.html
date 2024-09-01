@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <canvas width="800" height="600" style="border: 1px solid red"></canvas>
+
+    <script>
+      const canvas = document.querySelector('canvas')
+      const ctx = canvas.getContext('2d')
+
+      const rect = { x: 100, y: 100, width: 100, height: 100 }
+
+      let tx = 0
+      let ty = 0
+      let scale = 1
+
+      ctx.save()
+      testDraw('black')
+      ctx.restore()
+
+      tx = 100
+      ty = 100
+      const prevScale = scale
+      scale = 1.5
+
+      ctx.save()
+      ctx.translate(tx, ty)
+      ctx.scale(scale, scale)
+      ctx.translate(-tx, -ty)
+
+      testDraw('rgba(0, 255, 0, 0.6)')
+      ctx.restore()
+
+      tx = 150
+      ty = 150
+      scale = 2
+
+      ctx.save()
+      ctx.translate(tx, ty)
+      ctx.scale(scale, scale)
+      ctx.translate(-tx, -ty)
+
+      testDraw('rgba(0, 255, 0, 0.6)')
+      ctx.restore()
+
+      function testDraw(fs) {
+        ctx.fillStyle = fs
+        ctx.fillRect(rect.x, rect.y, rect.width, rect.height)
+      }
+
+      // ------------
+      function toCanvas(x, y) {
+        const mt = ctx.getTransform()
+
+        const scaleX = mt.a
+        const scaleY = mt.d
+
+        const tX = mt.e
+        const tY = mt.f
+
+        console.log(mt)
+      }
+
+      function offsetToCanvas(ox, oy, tx, ty, scaleX, scaleY) {
+        const x = (ox - tx) / scaleX
+        const y = (oy - ty) / scaleY
+
+        return { x, y }
+      }
+
+      function getCanvasCoords(ox, oy) {
+        const transform = ctx.getTransform()
+        const { a, b, c, d, e, f } = transform
+        const x = (ox - e) / a
+        const y = (oy - f) / d
+
+        return { x, y }
+      }
+    </script>
+  </body>
+</html>

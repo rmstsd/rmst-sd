@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>move-scroll</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body style="padding-top: 400px">
+    <button onclick="addListener()">监听</button>
+    <button onclick="cancelListener()">取消监听</button>
+
+    <div style="transform: scale(1); padding: 20px; margin: 50px">
+      <div
+        class="domContainer"
+        style="
+          width: 800px;
+          height: 400px;
+          border: 1px solid red;
+          overflow: auto;
+          position: relative;
+          margin-top: 200px;
+          margin-left: 100px;
+          padding: 20px;
+        "
+      >
+        <div style="width: 8000px; height: 6000px" class="innerContainer"></div>
+      </div>
+    </div>
+
+    <script>
+      const nodes = Array.from({ length: 500 }, (_, idx) => {
+        const h4 = document.createElement('h4')
+        h4.innerText = idx
+        return h4
+      })
+      document.querySelector('.innerContainer').append(...nodes)
+
+      let cancel = () => {}
+      function addListener() {
+        const domContainer = document.querySelector('.domContainer')
+
+        cancel = addMoveScrollListener(domContainer)
+      }
+
+      function cancelListener() {
+        cancel?.()
+      }
+
+      addListener()
+
+      function addMoveScrollListener(domContainer) {
+        const getInitialDirection = () => ({ left: null, right: null, top: null, bottom: null })
+        const resetDirection = () => {
+          fourDirection = getInitialDirection()
+        }
+
+        const offsetDistance = 0
+        let fourDirection = getInitialDirection()
+
+        let isPressDown = false
+        let timer = null
+        let isExecLock = false
+
+        function handleContainerMousedown() {
+          isPressDown = true
+        }
+
+        function handleDocumentMouseup() {
+          isPressDown = false
+          isExecLock = false
+          resetDirection()
+          cancelAnimationFrame(timer)
+        }
+
+        function handleDocumentMousemove(evt) {
+          if (!isPressDown) return
+          evt.preventDefault()
+
+          const { offsetWidth, offsetHeight } = domContainer
+
+          const { top, left } = domContainer.getBoundingClientRect()
+
+          const offsetLeft = left + window.pageXOffset
+          const offsetTop = top + window.pageYOffset
+
+          const pos_x = evt.pageX - offsetLeft
+          const pos_y = evt.pageY - offsetTop
+
+          if (pos_x >= offsetDistance && pos_x <= offsetWidth - offsetDistance) {
+            fourDirection.left = null
+            fourDirection.right = null
+          }
+
+          if (pos_y >= offsetDistance && pos_y <= offsetHeight - offsetDistance) {
+            fourDirection.top = null
+            fourDirection.bottom = null
+          }
+
+          if (
+            pos_x >= offsetDistance &&
+            pos_x <= offsetWidth - offsetDistance &&
+            pos_y >= offsetDistance &&
+            pos_y <= offsetHeight - offsetDistance
+          ) {
+            resetDirection()
+
+            cancelAnimationFrame(timer)
+            isExecLock = false
+            return
+          }
+
+          const ratio = 1
+
+          if (pos_x < offsetDistance) {
+            const leftOffset = offsetLeft + offsetDistance - evt.pageX
+
+            fourDirection.left = { scrollAttr: 'scrollLeft', scrollPer: -leftOffset / ratio }
+            fourDirection.right = null
+          } else if (pos_x > offsetWidth - offsetDistance) {
+            const rightOffset = evt.pageX - offsetLeft - offsetWidth + offsetDistance
+
+            fourDirection.right = { scrollAttr: 'scrollLeft', scrollPer: rightOffset / ratio }
+            fourDirection.left = null
+          }
+
+          if (pos_y < offsetDistance) {
+            const topOffset = offsetTop + offsetDistance - evt.pageY
+
+            fourDirection.top = { scrollAttr: 'scrollTop', scrollPer: -topOffset / ratio }
+            fourDirection.bottom = null
+          } else if (pos_y > offsetHeight - offsetDistance) {
+            const bottomOffset = evt.pageY - offsetTop - offsetHeight + offsetDistance
+
+            fourDirection.bottom = { scrollAttr: 'scrollTop', scrollPer: bottomOffset / ratio }
+            fourDirection.top = null
+          }
+
+          if (isExecLock) return
+          isExecLock = true
+
+          execTask()
+        }
+
+        function execTask() {
+          console.log('exec')
+          Object.keys(fourDirection).forEach(item => {
+            const itemDirection = fourDirection[item]
+            if (!itemDirection) return
+
+            domContainer[itemDirection.scrollAttr] = domContainer[itemDirection.scrollAttr] + itemDirection.scrollPer
+          })
+
+          timer = requestAnimationFrame(execTask)
+        }
+
+        domContainer.addEventListener('mousedown', handleContainerMousedown)
+        document.addEventListener('mouseup', handleDocumentMouseup)
+        document.addEventListener('mousemove', handleDocumentMousemove)
+
+        return function cancel() {
+          domContainer.removeEventListener('mousedown', handleContainerMousedown)
+          document.removeEventListener('mouseup', handleDocumentMouseup)
+          document.removeEventListener('mousemove', handleDocumentMousemove)
+        }
+      }
+
+      //
+    </script>
+  </body>
+</html>

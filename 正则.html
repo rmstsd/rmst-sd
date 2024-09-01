@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>reg</title>
 
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
     <style>
       body {
         padding: 10px;
+      }
+
+      .aaa:empty {
+        height: 20px;
+        background-color: red;
       }
     </style>
   </head>
@@ -20,129 +21,183 @@
   <body>
     <div id="root"></div>
 
-    <script type="text/babel">
-      const MyApp = () => {
-        return <div>react</div>
-      }
-
-      const container = document.getElementById('root')
-      const root = ReactDOM.createRoot(container)
-      root.render(<MyApp />)
-    </script>
-
     <script>
-      const createElement = (tag, props, children) => {
-        const el = document.createElement(tag)
-        props.forEach(prop => {
-          el.setAttribute(prop, props[prop])
-        })
-
-        el.append(...[].concat(children))
-
-        return el
-      }
-
       /*
+        ^ 开头
+        $ 结尾
         * 零次或多次
         + 一次或多次
-        ? 零次或一次 (写在两次后代表`非贪婪`)
+        ? 零次或一次 (写在量词后代表`非贪婪`)
 
         \w 匹配字母、数字、下划线。等价于'[A-Za-z0-9_]'
+        分组捕获 ()()
       */
 
-      const str =
-        '**a**s**da**sas[链接描述](http://localhost:9001/studio/4899)fdgfghgfh'.replaceAll(
-          /\[.+\]\(.+\)/g,
+      {
+        // 分组捕获
+        const reg = /(\d{4})-(\d{2})-(\d{2})/g
+        const text = '2015-12-25'
+        console.log([...text.matchAll(reg)])
+        const result = text.replace(reg, '$2__$1')
+        console.log(result)
 
-          matchStr => {
-            console.log(matchStr)
+        console.log(text.split(reg))
+      }
 
-            // 断言
-            const desc = matchStr.match(/(?<=\[).*(?=\]\()/g)
-            console.log(desc)
+      console.log('----------------------------------------------------------------')
 
-            const url = matchStr.match(/(?<=\]\().*(?=\))/g)
-            console.log(url)
+      {
+        const sppps = `<span>pig1</span><span>pig2</span>dog<span>pig3</span>`
+        console.log([...sppps.matchAll(/<span>.+?<\/span>/g)])
+      }
+
+      console.log('----------------------------------------------------------------')
+
+      {
+        const extra = '哈哈[xx](link11)哈风高放[uu](link22)火复工后'
+
+        console.log(getMdArray(extra))
+
+        function getMdArray(sstr) {
+          const matchRes = [...sstr.matchAll(/\[.*?\]\(.*?\)/g)] // 非贪婪匹配
+
+          if (!matchRes.length) return [sstr]
+
+          const answer = []
+
+          const getLinkObj = linkStr => {
+            const [label] = linkStr.match(/(?<=\[).*(?=\]\()/g)
+            const [href] = linkStr.match(/(?<=\]\().*(?=\))/g)
+
+            return { href, label }
           }
-        )
 
-      console.log(str)
+          let indexPoint = 0
+          matchRes.forEach((matchItem, index) => {
+            const matStr = matchItem[0]
 
-      // 钱
-      const moneyReg = /\d+(\.{1}\d{1,2})?$/
-      console.log(moneyReg.test('11.222555'))
+            answer.push(sstr.slice(indexPoint, matchItem.index))
+            answer.push(getLinkObj(matStr))
 
-      // 变量标识符
-      const varReg = /^\w+(.*\w+)?$/
-      const variableReg = /^[a-z]+([a-z.]*[a-z]+)?$/
-      console.log(varReg.test('a.b'))
+            indexPoint = matchItem.index + matStr.length
 
-      // ? 量词后 -非贪婪
-      const wReg1 = /\d+/
-      const wReg2 = /\d+?/
-      console.log('123asd'.match(wReg1))
-      console.log('123asd'.match(wReg2))
+            if (index === matchRes.length - 1) answer.push(sstr.slice(indexPoint))
+          })
 
-      var regex = /[ab]{2,5}c/g
-      var string = 'abc abbc abbbc abbbbc abbbbbc abbbbbbc'
-      console.log(string.match(regex))
+          return answer
+        }
+      }
 
-      // var regex = /\d{2,5}?/g
-      // var string = '123 1234 12345 123456'
-      // console.log(string.match(regex))
+      console.log('--------------------------------')
 
-      const regvvv = /^[A-Za-z0-9]\w*[A-Za-z0-9]+$/
+      {
+        // 钱
+        const moneyReg = /\d+(\.{1}\d{1,2})?$/
+        console.log(moneyReg.test('11.222555'))
+      }
 
-      console.log(regvvv.test('1111asasuiui_ff456456dasas666'))
+      {
+        // 变量标识符
+        const varReg = /^\w+(.*\w+)?$/
+        const variableReg = /^[a-z]+([a-z.]*[a-z]+)?$/
+        console.log(varReg.test('a.b'))
+      }
+
+      {
+        // ? 量词后 -非贪婪
+        const wReg1 = /\d+/
+        const wReg2 = /\d+?/
+        console.log('123asd'.match(wReg1))
+        console.log('123asd'.match(wReg2))
+      }
+
+      {
+        var regex = /[ab]{2,5}c/g
+        var string = 'abc abbc abbbc abbbbc abbbbbc abbbbbbc'
+        console.log(string.match(regex))
+
+        // var regex = /\d{2,5}?/g
+        // var string = '123 1234 12345 123456'
+        // console.log(string.match(regex))
+      }
+
+      {
+        const regvvv = /^[A-Za-z0-9]\w*[A-Za-z0-9]+$/
+
+        console.log(regvvv.test('1111asasuiui_ff456456dasas666'))
+      }
 
       console.log('-----------------------')
 
-      const pwdReg = /^\w{8,16}$/
+      {
+        const pwdReg = /^\w{8,16}$/
 
-      // console.log(pwdReg.test('bcdbcdthbcdbcdth'))
+        // console.log(pwdReg.test('bcdbcdthbcdbcdth'))
+      }
 
       // 请输入12位以上密码,数字,字母,字符至少包含两种,不能包含中文和空格
       // const ans = /(?!^[0-9]+$) (?!^[A-z]+$) (?!^[^A-z0-9]+$) ^[^\s\u4e00-\u9fa5] {12,20}$/
+      {
+        const reg44 = /\d{3}/g
 
-      const reg44 = /\d{3}/g
-
-      console.log([...'12345678'.matchAll(reg44)])
-
-      console.log('------------------------------')
-
-      const mds = '**a**bcd**efg**answer'
-
-      console.log(mds.match(/\*{2}\w+\*{2}/g))
-      console.log(mds.match(/(?<=\*\*)\w+(?=\*\*)/g))
+        console.log([...'12345678'.matchAll(reg44)])
+      }
 
       console.log('------------------------------')
 
-      const thousandsStr = '1234567891234567.1234567'
+      {
+        const mds = '**a**bcd**efg**answer'
 
-      const 没有小数点reg = /\d{1,3}(?=(\d{3})+$)/g
+        console.log(mds.match(/\*{2}[^*]+\*{2}/g))
+        console.log(mds.match(/(?<=\*\*)\w+(?=\*\*)/g))
+      }
 
-      const 有小数点reg = /\d{1,3}(?=(\d{3})+\.)/g
-      // /\d{1,3}(  ?= (\d{3})+ ( ?:\.\d+ )?$  )/g
+      console.log('------------------------------')
 
-      console.log(
-        thousandsStr.replace(有小数点reg, function () {
-          return `${arguments[0]},`
-        })
-      )
+      {
+        const thousandsStr = '1234567891234567.1234567'
 
-      const pathKeys = [
-        './index.js',
-        './tC端账号状态变更时/index.js',
-        './查询用户信息/index.js',
-        './用户/查询用户信息/index.js'
-      ]
+        const 没有小数点reg = /\d{1,3}(?=(\d{3})+$)/g
 
-      // 只匹配两个 `/` 的路径
-      const pathReg = /\.\/[^/]+\/index\.js/
-      console.log(pathReg.test('./用户/查询用户信息/index.js'))
+        const 有小数点reg = /\d{1,3}(?=(\d{3})+\.)/g
+        // /\d{1,3}(  ?= (\d{3})+ ( ?:\.\d+ )?$  )/g
 
-      const resPathKeys = pathKeys.filter(item => pathReg.test(item))
-      console.log(resPathKeys)
+        console.log(
+          thousandsStr.replace(有小数点reg, function () {
+            return `${arguments[0]},`
+          })
+        )
+      }
+
+      {
+        const pathKeys = [
+          './index.js',
+          './tC端账号状态变更时/index.js',
+          './查询用户信息/index.js',
+          './用户/查询用户信息/index.js'
+        ]
+
+        // 只匹配两个 `/` 的路径
+        const pathReg = /\.\/[^/]+\/index\.js/
+        console.log(pathReg.test('./用户/查询用户信息/index.js'))
+
+        const resPathKeys = pathKeys.filter(item => pathReg.test(item))
+        console.log(resPathKeys)
+      }
+
+      // 把 html 字符串内的 标签换成 空字符串
+      function replaceHtml(str) {
+        const reg = /<\/?.+?\/?>/g
+
+        console.log(str.match(reg))
+        console.log(Array.from(str.matchAll(reg)))
+
+        return str.replace(reg, '')
+      }
+
+      const html = `<section class="p-[10px] flex-grow"><button>click</button><input autocomplete="off" role="spinbutton" aria-valuenow="5000" step="1" class="ant-input-number-input" value="5000"><div class="absolute" style="left: 800px;">Hello World</div></section> aaa`
+
+      console.log(replaceHtml(html))
 
       //
     </script>
