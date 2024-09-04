@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3000rect</title>
 
-    <style></style>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0;
+      }
+    </style>
   </head>
 
   <body>
@@ -15,15 +20,30 @@
     <script>
       // 至少 3500 个
       const canvas = document.querySelector('canvas')
+
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+
       const ctx = canvas.getContext('2d')
 
       const rects = Array.from({ length: 4000 }, () => {
-        const x = Math.random() * canvas.width
-        const y = Math.random() * canvas.height
-        const width = Math.random() * 20
-        const height = Math.random() * 20
-        const color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`
-        return { x, y, width, height, color }
+        const x = Math.ceil(Math.random() * canvas.width)
+        const y = Math.ceil(Math.random() * canvas.height)
+        const width = Math.ceil(Math.random() * 20)
+        const height = Math.ceil(1 + Math.random() * 20)
+        const color = `rgb(${Math.ceil(Math.random() * 255)}, ${Math.ceil(Math.random() * 255)}, ${Math.ceil(
+          Math.random() * 255
+        )})`
+
+        const cachedCanvas = document.createElement('canvas')
+        cachedCanvas.width = width
+        cachedCanvas.height = height
+        const ctx = cachedCanvas.getContext('2d')
+        ctx.fillStyle = color
+        ctx.rect(0, 0, width, height)
+        ctx.fill()
+
+        return { x, y, width, height, color, cachedCanvas }
       })
 
       drawCanvas()
@@ -37,23 +57,26 @@
         prevY = event.clientY
       })
 
-      document.addEventListener('pointermove', event => {
-        if (isPointerDown) {
-          event.clientX - prevX
-          event.clientY - prevY
-          tx += event.clientX - prevX
-          ty += event.clientY - prevY
-          prevX = event.clientX
-          prevY = event.clientY
+      document.addEventListener(
+        'pointermove',
+        throttle(event => {
+          if (isPointerDown) {
+            event.clientX - prevX
+            event.clientY - prevY
+            tx += event.clientX - prevX
+            ty += event.clientY - prevY
+            prevX = event.clientX
+            prevY = event.clientY
 
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-          ctx.save()
-          ctx.translate(tx, ty)
-          drawCanvas()
-          ctx.restore()
-        }
-      })
+            ctx.save()
+            ctx.translate(tx, ty)
+            drawCanvas()
+            ctx.restore()
+          }
+        }, 1000 / 60)
+      )
 
       let tx = 0
       let ty = 0
@@ -71,8 +94,23 @@
 
       function drawCanvas() {
         rects.forEach(rect => {
+          // ctx.drawImage(rect.cachedCanvas, rect.x, rect.y, rect.cachedCanvas.width, rect.cachedCanvas.height)
+
           drawRect(rect.x, rect.y, rect.width, rect.height, rect.color)
         })
+      }
+
+      // 节流函数
+      function throttle(fn, delay) {
+        let timer = null
+        return function (...args) {
+          if (!timer) {
+            timer = setTimeout(() => {
+              fn.apply(this, args)
+              timer = null
+            }, delay)
+          }
+        }
       }
 
       //
