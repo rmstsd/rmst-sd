@@ -43,7 +43,10 @@
         ctx.rect(0, 0, width, height)
         ctx.fill()
 
-        return { x, y, width, height, color, cachedCanvas }
+        const path2d = new Path2D()
+        path2d.rect(x, y, width, height)
+
+        return { x, y, width, height, color, path2d, cachedCanvas }
       })
 
       drawCanvas()
@@ -85,18 +88,18 @@
         isPointerDown = false
       })
 
-      function drawRect(x, y, width, height, color) {
+      function drawRect(rect) {
         ctx.beginPath()
-        ctx.rect(x, y, width, height)
-        ctx.fillStyle = color
-        ctx.fill()
+        // ctx.rect(x, y, width, height)
+        ctx.fillStyle = rect.color
+        ctx.fill(rect.path2d)
       }
 
       function drawCanvas() {
         rects.forEach(rect => {
           // ctx.drawImage(rect.cachedCanvas, rect.x, rect.y, rect.cachedCanvas.width, rect.cachedCanvas.height)
 
-          drawRect(rect.x, rect.y, rect.width, rect.height, rect.color)
+          drawRect(rect)
         })
       }
 
