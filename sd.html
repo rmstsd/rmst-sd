@@ -7,59 +7,160 @@
     <title>sd</title>
 
     <style>
-      .text-style {
-        font-size: 18px;
-        line-height: 60px;
-        display: block;
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        font-family: 微软雅黑;
-        padding: 0 10px;
+      body {
+        margin: 100px;
       }
 
-      .hide-input {
-        width: 100%;
-        box-sizing: border-box;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        background-color: transparent;
-        outline: none;
-        border: none;
-        color: transparent;
-        caret-color: black;
+      span {
+        position: relative;
+        line-height: 0;
+        font-size: 12px;
+        display: inline-block;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 20px;
+          height: 20px;
+          border-radius: 100px;
+          transition: all 0.2s;
+          font-size: 26px;
+        }
+
+        &:hover {
+          &::before {
+            background-color: #eee;
+          }
+        }
+      }
+
+      svg {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke: currentColor;
+        position: relative;
       }
     </style>
   </head>
 
   <body>
-    <div
-      style="
-        height: 60px;
-        max-width: 100%;
-        overflow: hidden;
-        position: relative;
-        display: inline-block;
-        border: 1px solid rgb(255, 7, 7);
-      "
-    >
-      <div id="content" class="text-style" style="white-space: pre; min-width: 8px"></div>
-      <input class="text-style hide-input" />
+    <span>
+      <svg
+        fill="none"
+        stroke="currentColor"
+        stroke-width="4"
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+        focusable="false"
+        class="arco-icon arco-icon-close"
+      >
+        <path d="M9.857 9.858 24 24m0 0 14.142 14.142M24 24 38.142 9.858M24 24 9.857 38.142"></path>
+      </svg>
+    </span>
+
+    <div style="color: #969799">哈哈哈哈</div>
+
+    <div style="background-color: pink; height: 200px; min-width: 400px; max-width: 800px; overflow: auto">
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
+      <h1>
+        asdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdasasdasdas
+      </h1>
     </div>
 
-    <script>
-      const input = document.querySelector('input')
-      const span = document.querySelector('#content')
+    <button>xx</button>
 
-      input.oninput = evt => {
-        console.log(input.value)
-        span.textContent = input.value
+    <script>
+      document.querySelector('button').onclick = () => {
+        const foo = { hello: 'world' }
+        const blob = new Blob([JSON.stringify(foo)], { type: 'application/vnd.ms-excel;charset=utf-8' })
+        objectURL = window.URL.createObjectURL(blob)
+      
+        window.open(objectURL)
       }
+    </script>
+
+    <script>
+      const defList = [
+        { id: 1, group: 'group1' },
+        { id: 2, group: 'group1' },
+        { id: 3, group: 'group2' },
+        { id: 4, group: 'group2' },
+        { id: 5, group: 'group2' },
+        { id: 6, group: 'group3' },
+        { id: 7, group: 'group3' },
+        { id: 8, group: 'group3' },
+        { id: 9, group: 'group3' },
+        { id: 10 },
+        { id: 11 },
+        { id: 11, group: 'qwe' },
+        { id: 789, group: 'a' },
+        { id: 11, group: '哈哈哈' },
+        { id: 678, group: 'zzz' },
+        { id: 678, group: 'yy' }
+      ]
+
+      const ans = []
+
+      const other = {
+        group: 'other',
+        defs: []
+      }
+
+      defList.forEach(item => {
+        if (!item.group) {
+          other.defs.push(item)
+          return
+        }
+
+        const ansItem = ans.find(a => a.group === item.group)
+        if (ansItem) {
+          ansItem.defs.push(item)
+        } else {
+          ans.push({
+            group: item.group,
+            defs: [item]
+          })
+        }
+      })
+
+      ans.sort()
+
+      ans.push(other)
+
+      console.log(ans)
     </script>
   </body>
 </html>
-
-dev1
-dev2
