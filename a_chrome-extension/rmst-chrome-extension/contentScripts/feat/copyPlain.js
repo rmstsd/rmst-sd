@@ -9,3 +9,10 @@ document.addEventListener('copy', evt => {
     clipboardData.setData('text/plain', selText)
   }
 })
+
+document.addEventListener('keydown', evt => {
+  if (evt.ctrlKey && evt.key === 'c') {
+    const selText = window.getSelection().toString()
+    navigator.clipboard.writeText(selText)
+  }
+})
