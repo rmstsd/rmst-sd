@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "node index.js",
+    "mo": "node mo.mjs"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "mongodb": "^6.9.0",
     "tree-kill": "^1.2.2"
   }
 }
