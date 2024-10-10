@@ -4,61 +4,76 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sd</title>
+    <title>sd</title>
 
     <style>
-      h1 {
-        background-color: pink;
+      body {
         margin: 0;
+      }
+      .img {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
       }
     </style>
   </head>
 
   <body>
-    <section style="border: 1px solid black; transform: translateY(11%)">
-      <header>header</header>
+    <div class="img">img</div>
+    <div class="modal"></div>
 
-      <input type="text" value="asdasdasd">
+    <script>
+      const modal = document.querySelector('.modal')
+      const img = document.querySelector('.img')
 
-      <button onclick="asdasdasd()">asd</button>
+      let startRect
+      img.onclick = () => {
+        startRect = img.getBoundingClientRect()
 
-      <script>
+        modal.style.display = 'flex'
 
-        function asdasdasd() {
-          document.querySelector('input').select()
-        }
-      </script>
+        const imgClone = img.cloneNode(true)
+        imgClone.style.width = '100%'
+        imgClone.style.height = '400px'
+        modal.append(imgClone)
 
-      <div style="height: 300px; overflow: auto">
-        <div style="background-color: #fff; position: sticky; top: 0">asdasds</div>
+        const endRect = imgClone.getBoundingClientRect()
+        console.log(endRect)
 
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-        <h1>ass</h1>
-      </div>
-    </section>
+        setTimeout(() => {
+          const endy = -endRect.top - (endRect.height - startRect.height) / 2
+          console.log(endy)
+          imgClone.animate(
+            [
+              {
+                // width: `${startRect.width}px`,
+                height: `${startRect.height}px`,
+                transform: `translateX(${endRect.left}px) translateY(${endy}px)`
+              },
+              {
+                // width: `${endRect.width}px`,
+                height: `${endRect.height}px`,
+                transform: 'translateX(0px) translateY(0px)'
+              }
+            ],
+            { duration: 1000 }
+          )
+        }, 500)
+      }
 
-    <script></script>
+      modal.onclick = () => {
+        modal.removeChild(modal.lastChild)
+
+        modal.style.display = 'none'
+      }
+    </script>
   </body>
 </html>
