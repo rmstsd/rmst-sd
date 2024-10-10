@@ -21,7 +21,6 @@
         position: fixed;
         inset: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        align-items: center;
       }
     </style>
   </head>
@@ -43,30 +42,29 @@
         const imgClone = img.cloneNode(true)
         imgClone.style.width = '100%'
         imgClone.style.height = '400px'
+        imgClone.style.marginTop = '300px'
         modal.append(imgClone)
 
         const endRect = imgClone.getBoundingClientRect()
         console.log(endRect)
 
-        setTimeout(() => {
-          const endy = -endRect.top - (endRect.height - startRect.height) / 2
-          console.log(endy)
-          imgClone.animate(
-            [
-              {
-                // width: `${startRect.width}px`,
-                height: `${startRect.height}px`,
-                transform: `translateX(${endRect.left}px) translateY(${endy}px)`
-              },
-              {
-                // width: `${endRect.width}px`,
-                height: `${endRect.height}px`,
-                transform: 'translateX(0px) translateY(0px)'
-              }
-            ],
-            { duration: 1000 }
-          )
-        }, 500)
+        const endy = -endRect.top - (endRect.height - startRect.height) / 2
+
+        imgClone.animate(
+          [
+            {
+              // width: `${startRect.width}px`,
+              // height: `${startRect.height}px`,
+              transform: `translateX(${-endRect.left}px) translateY(${-endRect.top}px)`
+            },
+            {
+              // width: `${endRect.width}px`,
+              // height: `${endRect.height}px`,
+              transform: 'translateX(0px) translateY(0px)'
+            }
+          ],
+          { duration: 1000 }
+        )
       }
 
       modal.onclick = () => {
