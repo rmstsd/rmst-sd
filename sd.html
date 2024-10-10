@@ -26,7 +26,9 @@
   </head>
 
   <body>
-    <div class="img">img</div>
+    <div style="padding: 100px">
+      <div class="img">img</div>
+    </div>
     <div class="modal"></div>
 
     <script>
@@ -48,18 +50,19 @@
         const endRect = imgClone.getBoundingClientRect()
         console.log(endRect)
 
-        const endy = -endRect.top - (endRect.height - startRect.height) / 2
+        const end_tx = startRect.left - endRect.left - (endRect.width - startRect.width) / 2
+        const end_ty = startRect.top - endRect.top - (endRect.height - startRect.height) / 2
 
         imgClone.animate(
           [
             {
-              // width: `${startRect.width}px`,
-              // height: `${startRect.height}px`,
-              transform: `translateX(${-endRect.left}px) translateY(${-endRect.top}px)`
+              width: `${startRect.width}px`,
+              height: `${startRect.height}px`,
+              transform: `translateX(${end_tx}px) translateY(${end_ty}px)`
             },
             {
-              // width: `${endRect.width}px`,
-              // height: `${endRect.height}px`,
+              width: `${endRect.width}px`,
+              height: `${endRect.height}px`,
               transform: 'translateX(0px) translateY(0px)'
             }
           ],
