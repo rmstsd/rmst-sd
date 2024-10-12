@@ -21,15 +21,10 @@
         position: fixed;
         inset: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        /* align-items: center; */
-        /* align-content: center; */
-        font-size: 0;
+        align-content: center;
       }
 
       .img-clone {
-        vertical-align: middle;
-        display: inline-block;
-        font-size: 16px;
       }
     </style>
   </head>
@@ -38,9 +33,7 @@
     <div style="padding: 100px">
       <div class="img">img</div>
     </div>
-    <div class="modal" style="white-space: nowrap">
-      <!-- <div style="height: 100%; vertical-align: middle; width: 0; display: inline-block"></div> -->
-    </div>
+    <div class="modal" style="white-space: nowrap"></div>
 
     <script>
       const modal = document.querySelector('.modal')
@@ -49,16 +42,21 @@
       let startRect
       img.onclick = () => {
         startRect = img.getBoundingClientRect()
+        console.log('startRect', startRect)
 
         const imgClone = img.cloneNode(true)
         imgClone.classList.add('img-clone')
         imgClone.style.width = '100%'
         imgClone.style.height = '400px'
         modal.append(imgClone)
-        modal.style.display = 'block'
+
+        modal.style.display = 'unset'
+
+        // imgClone.style.marginTop =
+        //   (modal.getBoundingClientRect().height - imgClone.getBoundingClientRect().height) / 2 + 'px'
 
         const endRect = imgClone.getBoundingClientRect()
-        console.log(endRect)
+        console.log('endRect', endRect)
 
         const end_tx = startRect.left - endRect.left // - (endRect.width - startRect.width) / 2
         const end_ty = startRect.top - endRect.top // - (endRect.height - startRect.height) / 2
@@ -82,7 +80,6 @@
 
       modal.onclick = () => {
         modal.removeChild(modal.lastChild)
-
         modal.style.display = 'none'
       }
     </script>
