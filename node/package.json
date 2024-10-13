@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
-    "mo": "node mo.mjs"
+    "dev": "node --watch index.js",
+    "mo": "node --watch mo.mjs"
   },
   "keywords": [],
   "author": "",

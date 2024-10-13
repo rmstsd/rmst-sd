@@ -1,13 +1,19 @@
-const { spawn, exec } = require('node:child_process')
-var kill = require('tree-kill')
+// const { spawn, exec } = require('node:child_process')
+// var kill = require('tree-kill')
 
-const cc = `java -jar .\\trick-m4-4.20.10.jar .\\M4Demo2\\`
-const pc = exec(cc, { cwd: `E:\\trick-m4-4.20.10` })
+const { exec } = require('child_process')
+const path = require('path')
 
-pc.on('exit', (code, signal) => {
-  console.log('exit', code, signal)
-})
+// const cc = `java -jar .\\trick-m4-4.20.10.jar .\\M4Demo2\\`
+// const pc = exec(cc, { cwd: `E:\\trick-m4-4.20.10` })
 
-setTimeout(() => {
-  kill(pc.pid)
-}, 5000)
+// pc.on('exit', (code, signal) => {
+//   console.log('exit', code, signal)
+// })
+
+// setTimeout(() => {
+//   kill(pc.pid)
+// }, 5000)
+
+const pp = 'E:\\trick-m4-4.20.10\\M4Demo9\\'
+console.log(path.basename(pp))
