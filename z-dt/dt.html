@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dt</title>
+
+    <style>
+      summary {
+        padding: 4px 0;
+      }
+
+      details[open] summary {
+        border-bottom: 1px solid #ccc;
+      }
+
+      section {
+        margin-top: 10px;
+        padding-left: 20px;
+        display: grid;
+        gap: 20px;
+      }
+
+      .panel {
+        height: 400px;
+        border: 1px solid #bbb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        box-sizing: border-box;
+      }
+      .panel:hover {
+        border-color: red;
+        border-width: 2px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <details>
+      <summary>无限制</summary>
+      <section>
+        <div class="panel panel-no-limit"></div>
+      </section>
+    </details>
+
+    <hr />
+
+    <details>
+      <summary>防抖 debounce</summary>
+      <section style="grid-template-columns: repeat(2, 1fr)">
+        <details open>
+          <summary>头</summary>
+          <div class="panel debounce-panel-leading"></div>
+        </details>
+
+        <details open>
+          <summary>尾</summary>
+          <div class="panel debounce-panel-trailing"></div>
+        </details>
+      </section>
+    </details>
+
+    <hr />
+
+    <details open>
+      <summary>节流 throttle</summary>
+
+      <section style="grid-template-columns: repeat(3, 1fr)">
+        <details open>
+          <summary>头</summary>
+          <div class="panel throttle-panel-leading"></div>
+        </details>
+
+        <details open>
+          <summary>尾</summary>
+          <div class="panel throttle-panel-trailing"></div>
+        </details>
+
+        <details open>
+          <summary>头 + 尾</summary>
+          <div class="panel throttle-panel-leading-trailing"></div>
+        </details>
+      </section>
+    </details>
+
+    <script type="module">
+      {
+        // 无限制
+        const debouncePanel = document.querySelector('.panel-no-limit')
+        let debounceCount = 0
+        debouncePanel.textContent = debounceCount
+
+        function addCount() {
+          debounceCount++
+          debouncePanel.textContent = debounceCount
+        }
+
+        debouncePanel.addEventListener('pointermove', () => {
+          addCount()
+        })
+      }
+
+      import './debounce.js'
+      import './throttle.js'
+    </script>
+  </body>
+</html>
