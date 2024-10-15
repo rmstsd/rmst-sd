@@ -1,6 +1,6 @@
 // 节流
 
-const delay = 3000
+const delay = 2000
 
 {
   // 头
@@ -17,9 +17,10 @@ const delay = 3000
   throttlePanel.addEventListener('pointermove', () => {
     const currentTime = Date.now()
 
-    if (currentTime - lastTime > delay) {
-      addCount()
+    if (currentTime - lastTime >= delay) {
       lastTime = currentTime
+
+      addCount()
     }
   })
 }
@@ -35,14 +36,15 @@ const delay = 3000
     throttlePanel.textContent = throttleCount
   }
 
-  let timer = null
+  let isHasTask = false
   throttlePanel.addEventListener('pointermove', () => {
-    if (timer) {
+    if (isHasTask) {
       return
     }
 
-    timer = setTimeout(() => {
-      timer = null
+    isHasTask = true
+    setTimeout(() => {
+      isHasTask = false
 
       addCount()
     }, delay)
@@ -66,6 +68,7 @@ const delay = 3000
   throttlePanel.addEventListener('pointermove', () => {
     const currentTime = Date.now()
     const remain = delay - (currentTime - lastTime)
+
     if (remain <= 0) {
       lastTime = currentTime
       if (timer) {
@@ -76,7 +79,7 @@ const delay = 3000
       addCount()
     } else if (!timer) {
       timer = setTimeout(() => {
-        lastTime = Date.now()
+        lastTime = 0
         timer = null
 
         addCount()

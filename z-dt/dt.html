@@ -8,9 +8,11 @@
 
     <style>
       summary {
-        padding: 4px 0;
+        padding: 4px;
       }
-
+      summary:hover {
+        background-color: #eee;
+      }
       details[open] summary {
         border-bottom: 1px solid #ccc;
       }
@@ -30,6 +32,7 @@
         align-items: center;
         user-select: none;
         box-sizing: border-box;
+        font-size: 40px;
       }
       .panel:hover {
         border-color: red;
@@ -51,12 +54,12 @@
     <details>
       <summary>防抖 debounce</summary>
       <section style="grid-template-columns: repeat(2, 1fr)">
-        <details open>
+        <details>
           <summary>头</summary>
           <div class="panel debounce-panel-leading"></div>
         </details>
 
-        <details open>
+        <details>
           <summary>尾</summary>
           <div class="panel debounce-panel-trailing"></div>
         </details>
@@ -65,21 +68,21 @@
 
     <hr />
 
-    <details open>
+    <details>
       <summary>节流 throttle</summary>
 
       <section style="grid-template-columns: repeat(3, 1fr)">
-        <details open>
+        <details>
           <summary>头</summary>
           <div class="panel throttle-panel-leading"></div>
         </details>
 
-        <details open>
+        <details>
           <summary>尾</summary>
           <div class="panel throttle-panel-trailing"></div>
         </details>
 
-        <details open>
+        <details>
           <summary>头 + 尾</summary>
           <div class="panel throttle-panel-leading-trailing"></div>
         </details>
