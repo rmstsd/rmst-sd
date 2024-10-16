@@ -21,7 +21,7 @@ const delay = 2000
 
       clearTimeout(timer)
       timer = setTimeout(() => {
-        timer = null
+        timer = null // 重置条件
       }, delay)
     })
   }
@@ -43,7 +43,7 @@ const delay = 2000
       clearTimeout(timer)
 
       timer = setTimeout(() => {
-        addCount()
+        addCount() // 延迟执行
       }, delay)
     })
   }

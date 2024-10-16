@@ -45,7 +45,7 @@ const delay = 2000
 
       isHasTask = true
       setTimeout(() => {
-        isHasTask = false
+        isHasTask = false // 重置状态
 
         addCount()
       }, delay)
