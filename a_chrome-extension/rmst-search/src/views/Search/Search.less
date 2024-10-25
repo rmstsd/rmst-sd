@@ -14,7 +14,7 @@
   .mess-container {
     display: grid;
     grid-gap: 25px;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     @media (max-width: 750px) {
       grid-template-columns: repeat(1, 1fr);
@@ -31,6 +31,11 @@
       }
       .ant-input-suffix {
         display: none;
+      }
+      .anticon {
+        svg {
+          width: 100%;
+        }
       }
 
       button {

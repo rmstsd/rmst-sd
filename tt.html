@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tt</title>
+
+    <style>
+      image {
+        object-fit: contain;
+      }
+    </style>
+  </head>
+
+  <body>
+    <svg>
+    
+    </svg>
+    <script>
+      const p = document.createElement('div')
+      const c = document.createElement('div')
+
+      c.textContent = '12'
+
+      p.append(c)
+
+      document.body.append(p)
+
+      c.onclick = () => {
+        console.log('c click')
+
+        p.onclick = () => {
+          console.log('p click')
+        }
+      }
+    </script>
+  </body>
+</html>

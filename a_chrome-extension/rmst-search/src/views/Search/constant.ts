@@ -52,6 +52,13 @@ export const messList: UMessItem[] = [
     value: ''
   },
   {
+    id: 'github',
+    mark: 'github',
+    link: 'https://github.com/search?q=',
+    home: '',
+    value: ''
+  },
+  {
     id: 'mdn',
     mark: 'mdn',
     link: 'https://developer.mozilla.org/zh-CN/search?q=',
