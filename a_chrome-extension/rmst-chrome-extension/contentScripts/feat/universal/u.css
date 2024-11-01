@@ -5,3 +5,13 @@
 .dumi-default-sidebar {
   width: 240px !important;
 }
+
+/* www.zhangxinxu.com */
+.silebar_inner.slide_list > ul + * {
+  visibility: hidden;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  opacity: 0 !important;
+}

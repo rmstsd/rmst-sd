@@ -78,10 +78,21 @@
         )
       }
 
+      document.onkeydown = () => {
+        document.body.style = 'cursor: grab;'
+      }
+
       modal.onclick = () => {
         modal.removeChild(modal.lastChild)
         modal.style.display = 'none'
       }
+
+      function tagFoo(...r) {
+        console.log(r)
+      }
+      tagFoo`一个普通的模板字符串`
+      tagFoo`一个有插值的模板字符串：${'var'}`
+      tagFoo`as${1}df${2}g`
     </script>
   </body>
 </html>
