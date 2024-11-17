@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>previewImage</title>
+
+    <style>
+      .mask {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <img class="preview-image" style="width: 400px; height: 400px; object-fit: cover" src="./竖向图.png" />
+
+    <div class="mask"></div>
+
+    <script>
+      const img = document.querySelector('.preview-image')
+
+      const mask = document.querySelector('.mask')
+
+      img.addEventListener('click', () => {
+        const previewImg = document.createElement('img')
+        previewImg.src = img.src
+        previewImg.style.setProperty('width', '600px')
+
+        mask.style.setProperty('display', 'block')
+        mask.appendChild(previewImg)
+
+        previewImg.onload = () => {}
+
+        previewImg.onclick = () => {
+          previewImg.remove()
+          mask.style.setProperty('display', 'none')
+        }
+      })
+    </script>
+  </body>
+</html>

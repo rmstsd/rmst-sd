@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sd</title>
+
+    <style>
+      body {
+        padding: 0;
+      }
+
+      .img {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .img-clone {
+        /* transform-origin: left top; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 500px">
+      <div class="img" style="margin: 100px"></div>
+    </div>
+
+    <div class="modal" style="white-space: nowrap"></div>
+
+    <script>
+      // 起点 和 终点 要在 同一个布局下, 同一个环境下
+
+      const modal = document.querySelector('.modal')
+      const img = document.querySelector('.img')
+
+      let startRect
+      img.onclick = () => {
+        startRect = img.getBoundingClientRect()
+        console.log('startRect', startRect)
+
+        const imgClone = document.createElement('img')
+        imgClone.classList.add('img')
+        imgClone.classList.add('img-clone')
+        imgClone.style.width = '100%'
+        imgClone.style.height = '400px'
+
+        modal.style.display = 'block'
+
+        modal.append(imgClone)
+
+        const endRect = imgClone.getBoundingClientRect()
+        console.log('endRect', endRect)
+
+        const ty = (window.innerHeight - endRect.height) / 2
+        imgClone.style.transform = `translateX(${0}px) translateY(${ty}px)`
+
+        const end_tx = startRect.left - endRect.left
+        const end_ty = startRect.top - endRect.top
+
+        imgClone.animate(
+          [
+            {
+              width: `${startRect.width}px`,
+              height: `${startRect.height}px`,
+              transform: `translateX(${startRect.left}px) translateY(${startRect.top}px)`
+            },
+            {
+              width: `${endRect.width}px`,
+              height: `${endRect.height}px`,
+              transform: `translateX(0px) translateY(${ty}px)`
+            }
+          ],
+          { duration: 1000 }
+        )
+      }
+
+      modal.onclick = () => {
+        modal.removeChild(modal.lastChild)
+        modal.style.display = 'none'
+      }
+    </script>
+  </body>
+</html>

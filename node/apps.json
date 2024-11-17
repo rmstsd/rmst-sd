@@ -1,0 +1,1108 @@
+
+
+IdentifyingNumber : {14BBD330-AA3F-4F7A-8A39-DFB28AECFA82}
+Name              : Python 3.12.0 Standard Library (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Standard Library (64-bit)
+
+IdentifyingNumber : {0A9B38A7-D393-44A5-A94E-9FEC927DC39C}
+Name              : Python 3.12.0 Test Suite (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Test Suite (64-bit)
+
+IdentifyingNumber : {5DF0B8D8-4E7F-43EB-AD16-30FFA931A905}
+Name              : Python 3.12.0 Documentation (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Documentation (64-bit)
+
+IdentifyingNumber : {6B58F6F9-656A-4CC4-8BAB-22177BFFA45F}
+Name              : Python 3.12.0 Core Interpreter (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Core Interpreter (64-bit)
+
+IdentifyingNumber : {380DEEDA-4227-4F0E-9F7C-34C75649DE59}
+Name              : Python 3.12.0 Add to Path (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Add to Path (64-bit)
+
+IdentifyingNumber : {575EC8EB-A481-4CF1-BAB0-3C1DBD2E50A7}
+Name              : Python 3.12.0 Executables (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Executables (64-bit)
+
+IdentifyingNumber : {225BAA2C-BDCA-4D63-9D72-D92CE5E2421D}
+Name              : Python 3.12.0 Development Libraries (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Development Libraries (64-bit)
+
+IdentifyingNumber : {24B8988D-E785-4124-BF77-1DC6A3E62050}
+Name              : Python 3.12.0 pip Bootstrap (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 pip Bootstrap (64-bit)
+
+IdentifyingNumber : {6EAF677E-4EE8-4A22-9781-9131C5298D26}
+Name              : Python 3.12.0 Tcl/Tk Support (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python 3.12.0 Tcl/Tk Support (64-bit)
+
+IdentifyingNumber : {0B9129DE-4A3E-46D2-9B0A-E9A4A9421B32}
+Name              : SharpKeys
+Vendor            : RandyRants.com
+Version           : 3.9.4000
+Caption           : SharpKeys
+
+IdentifyingNumber : {90160000-008C-0000-1000-0000000FF1CE}
+Name              : Office 16 Click-to-Run Extensibility Component
+Vendor            : Microsoft Corporation
+Version           : 16.0.18025.20126
+Caption           : Office 16 Click-to-Run Extensibility Component
+
+IdentifyingNumber : {90160000-008C-0804-1000-0000000FF1CE}
+Name              : Office 16 Click-to-Run Localization Component
+Vendor            : Microsoft Corporation
+Version           : 16.0.18025.20126
+Caption           : Office 16 Click-to-Run Localization Component
+
+IdentifyingNumber : {90160000-007E-0000-1000-0000000FF1CE}
+Name              : Office 16 Click-to-Run Licensing Component
+Vendor            : Microsoft Corporation
+Version           : 16.0.18025.20160
+Caption           : Office 16 Click-to-Run Licensing Component
+
+IdentifyingNumber : {C7CD4820-7B50-423B-B7D3-3552336ECC53}
+Name              : Jenkins 2.462.3
+Vendor            : Jenkins Project
+Version           : 2.255.4623
+Caption           : Jenkins 2.462.3
+
+IdentifyingNumber : {01E7E930-A0F4-5340-5E2D-92EFC9D5821D}
+Name              : Windows Mobile Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows Mobile Extension SDK Contracts
+
+IdentifyingNumber : {E9508840-8997-0DA6-2BF2-66913126B654}
+Name              : Universal CRT Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Universal CRT Extension SDK
+
+IdentifyingNumber : {2C78EC40-921E-1C02-01FC-A1B6B0489B8C}
+Name              : Application Verifier x64 External Package (OnecoreUAP)
+Vendor            : Microsoft
+Version           : 10.1.22621.3233
+Caption           : Application Verifier x64 External Package (OnecoreUAP)
+
+IdentifyingNumber : {6D0CCE70-83A4-438E-8347-FDDCCB50868F}
+Name              : vs_githubprotocolhandlermsi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_githubprotocolhandlermsi
+
+IdentifyingNumber : {5E604E90-FC2E-4F1E-8A11-CADE26DB5D64}
+Name              : vs_communitysharedmsi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34714
+Caption           : vs_communitysharedmsi
+
+IdentifyingNumber : {750766A0-28E0-2EC0-B83C-7C6F1236B041}
+Name              : Windows App Certification Kit Native Components
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows App Certification Kit Native Components
+
+IdentifyingNumber : {9A3454B0-4013-E929-6B6C-392BB773AE96}
+Name              : Windows SDK Desktop Headers arm64
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Headers arm64
+
+IdentifyingNumber : {0374E0D0-98AE-0078-841E-DE9F70EDCB90}
+Name              : Windows SDK for Windows Store Managed Apps Libs
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Managed Apps Libs
+
+IdentifyingNumber : {75C334E0-DC1A-4569-A941-FB187E401F32}
+Name              : vcpp_crt.redist.clickonce
+Vendor            : Microsoft Corporation
+Version           : 14.38.33135
+Caption           : vcpp_crt.redist.clickonce
+
+IdentifyingNumber : {8C718D01-65E0-DE21-7EFF-040B2CE83638}
+Name              : Windows IoT Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows IoT Extension SDK Contracts
+
+IdentifyingNumber : {C3032A91-00D7-DCA3-F748-517EA6E62BF8}
+Name              : WinRT Intellisense IoT - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense IoT - en-us
+
+IdentifyingNumber : {8911DE91-F86B-023D-7443-3EADF27A9DC8}
+Name              : WinRT Intellisense UAP - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense UAP - en-us
+
+IdentifyingNumber : {F1FB15A1-E909-592A-BC35-C68EA29D4785}
+Name              : Java(TM) SE Development Kit 17.0.10 (64-bit)
+Vendor            : Oracle Corporation
+Version           : 17.0.10.0
+Caption           : Java(TM) SE Development Kit 17.0.10 (64-bit)
+
+IdentifyingNumber : {2CF6B1B1-3D60-A198-E401-093F7BA784F0}
+Name              : Windows App Certification Kit x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows App Certification Kit x64
+
+IdentifyingNumber : {58A35EB1-1702-F9D4-B490-68AD5DD5662D}
+Name              : WinRT Intellisense PPI - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense PPI - en-us
+
+IdentifyingNumber : {F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}
+Name              : Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219
+Vendor            : Microsoft Corporation
+Version           : 10.0.40219
+Caption           : Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219
+
+IdentifyingNumber : {6E7D95E1-DA2A-4DED-A8C6-3FBA1714DB62}
+Name              : Microsoft Visual Studio Setup Configuration
+Vendor            : Microsoft Corporation
+Version           : 3.9.2148.60653
+Caption           : Microsoft Visual Studio Setup Configuration
+
+IdentifyingNumber : {C6014D12-9572-B9F4-8ABB-EA044E101BB6}
+Name              : WinRT Intellisense Desktop - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense Desktop - en-us
+
+IdentifyingNumber : {13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}
+Name              : Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.21005
+Vendor            : Microsoft Corporation
+Version           : 12.0.21005
+Caption           : Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.21005
+
+IdentifyingNumber : {35552522-5930-E1A1-B1E9-FF78918E1543}
+Name              : Windows SDK for Windows Store Apps Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Apps Tools
+
+IdentifyingNumber : {F8CFEB22-A2E7-3971-9EDA-4B11EDEFC185}
+Name              : Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005
+Vendor            : Microsoft Corporation
+Version           : 12.0.21005
+Caption           : Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005
+
+IdentifyingNumber : {956F8752-98CA-E2CF-F802-C9CA56688DDC}
+Name              : Windows SDK Desktop Libs arm64
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Libs arm64
+
+IdentifyingNumber : {310D6272-1190-4630-9679-E10EABEF41B9}
+Name              : Microsoft Visual C++ 2022 X86 Debug Runtime - 14.38.33135
+Vendor            : Microsoft Corporation
+Version           : 14.38.33135
+Caption           : Microsoft Visual C++ 2022 X86 Debug Runtime - 14.38.33135
+
+IdentifyingNumber : {11E8DC72-9F72-1959-C4E4-F53F0AFF3FEF}
+Name              : Windows SDK EULA
+Vendor            : Microsoft Corporations
+Version           : 10.1.20348.1
+Caption           : Windows SDK EULA
+
+IdentifyingNumber : {A8F64C92-E160-4F91-ABF8-ED8B7BEA5CA0}
+Name              : ScreenToGif
+Vendor            : Nicke Manarin
+Version           : 2.41.1
+Caption           : ScreenToGif
+
+IdentifyingNumber : {27E851A2-2754-03B2-950A-24EE2ECC25ED}
+Name              : Windows SDK Desktop Headers x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Headers x64
+
+IdentifyingNumber : {C574A5A2-4D77-47ED-B965-21A7969EBE42}
+Name              : Node.js
+Vendor            : Node.js Foundation
+Version           : 18.17.1
+Caption           : Node.js
+
+IdentifyingNumber : {E977B8A2-A012-B54C-A2B9-DDB08002031F}
+Name              : Windows SDK for Windows Store Managed Apps Libs
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK for Windows Store Managed Apps Libs
+
+IdentifyingNumber : {6E3610B2-430D-4EB0-81E3-2B57E8B9DE8D}
+Name              : Bonjour
+Vendor            : Apple Inc.
+Version           : 3.0.0.10
+Caption           : Bonjour
+
+IdentifyingNumber : {1FC1A6C2-576E-489A-9B4A-92D21F542136}
+Name              : Microsoft Update Health Tools
+Vendor            : Microsoft Corporation
+Version           : 3.74.0.0
+Caption           : Microsoft Update Health Tools
+
+IdentifyingNumber : {2FE507C2-60A1-4BE8-270D-1EBA48C4C1A6}
+Name              : WinAppDeploy
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinAppDeploy
+
+IdentifyingNumber : {538E91F2-5231-E289-051F-DB55DE88CF56}
+Name              : WinRT Intellisense Desktop - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense Desktop - Other Languages
+
+IdentifyingNumber : {24C3B7F2-DC89-47D0-5AD7-902D8151E40D}
+Name              : Windows SDK Desktop Headers x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Headers x86
+
+IdentifyingNumber : {9C19C103-7DB1-44D1-A039-2C076A633A38}
+Name              : Microsoft Visual C++ 2022 X86 Additional Runtime - 14.38.33135
+Vendor            : Microsoft Corporation
+Version           : 14.38.33135
+Caption           : Microsoft Visual C++ 2022 X86 Additional Runtime - 14.38.33135
+
+IdentifyingNumber : {94dc9043-935f-4e10-ac8b-5ce0ac055188}
+Name              : AMD_Chipset_Drivers
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 5.08.02.027
+Caption           : AMD_Chipset_Drivers
+
+IdentifyingNumber : {2C897543-D940-0177-58DE-0D00653DE0B2}
+Name              : Universal CRT Tools x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Universal CRT Tools x64
+
+IdentifyingNumber : {2F5EB743-8C97-930F-F41E-2EC8D5D5565B}
+Name              : Windows SDK Desktop Libs arm
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Libs arm
+
+IdentifyingNumber : {F800DC43-F8E7-2922-CB24-4C7A083F25AF}
+Name              : Windows SDK Desktop Headers arm
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Headers arm
+
+IdentifyingNumber : {B3CFDD53-69FB-E652-4F3D-D3781CF7F66E}
+Name              : WinRT Intellisense Desktop - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense Desktop - en-us
+
+IdentifyingNumber : {24DAC073-46EA-ED5D-860A-845E8A27F426}
+Name              : Windows SDK Desktop Libs x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Libs x86
+
+IdentifyingNumber : {B3412B83-0076-44C5-B5A1-AC8952E09FED}
+Name              : AMD USB4 CM Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.0.0.34
+Caption           : AMD USB4 CM Driver
+
+IdentifyingNumber : {A3D0A593-20CD-83E6-83DE-6068053F2BDF}
+Name              : Windows Mobile Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows Mobile Extension SDK
+
+IdentifyingNumber : {417DF3A3-09A1-3EAE-9F6C-5EB8DB4AD0F2}
+Name              : Windows SDK Redistributables
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Redistributables
+
+IdentifyingNumber : {F51E47D3-D663-A741-BEF7-B0E01F0F4EF1}
+Name              : Windows IoT Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows IoT Extension SDK
+
+IdentifyingNumber : {319F3FF3-A01A-2657-8CFE-1AD55A53C587}
+Name              : Windows SDK for Windows Store Apps DirectX x86 Remote
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK for Windows Store Apps DirectX x86 Remote
+
+IdentifyingNumber : {779B6704-D2FB-9087-C7FB-0AA1586F6FCD}
+Name              : Windows Desktop Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows Desktop Extension SDK Contracts
+
+IdentifyingNumber : {06445C04-F85A-49A3-8676-80208A491706}
+Name              : vs_minshellmsires
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_minshellmsires
+
+IdentifyingNumber : {D56DC014-C4C1-4330-B32B-D9785DAE7BCB}
+Name              : VS Script Debugging Common
+Vendor            : Microsoft Corporation
+Version           : 17.0.125.0
+Caption           : VS Script Debugging Common
+
+IdentifyingNumber : {87CB1714-C57F-13EA-8982-8F720B44BCF3}
+Name              : Windows SDK Desktop Libs arm64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Libs arm64
+
+IdentifyingNumber : {5E5BB524-BA91-E7DE-4A85-11EC531AA622}
+Name              : Windows SDK for Windows Store Apps DirectX x86 Remote
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Apps DirectX x86 Remote
+
+IdentifyingNumber : {ED461E24-8FE2-759C-F157-824F0EA52E36}
+Name              : Windows SDK Desktop Tools x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Tools x64
+
+IdentifyingNumber : {25EE5034-1719-E781-2A16-74E73AFA1FB1}
+Name              : WinRT Intellisense UAP - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense UAP - Other Languages
+
+IdentifyingNumber : {0FF2E034-BB20-D7E2-1E74-C8774A2267D6}
+Name              : Windows SDK Modern Versioned Developer Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Modern Versioned Developer Tools
+
+IdentifyingNumber : {01351434-DA4A-8EAB-2CCA-71EC6D62592B}
+Name              : Windows Team Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows Team Extension SDK
+
+IdentifyingNumber : {8CFB9E44-A517-6023-7675-013679CD16B9}
+Name              : Universal CRT Redistributable
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Universal CRT Redistributable
+
+IdentifyingNumber : {996DB964-0D9D-5557-BBCB-9854FB000D2C}
+Name              : Windows SDK for Windows Store Apps Metadata
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK for Windows Store Apps Metadata
+
+IdentifyingNumber : {76D32574-2D58-5B25-A3D7-8B2CB4873306}
+Name              : Windows SDK Modern Non-Versioned Developer Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Modern Non-Versioned Developer Tools
+
+IdentifyingNumber : {E27A3A74-C7DB-9F2F-3543-683F4FC24793}
+Name              : Windows SDK Desktop Tools x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Tools x86
+
+IdentifyingNumber : {A4634E74-BFEE-CF6C-BF53-8D5E252FC574}
+Name              : Windows SDK Desktop Tools arm64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Tools arm64
+
+IdentifyingNumber : {BC5E8A94-8759-4DDF-96BE-BDF3661487E2}
+Name              : vs_minshellmsi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34714
+Caption           : vs_minshellmsi
+
+IdentifyingNumber : {E0B063A4-9268-CC1E-C8EE-9593D2A46592}
+Name              : Windows SDK for Windows Store Apps Headers
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK for Windows Store Apps Headers
+
+IdentifyingNumber : {D3B0EFC4-878A-CA8C-7C79-1160CDF637D1}
+Name              : Universal General MIDI DLS Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Universal General MIDI DLS Extension SDK
+
+IdentifyingNumber : {CFF175F4-9F1D-289D-B99E-EA6AFCF28F4E}
+Name              : Windows IoT Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows IoT Extension SDK
+
+IdentifyingNumber : {3A544905-4CA6-98FB-4012-E4E18B84411A}
+Name              : WinRT Intellisense IoT - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense IoT - Other Languages
+
+IdentifyingNumber : {8988EE05-1C3C-3C62-9C00-C07D71F20146}
+Name              : Windows SDK for Windows Store Apps Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK for Windows Store Apps Contracts
+
+IdentifyingNumber : {3A928615-B22E-42B6-A30A-CB7B1135F1CF}
+Name              : Windows SDK Desktop Headers x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Headers x64
+
+IdentifyingNumber : {61555635-B143-48EC-8204-E89DBF16D137}
+Name              : AMD DVR64
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.0.2
+Caption           : AMD DVR64
+
+IdentifyingNumber : {3182A195-B671-44A8-B0C7-7876B916BA5A}
+Name              : Python Launcher
+Vendor            : Python Software Foundation
+Version           : 3.12.150.0
+Caption           : Python Launcher
+
+IdentifyingNumber : {C7C6D595-1045-1CDB-DDB8-F0DCB03B63B2}
+Name              : Windows App Certification Kit SupportedApiList x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows App Certification Kit SupportedApiList x86
+
+IdentifyingNumber : {384A28F5-6B08-01FB-BE75-EBC673BBCACF}
+Name              : Universal CRT Tools x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Universal CRT Tools x86
+
+IdentifyingNumber : {BED088F5-660E-C8E2-9FF4-F652445CC5FA}
+Name              : Windows SDK Desktop Tools x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Tools x64
+
+IdentifyingNumber : {929FBD26-9020-399B-9A7A-751D61F0B942}
+Name              : Microsoft Visual C++ 2013 x64 Additional Runtime - 12.0.21005
+Vendor            : Microsoft Corporation
+Version           : 12.0.21005
+Caption           : Microsoft Visual C++ 2013 x64 Additional Runtime - 12.0.21005
+
+IdentifyingNumber : {323DB856-66EB-48DB-5DB1-642207AC63C9}
+Name              : Windows SDK Desktop Libs x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Libs x86
+
+IdentifyingNumber : {A3790FC6-37CC-833C-16D8-F9833BC8A7CB}
+Name              : Universal CRT Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Universal CRT Extension SDK
+
+IdentifyingNumber : {F4FEC5E6-2DFE-257D-9EBD-C4330DBA85DB}
+Name              : Windows SDK for Windows Store Apps Libs
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK for Windows Store Apps Libs
+
+IdentifyingNumber : {A749D8E6-B613-3BE3-8F5F-045C84EBA29B}
+Name              : Microsoft Visual C++ 2013 x64 Minimum Runtime - 12.0.21005
+Vendor            : Microsoft Corporation
+Version           : 12.0.21005
+Caption           : Microsoft Visual C++ 2013 x64 Minimum Runtime - 12.0.21005
+
+IdentifyingNumber : {8F6810F6-45F1-4D41-9BE1-FE3828602B93}
+Name              : vs_filehandler_x86
+Vendor            : Microsoft Corporation
+Version           : 17.9.34714
+Caption           : vs_filehandler_x86
+
+IdentifyingNumber : {AE908327-44FB-449D-BA41-08E7470BC678}
+Name              : Microsoft Visual C++ 2022 X64 Debug Runtime - 14.38.33135
+Vendor            : Microsoft Corporation
+Version           : 14.38.33135
+Caption           : Microsoft Visual C++ 2022 X64 Debug Runtime - 14.38.33135
+
+IdentifyingNumber : {CE1B7747-A39C-46B8-EB6F-01E5262B1289}
+Name              : Windows SDK for Windows Store Apps Libs
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Apps Libs
+
+IdentifyingNumber : {6430F847-9A5F-B3B8-7EEE-355F9F1CCD47}
+Name              : WinRT Intellisense IoT - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense IoT - Other Languages
+
+IdentifyingNumber : {FDB98657-D4A2-43D9-9B57-3CE2855BFC70}
+Name              : AMD Settings
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 2023.1025.2224.1996
+Caption           : AMD Settings
+
+IdentifyingNumber : {81F10667-D6D2-4D0C-8F2C-0A6323AB8B37}
+Name              : vs_communitymsires
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_communitymsires
+
+IdentifyingNumber : {121FBA67-8B82-21AA-ED67-4485D251D451}
+Name              : Universal CRT Headers Libraries and Sources
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Universal CRT Headers Libraries and Sources
+
+IdentifyingNumber : {99F91377-C1AD-4F70-BAE0-382C0939A20F}
+Name              : AMD WVR64
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.0.2
+Caption           : AMD WVR64
+
+IdentifyingNumber : {63AAA877-5536-9481-2385-28A082100D78}
+Name              : Kits Configuration Installer
+Vendor            : Microsoft
+Version           : 10.1.18362.1
+Caption           : Kits Configuration Installer
+
+IdentifyingNumber : {85C69797-7336-4E83-8D97-32A7C8465A3B}
+Name              : Update for Windows 10 for x64-based Systems (KB5001716)
+Vendor            : Microsoft Corporation
+Version           : 8.94.0.0
+Caption           : Update for Windows 10 for x64-based Systems (KB5001716)
+
+IdentifyingNumber : {54A8C797-B1C6-4120-3083-102DF35312CA}
+Name              : WinRT Intellisense PPI - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense PPI - Other Languages
+
+IdentifyingNumber : {54974C97-AE3B-474A-BB7F-F7779AD978BD}
+Name              : vs_minshellinteropsharedmsi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_minshellinteropsharedmsi
+
+IdentifyingNumber : {C65278B7-2A3B-2D88-1489-991195ECF5F2}
+Name              : Windows SDK Modern Versioned Developer Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Modern Versioned Developer Tools
+
+IdentifyingNumber : {9B9350F7-EC4D-979B-0F15-F5F4B309518D}
+Name              : MSI Development Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : MSI Development Tools
+
+IdentifyingNumber : {FDE0B5F7-76C1-8FB6-E901-1454FE4BEDB4}
+Name              : Windows Team Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows Team Extension SDK Contracts
+
+IdentifyingNumber : {0FD91BF7-EDCF-4789-907D-F8542FA917B7}
+Name              : vs_minshellx64msi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_minshellx64msi
+
+IdentifyingNumber : {C5BEF528-FEAA-9607-907E-0972D86AD06F}
+Name              : WinRT Intellisense PPI - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense PPI - en-us
+
+IdentifyingNumber : {D6982C58-1FDC-FB2E-B55A-7329ADE7315C}
+Name              : Windows Desktop Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows Desktop Extension SDK
+
+IdentifyingNumber : {47E40398-1A56-3617-F5C1-94AEF05528F7}
+Name              : Windows SDK for Windows Store Apps Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK for Windows Store Apps Tools
+
+IdentifyingNumber : {ABAEA0B8-6DAE-409D-8DA9-E2F894E27115}
+Name              : vs_communityx64msi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34714
+Caption           : vs_communityx64msi
+
+IdentifyingNumber : {988F14B8-79A8-475D-BAC7-83F96AD3D821}
+Name              : AMD PSP Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 5.24.0.0
+Caption           : AMD PSP Driver
+
+IdentifyingNumber : {E473E2C8-92A5-BA58-31B1-D24F923D927B}
+Name              : Windows SDK EULA
+Vendor            : Microsoft Corporations
+Version           : 10.1.22621.3233
+Caption           : Windows SDK EULA
+
+IdentifyingNumber : {4EA63EC8-7CDF-4D13-BA48-4F048E0598DD}
+Name              : RyzenMasterSDK
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.2.3.5
+Caption           : RyzenMasterSDK
+
+IdentifyingNumber : {908BD5F8-E6C6-D2F6-AC09-C9F36EBC1A5F}
+Name              : Windows Team Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows Team Extension SDK
+
+IdentifyingNumber : {0A7FB239-6A48-42EF-AC0D-7DF46FBFFA25}
+Name              : vs_vswebprotocolselectormsires
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_vswebprotocolselectormsires
+
+IdentifyingNumber : {76749279-BE8A-20AF-F257-0A79E080CF7E}
+Name              : Windows SDK for Windows Store Apps Headers
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Apps Headers
+
+IdentifyingNumber : {C952A289-86CA-9322-7C44-F6E7526FD5E3}
+Name              : WinAppDeploy
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinAppDeploy
+
+IdentifyingNumber : {9AC08E99-230B-47e8-9721-4577B7F124EA}
+Name              : 
+Vendor            : 
+Version           : 
+Caption           : 
+
+IdentifyingNumber : {C85A0AA9-2CF5-7B43-C078-4E8B7CE362D2}
+Name              : Application Verifier x64 External Package (DesktopEditions)
+Vendor            : Microsoft
+Version           : 10.1.22621.3233
+Caption           : Application Verifier x64 External Package (DesktopEditions)
+
+IdentifyingNumber : {8122ABB9-0148-144D-F136-C3AFF4B985DB}
+Name              : Windows SDK DirectX x86 Remote
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK DirectX x86 Remote
+
+IdentifyingNumber : {B31D92D9-2914-46B0-9738-F668A563DE73}
+Name              : AMD I2C Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.2.0.121
+Caption           : AMD I2C Driver
+
+IdentifyingNumber : {D482CBD9-A479-4D72-B1B1-E1C9FB6DEE85}
+Name              : MongoDB 6.0.12 2008R2Plus SSL (64 bit)
+Vendor            : MongoDB Inc.
+Version           : 6.0.12
+Caption           : MongoDB 6.0.12 2008R2Plus SSL (64 bit)
+
+IdentifyingNumber : {44E4AFD9-74E0-9631-4CE0-E7C779624FE2}
+Name              : WinRT Intellisense IoT - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense IoT - en-us
+
+IdentifyingNumber : {7625FDE9-5B15-1CDF-3810-EC60A67F6D39}
+Name              : Windows App Certification Kit x64 (OnecoreUAP)
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows App Certification Kit x64 (OnecoreUAP)
+
+IdentifyingNumber : {F51BFEE9-660E-A5AF-EA46-E90C4C605A89}
+Name              : Windows Desktop Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows Desktop Extension SDK
+
+IdentifyingNumber : {4A130AF9-EC97-7D26-1FB0-03A0E5CC672B}
+Name              : Windows SDK for Windows Store Apps Metadata
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Apps Metadata
+
+IdentifyingNumber : {4980F20A-1872-E9D9-F2DA-730F678DE7B2}
+Name              : Windows Mobile Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows Mobile Extension SDK
+
+IdentifyingNumber : {7E99A93A-8345-8BB6-EADB-10461E81BE0F}
+Name              : WinRT Intellisense Mobile - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense Mobile - en-us
+
+IdentifyingNumber : {3C25B44A-1D95-9E5E-57E3-19D9AE3C3BC1}
+Name              : WinRT Intellisense UAP - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense UAP - Other Languages
+
+IdentifyingNumber : {B8B3BB4A-A10D-4F51-91B7-A64FFAC31EA7}
+Name              : Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.40.33810
+Vendor            : Microsoft Corporation
+Version           : 14.40.33810
+Caption           : Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.40.33810
+
+IdentifyingNumber : {94DE555A-B513-762F-D7C6-2B2922940641}
+Name              : WinRT Intellisense UAP - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense UAP - en-us
+
+IdentifyingNumber : {10DBDB8A-C88F-81E7-D98D-025ACA673BAC}
+Name              : Windows Mobile Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows Mobile Extension SDK Contracts
+
+IdentifyingNumber : {5EBB309A-2974-F721-42A9-0212E54B3693}
+Name              : WinRT Intellisense PPI - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : WinRT Intellisense PPI - Other Languages
+
+IdentifyingNumber : {505932AA-D734-1BAA-D38C-B89F10AFF0A2}
+Name              : Windows SDK ARM Desktop Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK ARM Desktop Tools
+
+IdentifyingNumber : {731F6BAA-A986-45A4-8936-7C3AAAAA760B}
+Name              : Teams Machine-Wide Installer
+Vendor            : Microsoft Corporation
+Version           : 1.6.0.22378
+Caption           : Teams Machine-Wide Installer
+
+IdentifyingNumber : {2D2C18BA-7B10-0A98-F662-9D397CAEA0C3}
+Name              : SDK ARM Additions
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : SDK ARM Additions
+
+IdentifyingNumber : {CACD4EBA-F620-A294-1B60-3CEB0954FE02}
+Name              : Windows SDK Desktop Tools x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Tools x86
+
+IdentifyingNumber : {70FC19CA-74B2-4485-88FE-826118805997}
+Name              : vs_minshellinteropmsi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_minshellinteropmsi
+
+IdentifyingNumber : {C5A6350B-B034-F359-E3AA-773F4F4A5B96}
+Name              : WinRT Intellisense Mobile - en-us
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense Mobile - en-us
+
+IdentifyingNumber : {0AC39B1B-4AFC-4684-B22C-625848E16C92}
+Name              : Microsoft Visual Studio Setup WMI Provider
+Vendor            : Microsoft Corporation
+Version           : 3.9.2148.60653
+Caption           : Microsoft Visual Studio Setup WMI Provider
+
+IdentifyingNumber : {7741665B-2D3B-7E24-1014-56B62296CD88}
+Name              : Windows SDK Facade Windows WinMD Versioned
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Facade Windows WinMD Versioned
+
+IdentifyingNumber : {A69CD06B-FED5-81AD-3D62-38B325BAD254}
+Name              : Windows SDK Desktop Headers arm64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Headers arm64
+
+IdentifyingNumber : {0460C87B-7F4C-3170-FAC9-B7A6AE5CE4E9}
+Name              : Universal CRT Redistributable
+Vendor            : Microsoft Corporation
+Version           : 10.0.26624
+Caption           : Universal CRT Redistributable
+
+IdentifyingNumber : {286DC39B-5FB7-4AFF-9DD4-22DB47664CD7}
+Name              : Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.38.33135
+Vendor            : Microsoft Corporation
+Version           : 14.38.33135
+Caption           : Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.38.33135
+
+IdentifyingNumber : {5F1CD2CB-9C4E-BF51-9C82-DE916CA5E4AE}
+Name              : Windows SDK for Windows Store Apps Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Apps Contracts
+
+IdentifyingNumber : {C36029EB-19FF-4462-A283-03B41BE9EFA4}
+Name              : AMD MicroPEP Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.0.40.1
+Caption           : AMD MicroPEP Driver
+
+IdentifyingNumber : {7E298CFB-5829-4903-98BA-F3F70E7CEB09}
+Name              : vs_minshellsharedmsi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_minshellsharedmsi
+
+IdentifyingNumber : {8D92043C-84C1-368A-885F-5FD8B92200EC}
+Name              : Windows IoT Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows IoT Extension SDK Contracts
+
+IdentifyingNumber : {838DC63C-34E9-9DBB-3A07-AEFC7768DC2A}
+Name              : Windows SDK Desktop Libs x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Libs x64
+
+IdentifyingNumber : {18ABFE7C-8380-B6B6-B40E-8F3C98FFEBB9}
+Name              : Windows SDK Desktop Libs x64
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Libs x64
+
+IdentifyingNumber : {40EB739C-B694-40E3-8F80-631209827A5D}
+Name              : VMware Workstation
+Vendor            : VMware, Inc.
+Version           : 17.5.2
+Caption           : VMware Workstation
+
+IdentifyingNumber : {377C68AC-F3B1-4B7F-B0F8-72446D60E99E}
+Name              : vs_filehandler_amd64
+Vendor            : Microsoft Corporation
+Version           : 17.9.34714
+Caption           : vs_filehandler_amd64
+
+IdentifyingNumber : {56E349AC-F849-A151-269B-8CFF2D14BB14}
+Name              : Windows SDK Signing Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Signing Tools
+
+IdentifyingNumber : {BEC174BC-5C00-37EF-1561-A28834FE774F}
+Name              : Windows Desktop Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows Desktop Extension SDK Contracts
+
+IdentifyingNumber : {0E870AEC-76C8-1CA0-D453-961D9D8B4715}
+Name              : Windows SDK Desktop Tools arm64
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Tools arm64
+
+IdentifyingNumber : {6136B5FC-9FAD-B577-C5EA-AF2D266B7293}
+Name              : Windows SDK for Windows Store Apps
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK for Windows Store Apps
+
+IdentifyingNumber : {611AA03D-D625-35AD-0036-C5C11CF1DD9F}
+Name              : Windows SDK Desktop Libs arm
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Desktop Libs arm
+
+IdentifyingNumber : {2DF27D5D-478A-CC3F-EF64-E461BC3B3580}
+Name              : Windows SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK
+
+IdentifyingNumber : {9359EF6D-A93B-F8F0-1361-2BB668F92702}
+Name              : Universal General MIDI DLS Extension SDK
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Universal General MIDI DLS Extension SDK
+
+IdentifyingNumber : {AAE0E27D-C88A-49BA-8715-77ADCD4286A3}
+Name              : AMD SBxxx SMBus Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 5.12.0.38
+Caption           : AMD SBxxx SMBus Driver
+
+IdentifyingNumber : {963BD0BD-2098-D21C-AA37-39876C732819}
+Name              : Windows SDK ARM Desktop Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK ARM Desktop Tools
+
+IdentifyingNumber : {1DF5CACD-208A-01A0-4DBA-C51FDBE99FB4}
+Name              : Windows SDK Signing Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Signing Tools
+
+IdentifyingNumber : {1851460E-0E63-4117-B5BA-25A2F045801B}
+Name              : vs_CoreEditorFonts
+Vendor            : Microsoft Corporation
+Version           : 17.7.40001
+Caption           : vs_CoreEditorFonts
+
+IdentifyingNumber : {FAA6B22E-702C-2AC7-05B1-197CD7CEA21D}
+Name              : Windows Team Extension SDK Contracts
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows Team Extension SDK Contracts
+
+IdentifyingNumber : {69FA193E-02DE-4581-BA73-571008BA0C18}
+Name              : AMD User Experience Program Installer
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 2320.23.01.1025
+Caption           : AMD User Experience Program Installer
+
+IdentifyingNumber : {A6D8755E-99E6-3C3F-1E68-6567743D4A81}
+Name              : Windows SDK Facade Windows WinMD Versioned
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : Windows SDK Facade Windows WinMD Versioned
+
+IdentifyingNumber : {1D228B5E-62E8-737B-3478-78A795EBB8EC}
+Name              : Universal CRT Redistributable
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Universal CRT Redistributable
+
+IdentifyingNumber : {08AF6F7E-1E1B-4049-B189-B0A109E0CE05}
+Name              : vs_vswebprotocolselectormsi
+Vendor            : Microsoft Corporation
+Version           : 17.9.34511
+Caption           : vs_vswebprotocolselectormsi
+
+IdentifyingNumber : {D3CE43AE-FB64-9FCA-BE16-5A2F3F2B112D}
+Name              : Universal CRT Headers Libraries and Sources
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Universal CRT Headers Libraries and Sources
+
+IdentifyingNumber : {266446AE-C5DA-4A29-86A9-48128C1DBF00}
+Name              : PowerToys (Preview)
+Vendor            : Microsoft Corporation
+Version           : 0.85.1
+Caption           : PowerToys (Preview)
+
+IdentifyingNumber : {492AEFBE-1B81-4C20-A111-E6974BB98EC5}
+Name              : Branding64
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.00.0009
+Caption           : Branding64
+
+IdentifyingNumber : {A2CFB1CE-09E6-E078-2EEC-6D94C98BB064}
+Name              : WinRT Intellisense Desktop - Other Languages
+Vendor            : Microsoft Corporation
+Version           : 10.1.20348.1
+Caption           : WinRT Intellisense Desktop - Other Languages
+
+IdentifyingNumber : {31D517CE-04EE-F508-87C6-A503372B02A1}
+Name              : Windows SDK Desktop Headers arm
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Headers arm
+
+IdentifyingNumber : {3665A5DE-D07C-46D7-9207-713E8E9FEF32}
+Name              : AMD PPM Provisioning File Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 8.0.0.22
+Caption           : AMD PPM Provisioning File Driver
+
+IdentifyingNumber : {3891A7DE-A85F-9B4E-2B84-50162AFA1E48}
+Name              : MSI Development Tools
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : MSI Development Tools
+
+IdentifyingNumber : {15941C7F-810D-41DF-8C5A-8D0490277AFB}
+Name              : Windows SDK AddOn
+Vendor            : Microsoft Corporation
+Version           : 10.1.0.0
+Caption           : Windows SDK AddOn
+
+IdentifyingNumber : {59CED48F-EBFE-480C-8A38-FC079C2BEC0F}
+Name              : Microsoft Visual C++ 2022 X64 Additional Runtime - 14.40.33810
+Vendor            : Microsoft Corporation
+Version           : 14.40.33810
+Caption           : Microsoft Visual C++ 2022 X64 Additional Runtime - 14.40.33810
+
+IdentifyingNumber : {E9DD399F-21A3-479E-A7DF-D6CF4B2ADBF3}
+Name              : AMD GPIO2 Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 2.2.0.130
+Caption           : AMD GPIO2 Driver
+
+IdentifyingNumber : {AC5F4E9F-E468-6519-3980-C1EC3F801018}
+Name              : Application Verifier x64 External Package
+Vendor            : Microsoft
+Version           : 10.1.20348.1
+Caption           : Application Verifier x64 External Package
+
+IdentifyingNumber : {B5F4C6AF-DC6F-F6A4-1087-D068F4660610}
+Name              : SDK ARM Redistributables
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : SDK ARM Redistributables
+
+IdentifyingNumber : {F50E3BAF-A09C-0730-319C-56221E12B747}
+Name              : Windows SDK Desktop Headers x86
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK Desktop Headers x86
+
+IdentifyingNumber : {F9D12DAF-9D90-4626-B4EE-721FCBA19932}
+Name              : vs_FileTracker_Singleton
+Vendor            : Microsoft Corporation
+Version           : 17.9.34714
+Caption           : vs_FileTracker_Singleton
+
+IdentifyingNumber : {7E23CCDF-D8BD-36F8-CB1F-1DDE0D2B3F07}
+Name              : Windows SDK DirectX x64 Remote
+Vendor            : Microsoft Corporation
+Version           : 10.1.22621.3233
+Caption           : Windows SDK DirectX x64 Remote
+
+IdentifyingNumber : {877F46EF-614F-4B05-A09D-E15E5B424710}
+Name              : Windows Subsystem for Linux
+Vendor            : Microsoft Corporation
+Version           : 2.1.5.0
+Caption           : Windows Subsystem for Linux
+
+
+
