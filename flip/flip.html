@@ -25,7 +25,7 @@
       }
 
       .img-clone {
-        /* transform-origin: left top; */
+        background-color: pink;
       }
     </style>
   </head>
@@ -43,50 +43,53 @@
       const modal = document.querySelector('.modal')
       const img = document.querySelector('.img')
 
+      let startParameter = {}
+
       let startRect
+      let imgClone = document.createElement('img')
       img.onclick = () => {
+        modal.style.display = 'flex'
+        modal.style.justifyContent = 'center'
+        modal.style.alignItems = 'center'
+
         startRect = img.getBoundingClientRect()
         console.log('startRect', startRect)
 
-        const imgClone = document.createElement('img')
-        imgClone.classList.add('img')
+        imgClone = document.createElement('img')
         imgClone.classList.add('img-clone')
-        imgClone.style.width = '100%'
-        imgClone.style.height = '400px'
-
-        modal.style.display = 'block'
-
         modal.append(imgClone)
 
-        const endRect = imgClone.getBoundingClientRect()
-        console.log('endRect', endRect)
+        imgClone.style.setProperty('width', `${startRect.width}px`)
+        imgClone.style.setProperty('height', `${startRect.height}px`)
 
-        const ty = (window.innerHeight - endRect.height) / 2
-        imgClone.style.transform = `translateX(${0}px) translateY(${ty}px)`
+        const clonedStartRect = imgClone.getBoundingClientRect()
+        const startTx = -(clonedStartRect.left - startRect.left)
+        const startTy = -(clonedStartRect.top - startRect.top)
 
-        const end_tx = startRect.left - endRect.left
-        const end_ty = startRect.top - endRect.top
+        startParameter.tx = startTx
+        startParameter.ty = startTy
+        startParameter.width = startRect.width
+        startParameter.height = startRect.height
 
-        imgClone.animate(
-          [
-            {
-              width: `${startRect.width}px`,
-              height: `${startRect.height}px`,
-              transform: `translateX(${startRect.left}px) translateY(${startRect.top}px)`
-            },
-            {
-              width: `${endRect.width}px`,
-              height: `${endRect.height}px`,
-              transform: `translateX(0px) translateY(${ty}px)`
-            }
-          ],
-          { duration: 1000 }
-        )
+        imgClone.style.setProperty('transform', `translateX(${startTx}px) translateY(${startTy}px)`)
+
+        requestAnimationFrame(() => {
+          imgClone.style.setProperty('transition', 'all 0.5s ease-in-out')
+          imgClone.style.setProperty('transform', 'translateX(0px) translateY(0px)')
+          imgClone.style.setProperty('width', '100%')
+          imgClone.style.setProperty('height', '400px')
+        })
       }
 
       modal.onclick = () => {
-        modal.removeChild(modal.lastChild)
-        modal.style.display = 'none'
+        imgClone.style.setProperty('transform', `translateX(${startParameter.tx}px) translateY(${startParameter.ty}px)`)
+        imgClone.style.setProperty('width', `${startParameter.width}px`)
+        imgClone.style.setProperty('height', `${startParameter.height}px`)
+
+        imgClone.ontransitionend = () => {
+          imgClone.remove()
+          modal.style.display = 'none'
+        }
       }
     </script>
   </body>
