@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <img class="preview-image" style="width: 400px; height: 400px; object-fit: cover" src="./竖向图.png" />
+    <img class="preview-image" style="width: 400px; height: 200px" src="./竖向图.png" />
 
     <div class="mask"></div>
 
@@ -29,18 +29,112 @@
       img.addEventListener('click', () => {
         const previewImg = document.createElement('img')
         previewImg.src = img.src
-        previewImg.style.setProperty('width', '600px')
 
-        mask.style.setProperty('display', 'block')
+        previewImg.style.setProperty('position', 'absolute')
         mask.appendChild(previewImg)
 
-        previewImg.onload = () => {}
+        previewImg.onload = () => {
+          mask.style.setProperty('display', 'block')
+          const { naturalWidth, naturalHeight } = previewImg
+
+          const startRect = img.getBoundingClientRect()
+
+          const { x, y, width, height } = getPosition(naturalWidth, naturalHeight)
+
+          previewImg.style.setProperty('left', `${x}px`)
+          previewImg.style.setProperty('top', `${y}px`)
+          previewImg.style.setProperty('width', `${width}px`)
+          previewImg.style.setProperty('height', `${height}px`)
+
+          const endRect = previewImg.getBoundingClientRect()
+
+          previewImg.animate(
+            [
+              {
+                left: `${startRect.left}px`,
+                top: `${startRect.top}px`,
+                width: `${startRect.width}px`,
+                height: `${startRect.height}px`
+              },
+              {
+                left: `${endRect.left}px`,
+                top: `${endRect.top}px`,
+                width: `${endRect.width}px`,
+                height: `${endRect.height}px`
+              }
+            ],
+            {
+              duration: 300,
+              easing: 'ease-in-out'
+            }
+          )
+        }
 
         previewImg.onclick = () => {
-          previewImg.remove()
-          mask.style.setProperty('display', 'none')
+          const startRect = previewImg.getBoundingClientRect()
+          const endRect = img.getBoundingClientRect()
+
+          previewImg.animate(
+            [
+              {
+                left: `${startRect.left}px`,
+                top: `${startRect.top}px`,
+                width: `${startRect.width}px`,
+                height: `${startRect.height}px`
+              },
+              {
+                left: `${endRect.left}px`,
+                top: `${endRect.top}px`,
+                width: `${endRect.width}px`,
+                height: `${endRect.height}px`
+              }
+            ],
+            {
+              duration: 300,
+              easing: 'ease-in-out'
+            }
+          ).onfinish = () => {
+            previewImg.remove()
+            mask.style.setProperty('display', 'none')
+          }
+        }
+
+        window.onresize = () => {
+          if (mask.style.display === 'block') {
+            const { x, y, width, height } = getPosition(previewImg.naturalWidth, previewImg.naturalHeight)
+
+            previewImg.style.setProperty('left', `${x}px`)
+            previewImg.style.setProperty('top', `${y}px`)
+            previewImg.style.setProperty('width', `${width}px`)
+            previewImg.style.setProperty('height', `${height}px`)
+          }
         }
       })
+
+      function getPosition(naturalWidth, naturalHeight) {
+        const { innerWidth, innerHeight } = window
+
+        const containerRatio = innerWidth / innerHeight
+        const imageRatio = naturalWidth / naturalHeight
+
+        if (containerRatio > imageRatio) {
+          const width = imageRatio * innerHeight
+          const height = innerHeight
+
+          const x = (innerWidth - width) / 2
+          const y = 0
+
+          return { x, y, width, height }
+        } else {
+          const width = innerWidth
+          const height = innerWidth / imageRatio
+
+          const x = 0
+          const y = (innerHeight - height) / 2
+
+          return { x, y, width, height }
+        }
+      }
     </script>
   </body>
 </html>
