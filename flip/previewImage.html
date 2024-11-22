@@ -48,7 +48,47 @@
 
           const endRect = previewImg.getBoundingClientRect()
 
-          previewImg.animate(
+          // previewImg.animate(
+          //   [
+          //     {
+          //       left: `${startRect.left}px`,
+          //       top: `${startRect.top}px`,
+          //       width: `${startRect.width}px`,
+          //       height: `${startRect.height}px`
+          //     },
+          //     {
+          //       left: `${endRect.left}px`,
+          //       top: `${endRect.top}px`,
+          //       width: `${endRect.width}px`,
+          //       height: `${endRect.height}px`
+          //     }
+          //   ],
+          //   {
+          //     duration: 300,
+          //     easing: 'ease-in-out'
+          //   }
+          // )
+        }
+
+        previewImg.onclick = () => {
+          {
+            previewImg.remove()
+            mask.style.setProperty('display', 'none')
+
+            return
+          }
+
+          if (previewImg.ani) {
+            previewImg.isHide = false
+            previewImg.ani.reverse()
+            previewImg.ani = null
+            return
+          }
+
+          const startRect = previewImg.getBoundingClientRect()
+          const endRect = img.getBoundingClientRect()
+
+          const ani = previewImg.animate(
             [
               {
                 left: `${startRect.left}px`,
@@ -68,34 +108,15 @@
               easing: 'ease-in-out'
             }
           )
-        }
 
-        previewImg.onclick = () => {
-          const startRect = previewImg.getBoundingClientRect()
-          const endRect = img.getBoundingClientRect()
+          previewImg.ani = ani
+          previewImg.isHide = true
 
-          previewImg.animate(
-            [
-              {
-                left: `${startRect.left}px`,
-                top: `${startRect.top}px`,
-                width: `${startRect.width}px`,
-                height: `${startRect.height}px`
-              },
-              {
-                left: `${endRect.left}px`,
-                top: `${endRect.top}px`,
-                width: `${endRect.width}px`,
-                height: `${endRect.height}px`
-              }
-            ],
-            {
-              duration: 300,
-              easing: 'ease-in-out'
+          ani.onfinish = () => {
+            if (previewImg.isHide) {
+              previewImg.remove()
+              mask.style.setProperty('display', 'none')
             }
-          ).onfinish = () => {
-            previewImg.remove()
-            mask.style.setProperty('display', 'none')
           }
         }
 

@@ -6,16 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sd</title>
 
-    <style></style>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+    </style>
   </head>
 
   <body>
-    <div style="height: 100px; margin: 400px; width: 200px; background-color: red; position: relative">
-      <div>erewrwer</div>
+    <pre></pre>
 
-      <div style="position: absolute; background-color: pink">asd</div>
+    <hr />
+    <main></main>
+    <div style="position: fixed; inset: 0">
+      <input class="ff33" type="text" value="222" />
+      <input type="text" style="" />
     </div>
 
-    <script></script>
+    <script>
+      document.querySelector('main').textContent = navigator.platform
+      const inp = document.querySelector('input')
+      const ff33 = document.querySelector('.ff33')
+      const sl = msg => {
+        fetch('http://192.168.13.16:3485', { method: 'POST', body: msg })
+      }
+      sl(`ii ${window.innerHeight}`)
+      window.addEventListener('resize', () => {
+        // sl(`resize x${window.innerHeight}`)
+      })
+      let iniHeight = window.visualViewport.height
+
+      {
+        let timer = null
+        let prevHeight = window.visualViewport.height
+
+        window.addEventListener('orientationchange', () => {
+          prevHeight = window.visualViewport.height
+        })
+
+        window.visualViewport.addEventListener('resize', () => {
+          console.log('visualViewport resize')
+
+          sl(`visualViewport x${window.visualViewport.height}`)
+
+          if (window.visualViewport.height > prevHeight && window.visualViewport.height - prevHeight > 100) {
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+              sl('键盘收起')
+            }, 300)
+          }
+
+          if (window.visualViewport.height < iniHeight) {
+            document.activeElement.blur()
+            ff33.focus()
+          }
+
+          prevHeight = window.visualViewport.height
+        })
+      }
+    </script>
   </body>
 </html>
