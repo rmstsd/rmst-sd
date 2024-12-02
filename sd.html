@@ -7,64 +7,65 @@
     <title>sd</title>
 
     <style>
-      html,
-      body {
-        margin: 0;
-        height: 100%;
+      div {
+        padding: 20px;
+        border: 1px solid black;
       }
     </style>
   </head>
 
   <body>
-    <pre></pre>
-
-    <hr />
-    <main></main>
-    <div style="position: fixed; inset: 0">
-      <input class="ff33" type="text" value="222" />
-      <input type="text" style="" />
+    <div class="d-1" tabindex="0">
+      d-1
+      <div class="d-2" tabindex="0">
+        d-2
+        <div class="d-3" tabindex="0">
+          d-3
+          <div class="d-4" tabindex="0">
+            d-4
+            <div class="d-5" tabindex="0">
+              d-5
+              <input type="text" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-      document.querySelector('main').textContent = navigator.platform
-      const inp = document.querySelector('input')
-      const ff33 = document.querySelector('.ff33')
-      const sl = msg => {
-        fetch('http://192.168.13.16:3485', { method: 'POST', body: msg })
-      }
-      sl(`ii ${window.innerHeight}`)
-      window.addEventListener('resize', () => {
-        // sl(`resize x${window.innerHeight}`)
+      const divs = document.querySelectorAll('div')
+
+      divs.forEach((d, idx) => {
+        // d.addEventListener(
+        //   'click',
+        //   evt => {
+        //     console.log('clicked capture', d.classList.value)
+        //   },
+        //   { capture: true }
+        // )
+        // d.addEventListener(
+        //   'click',
+        //   () => {
+        //     console.log('clicked bubble', d.classList.value)
+        //   },
+        //   { capture: false }
+        // )
+        // d.addEventListener(
+        //   'focus',
+        //   () => {
+        //     console.log('focus div', d.classList.value)
+        //   }
+        // )
+        d.addEventListener('keydown', () => {
+          console.log('keydown div', d.classList.value)
+        })
       })
-      let iniHeight = window.visualViewport.height
 
-      {
-        let timer = null
-        let prevHeight = window.visualViewport.height
-
-        window.addEventListener('orientationchange', () => {
-          prevHeight = window.visualViewport.height
-        })
-
-        window.visualViewport.addEventListener('resize', () => {
-          console.log('visualViewport resize')
-
-          sl(`visualViewport x${window.visualViewport.height}`)
-
-          if (window.visualViewport.height > prevHeight && window.visualViewport.height - prevHeight > 100) {
-            clearTimeout(timer)
-            timer = setTimeout(() => {
-              sl('键盘收起')
-            }, 300)
-          }
-
-          if (window.visualViewport.height < iniHeight) {
-            document.activeElement.blur()
-            ff33.focus()
-          }
-
-          prevHeight = window.visualViewport.height
-        })
+      document.querySelector('input').onkeydown = evt => {
+        console.log('evt', 'input onkeydown')
+      }
+      document.querySelector('input').onfocus = evt => {
+        console.log('evt', 'input onfocus')
       }
     </script>
   </body>
