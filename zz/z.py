@@ -3,7 +3,7 @@ print("Hello World!")
 
 import lib
 
-
+lib.cq.include("name", ["age", "city"])
 
 
 def helloWorld(tc, inputParams, taskInputParams):
@@ -20,3 +20,11 @@ def helloWorld(tc, inputParams, taskInputParams):
   print(base.jsonToString(res))
 
   return base.jsonToString(res)
+
+
+def FindBinByFbInvLayoutId(tc, inputParams, taskInputParams):
+    id = inputParams["id"]
+
+
+    res = entity.findMany(tc, "FbInvLayout", cq.include("btMaterial", ["11001"]), None)
+    print(base.jsonToString(res))
