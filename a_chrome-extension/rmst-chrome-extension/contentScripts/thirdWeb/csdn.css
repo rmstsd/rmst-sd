@@ -1,3 +1,8 @@
+
+* {
+  user-select: unset !important;
+}
+
 .recommend-right1 {
   display: block !important;
 }
