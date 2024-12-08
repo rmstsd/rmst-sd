@@ -1,30 +1,29 @@
+import lib
 
 print("Hello World!")
 
-import lib
-
-lib.cq.include("name", ["age", "city"])
-
-
-def helloWorld(tc, inputParams, taskInputParams):
-  print('aaaa')
-  dd = {"name": "John", "age": 30, "city": "New York"}
-  
-  res = {
-    "fatal": False,
-    "error": False, 
-    "errorMsg": None,
-    "outputParams": dd
-  }
-
-  print(base.jsonToString(res))
-
-  return base.jsonToString(res)
-
 
 def FindBinByFbInvLayoutId(tc, inputParams, taskInputParams):
-    id = inputParams["id"]
+    btMtCode = inputParams["btMtCode"]
 
+    res = entity.findMany(tc, "FbInvLayout", cq.include("btMaterial", [btMtCode]), None)
 
-    res = entity.findMany(tc, "FbInvLayout", cq.include("btMaterial", ["11001"]), None)
     print(base.jsonToString(res))
+    ans = [item["qty"] for item in res]
+
+    return base.jsonToString(
+        {"fatal": False, "error": False, "errorMsg": None, "outputParams": {"ans": ans}}
+    )
+
+
+def query(tc, inputParams, taskInputParams):
+    btMaterialName = inputParams["btMaterialName"]
+
+    res = entity.findMany(tc, "FbInvLayout", cq.include("btMaterialName", [btMaterialName]), None)
+
+    print(base.jsonToString(res))
+    ans = [item.get['locked'] for item in res]
+
+    return base.jsonToString(
+        {"fatal": False, "error": False, "errorMsg": None, "outputParams": {"ans": ans}}
+    )
