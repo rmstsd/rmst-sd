@@ -13,11 +13,20 @@
     <div>12</div>
 
     <script>
-      const div = document.querySelector('div')
-      
+      let d = false
+      document.addEventListener('pointerdown', evt => {
+        d = true
+        console.log('pointerdown', evt.clientX)
+      })
+      document.addEventListener('pointermove', evt => {
+        if (d) {
+          console.log('pointermove', evt.clientX)
+        }
+      })
+      document.addEventListener('pointerup', evt => {
+        d = false
 
-      div.animate([{ transform: 'translateX(100px)' }], {
-        fill: 'forwards'
+        console.log('pointerup', evt.clientX)
       })
     </script>
   </body>
