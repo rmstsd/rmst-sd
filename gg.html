@@ -105,7 +105,8 @@
             momentumStartY: 0, // 惯性滑动范围内的 startY
             momentumTimeThreshold: 300, // 惯性滑动的启动 时间阈值
             momentumYThreshold: 15, // 惯性滑动的启动 距离阈值
-            isStarted: false // start锁
+            isStarted: false, // start锁
+            stopMove: false
           }
         },
         mounted() {
@@ -132,10 +133,11 @@
           },
           onMove(e) {
             if (!this.isStarted) return
+            console.log('onMove', Date.now())
             const point = e.touches ? e.touches[0] : e
             const deltaY = point.pageY - this.pointY
             // 浮点数坐标会影响渲染速度
-            console.log(this.startY)
+
             let offsetY = Math.round(this.startY + deltaY)
             // 超出边界时增加阻力
             if (offsetY < this.minY || offsetY > this.maxY) {
@@ -148,15 +150,24 @@
               this.momentumStartY = this.offsetY
               this.startTime = now
             }
+            this.stopMove = false
+            clearTimeout(this.timer)
+            this.timer = setTimeout(() => {
+              this.stopMove = true
+            }, )
           },
           onEnd(e) {
             if (!this.isStarted) return
+            clearTimeout(this.timer)
+
+            console.log('this.stopMove', this.stopMove)
+
             this.isStarted = false
             if (this.isNeedReset()) return
             const absDeltaY = Math.abs(this.offsetY - this.momentumStartY)
             const duration = new Date().getTime() - this.startTime
             // 启动惯性滑动
-            if (duration < this.momentumTimeThreshold && absDeltaY > this.momentumYThreshold) {
+            if (!this.stopMove && duration < this.momentumTimeThreshold && absDeltaY > this.momentumYThreshold) {
               const momentum = calcMomentum(
                 this.offsetY,
                 this.momentumStartY,
