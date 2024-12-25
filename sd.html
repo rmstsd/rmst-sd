@@ -6,153 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sd</title>
 
-    <style>
-      div {
-        padding: 20px;
-        border: 1px solid black;
-      }
-      table {
-        border-collapse: collapse;
-        border: 2px solid rgb(140 140 140);
-        font-family: sans-serif;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-      }
-
-      caption {
-        caption-side: bottom;
-        padding: 10px;
-        font-weight: bold;
-      }
-
-      thead,
-      tfoot {
-        background-color: rgb(228 240 245);
-      }
-
-      th,
-      td {
-        border: 1px solid rgb(160 160 160);
-        padding: 8px 10px;
-      }
-
-      td:last-of-type {
-        text-align: center;
-      }
-
-      tbody > tr:nth-of-type(even) {
-        background-color: rgb(237 238 242);
-      }
-
-      tfoot th {
-        text-align: right;
-      }
-
-      tfoot td {
-        font-weight: bold;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <div class="d-1" tabindex="0">
-      d-1
-      <div class="d-2" tabindex="0">
-        d-2
-        <div class="d-3" tabindex="0">
-          d-3
-          <div class="d-4" tabindex="0">
-            d-4
-            <div class="d-5" tabindex="0">
-              d-5
-              <input type="text" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <form action="">
+      <input type="text" name="username" />
+      <input type="password" name="password" />
 
-    <input type="text" readonly />
-    <input type="text" />
-
-    <main style="border: 1px solid red">
-      <main>s</main>
-      <main style="font-size: 22px">22</main>
-    </main>
-    <table>
-      <caption>Front-end web developer course 2021</caption>
-      <thead>
-        <tr>
-          <th scope="col">Person</th>
-          <th scope="col">Most interest in</th>
-          <th scope="col">Age</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Chris</th>
-          <td>HTML tables</td>
-          <td>22</td>
-        </tr>
-        <tr>
-          <th scope="row">Dennis</th>
-          <td>Web accessibility</td>
-          <td>45</td>
-        </tr>
-        <tr>
-          <th scope="row">Sarah</th>
-          <td>JavaScript frameworks</td>
-          <td>29</td>
-        </tr>
-        <tr>
-          <th scope="row">Karen</th>
-          <td>Web performance</td>
-          <td>36</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th scope="row" colspan="2">Average age</th>
-          <td>33</td>
-        </tr>
-      </tfoot>
-    </table>
+      <button>asdas</button>
+    </form>
 
     <script>
-      const divs = document.querySelectorAll('div')
+      const un = document.querySelector('input[name="username"]')
+      const pw = document.querySelector('input[name="password"]')
 
-      divs.forEach((d, idx) => {
-        // d.addEventListener(
-        //   'click',
-        //   evt => {
-        //     console.log('clicked capture', d.classList.value)
-        //   },
-        //   { capture: true }
-        // )
-        // d.addEventListener(
-        //   'click',
-        //   () => {
-        //     console.log('clicked bubble', d.classList.value)
-        //   },
-        //   { capture: false }
-        // )
-        // d.addEventListener(
-        //   'focus',
-        //   () => {
-        //     console.log('focus div', d.classList.value)
-        //   }
-        // )
-        d.addEventListener('keydown', () => {
-          console.log('keydown div', d.classList.value)
-        })
+      un.addEventListener('input', evt => {
+        console.log('evt', evt)
+        evt.preventDefault()
       })
 
-      document.querySelector('input').onkeydown = evt => {
-        console.log('evt', 'input onkeydown')
-      }
-      document.querySelector('input').onfocus = evt => {
-        console.log('evt', 'input onfocus')
-      }
+      pw.addEventListener('input', () => {
+        console.log(pw.value)
+      })
     </script>
   </body>
 </html>

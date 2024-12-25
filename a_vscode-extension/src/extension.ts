@@ -50,13 +50,16 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     if (!wordText.trim() || !location) {
-      vscode.window.showWarningMessage('不能转换空字符')
+      vscode.window.showWarningMessage('请先选中字符串')
 
       return
     }
 
     const options: vscode.QuickPickItem[] = getNewWords(wordText).map(item => ({ label: item }))
     vscode.window.showQuickPick(options, { placeHolder: '请选择新单词' }).then(res => {
+      if (!res) {
+        return
+      }
       const nvWord = res.label
 
       editor.edit(editBuilder => {
