@@ -3,7 +3,8 @@
   "displayName": "rmst-vscode-tools",
   "description": "对单词重命名",
   "repository": {},
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "icon": "icon.png",
   "publisher": "rmst",
   "main": "./out/extension.js",
   "scripts": {
