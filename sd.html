@@ -10,24 +10,21 @@
   </head>
 
   <body>
-    <form action="">
+    <div style="padding: 10px">
       <input type="text" name="username" />
-      <input type="password" name="password" />
-
-      <button>asdas</button>
-    </form>
+    </div>
 
     <script>
-      const un = document.querySelector('input[name="username"]')
-      const pw = document.querySelector('input[name="password"]')
+      const un = document.querySelector('div')
 
-      un.addEventListener('input', evt => {
+      un.addEventListener('pointerdown', evt => {
         console.log('evt', evt)
         evt.preventDefault()
       })
 
-      pw.addEventListener('input', () => {
-        console.log(pw.value)
+      const input = document.querySelector('input')
+      input.addEventListener('pointerdown', evt => {
+        evt.stopPropagation()
       })
     </script>
   </body>
