@@ -15,4 +15,8 @@ document.addEventListener('keydown', evt => {
 
     evt.preventDefault()
   }
+
+  if (evt.ctrlKey && evt.key === 's') {
+    evt.preventDefault()
+  }
 })

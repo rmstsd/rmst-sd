@@ -6,40 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sd</title>
 
-    <style>
-      body {
-        margin: 0;
-      }
-      .container {
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5);
-        text-align: center;
-        white-space: nowrap;
-      }
-
-      .content {
-        height: 400px;
-        width: 500px;
-        display: inline-block;
-        vertical-align: middle;
-        background-color: white;
-        white-space: nowrap;
-      }
-
-      .container::after {
-        content: "";
-        height: 100%;
-        display: inline-block;
-        vertical-align: middle;
-        width: 0;
-        overflow: hidden;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <div class="container">
-      <div class="content">sadasd</div>
+    <div style="padding: 10px">
+      <input type="text" name="username" />
     </div>
+
+    <script>
+      const un = document.querySelector('div')
+
+      un.addEventListener('pointerdown', evt => {
+        console.log('evt', evt)
+        evt.preventDefault()
+      })
+
+      const input = document.querySelector('input')
+      input.addEventListener('pointerdown', evt => {
+        evt.stopPropagation()
+      })
+    </script>
   </body>
 </html>
