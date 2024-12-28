@@ -7,152 +7,39 @@
     <title>sd</title>
 
     <style>
-      div {
-        padding: 20px;
-        border: 1px solid black;
+      body {
+        margin: 0;
       }
-      table {
-        border-collapse: collapse;
-        border: 2px solid rgb(140 140 140);
-        font-family: sans-serif;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-      }
-
-      caption {
-        caption-side: bottom;
-        padding: 10px;
-        font-weight: bold;
-      }
-
-      thead,
-      tfoot {
-        background-color: rgb(228 240 245);
-      }
-
-      th,
-      td {
-        border: 1px solid rgb(160 160 160);
-        padding: 8px 10px;
-      }
-
-      td:last-of-type {
+      .container {
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
         text-align: center;
+        white-space: nowrap;
       }
 
-      tbody > tr:nth-of-type(even) {
-        background-color: rgb(237 238 242);
+      .content {
+        height: 400px;
+        width: 500px;
+        display: inline-block;
+        vertical-align: middle;
+        background-color: white;
+        white-space: nowrap;
       }
 
-      tfoot th {
-        text-align: right;
-      }
-
-      tfoot td {
-        font-weight: bold;
+      .container::after {
+        content: "";
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        overflow: hidden;
       }
     </style>
   </head>
 
   <body>
-    <div class="d-1" tabindex="0">
-      d-1
-      <div class="d-2" tabindex="0">
-        d-2
-        <div class="d-3" tabindex="0">
-          d-3
-          <div class="d-4" tabindex="0">
-            d-4
-            <div class="d-5" tabindex="0">
-              d-5
-              <input type="text" />
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container">
+      <div class="content">sadasd</div>
     </div>
-
-    <input type="text" readonly />
-    <input type="text" />
-
-    <main style="border: 1px solid red">
-      <main>s</main>
-      <main style="font-size: 22px">22</main>
-    </main>
-    <table>
-      <caption>Front-end web developer course 2021</caption>
-      <thead>
-        <tr>
-          <th scope="col">Person</th>
-          <th scope="col">Most interest in</th>
-          <th scope="col">Age</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Chris</th>
-          <td>HTML tables</td>
-          <td>22</td>
-        </tr>
-        <tr>
-          <th scope="row">Dennis</th>
-          <td>Web accessibility</td>
-          <td>45</td>
-        </tr>
-        <tr>
-          <th scope="row">Sarah</th>
-          <td>JavaScript frameworks</td>
-          <td>29</td>
-        </tr>
-        <tr>
-          <th scope="row">Karen</th>
-          <td>Web performance</td>
-          <td>36</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th scope="row" colspan="2">Average age</th>
-          <td>33</td>
-        </tr>
-      </tfoot>
-    </table>
-
-    <script>
-      const divs = document.querySelectorAll('div')
-
-      divs.forEach((d, idx) => {
-        // d.addEventListener(
-        //   'click',
-        //   evt => {
-        //     console.log('clicked capture', d.classList.value)
-        //   },
-        //   { capture: true }
-        // )
-        // d.addEventListener(
-        //   'click',
-        //   () => {
-        //     console.log('clicked bubble', d.classList.value)
-        //   },
-        //   { capture: false }
-        // )
-        // d.addEventListener(
-        //   'focus',
-        //   () => {
-        //     console.log('focus div', d.classList.value)
-        //   }
-        // )
-        d.addEventListener('keydown', () => {
-          console.log('keydown div', d.classList.value)
-        })
-      })
-
-      document.querySelector('input').onkeydown = evt => {
-        console.log('evt', 'input onkeydown')
-      }
-      document.querySelector('input').onfocus = evt => {
-        console.log('evt', 'input onfocus')
-      }
-    </script>
   </body>
 </html>
