@@ -1,29 +1,13 @@
-import 'dart:math';
+import 'dart:async';
 
 void main() {
-  var name = "John";
-  var age = 25;
+  final cc = func();
 
-  const ui = 1;
+  print(cc);
 
-  print(Random());
-
-  age = 30;
-
-  var ans = [
-    1,
-    2,
-    3,
-    4,
-  ];
-
-  var aa = {"name": name, age: age, ans: ans};
-
-  print(aa);
-
-  asd(age);
+  Timer(Duration(seconds: 2), () {
+    print(23);
+  });
 }
 
-void asd(int aa) {
-  print(aa);
-}
+func() => {'a': 'a', 'b': 'b'};

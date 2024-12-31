@@ -10,22 +10,13 @@
   </head>
 
   <body>
-    <div style="padding: 10px">
-      <input type="text" name="username" />
+    <div style="display: flex">
+      <div style="width: 0; flex-grow: 1;">
+        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">
+          从消费产品到金融服务，从B端到C端产品，从大品牌到个人开发者，TDesign都能充分满足低成本，高效有品质感的前端设计和开发工作，助力提升产品体验，有效提升设计研发效能
+        </div>
+      </div>
+      <div style="width: 100px; flex-shrink: 0">aa</div>
     </div>
-
-    <script>
-      const un = document.querySelector('div')
-
-      un.addEventListener('pointerdown', evt => {
-        console.log('evt', evt)
-        evt.preventDefault()
-      })
-
-      const input = document.querySelector('input')
-      input.addEventListener('pointerdown', evt => {
-        evt.stopPropagation()
-      })
-    </script>
   </body>
 </html>
