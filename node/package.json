@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node --watch index.js",
     "win": "electron",
-    "mo": "node --watch mo.mjs"
+    "mo": "node --watch mo.mjs",
+    "aa": "node --watch git-大小写敏感.mjs"
   },
   "keywords": [],
   "author": "",
