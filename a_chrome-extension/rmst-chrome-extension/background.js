@@ -29,5 +29,3 @@ function createContextMenus() {
   })
 }
 createContextMenus()
-
-chrome.runtime.onInstalled.addListener(() => {})
