@@ -2,6 +2,10 @@
   user-select: auto !important;
 }
 
+.rmst-u * {
+  user-select: auto !important;
+}
+
 .dumi-default-sidebar {
   width: 240px !important;
 }
