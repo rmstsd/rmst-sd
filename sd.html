@@ -10,11 +10,27 @@
   </head>
 
   <body>
-    <input type="checkbox" />
+    <div style="background-color: pink">asdasd</div>
+    <div style="background-color: orange">rrr</div>
 
     <script>
-      const input = document.querySelector('input')
+      const div = document.querySelector('div')
 
+      div.addEventListener('pointerup', evt => {
+        const sel = getSelection()
+
+        if (sel.rangeCount !== 0) {
+          const range = sel.getRangeAt(0)
+          // console.log(range.END_TO_END)
+          // console.log(range.END_TO_START)
+          // console.log(range.START_TO_END)
+          // console.log(range.START_TO_START)
+
+          // console.log(range.getBoundingClientRect())
+
+          console.log(range)
+        }
+      })
     </script>
   </body>
 </html>
