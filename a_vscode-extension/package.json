@@ -3,7 +3,7 @@
   "displayName": "rmst-vscode-tools",
   "description": "对单词重命名",
   "repository": {},
-  "version": "0.2.0",
+  "version": "0.2.1",
   "icon": "icon.png",
   "publisher": "rmst",
   "main": "./out/extension.js",
@@ -13,7 +13,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "yarn run compile",
     "vsce-build-vsix": "vsce package",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "publish": "vsce publish patch"
   },
   "dependencies": {
     "@babel/parser": "^7.20.0",
@@ -38,8 +39,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:rmst-vscode-tools.delete-func",
-    "onCommand:rmst-vscode-tools.convert-word"
+    "onStartupFinished"
   ],
   "contributes": {
     "commands": [
