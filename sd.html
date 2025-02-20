@@ -6,15 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sd</title>
 
-    <style></style>
+    <style>
+      .wide-column {
+        container-type: size;
+        container-name: ccc;
+        resize: horizontal;
+        overflow: auto;
+        background-color: pink;
+        height: 400px;
+      }
+
+      .card {
+      }
+
+      /* the card is placed as a child of the two grid items, displaying as one or two columns  */
+      @container ccc (min-width: 700px) {
+        .wide-column {
+          background-color: orange;
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <input type="checkbox" />
-
-    <script>
-      const input = document.querySelector('input')
-
-    </script>
+    <div class="wide-column">
+      <article class="card">ads</article>
+    </div>
   </body>
 </html>
