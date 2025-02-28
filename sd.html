@@ -2,35 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sd</title>
+    <title>Document</title>
 
-    <style></style>
+    <style>
+      div {
+        width: 100pt;
+        border: 2px solid var(--c);
+      }
+
+      span {
+        border: 2px solid var(--c);
+      }
+    </style>
   </head>
-
   <body>
-    <div style="background-color: pink">asdasd</div>
-    <div style="background-color: orange">rrr</div>
+    <div style="--c: red">
+      div
 
-    <script>
-      const div = document.querySelector('div')
-
-      div.addEventListener('pointerup', evt => {
-        const sel = getSelection()
-
-        if (sel.rangeCount !== 0) {
-          const range = sel.getRangeAt(0)
-          // console.log(range.END_TO_END)
-          // console.log(range.END_TO_START)
-          // console.log(range.START_TO_END)
-          // console.log(range.START_TO_START)
-
-          // console.log(range.getBoundingClientRect())
-
-          console.log(range)
-        }
-      })
-    </script>
+      <span style="--c: blue">san</span>
+    </div>
   </body>
 </html>
