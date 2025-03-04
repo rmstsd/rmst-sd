@@ -22,5 +22,15 @@
 
       <span style="--c: blue">san</span>
     </div>
+
+    <script>
+      fetch('https://reqres.in/api/users', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: 'paul rudd',
+          movies: ['I Love You Man', 'Role Models']
+        })
+      })
+    </script>
   </body>
 </html>
