@@ -1,27 +1,18 @@
 {
-  "name": "node",
+  "name": "small-feat",
   "version": "1.0.0",
-  "description": "",
-  "main": "win.js",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "dev": "node --watch index.mjs",
-    "win": "electron",
-    "mo": "node --watch mo.mjs",
-    "aa": "node --watch git-大小写敏感.mjs"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^20.14.12"
+    "dev": "set node_env=dev && nodemon n.js"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
-    "electron": "^33.1.0",
-    "get-appx-path": "^0.2.4",
-    "mongodb": "^6.9.0",
-    "regedit": "^5.1.3",
-    "tree-kill": "^1.2.2",
-    "windowsapps": "^1.1.0"
+    "axios": "^1.7.2",
+    "fast-glob": "^3.3.2",
+    "filedirname": "^3.4.0",
+    "https-proxy-agent": "^7.0.5",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.4"
   }
 }
