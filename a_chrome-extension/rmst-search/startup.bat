@@ -1,3 +1,3 @@
 @echo off
 
-node "./aa.js"
+pm2 start "./ecosystem.config.cjs"
