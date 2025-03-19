@@ -1,36 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 
+    <title>Canvas with MiniMap</title>
     <style>
-      div {
-        width: 100pt;
-        border: 2px solid var(--c);
+      .container {
+        position: relative;
+        width: 800px;
+        height: 600px;
       }
 
-      span {
-        border: 2px solid var(--c);
+      #mainCanvas {
+        border: 1px solid #ccc;
+        background: white;
+      }
+
+      #miniMap {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        border: 2px solid #666;
+        background: rgba(240, 240, 240, 0.8);
+        cursor: move;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
     </style>
   </head>
   <body>
-    <div style="--c: red">
-      div
-
-      <span style="--c: blue">san</span>
+    <div class="container">
+      <canvas id="mainCanvas"></canvas>
+      <canvas id="miniMap"></canvas>
     </div>
 
     <script>
-      fetch('https://reqres.in/api/users', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: 'paul rudd',
-          movies: ['I Love You Man', 'Role Models']
-        })
-      })
+      class MainCanvas {
+        constructor(canvas) {
+          this.canvas = canvas
+          this.ctx = canvas.getContext('2d')
+          this.rects = []
+          this.scale = 1
+          this.offsetX = 0
+          this.offsetY = 0
+          this.isDragging = false
+          this.lastX = 0
+          this.lastY = 0
+          this.observers = []
+
+          // 设置画布尺寸
+          this.canvas.width = 800
+          this.canvas.height = 600
+
+          // 事件监听
+          this.canvas.addEventListener('mousedown', this.handleMouseDown.bind(this))
+          this.canvas.addEventListener('mousemove', this.handleMouseMove.bind(this))
+          this.canvas.addEventListener('mouseup', this.handleMouseUp.bind(this))
+          this.canvas.addEventListener('wheel', this.handleWheel.bind(this))
+
+          this.draw()
+        }
+
+        addObserver(observer) {
+          this.observers.push(observer)
+        }
+
+        notifyObservers() {
+          this.observers.forEach(observer => {
+            observer.update(this.rects, {
+              offsetX: this.offsetX,
+              offsetY: this.offsetY,
+              scale: this.scale
+            })
+          })
+        }
+
+        handleMouseDown(e) {
+          this.isDragging = true
+          this.lastX = e.clientX
+          this.lastY = e.clientY
+        }
+
+        handleMouseMove(e) {
+          if (!this.isDragging) return
+
+          const dx = e.clientX - this.lastX
+          const dy = e.clientY - this.lastY
+          this.lastX = e.clientX
+          this.lastY = e.clientY
+
+          this.offsetX -= dx / this.scale
+          this.offsetY -= dy / this.scale
+
+          this.draw()
+          this.notifyObservers()
+        }
+
+        handleMouseUp() {
+          this.isDragging = false
+        }
+
+        handleWheel(e) {
+          e.preventDefault()
+          const zoomIntensity = 0.1
+          const oldScale = this.scale
+
+          if (e.deltaY < 0) {
+            this.scale *= 1 + zoomIntensity
+          } else {
+            this.scale /= 1 + zoomIntensity
+          }
+
+          // 保持缩放中心
+          const rect = this.canvas.getBoundingClientRect()
+          const mouseX = (e.clientX - rect.left) / oldScale + this.offsetX
+          const mouseY = (e.clientY - rect.top) / oldScale + this.offsetY
+
+          this.offsetX = mouseX - (e.clientX - rect.left) / this.scale
+          this.offsetY = mouseY - (e.clientY - rect.top) / this.scale
+
+          this.draw()
+          this.notifyObservers()
+        }
+
+        draw() {
+          this.ctx.save()
+          this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+          this.ctx.restore()
+
+          this.ctx.setTransform(this.scale, 0, 0, this.scale, -this.offsetX * this.scale, -this.offsetY * this.scale)
+
+          // 绘制网格背景
+          this.ctx.strokeStyle = '#eee'
+          for (let x = 0; x < 2000; x += 50) {
+            for (let y = 0; y < 2000; y += 50) {
+              this.ctx.strokeRect(x, y, 50, 50)
+            }
+          }
+
+          // 绘制矩形
+          this.rects.forEach(rect => {
+            this.ctx.fillStyle = rect.color
+            this.ctx.fillRect(rect.x, rect.y, rect.width, rect.height)
+          })
+        }
+      }
+
+      class MiniMap {
+        constructor(mainCanvas, miniMapCanvas) {
+          this.main = mainCanvas
+          this.mini = miniMapCanvas
+          this.mini.width = 200
+          this.mini.height = 150
+          this.isDragging = false
+
+          // 事件监听
+          this.mini.addEventListener('mousedown', this.handleMouseDown.bind(this))
+          this.mini.addEventListener('mousemove', this.handleMouseMove.bind(this))
+          this.mini.addEventListener('mouseup', () => (this.isDragging = false))
+        }
+
+        update(rects, viewState) {
+          this.drawMiniMap(rects, viewState)
+        }
+
+        drawMiniMap(rects, ) {
+          const ctx = this.mini.getContext('2d')
+          ctx.clearRect(0, 0, this.mini.width, this.mini.height)
+
+          // 绘制背景
+          ctx.fillStyle = '#f0f0f0'
+          ctx.fillRect(0, 0, this.mini.width, this.mini.height)
+
+          // 绘制主内容
+          const scaleX = this.mini.width / 2000
+          const scaleY = this.mini.height / 2000
+
+          rects.forEach(rect => {
+            ctx.fillStyle = rect.color
+            ctx.fillRect(rect.x * scaleX, rect.y * scaleY, rect.width * scaleX, rect.height * scaleY)
+          })
+
+          // 绘制视口框
+          const viewWidth = this.main.canvas.width / this.main.scale
+          const viewHeight = this.main.canvas.height / this.main.scale
+          const viewX = this.main.offsetX
+          const viewY = this.main.offsetY
+
+          ctx.strokeStyle = 'blue'
+          ctx.lineWidth = 2
+          ctx.strokeRect(viewX * scaleX, viewY * scaleY, viewWidth * scaleX, viewHeight * scaleY)
+        }
+
+        handleMouseDown(e) {
+          this.isDragging = true
+          this.updateViewport(e)
+        }
+
+        handleMouseMove(e) {
+          if (!this.isDragging) return
+          this.updateViewport(e)
+        }
+
+        updateViewport(e) {
+          const rect = this.mini.getBoundingClientRect()
+          const x = (e.clientX - rect.left) * (this.mini.width / rect.width)
+          const y = (e.clientY - rect.top) * (this.mini.height / rect.height)
+
+          const mainX = (x / this.mini.width) * 2000
+          const mainY = (y / this.mini.height) * 2000
+
+          this.main.offsetX = mainX - this.main.canvas.width / this.main.scale / 2
+          this.main.offsetY = mainY - this.main.canvas.height / this.main.scale / 2
+
+          this.main.draw()
+          this.main.notifyObservers()
+        }
+      }
+
+      // 初始化
+      const mainCanvas = new MainCanvas(document.getElementById('mainCanvas'))
+      const miniMap = new MiniMap(mainCanvas, document.getElementById('miniMap'))
+      mainCanvas.addObserver(miniMap)
+
+      // 添加示例图形
+      mainCanvas.rects.push(
+        { x: 300, y: 200, width: 150, height: 100, color: 'rgba(255,0,0,0.5)' },
+        { x: 600, y: 400, width: 80, height: 120, color: 'rgba(0,255,0,0.5)' },
+        { x: 100, y: 500, width: 200, height: 80, color: 'rgba(0,0,255,0.5)' },
+        { x: 500, y: 1000, width: 200, height: 80, color: 'rgba(0,0,255,0.5)' },
+        { x: 1000, y: 1000, width: 200, height: 80, color: 'rgba(0,0,255,0.5)' }
+      )
+
+      // 初始绘制
+      mainCanvas.draw()
+      miniMap.update(mainCanvas.rects, mainCanvas)
     </script>
   </body>
 </html>
