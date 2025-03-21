@@ -2,7 +2,6 @@ if (window.location.hostname !== 'localhost') {
   document.body.classList.add('rmst-u')
 }
 
-// 防止 QQ 浏览器 按退格键
 document.addEventListener('keydown', evt => {
   if (evt.key === 'Backspace') {
     if (
@@ -17,6 +16,11 @@ document.addEventListener('keydown', evt => {
   }
 
   if (evt.ctrlKey && evt.key === 's') {
+    evt.preventDefault()
+  }
+
+  // 阻止 ctrl + d 会触发收藏书签的默认事件
+  if (evt.ctrlKey && evt.key === 'd') {
     evt.preventDefault()
   }
 })
