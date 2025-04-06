@@ -25,3 +25,7 @@ body > main > div.relative.mx-auto.max-w-screen-xl.px-4.py-10 > nav > div > div.
   color: #3042ed;
   background-color: #fffaf2;
 }
+
+*::selection {
+  background-color: #b8e8ff;
+}
