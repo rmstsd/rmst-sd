@@ -1,5 +1,8 @@
 #![allow(warnings)]
 
+mod study;
+use study::{z_enum::en, z_struct::st};
+
 use rand::Rng;
 use std::{clone, cmp::Ordering, collections::HashMap, io, net::ToSocketAddrs, string};
 
@@ -97,82 +100,8 @@ fn main() {
   assert_eq!(slice, &[2, 3]);
 
   {
-    // 数组
-
-    let mut v = vec![100, 32, 57];
-    for i in &mut v {
-      *i += 1; // * 解引用运算符
-    }
-
-    // println!("{v:?}");
-  }
-
-  {
-    // 枚举
-    #[derive(Debug)]
-    enum Ss {
-      Int(i32),
-      Tesx(String),
-    }
-
-    let v = vec![Ss::Int(3), Ss::Tesx(String::from("sdgfh收到开个会地方"))];
-
-    println!("{:?}", v);
-  }
-
-  {
-    println!(
-      "------------ hash map
-      "
-    );
-    // hash map
-
-    let mut sc = HashMap::new();
-    sc.insert("a", 88);
-    sc.insert("b", 10);
-    sc.insert("c", 10);
-
-    // println!("-- {sc:?}");
-
-    let ac = sc.get("a").unwrap();
-    // println!("{ac:?}");
-
-    let fname = String::from("aa");
-
-    let mut hm = HashMap::new();
-    hm.insert(fname, 8);
-
-    let ss = hm.entry(String::from("aa")).or_insert(0);
-    let ss = hm.entry(String::from("bb")).or_insert(2);
-
-    let wd = "a";
-
-    let sp = wd.split("");
-
-    let mut mp: HashMap<&str, i32> = HashMap::new();
-
-    for item in wd.split("") {
-      if item == "" {
-        continue;
-      }
-
-      let count = mp.entry(item).or_insert(0);
-      *count += 1;
-    }
-    // println!("{mp:?}");
-  }
-
-  {
-    let a = "a".to_string();
-    let b = "b".to_string();
-    let c = "c".to_string();
-
-    let d = format!("{a}-{b}-{c}");
-
-    println!("{a:?}");
-    println!("{b:?}");
-    println!("{c:?}");
-    println!("{d:?}");
+    st();
+    en();
   }
 }
 
