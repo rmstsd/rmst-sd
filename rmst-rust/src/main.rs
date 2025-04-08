@@ -100,8 +100,8 @@ fn main() {
   assert_eq!(slice, &[2, 3]);
 
   {
-    st();
-    // en();
+    // st();
+    en();
   }
 }
 
