@@ -1,4 +1,5 @@
 pub mod z_enum;
 pub mod z_hashMap;
+pub mod z_match;
 pub mod z_struct;
 pub mod z_vec;

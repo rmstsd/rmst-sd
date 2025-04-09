@@ -1,7 +1,7 @@
 #![allow(warnings)]
 
 mod study;
-use study::{z_enum::en, z_struct::st};
+use study::{z_enum::en, z_match::z_match, z_struct::st};
 
 use rand::Rng;
 use std::{clone, cmp::Ordering, collections::HashMap, io, net::ToSocketAddrs, string};
@@ -101,7 +101,8 @@ fn main() {
 
   {
     // st();
-    en();
+    // en();
+    z_match();
   }
 }
 
