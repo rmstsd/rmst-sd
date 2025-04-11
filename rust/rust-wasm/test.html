@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>hello-wasm example</title>
+  </head>
+  <body>
+    <script type="module">
+      window.log = console.log
+
+      import init, { greet } from './pkg/rust_wasm.js'
+      init().then(() => {
+        const ans = greet([1, 2, 3])
+        console.log(ans)
+      })
+    </script>
+  </body>
+</html>

@@ -1,10 +1,10 @@
 #![allow(warnings)]
 
 mod study;
-use study::{z_enum::en, z_match::z_match, z_struct::st};
+use study::{z_enum::en, z_match::z_match, z_result_option::rp, z_struct::st};
 
 use rand::Rng;
-use std::{clone, cmp::Ordering, collections::HashMap, io, net::ToSocketAddrs, string};
+use std::{cmp::Ordering, collections::HashMap, io::stdin};
 
 fn main() {
   println!("------------------ main start");
@@ -102,7 +102,8 @@ fn main() {
   {
     // st();
     // en();
-    z_match();
+    // z_match();
+    rp()
   }
 }
 
@@ -139,9 +140,7 @@ fn game() {
 
     let mut guess = String::new();
 
-    io::stdin()
-      .read_line(&mut guess)
-      .expect("Failed to read line");
+    stdin().read_line(&mut guess).expect("Failed to read line");
 
     println!("You guessed: {} 哈哈", guess.trim());
 

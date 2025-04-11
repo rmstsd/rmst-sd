@@ -34,6 +34,19 @@
       <rect x="10" y="10" width="100" height="100" fill="none" stroke="red" stroke-width="4" />
     </svg>
 
-    <script></script>
+    <button>xx</button>
+    <script>
+      const btn = document.querySelector('button')
+      btn.onclick = () => {
+        const data = 'asdasdasdasd hhhh好久好久哈哈'
+        const blob = new Blob([data], { type: 'text/plain' })
+        const a = document.createElement('a')
+        a.href = URL.createObjectURL(blob)
+        a.download = 'm4.license'
+        a.click()
+        URL.revokeObjectURL(a.href)
+        a.remove()
+      }
+    </script>
   </body>
 </html>
