@@ -1,7 +1,9 @@
 #![allow(warnings)]
 
 mod study;
-use study::{z_enum::en, z_match::z_match, z_result_option::rp, z_struct::st, z_vec::z_vec};
+use study::{
+  z_enum::en, z_json::json, z_match::z_match, z_result_option::rp, z_struct::st, z_vec::z_vec,
+};
 
 use rand::Rng;
 use std::{cmp::Ordering, collections::HashMap, io::stdin};
@@ -104,7 +106,8 @@ fn main() {
     // en();
     // z_match();
     // rp()
-    z_vec()
+    // z_vec()
+    json();
   }
 }
 
