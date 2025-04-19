@@ -6,47 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style>
-      *::selection {
-        background-color: #b8e8ff;
-      }
-    </style>
+    <style></style>
   </head>
 
-  <body>
-    <svg width="500" height="500">
-      <g transform="scale(2) rotate(3)">
-        <rect
-          x="10"
-          y="10"
-          width="100"
-          height="100"
-          fill="none"
-          stroke="red"
-          vector-effect="non-rotation"
-          stroke-width="4"
-        />
-
-        <path id="ve" vector-effect="non-scaling-size non-rotation fixed-position" stroke="red" stroke-width="3"
-        fill="none" transform="matrix(1,0, 0,1,150,150)" d="M-50,-50 L50,-50 50,-100 150,0 50,100 50,50 -50,50 -50,-50z
-        M5 0 L0 -5 -5 0 0 5z"/ >
-      </g>
-      <rect x="10" y="10" width="100" height="100" fill="none" stroke="red" stroke-width="4" />
-    </svg>
-
-    <button>xx</button>
-    <script>
-      const btn = document.querySelector('button')
-      btn.onclick = () => {
-        const data = 'asdasdasdasd hhhh好久好久哈哈'
-        const blob = new Blob([data], { type: 'text/plain' })
-        const a = document.createElement('a')
-        a.href = URL.createObjectURL(blob)
-        a.download = 'm4.license'
-        a.click()
-        URL.revokeObjectURL(a.href)
-        a.remove()
-      }
-    </script>
+  <body style="background-color: black">
+    <img src="./外圈旋转@2x.png" alt="" />
+    <script></script>
   </body>
 </html>
