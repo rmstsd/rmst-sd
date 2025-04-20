@@ -2,7 +2,7 @@ use serde_json::{Result, Value};
 
 pub fn json() {
   // Some JSON input data as a &str. Maybe this comes from the user.
-  let data = r#"
+  let data: &str = r#"
     {
        "name": "John Doe",
        "age": 43,
@@ -21,8 +21,6 @@ pub fn json() {
   // dbg!(&v["love"]);
   // dbg!(&v["phones"][0]);
 
-  dbg!(22);
-
   let mut b = 5;
   let c = &mut b;
 
@@ -30,43 +28,9 @@ pub fn json() {
 
   //
 
-  struct Book2<'a> {
-    title: &'a str,
-    author: &'a str,
-    date: &'a str,
-  }
+  let aa = "asdasd".to_string().to_string().to_string();
 
-  // 声明一个标准字符串类型
-  let title = String::from("rust 核心进阶");
+  dbg!(&aa);
 
-  let book = Book2 {
-    title: title.as_str(),
-    author: "xxx",
-    date: "yyy",
-  };
-
-  // 按值传递，title 失去值的所有权
-  read(title);
-
-  fn read(book: String) {
-    println!("xxxxx, {}", book);
-  }
-
-  let mut s = String::from("hello");
-  let r1 = &s;
-  let r2 = &s;
-
-  println!("{r1} and {r2}");
-
-  let r3 = &mut s;
-  println!("{r3} ");
   //
-
-  let reference_to_nothing = dangle();
-
-  fn dangle() -> &String {
-    let s = String::from("hello");
-
-    &s
-  }
 }
