@@ -67,4 +67,8 @@ export function activate(context: vscode.ExtensionContext) {
       })
     })
   })
+
+  vscode.commands.registerCommand('openFolderInNewWindow', uri => {
+    vscode.commands.executeCommand('vscode.openFolder', uri, { forceNewWindow: true })
+  })
 }

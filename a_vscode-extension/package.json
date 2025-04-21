@@ -3,7 +3,7 @@
   "displayName": "rmst-vscode-tools",
   "description": "对单词重命名",
   "repository": {},
-  "version": "0.2.1",
+  "version": "0.2.2",
   "icon": "icon.png",
   "publisher": "rmst",
   "main": "./out/extension.js",
@@ -27,6 +27,7 @@
     "@types/node": "16.x",
     "@types/vscode": "^1.72.0",
     "@vscode/test-electron": "^2.1.5",
+    "@vscode/vsce": "^3.3.2",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
     "typescript": "^4.8.4",
@@ -50,7 +51,20 @@
       {
         "command": "convert-word",
         "title": "rmst: 转成其他形式"
+      },
+      {
+        "command": "openFolderInNewWindow",
+        "title": "在新窗口打开"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "openFolderInNewWindow",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation@999"
+        }
+      ]
+    }
   }
 }
