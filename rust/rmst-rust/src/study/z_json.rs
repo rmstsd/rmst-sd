@@ -1,36 +1,48 @@
-use serde_json::{Result, Value};
+use serde::Deserialize;
+use std::{
+  fs::File,
+  io::{self, Read},
+  path,
+};
+
+static pathStr: &str = r"D:\Desktop\cfg-2.json";
+
+// 定义用户结构体
+#[derive(Deserialize, Debug)]
+struct User {
+  name: String,
+  age: Option<u8>,
+}
+
+fn readPath(path: Path) -> io::Result<User> {
+  // 打开文件
+  let mut file = File::open(path)?;
+  // 创建一个空的 String 用于存储文件内容
+  let mut contents = String::new();
+  // 读取文件内容到字符串中
+  file.read_to_string(&mut contents)?;
+
+  // 反序列化 JSON 数据到 Rust 数据结构
+  let user: User = serde_json::from_str(&contents)?;
+
+  println!("{user:#?}");
+
+  Ok(user)
+}
 
 pub fn json() {
-  // Some JSON input data as a &str. Maybe this comes from the user.
-  let data: &str = r#"
-    {
-       "name": "John Doe",
-       "age": 43,
-       "phones": [
-           "+44 1234567",
-           "+44 2345678"
-       ],
-       "love": {
-          "a": "b"
-        }
-   }"#;
+  let a = readPath(pathStr);
+  dbg!(&a);
+  // // The type of `j` is `&str`
+  // let j = "
+  //       {
+  //           \"name\": \"0xF9BA143B95FF6D82\",
+  //           \"age\": \"Menlo Park, CA\"
+  //       }";
 
-  let v: Value = serde_json::from_str(data).unwrap();
+  // let u: User = serde_json::from_str(j).unwrap();
+  // println!("{:#?}", u);
 
-  // println!("{:#?}", v["name"]);
-  // dbg!(&v["love"]);
-  // dbg!(&v["phones"][0]);
-
-  let mut b = 5;
-  let c = &mut b;
-
-  *c += 1;
-
-  //
-
-  let aa = "asdasd".to_string().to_string().to_string();
-
-  dbg!(&aa);
-
-  //
+  // let u1 = json!({ "name": "aaa", "age": "11", "love": "777" });
+  // println!("{u1:#?}");
 }
