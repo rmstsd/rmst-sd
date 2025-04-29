@@ -16,7 +16,7 @@ struct User {
 
 fn readPath(path: Path) -> io::Result<User> {
   // 打开文件
-  let mut file = File::open(path)?;
+  let mut file = File::open("")?;
   // 创建一个空的 String 用于存储文件内容
   let mut contents = String::new();
   // 读取文件内容到字符串中
