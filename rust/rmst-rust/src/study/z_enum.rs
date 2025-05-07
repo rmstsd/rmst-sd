@@ -1,4 +1,4 @@
-pub fn en() {
+pub fn enm() {
   // 枚举
   #[derive(Debug)]
   enum Ss {

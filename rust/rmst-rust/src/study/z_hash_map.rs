@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-fn hashMap() {
+pub fn hashMap() {
   // hash map
 
   let mut sc = HashMap::new();

@@ -2,7 +2,7 @@ use serde::Deserialize;
 use std::{
   fs::File,
   io::{self, Read},
-  path,
+  path::{self, Path},
 };
 
 static pathStr: &str = r"D:\Desktop\cfg-2.json";
