@@ -1,9 +1,9 @@
 mod study;
 use std::time::Instant;
 
+use enigo::*;
 use study::z_enum::enm;
 use tokio::time::{Duration, sleep, timeout};
-
 // #[tokio::main]
 fn main() {
   println!("Before sleep");

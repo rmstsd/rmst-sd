@@ -19,6 +19,32 @@
 
       <div></div>
     </div>
-    <script></script>
+    <script>
+      // 获取 title 元素
+      const titleElement = document.querySelector('title')
+
+      // 如果没有找到 title 元素，则退出
+      if (!titleElement) {
+        console.warn('未找到 title 元素')
+        return
+      }
+
+      // 创建一个 MutationObserver 实例
+      const observer = new MutationObserver(mutationsList => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            // 当 title 元素的子节点发生变化时触发
+            const newTitle = document.title
+            callback(newTitle)
+          }
+        }
+      })
+
+      // 配置观察选项
+      const config = { childList: true }
+
+      // 开始观察 title 元素
+      observer.observe(titleElement, config)
+    </script>
   </body>
 </html>

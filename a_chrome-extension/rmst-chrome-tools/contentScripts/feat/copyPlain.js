@@ -13,7 +13,9 @@ document.addEventListener('copy', evt => {
 document.addEventListener('keydown', evt => {
   if ((evt.ctrlKey || evt.altKey) && evt.key === 'c') {
     const selText = window.getSelection().toString()
-    navigator.clipboard.writeText(replaceNbspToSpace(selText))
+    if (selText) {
+      navigator.clipboard.writeText(replaceNbspToSpace(selText))
+    }
   }
 })
 
