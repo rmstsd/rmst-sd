@@ -9,7 +9,7 @@ pub fn z_vec() {
   let filtered_list: Vec<_> = list.iter().filter(|x| **x > 3).collect();
   // println!("{filtered_list:#?}");
 
-  let mut c1 = Counter::new(1);
+  let c1 = Counter::new(1);
 
   println!("{:#?}", c1.get_number());
   println!("{:#?}", c1.get_number());
