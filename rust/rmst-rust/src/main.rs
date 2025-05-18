@@ -1,7 +1,7 @@
 #![allow(warnings)]
 
 use serde::{Deserialize, Deserializer, Serialize, de};
-use serde_json::{Value, json};
+use serde_json::{Value, json, to_value};
 #[derive(Debug, Serialize, Deserialize)]
 struct EdPath {
   path: String,
@@ -58,7 +58,7 @@ where
   }
 }
 
-fn main() {
+fn mainff() {
   dbg!(&"start");
 
   set_window_icon(
@@ -110,7 +110,7 @@ fn main() {
 // use image::ImageFormat::Png;
 // use image::load_from_memory;
 use reqwest::get;
-use std::io::Cursor;
+use std::{io::Cursor, path::PathBuf, process::Command};
 // use tauri::{AppHandle, Manager, WindowBuilder};
 
 async fn set_window_icon(url: String) -> Result<(), String> {
@@ -165,4 +165,48 @@ async fn set_window_icon(url: String) -> Result<(), String> {
   }
 
   Ok(())
+}
+
+fn main() {
+  let str = None;
+
+  let cc: String = str.unwrap_or_default();
+
+  // let r = exec();
+  // dbg!(&r);
+  // let data = Some(vec!["a", "b"]);
+  // let val = to_value(data);
+
+  // dbg!(&val);
+}
+
+fn searchEven(nums: Vec<i32>) -> Option<i32> {
+  let f = nums.iter().find(|&num| num % 2 == 0)?;
+  Some(*f)
+}
+
+fn exec() -> Result<(), bool> {
+  // 指定目标目录（可替换为实际路径）
+  let target_dir = PathBuf::from(r"E:/rmst-sd");
+
+  // 构建命令：node sc.js
+  let mut cmd = Command::new("node");
+  cmd.arg("a.js").current_dir(target_dir); // 设置工作目录
+
+  // 执行命令并处理输出
+  match cmd.status() {
+    Ok(status) => {
+      if status.success() {
+        println!("命令执行成功");
+        Ok(())
+      } else {
+        println!("命令执行失败，退出码：{}", status.code().unwrap_or(-1));
+        Err(false)
+      }
+    }
+    Err(e) => {
+      eprintln!("启动进程失败：{}", e);
+      Err(false)
+    }
+  }
 }

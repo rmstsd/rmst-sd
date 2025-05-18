@@ -6,253 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style></style>
+    <style>
+      .oriimage {
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-out {
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes slide-from-right {
+        from {
+          transform: translateX(30px);
+        }
+      }
+
+      @keyframes slide-to-left {
+        to {
+          transform: translateX(-30px);
+        }
+      }
+
+      ::view-transition-old(root) {
+        animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out, 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+      }
+
+      ::view-transition-new(root) {
+        animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+          300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+      }
+    </style>
   </head>
 
   <body>
-    <div contenteditable="true" style="padding: 10px; height: 500px"></div>
-
     <div>
-      asda
-      <br />
-      sdasdasddfghfgh asdadiv
-
-      <div></div>
+      <!-- <img class="oriimage" src="./assets/avatar-2.png" alt="" style="width: 100px" /> -->
+      <div class="oriimage" style="width: 100px; height: 100px; background-color: red"></div>
     </div>
     <script>
-      const data = `
-      组	权限项	中文标签	中文解释																
-FleetSceneRun	Menu	菜单	如果配置了菜单，菜单栏显示“调度场景”。																
-FleetSceneRun	View	查看	页面显示内容。																
-FleetSceneRun	RobotEdit	机器人操作	可接单、不接单、获取控制权、释放控制权、重连、清错、重置、故障重连等。																
-FleetSceneRun	SendOrder	发单	简单测试、复杂测试、随机测试。																
-FleetSceneRun	Debug	调试	取消所有运单、重置所有机器人。																
-FleetSceneRun	AIDiagnose	AI 诊断	工具栏和机器人卡片中显示 “AI 诊断”入口。																
-FleetSceneRun	EditScene	编辑场景	运行页面显示“编辑”按钮。																
-																			
-FleetSceneEdit	AddScene	添加场景	编辑页面显示“添加场景”按钮。																
-FleetSceneEdit	ImportScene	导入场景	编辑页面显示“导入场景”按钮。																
-FleetSceneEdit	ExportScene	导出场景	编辑页面显示“导出场景”按钮。																
-FleetSceneEdit	ImportRdsCoreScene	导入 RDS CORE 场景	编辑页面显示“导入 RDS CORE 场景”按钮。																
-FleetSceneEdit	DisableScene	停用场景	编辑页面显示“停用场景”按钮。																
-FleetSceneEdit	DeleteScene	删除场景	编辑页面显示“删除场景”按钮。																
-FleetSceneEdit	OneKeyEmulation	一键仿真	编辑页面显示“一键仿真”按钮。																
-FleetSceneEdit	Robot	机器人	包括添加机器人组、删除机器人组、编辑机器人组、添加机器人、删除机器人、编辑机器人。																
-FleetSceneEdit	Area	区域	包括添加区域、删除区域、编辑区域。																
-FleetSceneEdit	ContainerType	容器类型	包括添加容器类型、删除容器类型、编辑容器类型。																
-FleetSceneEdit	Door	门	包括添加门、删除门、编辑门。																
-																			
-FleetSceneRun	EmulationMenu	菜单	如果配置了菜单，菜单栏显示“仿真中心”。“调度场景”运行界面显示“仿真”按钮。																
-FleetSceneRun	ViewEdit	查看编辑	页面显示内容且可进行全部操作。																
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			
-																			`
-      function excelToJson(excelContent) {
-        const lines = excelContent.trim().split('\n')
-        const headers = lines[0].split('\t')
-        let result = []
+      const oriimage = document.querySelector('.oriimage')
 
-        for (let i = 1; i < lines.length; i++) {
-          if (lines[i].trim() === '') continue
-          const values = lines[i].split('\t')
-          const item = {}
-          for (let j = 0; j < headers.length; j++) {
-            item[headers[j]] = values[j] || ''
+      let div = document.createElement('div')
+
+      oriimage.onclick = () => {
+        document.startViewTransition(() => {
+          oriimage.style.display = 'none'
+
+          div = document.createElement('div')
+
+          div.onclick = () => {
+            document.startViewTransition(() => {
+              oriimage.style.display = 'block'
+              div.remove()
+            })
           }
-          result.push(item)
-        }
 
-        result = result.filter(item => item.组)
+          div.style.background = 'rgba(0,0,0,0.5)'
+          div.style.position = 'fixed'
+          div.style.inset = 0
+          div.style.display = 'flex'
+          div.style.justifyContent = 'center'
+          div.style.alignItems = 'center'
+          document.body.appendChild(div)
 
-        result.forEach(item => {
-          for (const key in item) {
-            if (!item[key]) {
-              delete item[key]
-            }
-          }
+          let image2 = document.createElement('div')
+
+          image2.style.width = '80%'
+          image2.style.height = '80%'
+          image2.style.backgroundColor = 'pink'
+          div.appendChild(image2)
         })
-        return result
       }
-
-      const jsonResult = excelToJson(data)
-      console.log(jsonResult)
     </script>
   </body>
 </html>
