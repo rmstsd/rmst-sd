@@ -11,3 +11,11 @@
 ---
 
 `notepad $profile.AllUsersAllHosts`
+
+```bash
+$Host.UI.RawUI.WindowTitle = Split-Path -Path $PWD.Path -Leaf
+
+set-alias -name pp -value pnpm
+set-alias -name yy -value yarn
+set-alias -name nn -value npm
+```
