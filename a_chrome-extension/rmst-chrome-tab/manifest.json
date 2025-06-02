@@ -1,0 +1,17 @@
+{
+  "name": "rmst-chrome-tab",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "48": "image/smile.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["<all_urls>"],
+  "chrome_url_overrides": {
+    "newtab": "./dist/index.html"
+  },
+  "permissions": ["debugger", "tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage", "webRequest"],
+  "web_accessible_resources": []
+}

@@ -1,8 +1,24 @@
-use icon::download_icon;
+#[macro_use]
+extern crate lazy_static;
+use std::sync::Mutex;
 
-mod icon;
+#[derive(Debug)]
+struct User {
+  uu: i32,
+}
 
-#[tokio::main]
-async fn main() {
-  download_icon("https://chat.deepseek.com/favicon.svg").await;
+lazy_static! {
+  static ref GLOBAL_DATA: Mutex<Option<User>> = Mutex::new(None);
+}
+
+fn main() {
+  // 设置值
+  *GLOBAL_DATA.lock().unwrap() = Some(User { uu: 77 });
+
+  // 读取值
+  if let Some(data) = &*GLOBAL_DATA.lock().unwrap() {
+    dbg!(&data);
+
+    dbg!(&data.uu);
+  }
 }
