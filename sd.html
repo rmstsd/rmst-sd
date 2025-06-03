@@ -6,106 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style>
-      .oriimage {
-      }
-
-      @keyframes fade-in {
-        from {
-          opacity: 0;
-        }
-      }
-
-      @keyframes fade-out {
-        to {
-          opacity: 0;
-        }
-      }
-
-      @keyframes slide-from-right {
-        from {
-          transform: translateX(30px);
-        }
-      }
-
-      @keyframes slide-to-left {
-        to {
-          transform: translateX(-30px);
-        }
-      }
-
-      ::view-transition-old(root) {
-        animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out, 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-      }
-
-      ::view-transition-new(root) {
-        animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-          300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <div>
-      <!-- <img class="oriimage" src="./assets/avatar-2.png" alt="" style="width: 100px" /> -->
-      <div class="oriimage" style="width: 100px; height: 100px; background-color: red"></div>
-    </div>
+    <div
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: pink;
+        white-space: pre-line;
+        text-align: justify;
+        min-width: max-content;
+      "
+    ></div>
+
+    <div class="test" style="text-align: justify-all; white-space: pre-line"></div>
     <script>
-      const oriimage = document.querySelector('.oriimage')
+      const test = document.querySelector('.test')
+      test.textContent = ``
 
-      let div = document.createElement('div')
+      const div = document.querySelector('div')
 
-      oriimage.onclick = () => {
-        document.startViewTransition(() => {
-          oriimage.style.display = 'none'
+      div.textContent = `      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+ eiusmod tempor incididunt ut labore et dolore
+magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+`
 
-          div = document.createElement('div')
+      let dd = false
+      let downPos = { x: 0, y: 0 }
 
-          div.onclick = () => {
-            document.startViewTransition(() => {
-              oriimage.style.display = 'block'
-              div.remove()
-            })
-          }
+      let pos = { x: 0, y: 0 }
+      let downSnap = { x: 0, y: 0 }
 
-          div.style.background = 'rgba(0,0,0,0.5)'
-          div.style.position = 'fixed'
-          div.style.inset = 0
-          div.style.display = 'flex'
-          div.style.justifyContent = 'center'
-          div.style.alignItems = 'center'
-          document.body.appendChild(div)
+      div.onpointerdown = evt => {
+        evt.preventDefault()
+        dd = true
+        downSnap = { ...pos }
 
-          let image2 = document.createElement('div')
-
-          image2.style.width = '80%'
-          image2.style.height = '80%'
-          image2.style.backgroundColor = 'pink'
-          div.appendChild(image2)
-        })
+        downPos = { x: evt.clientX, y: evt.clientY }
       }
-    </script>
 
-    <div style="height: 500px; background-color: pink; display: grid; grid-template-columns: 1fr 1fr">
-      <div>43454</div>
-      <div style="overflow: auto; height: 100%">
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-        <h1>sdgfdgh</h1>
-      </div>
-    </div>
+      document.addEventListener('pointermove', evt => {
+        if (dd) {
+          const x = downSnap.x + evt.clientX - downPos.x
+          const y = downSnap.y + evt.clientY - downPos.y
+
+          div.style.left = `${x}px`
+          div.style.top = `${y}px`
+
+          pos = { x, y }
+        }
+      })
+
+      document.addEventListener('pointerup', evt => {
+        dd = false
+      })
+    </script>
   </body>
 </html>
