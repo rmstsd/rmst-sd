@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .outer {
+      --height: 40px;
+      --border-color: #ff7777;
+      --border-width: 2px;
+      --triangle-size: 16px;
+
+      --_dd: calc(var(--border-width) / 2);
+
+      display: inline-block;
+      box-sizing: border-box;
+      padding: var(--border-width);
+      height: var(--height);
+      background-color: var(--border-color);
+      clip-path: polygon(
+        0 var(--triangle-size),
+        var(--triangle-size) 0,
+        100% 0,
+        100% calc(100% - var(--triangle-size)),
+        calc(100% - var(--triangle-size)) 100%,
+        0 100%
+      );
+
+      &:hover {
+        --border-color: rgb(255, 0, 0);
+      }
+    }
+    .inner {
+      padding: 0 20px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: #6868cb;
+      clip-path: polygon(
+        0 calc(var(--triangle-size) - var(--_dd)),
+        calc(var(--triangle-size) - var(--_dd)) 0,
+        100% 0,
+        100% calc(100% - var(--triangle-size) + var(--_dd)),
+        calc(100% - var(--triangle-size) + var(--_dd)) 100%,
+        0 100%
+      );
+      color: #fff;
+    }
+  </style>
+  <body>
+    <div class="outer" style="cursor: pointer">
+      <div class="inner">Click Me!</div>
+    </div>
+    <div class="outer" style="--height: 24px; --border-color: orange; --border-width: 1px; cursor: move">
+      <div class="inner">哈哈</div>
+    </div>
+    <div
+      class="outer"
+      style="--height: 60px; --border-color: #05ff11; --border-width: 8px; --triangle-size: 30px; cursor: pointer"
+    >
+      <div class="inner">市房管局快递费开了个</div>
+    </div>
+  </body>
+</html>
