@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>sd</title>
+
+    <style></style>
+  </head>
+
+  <body>
+    <script>
+      // 机器人名（可选）@位置1:动作1->
+      // 动作可以以 * 开头，表示 binTask
+
+      const rr = /^\*?\w+$/
+      // console.log(rr.test('aaa'))
+      // console.log(rr.test('*aaa'))
+      // console.log(rr.test('*a*aa'))
+
+      const reg = /(\w)?@((\w+)\:([\w\*]+)->)+/
+      // const reg = /(\w)?@[\w]+\:[\w\*]+(->[\w]+\:[\w\*]+)*$/
+
+      const list = [
+        'AMB-01@AP1:Wait->AP2:Load',
+        'AMB-01@AP1:Wait',
+        '@AP1:Wait',
+        '@AP1:Wait->AP2:Load',
+        '@AP1:Wait->AP2:*Load->AP3:Load',
+        '@AP1:Wait->AP2:Load->AP3:Load->AP4:*Load',
+        '',
+        '@AP1:Wait->',
+        '@AP1:Wait->AP2:',
+        '@AP1:Wait->AP2',
+        '@AP1:',
+        '@AP1:Wait->AP3:Lo*ad',
+        '@AP1:Wait->AP3:*Lo*ad',
+        '@-AP1:-Wait-',
+        ''
+      ]
+
+      list.forEach((item, i) => {
+        if (!item) {
+          console.log('分割线------------')
+        } else {
+          const ac = validate(item)
+
+          console.log(i, ac)
+        }
+      })
+
+      function validate(str) {
+        const at = '@'
+        const atIndex = str.indexOf(at)
+
+        const pointAndActionList = str.slice(atIndex + 1).split('->')
+
+        for (const item of pointAndActionList) {
+          const [point, action] = item.split(':')
+
+          if (!point || !action) {
+            return false
+          }
+
+          if (!rr.test(action)) {
+            return false
+          }
+        }
+
+        return true
+      }
+
+      // 匹配至少两个字母用连字符分隔的字符串
+      // const pattern = /^[\w+]+(->[\w\*]+)*$/
+
+      // console.log('---------------------------------')
+      // // 测试示例
+      // console.log(pattern.test('a')) // true
+      // console.log(pattern.test('a->b')) // true
+      // console.log(pattern.test('a->b->c*')) // true
+      // console.log(pattern.test('a->b->c->d')) // true
+      // console.log(pattern.test('a->')) // false
+      // console.log(pattern.test('a->b->')) // false
+    </script>
+  </body>
+</html>
