@@ -1,9 +1,9 @@
 {
   "name": "rmst-vscode-tools",
   "displayName": "rmst-vscode-tools",
-  "description": "对单词重命名",
+  "description": "rmst-vscode-tools",
   "repository": {},
-  "version": "0.2.2",
+  "version": "0.2.3",
   "icon": "icon.png",
   "publisher": "rmst",
   "main": "./out/extension.js",
@@ -54,7 +54,11 @@
       },
       {
         "command": "openFolderInNewWindow",
-        "title": "在新窗口打开"
+        "title": "rmst: 在新窗口打开"
+      },
+      {
+        "command": "openInWindowTerminal",
+        "title": "rmst: 在终端打开"
       }
     ],
     "menus": {

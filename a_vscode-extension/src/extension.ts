@@ -2,6 +2,9 @@ import * as vscode from 'vscode'
 
 import { getFunctionNode } from './smallFeat/deleteFunc'
 import getNewWords from './smallFeat/getNewWords'
+import { exec } from 'child_process'
+import { dirname } from 'path'
+import path = require('path')
 
 // 命令触发的时候调用
 export function activate(context: vscode.ExtensionContext) {
@@ -70,5 +73,18 @@ export function activate(context: vscode.ExtensionContext) {
 
   vscode.commands.registerCommand('openFolderInNewWindow', uri => {
     vscode.commands.executeCommand('vscode.openFolder', uri, { forceNewWindow: true })
+  })
+
+  vscode.commands.registerCommand('openInWindowTerminal', uri => {
+    const workspaceFolders = vscode.workspace.workspaceFolders
+    if (!workspaceFolders.length) {
+      console.log('请先打开一个文件夹')
+      return
+    }
+
+    const fsPath = workspaceFolders[0].uri.fsPath
+    const basename = path.basename(fsPath)
+
+    exec(`wt -d ${fsPath} --title ${basename} --suppressApplicationTitle`)
   })
 }
