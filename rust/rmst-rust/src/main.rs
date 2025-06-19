@@ -1,24 +1,16 @@
-#[macro_use]
-extern crate lazy_static;
-use std::sync::Mutex;
-
-#[derive(Debug)]
-struct User {
-  uu: i32,
-}
-
-lazy_static! {
-  static ref GLOBAL_DATA: Mutex<Option<User>> = Mutex::new(None);
-}
+#![allow(warnings)]
 
 fn main() {
-  // 设置值
-  *GLOBAL_DATA.lock().unwrap() = Some(User { uu: 77 });
+  let mut s: String = String::from("Hello, world!");
 
-  // 读取值
-  if let Some(data) = &*GLOBAL_DATA.lock().unwrap() {
-    dbg!(&data);
+  let rs: &str;
 
-    dbg!(&data.uu);
+  let r4 = &s;
+  rs = ff(r4);
+
+  dbg!(&rs);
+
+  fn ff<'a>(r4: &'a str) -> &'a str {
+    r4
   }
 }
