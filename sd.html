@@ -6,82 +6,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style></style>
+    <style>
+      .active {
+        color: red;
+      }
+
+      h1 {
+        margin: 0;
+      }
+    </style>
   </head>
 
   <body>
+    <div class="container" style="overflow: auto; height: 500px; margin-top: 300px">
+      <div style="display: flex; position: sticky; top: 0">
+        <button id="b-1" class="active">1</button>
+        <button id="b-2">2</button>
+        <button id="b-3">3</button>
+        <button id="b-4">4</button>
+        <button id="b-5">5</button>
+      </div>
+
+      <div>
+        <div data-id="b-1">
+          <h1>1</h1>
+          <div style="height: 200px"></div>
+        </div>
+
+        <div data-id="b-2">
+          <h1>2</h1>
+          <div style="height: 200px"></div>
+        </div>
+
+        <div data-id="b-3">
+          <h1>3</h1>
+          <div style="height: 200px"></div>
+        </div>
+
+        <div data-id="b-4">
+          <h1>4</h1>
+        </div>
+
+        <div data-id="b-5">
+          <h1>5</h1>
+        </div>
+      </div>
+    </div>
+
     <script>
-      // 机器人名（可选）@位置1:动作1->
-      // 动作可以以 * 开头，表示 binTask
+      const buttons = document.querySelectorAll('button')
 
-      const rr = /^\*?\w+$/
-      // console.log(rr.test('aaa'))
-      // console.log(rr.test('*aaa'))
-      // console.log(rr.test('*a*aa'))
+      let isScroll = false
 
-      const reg = /(\w)?@((\w+)\:([\w\*]+)->)+/
-      // const reg = /(\w)?@[\w]+\:[\w\*]+(->[\w]+\:[\w\*]+)*$/
+      buttons.forEach(item => {
+        item.onclick = () => {
+          isScroll = true
 
-      const list = [
-        'AMB-01@AP1:Wait->AP2:Load',
-        'AMB-01@AP1:Wait',
-        '@AP1:Wait',
-        '@AP1:Wait->AP2:Load',
-        '@AP1:Wait->AP2:*Load->AP3:Load',
-        '@AP1:Wait->AP2:Load->AP3:Load->AP4:*Load',
-        '',
-        '@AP1:Wait->',
-        '@AP1:Wait->AP2:',
-        '@AP1:Wait->AP2',
-        '@AP1:',
-        '@AP1:Wait->AP3:Lo*ad',
-        '@AP1:Wait->AP3:*Lo*ad',
-        '@-AP1:-Wait-',
-        ''
-      ]
+          removeClass()
+          document.querySelector(`[data-id="${item.id}"]`).scrollIntoView({})
 
-      list.forEach((item, i) => {
-        if (!item) {
-          console.log('分割线------------')
-        } else {
-          const ac = validate(item)
+          item.classList.add('active')
 
-          console.log(i, ac)
+          setTimeout(() => {
+            isScroll = false
+          }, 300)
         }
       })
 
-      function validate(str) {
-        const at = '@'
-        const atIndex = str.indexOf(at)
+      const headings = document.querySelectorAll('h1')
 
-        const pointAndActionList = str.slice(atIndex + 1).split('->')
+      const container = document.querySelector('.container')
 
-        for (const item of pointAndActionList) {
-          const [point, action] = item.split(':')
+      const containerRect = container.getBoundingClientRect()
 
-          if (!point || !action) {
-            return false
-          }
-
-          if (!rr.test(action)) {
-            return false
-          }
-        }
-
-        return true
+      function removeClass() {
+        buttons.forEach(item => item.classList.remove('active'))
       }
 
-      // 匹配至少两个字母用连字符分隔的字符串
-      // const pattern = /^[\w+]+(->[\w\*]+)*$/
+      container.addEventListener('scroll', evt => {
+        return
+        if (isScroll) {
+          return
+        }
+        const allContent = document.querySelectorAll('div[data-id]')
 
-      // console.log('---------------------------------')
-      // // 测试示例
-      // console.log(pattern.test('a')) // true
-      // console.log(pattern.test('a->b')) // true
-      // console.log(pattern.test('a->b->c*')) // true
-      // console.log(pattern.test('a->b->c->d')) // true
-      // console.log(pattern.test('a->')) // false
-      // console.log(pattern.test('a->b->')) // false
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
+          console.log('触底')
+
+          removeClass()
+
+          document.querySelector('#b-5').classList.add('active')
+          return
+        }
+
+        for (const content of Array.from(allContent)) {
+          const { top, height } = content.getBoundingClientRect()
+
+          const offsetTop = top - containerRect.top - 0
+          const innerTargetOffset = containerRect.height / 2
+          let inView =
+            (offsetTop >= 0 && offsetTop <= innerTargetOffset) ||
+            (offsetTop <= 0 && offsetTop + height >= innerTargetOffset)
+
+          if (inView) {
+            removeClass()
+            const button = document.querySelector(`#${content.dataset.id}`)
+            button.classList.add('active')
+            break
+          }
+        }
+      })
     </script>
   </body>
 </html>
