@@ -35,11 +35,6 @@
       "css": ["./contentScripts/feat/universal/u.css"]
     },
     {
-      "matches": ["*://www.zhihu.com/*"],
-      "css": ["./contentScripts/thirdWeb/zhihu/zhihu.css"],
-      "js": ["./contentScripts/thirdWeb/zhihu/zhihu.js"]
-    },
-    {
       "matches": ["*://www.huya.com/*"],
       "css": ["./contentScripts/thirdWeb/huya.css"]
     },

@@ -18,6 +18,22 @@
   </head>
 
   <body>
+    <svg width="100%" height="100%">
+      <defs>
+        <filter x="0" y="0" width="1" height="1" id="solid">
+          <feFlood flood-color="orange" />
+          <feMerge>
+            <feMergeNode in="bg" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <text filter="url(#solid)" x="20" y="50" font-size="50">solid background</text>
+    </svg>
+
+    <div style="writing-mode: vertical-lr">eat food</div>
+    <div style="writing-mode: vertical-lr">电饭锅</div>
+
     <div class="container" style="overflow: auto; height: 500px; margin-top: 300px">
       <div style="display: flex; position: sticky; top: 0">
         <button id="b-1" class="active">1</button>
