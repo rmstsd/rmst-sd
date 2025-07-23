@@ -3,7 +3,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "icons": {
-    "48": "image/cute.png"
+    "48": "image/aa.png"
   },
   "background": {
     "service_worker": "background.js"
@@ -30,7 +30,8 @@
         "./contentScripts/feat/clearStorage.js",
         "./contentScripts/feat/toLowercase.js",
         "./contentScripts/feat/copyPlain.js",
-        "./contentScripts/feat/universal/u.js"
+        "./contentScripts/feat/universal/u.js",
+        "./contentScripts/feat/copy_link_name.js"
       ],
       "css": ["./contentScripts/feat/universal/u.css"]
     },
