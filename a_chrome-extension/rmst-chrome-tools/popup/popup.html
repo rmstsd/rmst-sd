@@ -8,12 +8,13 @@
     <style>
       body {
         margin: 0;
-        width: 160px;
+        width: 180px;
       }
 
       .icon {
         width: 20px;
         height: 20px;
+        flex-shrink: 0;
         display: inline-block;
         line-height: 20px;
         font-weight: bold;
@@ -25,6 +26,7 @@
         align-items: center;
         gap: 8px;
         padding: 5px 10px;
+        padding-right: 2px;
         color: #464646;
         font-size: 14px;
         line-height: 1.5715;
@@ -44,8 +46,16 @@
         text-decoration: underline;
       }
 
+      .bk-title {
+        width: 0;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
       .clear-local-data {
-        margin: 10px;
+        margin: 5px 10px;
       }
       button {
         cursor: pointer;

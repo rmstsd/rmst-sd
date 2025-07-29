@@ -85,6 +85,7 @@ async function initBookMarkUi() {
     }
 
     const span = document.createElement('span')
+    span.classList.add('bk-title')
     span.innerText = item.title
 
     const a = document.createElement('a')
