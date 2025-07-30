@@ -18,19 +18,6 @@
   </head>
 
   <body>
-    <svg width="100%" height="100%">
-      <defs>
-        <filter x="0" y="0" width="1" height="1" id="solid">
-          <feFlood flood-color="orange" />
-          <feMerge>
-            <feMergeNode in="bg" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <text filter="url(#solid)" x="20" y="50" font-size="50">solid background</text>
-    </svg>
-
     <div style="writing-mode: vertical-lr">eat food</div>
     <div style="writing-mode: vertical-lr">电饭锅</div>
 
@@ -70,6 +57,12 @@
     </div>
 
     <script>
+      document.addEventListener('keydown', evt => {
+        if (evt.ctrlKey && evt.code === 'Space') {
+          console.log('44')
+        }
+      })
+
       const buttons = document.querySelectorAll('button')
 
       let isScroll = false
@@ -121,8 +114,7 @@
           const offsetTop = top - containerRect.top - 0
           const innerTargetOffset = containerRect.height / 2
           let inView =
-            (offsetTop >= 0 && offsetTop <= innerTargetOffset) ||
-            (offsetTop <= 0 && offsetTop + height >= innerTargetOffset)
+            (offsetTop >= 0 && offsetTop <= innerTargetOffset) || (offsetTop <= 0 && offsetTop + height >= innerTargetOffset)
 
           if (inView) {
             removeClass()

@@ -4,11 +4,7 @@ if (window.location.hostname !== 'localhost') {
 
 document.addEventListener('keydown', evt => {
   if (evt.key === 'Backspace') {
-    if (
-      evt.target.tagName === 'INPUT' ||
-      evt.target.tagName === 'TEXTAREA' ||
-      evt.target.hasAttribute('contenteditable')
-    ) {
+    if (evt.target.tagName === 'INPUT' || evt.target.tagName === 'TEXTAREA' || evt.target.hasAttribute('contenteditable')) {
       return
     }
 
@@ -21,6 +17,7 @@ document.addEventListener('keydown', evt => {
 
   // 阻止 ctrl + d 会触发收藏书签的默认事件
   if (evt.ctrlKey && evt.key === 'd') {
+    console.log('ctrl + d')
     evt.preventDefault()
   }
 })
