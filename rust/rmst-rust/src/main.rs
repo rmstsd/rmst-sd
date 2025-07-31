@@ -1,16 +1,35 @@
 #![allow(warnings)]
 
-fn main() {
-  let mut s: String = String::from("Hello, world!");
+use std::{fs, io};
 
-  let rs: &str;
+fn main() -> Result<(), io::Error> {
+  let path = r"C:\Users\rmst\Desktop\rmst-assets";
 
-  let r4 = &s;
-  rs = ff(r4);
+  let read_dir = fs::read_dir(path)?;
 
-  dbg!(&rs);
+  let list: Vec<String> = read_dir
+    .filter_map(|f| {
+      let f = f.ok()?;
+      let md = f.metadata().ok()?;
 
-  fn ff<'a>(r4: &'a str) -> &'a str {
-    r4
-  }
+      if md.is_file() {
+        let nn = f.file_name().into_string().ok();
+
+        nn
+      } else if md.is_dir() {
+        let nn = f.file_name().into_string().ok();
+
+        nn
+      } else {
+        None
+      }
+    })
+    .collect();
+
+  dbg!(&"--");
+  dbg!(&list);
+
+  // let file = File::open(path)?;
+
+  return Ok(());
 }
