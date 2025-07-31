@@ -57,6 +57,19 @@
     </div>
 
     <script>
+      const pattern = new URLPattern({
+        protocol: '*',
+        hostname: 'localhost',
+        pathname: '*'
+        // 其他组件默认会继承通配符，也可显式指定
+      })
+
+      console.log(pattern)
+
+      console.log(pattern.test('http://localhost:7777/sd.html'))
+    </script>
+
+    <script>
       document.addEventListener('keydown', evt => {
         if (evt.ctrlKey && evt.code === 'Space') {
           console.log('44')

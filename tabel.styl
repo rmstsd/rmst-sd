@@ -1,0 +1,33 @@
+thead {
+  tr {
+    th {
+      border-top 1px solid borderWrapperColor
+
+      &:first-child {
+        border-left 1px solid borderWrapperColor
+      }
+
+      &:last-child {
+        border-right 1px solid borderWrapperColor
+      }
+    }
+  }
+}
+
+tbody {
+  tr:last-child {
+    td {
+      border-bottom 1px solid borderWrapperColor
+    }
+  }
+
+  td {
+    &:first-child {
+      border-left 1px solid borderWrapperColor
+    }
+
+    &:last-child {
+      border-right 1px solid borderWrapperColor
+    }
+  }
+}

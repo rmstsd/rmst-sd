@@ -70,9 +70,8 @@ async function initBookMarkUi() {
   const bms = await getBookmarks()
 
   const aElement_array = bms.map((item, index) => {
-    const url = new URL(item.url)
     const img = document.createElement('img')
-    img.src = url.origin + '/favicon.ico'
+    img.src = getFaviconUrl(item.url)
     img.classList.add('icon')
 
     const spanEmpty = document.createElement('span')
@@ -104,4 +103,11 @@ async function toLowercaseBtn() {
   const [currTab] = await chrome.tabs.query({ active: true })
 
   chrome.tabs.sendMessage(currTab.id, { evt: 'evt_to-lowercase' })
+}
+
+const getFaviconUrl = url => {
+  const favUrl = new URL(chrome.runtime.getURL('/_favicon/'))
+  favUrl.searchParams.set('pageUrl', url)
+  favUrl.searchParams.set('size', '100')
+  return favUrl.toString()
 }

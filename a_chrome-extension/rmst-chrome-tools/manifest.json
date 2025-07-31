@@ -15,7 +15,7 @@
     }
   },
   "host_permissions": ["<all_urls>"],
-  "permissions": ["debugger", "tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage", "webRequest"],
+  "permissions": ["debugger", "tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage", "webRequest", "favicon"],
   "web_accessible_resources": [
     {
       "resources": ["/contentScripts/feat/disabledWs/scriptSrc.js"],
