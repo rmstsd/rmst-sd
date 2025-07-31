@@ -38,6 +38,13 @@ function IndexPopup() {
 
 export default IndexPopup
 
+function faviconURL(u) {
+  const url = new URL(chrome.runtime.getURL('/_favicon/'))
+  url.searchParams.set('pageUrl', u)
+  url.searchParams.set('size', '32')
+  return url.toString()
+}
+
 async function getBookMarkUi() {
   const getBookmarks = async () => {
     const bookmarks = await chrome.bookmarks.getTree()
@@ -45,7 +52,7 @@ async function getBookMarkUi() {
   }
   const bms = await getBookmarks()
 
-  return bms.map(item => ({ item, icon: getFaviconUrl(item.url) }))
+  return bms.map(item => ({ item, icon: faviconURL(item.url) }))
 }
 
 // 监听 clearStorage.js 发过来的消息
@@ -110,11 +117,4 @@ async function toLowercaseBtn() {
   const [currTab] = await chrome.tabs.query({ active: true })
 
   chrome.tabs.sendMessage(currTab.id, { evt: 'evt_to-lowercase' })
-}
-
-const getFaviconUrl = url => {
-  const favUrl = new URL(chrome.runtime.getURL('/_favicon/'))
-  favUrl.searchParams.set('pageUrl', url)
-  favUrl.searchParams.set('size', '100')
-  return favUrl.toString()
 }
