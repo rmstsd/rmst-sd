@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "dev": "node --watch node.mjs"
+  }
+}
