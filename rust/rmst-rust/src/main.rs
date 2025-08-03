@@ -1,20 +1,45 @@
 #![allow(warnings)]
 
 mod fs_op;
+mod jksj;
 
 use std::{
   fs::{self, File},
   io,
 };
 
-use crate::fs_op::list_name::list_names;
+use crate::{fs_op::list_name::list_names, jksj::cli::cli_index};
 
 fn main() {
-  // dbg!(&0);
-  // let ans = aa().expect("aa");
-  // dbg!(&ans);
+  // let url = "https://rustwiki.org/zh-CN/book/ch07-05-separating-modules-into-different-files.html";
 
-  let x: Result<i32, ()> = Ok(2);
+  // let resp = reqwest::blocking::get(url).unwrap().text().unwrap();
+
+  // let md = html2md::parse_html(&resp);
+
+  // dbg!(123);
+
+  // fs::write("../html.md", md);
+
+  cli_index();
+}
+
+#[derive(Debug)]
+enum MyError {
+  A,
+  B,
+}
+
+fn divide(a: i32, b: i32) -> Result<bool, MyError> {
+  if b == 0 { Err(MyError::A) } else { Ok(true) }
+}
+
+fn square_root(x: f64) -> Result<f64, MyError> {
+  if x < 0.0 {
+    Err(MyError::B)
+  } else {
+    Ok(x.sqrt())
+  }
 }
 
 fn aa() -> Result<(), io::Error> {

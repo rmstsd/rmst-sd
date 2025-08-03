@@ -1,9 +1,5 @@
 import './u.css'
 
-if (window.location.hostname !== 'localhost') {
-  document.body.classList.add('rmst-u')
-}
-
 document.addEventListener('keydown', evt => {
   const target = evt.target as HTMLElement
 
