@@ -8,6 +8,7 @@
     "dev": "set node_env=dev && nodemon index.mjs"
   },
   "dependencies": {
+    "address": "^2.0.3",
     "axios": "^1.7.2",
     "fast-glob": "^3.3.2",
     "filedirname": "^3.4.0",
