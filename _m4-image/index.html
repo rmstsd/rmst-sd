@@ -3,140 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="icon" type="image/png" href="./icon.png" />
-
-    <title>M4图集</title>
-
-    <style>
-      body {
-        margin: 0;
-      }
-
-      .nav-container {
-        padding: 8px 16px;
-        background-color: #fff;
-        position: sticky;
-        top: 0;
-
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      nav {
-        display: flex;
-        gap: 8px;
-      }
-
-      a {
-        cursor: pointer;
-        text-decoration: underline;
-        text-underline-offset: 2px;
-      }
-
-      .iamge-container {
-        padding: 16px;
-        padding-top: 0;
-        display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      }
-
-      .image-wrapper-item {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .image-item {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        border-radius: 4px;
-        object-fit: cover;
-        border: 1px solid #ddd;
-        cursor: pointer;
-      }
-
-      .image-title {
-      }
-
-      .iamge-container-mobile {
-        padding: 16px;
-        padding-top: 0;
-        display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      }
-
-      .image-item-mobile {
-        width: 100%;
-        aspect-ratio: 9 / 16;
-        border-radius: 4px;
-        object-fit: contain;
-        cursor: pointer;
-      }
-
-      .image-modal {
-        position: fixed;
-        inset: 0;
-
-        z-index: 10;
-      }
-
-      .mask {
-        position: absolute;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.6);
-      }
-
-      .image-modal-content {
-        position: absolute;
-        inset: 0;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .image-modal-preview {
-        max-width: 90%;
-        max-height: 90%;
-      }
-
-      .close-btn {
-        position: absolute;
-        top: 40px;
-        right: 40px;
-        cursor: pointer;
-        padding: 10px 20px;
-      }
-    </style>
+    <link rel="stylesheet" href="./style.css" />
+    <title>M4 Gallery</title>
   </head>
   <body>
     <div class="nav-container">
-      <nav>
-        <a id="zhBtn" href="#zh">中文</a>
-        <a id="enBtn" href="#en">英文</a>
-      </nav>
+      <div class="nav-container-left">
+        <img class="logo-img" src="./icon.png" />
+        <span class="logo-title">M4 Gallery</span>
+      </div>
 
-      <nav>
-        <a id="pcBtn">PC</a>
-        <a id="mobileBtn">Mobile</a>
-      </nav>
+      <div class="nav-container-right">
+        <nav>
+          <a id="pcBtn">PC</a>
+          <a id="mobileBtn">Mobile</a>
+        </nav>
+        <nav>
+          <a id="zhBtn" href="#zh">中</a>
+          <a id="enBtn" href="#en">EN</a>
+        </nav>
+      </div>
     </div>
 
     <div class="image-container-wrapper">
-      <div class="iamge-container"></div>
-      <div class="iamge-container-mobile"></div>
+      <div class="image-container"></div>
+      <div class="image-container-mobile"></div>
     </div>
 
     <div class="image-modal" style="display: none">
-      <div class="mask"></div>
+      <div id="mask" class="mask"></div>
 
-      <div class="image-modal-content">
+      <div id="imageModalContent" class="image-modal-content">
         <img class="image-modal-preview" />
       </div>
 
-      <button class="close-btn">关闭</button>
+      <span class="close-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          fill="none"
+          version="1.1"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+        >
+          <g>
+            <path
+              d="M24,4.5C34.7696,4.5,43.5,13.2304,43.5,24C43.5,34.7696,34.7696,43.5,24,43.5C13.2304,43.5,4.5,34.7696,4.5,24C4.5,13.2304,13.2304,4.5,24,4.5ZM24,48C37.2548,48,48,37.2548,48,24C48,10.7452,37.2548,0,24,0C10.7452,0,0,10.7452,0,24C0,37.2548,10.7452,48,24,48ZM16.4062,16.4062C15.525,17.2875,15.525,18.7125,16.4062,19.5844L20.8125,23.9906L16.4062,28.3969C15.525,29.2781,15.525,30.7031,16.4062,31.575C17.2875,32.4469,18.7125,32.4562,19.5844,31.575L23.9906,27.1687L28.3969,31.575C29.2781,32.4562,30.7031,32.4562,31.575,31.575C32.4469,30.6937,32.4562,29.2687,31.575,28.3969L27.1687,23.9906L31.575,19.5844C32.4562,18.7031,32.4562,17.2781,31.575,16.4062C30.6937,15.5344,29.2687,15.525,28.3969,16.4062L23.9906,20.8125L19.5844,16.4062C18.7031,15.525,17.2781,15.525,16.4062,16.4062Z"
+              fill="#F2F3F4"
+              fill-opacity="1"
+            />
+          </g>
+        </svg>
+      </span>
     </div>
 
     <script src="./data.js"></script>
@@ -144,8 +64,8 @@
     <script>
       const imageContainerWrapper = document.querySelector('.image-container-wrapper')
 
-      const imageContainer = document.querySelector('.iamge-container')
-      const imageContainerMobile = document.querySelector('.iamge-container-mobile')
+      const imageContainer = document.querySelector('.image-container')
+      const imageContainerMobile = document.querySelector('.image-container-mobile')
 
       const closeBtn = document.querySelector('.close-btn')
       const imageModal = document.querySelector('.image-modal')
@@ -156,8 +76,26 @@
       updateState({ lang: location.hash.slice(1) || 'zh' })
       function updateState(newState) {
         Object.assign(state, newState)
-
         updateList()
+
+        {
+          enBtn.classList.remove('a-active')
+          zhBtn.classList.remove('a-active')
+          mobileBtn.classList.remove('a-active')
+          pcBtn.classList.remove('a-active')
+
+          if (state.lang === 'zh') {
+            zhBtn.classList.add('a-active')
+          } else {
+            enBtn.classList.add('a-active')
+          }
+
+          if (state.type === 'pc') {
+            pcBtn.classList.add('a-active')
+          } else {
+            mobileBtn.classList.add('a-active')
+          }
+        }
       }
 
       function updateList() {
@@ -208,6 +146,12 @@
       closeBtn.addEventListener('click', () => {
         imageModal.style.display = 'none'
       })
+
+      imageModalContent.onclick = evt => {
+        if (evt.target === imageModalContent) {
+          imageModal.style.display = 'none'
+        }
+      }
 
       imageContainerWrapper.addEventListener('click', evt => {
         const target = evt.target
