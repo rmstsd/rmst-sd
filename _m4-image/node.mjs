@@ -3,11 +3,11 @@
 import { readdir, writeFile } from 'fs/promises'
 import { join } from 'path'
 
-const baseDir_en_mobile = './M4图集/M4 调度图集_英文/移动端'
-const baseDir_en_pc = './M4图集/M4 调度图集_英文/桌面端'
+const baseDir_en_mobile = './M4图集/M4_英文/M4_移动端'
+const baseDir_en_pc = './M4图集/M4_英文/M4_桌面端'
 
-const baseDir_zh_mobile = './M4图集/M4 调度图集_中文/移动端'
-const baseDir_zh_pc = './M4图集/M4 调度图集_中文/桌面端'
+const baseDir_zh_mobile = './M4图集/M4_中文/M4_移动端'
+const baseDir_zh_pc = './M4图集/M4_中文/M4_桌面端'
 
 async function getAllImageFiles(dir) {
   const files = []
