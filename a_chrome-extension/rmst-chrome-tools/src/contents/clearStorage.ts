@@ -1,3 +1,5 @@
+export {}
+
 // 监听 chrome.tabs.sendMessage 发送的消息
 chrome.runtime.onMessage.addListener(message => {
   window.localStorage.clear()

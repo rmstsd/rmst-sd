@@ -1,3 +1,5 @@
+export {}
+
 const urlMap = {
   '//www.jianshu.com/go-wild': '继续前往',
   '//leetcode.cn/link/': '继续访问',

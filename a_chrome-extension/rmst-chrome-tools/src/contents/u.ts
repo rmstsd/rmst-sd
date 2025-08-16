@@ -1,3 +1,5 @@
+export {}
+
 import './u.css'
 
 document.addEventListener('keydown', evt => {

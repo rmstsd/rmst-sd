@@ -1,3 +1,7 @@
+export {}
+
+import { replaceNbspToSpace } from '@/util.ts'
+
 let copyLinkNameLastTarget = null
 document.addEventListener(
   'contextmenu',

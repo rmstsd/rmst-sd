@@ -1,3 +1,5 @@
+export {}
+
 chrome.runtime.onMessage.addListener(data => {
   if (data.evt === 'evt_to-lowercase') {
     logTextNodes(document.body)
