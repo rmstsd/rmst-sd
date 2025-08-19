@@ -14,11 +14,31 @@
       h1 {
         margin: 0;
       }
+
+      .fff {
+        overflow: hidden;
+      }
+
+      .g-item {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     </style>
   </head>
 
   <body>
-    <div class="aadd">法国华府国际规划局规划加个</div>
+    <div style="display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr)">
+      <div class="fff">
+        <div class="g-item">法国华府国际规划局规划加个</div>
+      </div>
+      <div class="fff">
+        <div class="g-item">法国华府国际规划局规划加个</div>
+      </div>
+      <div class="fff">
+        <div class="g-item">法国华府国际规划局规划加个</div>
+      </div>
+    </div>
 
     <script></script>
 
