@@ -10,16 +10,22 @@ fn main() {
   // data.push(4);
   &data1;
 
-  let s1 = "aa".to_string();
+  let s1 = String::from("aa");
   let s2 = "b".to_string();
 
-  let res = max(&s1, &s2);
-  s1;
-  s2;
+  let res: &str = max(&s1, &s2);
+
   dbg!(res);
+
+  let result = get_max(&s1);
+  println!("bigger one: {}", result);
 }
 
-fn max(s1: &String, s2: &String) -> &str {
+fn get_max(s1: &String) -> &str {
+  max(s1, "Cynthia")
+}
+
+fn max<'a>(s1: &'a str, s2: &'a str) -> &'a str {
   if (s1 > s2) {
     return &s1;
   };
