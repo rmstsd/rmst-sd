@@ -35,6 +35,16 @@ app.get('/css/:fileName', async ({ query, params }) => {
   return new Response(content, { headers: { 'content-type': 'text/css' } })
 })
 
+app.post('/test', async ({ body }) => {
+  console.log(body.delay)
+
+  await wait(body.delay ?? 0)
+
+  return {
+    data: body.data
+  }
+})
+
 app.get('/blog', async () => {
   await sleep(2000)
 
