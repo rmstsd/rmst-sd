@@ -28,17 +28,20 @@
   </head>
 
   <body>
-    <div style="display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr)">
-      <div class="fff">
-        <div class="g-item">法国华府国际规划局规划加个</div>
-      </div>
-      <div class="fff">
-        <div class="g-item">法国华府国际规划局规划加个</div>
-      </div>
-      <div class="fff">
-        <div class="g-item">法国华府国际规划局规划加个</div>
-      </div>
-    </div>
+    <button id="ff">fetch</button>
+
+    <script>
+      let requestQueue = Promise.resolve()
+      const dispatchWithQueue = request => {
+        requestQueue = requestQueue.then(() => request()).catch(err => Promise.reject(err))
+        return requestQueue
+      }
+
+      ff.onclick = () => {
+        dispatchWithQueue(() => fetch('http://localhost:1400/blog'))
+        dispatchWithQueue(() => fetch('http://localhost:1400/blog'))
+      }
+    </script>
 
     <script>
       const isObject = v => Object.prototype.toString.call(v) === '[object Object]'
@@ -155,11 +158,12 @@
       let isScroll = false
 
       buttons.forEach(item => {
+        return
         item.onclick = () => {
           isScroll = true
 
           removeClass()
-          document.querySelector(`[data-id="${item.id}"]`).scrollIntoView({})
+          document.querySelector(`[data-id="${item.id}"]`)?.scrollIntoView({})
 
           item.classList.add('active')
 

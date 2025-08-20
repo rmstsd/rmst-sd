@@ -1,6 +1,7 @@
 import { Elysia } from 'elysia'
 import { cors } from '@elysiajs/cors'
 import { staticPlugin } from '@elysiajs/static'
+import { sleep } from 'bun'
 
 const app = new Elysia().onError(({ code, error }) => {
   console.error('error -> ', code, error)
@@ -34,7 +35,9 @@ app.get('/css/:fileName', async ({ query, params }) => {
   return new Response(content, { headers: { 'content-type': 'text/css' } })
 })
 
-app.get('/blog', () => {
+app.get('/blog', async () => {
+  await sleep(2000)
+
   return 'blog'
 })
 
