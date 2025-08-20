@@ -23,7 +23,8 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*"
+      "https://*/*",
+      "http://*/*"
     ],
     "permissions": [
       "debugger",
@@ -34,7 +35,8 @@
       "cookies",
       "storage",
       "webRequest",
-      "favicon"
+      "favicon",
+      "scripting"
     ],
     "web_accessible_resources": [
       {

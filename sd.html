@@ -40,7 +40,64 @@
       </div>
     </div>
 
-    <script></script>
+    <script>
+      const isObject = v => Object.prototype.toString.call(v) === '[object Object]'
+      function formatValue(v) {
+        if (typeof v === 'number') {
+          return ['span', {}, v]
+        } else if (typeof v === 'string') {
+          return ['span', {}, JSON.stringify(v)]
+        } else if (typeof v === 'boolean') {
+          return ['span', {}, v]
+        } else if (isObject(v)) {
+          return ['object', { object: v }]
+        } else {
+          return ['span', {}, String(v)]
+        }
+      }
+
+      // 1. 定义格式化器
+      const userFormatter = {
+        // 检查是否需要对当前值进行格式化（这里只处理带 `userType` 标记的对象）
+        header(value) {
+          // 是对象
+          if (typeof value === 'object' && value !== null && value.__ob) {
+            return ['div', {}, ['span', {}, 'Reactive'], '<', '对象', `>`]
+          }
+
+          return null
+        },
+
+        hasBody() {
+          return true
+        },
+
+        // 展开时显示的内容（这里显示完整属性）
+        body(value) {
+          value.__ob = false
+
+          return ['object', { object: value }]
+        }
+      }
+
+      // 2. 注册格式化器（添加到全局数组）
+      window.devtoolsFormatters = window.devtoolsFormatters || []
+      window.devtoolsFormatters.push(userFormatter)
+
+      // 3. 测试：创建一个“用户对象”并标记类型
+      const user = {
+        __ob: true,
+        userType: 'user', // 用于格式化器识别
+        id: 1,
+        name: '张三',
+        age: 25,
+        email: 'zhangsan@example.com',
+        address: '北京市'
+      }
+
+      // 在控制台打印，查看效果
+      console.log(user)
+    </script>
 
     <div class="container" style="overflow: auto; height: 500px; margin-top: 300px">
       <div style="display: flex; position: sticky; top: 0">
@@ -84,10 +141,6 @@
         pathname: '*'
         // 其他组件默认会继承通配符，也可显式指定
       })
-
-      console.log(pattern)
-
-      console.log(pattern.test('http://localhost:7777/sd.html'))
     </script>
 
     <script>

@@ -1,13 +1,14 @@
-export {}
-
 import { replaceNbspToSpace } from '@/util.ts'
+import type { PlasmoCSConfig } from 'plasmo'
+
+export const config: PlasmoCSConfig = {}
 
 let copyLinkNameLastTarget = null
 document.addEventListener(
   'contextmenu',
   event => {
     const eventPath = event.composedPath()
-    for (const node of eventPath) {
+    for (const node of eventPath as any) {
       if (node.nodeName != null && node.nodeName.toLowerCase() === 'a') {
         copyLinkNameLastTarget = node
         return
@@ -15,10 +16,12 @@ document.addEventListener(
     }
     copyLinkNameLastTarget = null
   },
-  /* capture= */ true
+  true
 )
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log(copyLinkNameLastTarget)
+
   if (message === 'copy' && copyLinkNameLastTarget != null) {
     console.log('copyLinkNameLastTarget.innerText', copyLinkNameLastTarget.innerText)
 

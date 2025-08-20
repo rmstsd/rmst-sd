@@ -1,4 +1,8 @@
-export {}
+import type { PlasmoCSConfig } from 'plasmo'
+
+export const config: PlasmoCSConfig = {
+  world: 'MAIN'
+}
 
 const urlMap = {
   '//www.jianshu.com/go-wild': '继续前往',
