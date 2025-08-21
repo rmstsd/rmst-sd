@@ -40,9 +40,7 @@ app.post('/test', async ({ body }) => {
 
   await wait(body.delay ?? 0)
 
-  return {
-    data: body.data
-  }
+  return [{ name: body.name }]
 })
 
 app.get('/blog', async () => {
