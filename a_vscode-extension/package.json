@@ -3,7 +3,7 @@
   "displayName": "rmst-vscode-tools",
   "description": "rmst-vscode-tools",
   "repository": {},
-  "version": "0.2.3",
+  "version": "0.2.4",
   "icon": "icon.png",
   "publisher": "rmst",
   "main": "./out/extension.js",
@@ -59,6 +59,10 @@
       {
         "command": "openInWindowTerminal",
         "title": "rmst: 在终端打开"
+      },
+      {
+        "command": "i18n",
+        "title": "rmst: 国际化"
       }
     ],
     "menus": {
@@ -69,6 +73,16 @@
           "group": "navigation@999"
         }
       ]
+    },
+    "configuration": {
+      "title": "rmst-vscode-tools",
+      "properties": {
+        "i18nFilePath": {
+          "type": "string",
+          "default": "",
+          "description": "i18n文件路径"
+        }
+      }
     }
   }
 }
