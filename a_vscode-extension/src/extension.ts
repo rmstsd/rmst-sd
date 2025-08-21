@@ -135,7 +135,7 @@ export function activate(context: vscode.ExtensionContext) {
       .filter(([k, v]) => v === wordText)
       .map(([k]) => k)
 
-    const options: vscode.QuickPickItem[] = dictKeys.map(item => ({ label: `lo(${item})` }))
+    const options: vscode.QuickPickItem[] = dictKeys.map(item => ({ label: `lo('${item}')` }))
 
     if (options.length === 0) {
       vscode.window.showWarningMessage('未找到国际化字符串')
