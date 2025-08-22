@@ -6,215 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style>
-      .active {
-        color: red;
-      }
-
-      h1 {
-        margin: 0;
-      }
-
-      .fff {
-        overflow: hidden;
-      }
-
-      .g-item {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <button id="ff">删除</button>
-
     <script>
-      let requestQueue = Promise.resolve()
-      const dispatchWithQueue = request => {
-        requestQueue = requestQueue.then(() => request()).catch(err => Promise.reject(err))
-        return requestQueue
-      }
+      function program() {
+        const value = { key: 123 }
 
-      ff.onclick = () => {
-        dispatchWithQueue(() => fetch('http://localhost:1400/blog'))
-        dispatchWithQueue(() => fetch('http://localhost:1400/blog'))
-      }
-    </script>
-
-    <script>
-      const isObject = v => Object.prototype.toString.call(v) === '[object Object]'
-      function formatValue(v) {
-        if (typeof v === 'number') {
-          return ['span', {}, v]
-        } else if (typeof v === 'string') {
-          return ['span', {}, JSON.stringify(v)]
-        } else if (typeof v === 'boolean') {
-          return ['span', {}, v]
-        } else if (isObject(v)) {
-          return ['object', { object: v }]
-        } else {
-          return ['span', {}, String(v)]
+        // Implicitly propagated via shared reference to an external variable.
+        // The value is only available only for the _synchronous execution_ of
+        // the try-finally code.
+        try {
+          shared = value
+          implicit()
+        } finally {
+          shared = undefined
         }
       }
 
-      // 1. 定义格式化器
-      const userFormatter = {
-        // 检查是否需要对当前值进行格式化（这里只处理带 `userType` 标记的对象）
-        header(value) {
-          // 是对象
-          if (typeof value === 'object' && value !== null && value.__ob) {
-            return ['div', {}, ['span', {}, 'Reactive'], '<', '删除', `>`]
-          }
+      let shared
+      async function implicit() {
+        // The shared reference is still set to the correct value.
+        console.log(shared.key, 123)
 
-          return null
-        },
+        await 1
 
-        hasBody() {
-          return true
-        },
-
-        // 展开时显示的内容（这里显示完整属性）
-        body(value) {
-          value.__ob = false
-
-          return ['object', { object: value }]
-        }
+        // After awaiting, the shared reference has been reset to `undefined`.
+        // We've lost access to our original value.
+        console.log(shared.key, 123)
       }
 
-      // 2. 注册格式化器（添加到全局数组）
-      window.devtoolsFormatters = window.devtoolsFormatters || []
-      window.devtoolsFormatters.push(userFormatter)
-
-      // 3. 测试：创建一个“用户对象”并标记类型
-      const user = {
-        __ob: true,
-        userType: 'user', // 用于格式化器识别
-        id: 1,
-        name: '张三',
-        age: 25,
-        email: 'zhangsan@example.com',
-        address: '北京市'
-      }
-
-      // 在控制台打印，查看效果
-      console.log(user)
-    </script>
-
-    <div class="container" style="overflow: auto; height: 500px; margin-top: 300px">
-      <div style="display: flex; position: sticky; top: 0">
-        <button id="b-1" class="active">1</button>
-        <button id="b-2">2</button>
-        <button id="b-3">3</button>
-        <button id="b-4">4</button>
-        <button id="b-5">5</button>
-      </div>
-
-      <div>
-        <div data-id="b-1">
-          <h1>1</h1>
-          <div style="height: 200px"></div>
-        </div>
-
-        <div data-id="b-2">
-          <h1>2</h1>
-          <div style="height: 200px"></div>
-        </div>
-
-        <div data-id="b-3">
-          <h1>3</h1>
-          <div style="height: 200px"></div>
-        </div>
-
-        <div data-id="b-4">
-          <h1>4</h1>
-        </div>
-
-        <div data-id="b-5">
-          <h1>5</h1>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const pattern = new URLPattern({
-        protocol: '*',
-        hostname: 'localhost',
-        pathname: '*'
-        // 其他组件默认会继承通配符，也可显式指定
-      })
-    </script>
-
-    <script>
-      document.addEventListener('keydown', evt => {
-        if (evt.ctrlKey && evt.code === 'Space') {
-          console.log('44')
-        }
-      })
-
-      const buttons = document.querySelectorAll('button')
-
-      let isScroll = false
-
-      buttons.forEach(item => {
-        return
-        item.onclick = () => {
-          isScroll = true
-
-          removeClass()
-          document.querySelector(`[data-id="${item.id}"]`)?.scrollIntoView({})
-
-          item.classList.add('active')
-
-          setTimeout(() => {
-            isScroll = false
-          }, 300)
-        }
-      })
-
-      const headings = document.querySelectorAll('h1')
-
-      const container = document.querySelector('.container')
-
-      const containerRect = container.getBoundingClientRect()
-
-      function removeClass() {
-        buttons.forEach(item => item.classList.remove('active'))
-      }
-
-      container.addEventListener('scroll', evt => {
-        return
-        if (isScroll) {
-          return
-        }
-        const allContent = document.querySelectorAll('div[data-id]')
-
-        if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
-          console.log('触底')
-
-          removeClass()
-
-          document.querySelector('#b-5').classList.add('active')
-          return
-        }
-
-        for (const content of Array.from(allContent)) {
-          const { top, height } = content.getBoundingClientRect()
-
-          const offsetTop = top - containerRect.top - 0
-          const innerTargetOffset = containerRect.height / 2
-          let inView =
-            (offsetTop >= 0 && offsetTop <= innerTargetOffset) || (offsetTop <= 0 && offsetTop + height >= innerTargetOffset)
-
-          if (inView) {
-            removeClass()
-            const button = document.querySelector(`#${content.dataset.id}`)
-            button.classList.add('active')
-            break
-          }
-        }
-      })
+      program()
     </script>
   </body>
 </html>
