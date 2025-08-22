@@ -99,17 +99,36 @@ export function activate(context: vscode.ExtensionContext) {
     if (editor.selection.isEmpty) {
       location = editor.document.getWordRangeAtPosition(editor.selection.active)
       wordText = editor.document.getText(location)
-
-      console.log('location', location)
     } else {
       wordText = editor.document.getText(editor.selection)
       location = editor.selection
     }
 
+    console.log('location', location.start)
+    console.log('wordText', wordText)
+
     if (!wordText.trim() || !location) {
       vscode.window.showWarningMessage('请先选中需要国际化的字符串')
 
       return
+    }
+
+    const prevChar = editor.document.getText(
+      new vscode.Range(location.start.line, location.start.character - 1, location.start.line, location.start.character)
+    )
+    console.log('prevChar', prevChar)
+    const nextChar = editor.document.getText(
+      new vscode.Range(location.start.line, location.end.character, location.start.line, location.end.character + 1)
+    )
+    console.log('nextChar', nextChar)
+
+    if (prevChar === nextChar && [`'`, `"`, '`'].includes(prevChar)) {
+      location = new vscode.Range(
+        location.start.line,
+        location.start.character - 1,
+        location.end.line,
+        location.end.character + 1
+      )
     }
 
     const config = vscode.workspace.getConfiguration()
