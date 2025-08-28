@@ -1,43 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style></style>
+    <style>
+      .btn {
+        width: 200px;
+        height: 32px;
+        border-radius: 999px;
+        background-color: black;
+        background-image: radial-gradient(at 100% 0%, transparent var(--a), #00f7ff var(--a)),
+          radial-gradient(at 50% 0%, transparent var(--b), #ffb200 var(--b)),
+          radial-gradient(at 20% 0%, transparent var(--c), #ff00cc var(--c));
+
+        position: relative;
+        overflow: hidden;
+        resize: horizontal;
+      }
+
+      .ov {
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(6px);
+      }
+    </style>
   </head>
 
   <body>
-    <script>
-      function program() {
-        const value = { key: 123 }
+    <div class="btn" style="--a: 70%; --b: 60%; --c: 50%">
+      <div class="ov"></div>
+    </div>
 
-        // Implicitly propagated via shared reference to an external variable.
-        // The value is only available only for the _synchronous execution_ of
-        // the try-finally code.
-        try {
-          shared = value
-          implicit()
-        } finally {
-          shared = undefined
-        }
-      }
-
-      let shared
-      async function implicit() {
-        // The shared reference is still set to the correct value.
-        console.log(shared.key, 123)
-
-        await 1
-
-        // After awaiting, the shared reference has been reset to `undefined`.
-        // We've lost access to our original value.
-        console.log(shared.key, 123)
-      }
-
-      program()
-    </script>
+    <script></script>
   </body>
 </html>

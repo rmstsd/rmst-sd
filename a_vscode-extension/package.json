@@ -83,6 +83,18 @@
           "description": "i18n文件路径"
         }
       }
-    }
+    },
+    "languages": [
+      {
+        "id": "customIni",
+        "aliases": [
+          "txt"
+        ],
+        "extensions": [
+          ".txt"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ]
   }
 }

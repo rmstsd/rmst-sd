@@ -7,16 +7,6 @@ export const config: PlasmoCSConfig = {
 }
 
 document.addEventListener('keydown', evt => {
-  const target = evt.target as HTMLElement
-
-  if (evt.key === 'Backspace') {
-    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.hasAttribute('contenteditable')) {
-      return
-    }
-
-    evt.preventDefault()
-  }
-
   if (evt.ctrlKey && evt.key === 's') {
     evt.preventDefault()
   }
@@ -26,7 +16,9 @@ document.addEventListener('keydown', evt => {
     evt.preventDefault()
   }
 
-  if ((evt.ctrlKey || evt.altKey) && evt.key === 'c') {
+  if (evt.altKey && evt.altKey && evt.key === 'c') {
+    evt.preventDefault()
+
     const selText = window.getSelection().toString()
     if (selText) {
       navigator.clipboard.writeText(replaceNbspToSpace(selText))
