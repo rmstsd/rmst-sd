@@ -8,7 +8,7 @@
 
     <style>
       .btn {
-        width: 200px;
+        width: 100px;
         height: 32px;
         border-radius: 999px;
         background-color: black;
@@ -29,11 +29,82 @@
     </style>
   </head>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   <body>
     <div class="btn" style="--a: 70%; --b: 60%; --c: 50%">
       <div class="ov"></div>
     </div>
 
-    <script></script>
+    <script>
+      const btn = document.querySelector('.btn')
+
+      btn.onclick = () => {
+        axios
+          .get('http://localhost:1400/ff', {
+            responseType: 'blob'
+          })
+          .then(async res => {
+            const blob = res.data
+
+            const response = new Response(blob)
+            console.log(response)
+
+            const reader = response.body.getReader()
+            const textDecoder = new TextDecoder()
+            let result = true
+            let output = []
+
+            while (result) {
+              const { done, value } = await reader.read()
+
+              if (done) {
+                console.log('Stream ended')
+                result = false
+                break
+              }
+
+              const chunkText = textDecoder.decode(value)
+              output.push(chunkText)
+            }
+
+            console.log('done', output)
+          })
+        // getStream()
+      }
+
+      async function getStream() {
+        let response = await fetch('http://localhost:1400/ff')
+        console.log(response)
+
+        {
+          console.log(await response.text())
+          return
+        }
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+
+        const reader = response.body.getReader()
+        const textDecoder = new TextDecoder()
+        let result = true
+        let output = ''
+
+        while (result) {
+          const { done, value } = await reader.read()
+
+          if (done) {
+            console.log('Stream ended')
+            result = false
+            break
+          }
+
+          const chunkText = textDecoder.decode(value)
+          console.log(chunkText)
+          output += chunkText
+        }
+      }
+    </script>
   </body>
 </html>
