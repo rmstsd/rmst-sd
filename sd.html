@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,6 +26,31 @@
         inset: 0;
         backdrop-filter: blur(6px);
       }
+
+      .con {
+        display: flex;
+        border: 1px solid #000;
+
+        .item {
+          flex-basis: 50px;
+          height: 50px;
+
+          &.a {
+            background-color: pink;
+            flex-shrink: 1;
+            min-width: 60px;
+          }
+          &.b {
+            background-color: orange;
+            flex-shrink: 1;
+          }
+          &.c {
+            flex-basis: 100px;
+            background-color: purple;
+            flex-shrink: 2;
+          }
+        }
+      }
     </style>
   </head>
 
@@ -34,6 +59,12 @@
   <body>
     <div class="btn" style="--a: 70%; --b: 60%; --c: 50%">
       <div class="ov"></div>
+    </div>
+
+    <div class="con">
+      <div class="item a"></div>
+      <div class="item b"></div>
+      <div class="item c"></div>
     </div>
 
     <script>
@@ -49,8 +80,23 @@
 
             const response = new Response(blob)
             console.log(response)
+            {
+              let output = []
+              const textDecoder = new TextDecoder()
+              for await (const chunk of response.body) {
+                console.log(chunk)
+
+                const chunkText = textDecoder.decode(chunk)
+                output.push(chunkText)
+              }
+
+              console.log(output)
+
+              return
+            }
 
             const reader = response.body.getReader()
+
             const textDecoder = new TextDecoder()
             let result = true
             let output = []
@@ -104,6 +150,44 @@
           console.log(chunkText)
           output += chunkText
         }
+      }
+
+      // 除以 100
+      function numToPercent(num) {
+        let str = '00' + num.toString()
+
+        let oldDecimalPointIndex = str.indexOf('.')
+        if (oldDecimalPointIndex === -1) {
+          oldDecimalPointIndex = str.length
+        }
+
+        const oldPart1 = str.slice(0, oldDecimalPointIndex)
+        const oldPart2 = str.slice(oldDecimalPointIndex + 1)
+
+        const dotIndex = oldPart1.length - 2
+        const ansStr = oldPart1.slice(0, dotIndex) + '.' + oldPart1.slice(dotIndex) + oldPart2
+
+        return parseFloat(ansStr)
+      }
+
+      numToPercent(0.9)
+
+      // 0.445 -> 44.5
+      percentToNum(0.8)
+      function percentToNum(num) {
+        let str = num.toString() + '00'
+
+        let oldDecimalPointIndex = str.indexOf('.')
+        if (oldDecimalPointIndex === -1) {
+          oldDecimalPointIndex = str.length
+        }
+
+        const oldPart1 = str.slice(0, oldDecimalPointIndex)
+        const oldPart2 = str.slice(oldDecimalPointIndex + 1)
+
+        const ansStr = oldPart1 + oldPart2.slice(0, 2) + '.' + oldPart2.slice(2)
+
+        // console.log(parseFloat(ansStr))
       }
     </script>
   </body>

@@ -11,15 +11,28 @@ import path from 'node:path'
 // console.log(path.basename(`e:\\rmst-sd\\zz`))
 
 import { ip, ipv6, mac } from 'address'
-import { readFileSync } from 'node:fs'
+import { createReadStream, readFileSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
+import { createInterface } from 'node:readline'
 
 // default interface 'eth' on linux, 'en' on osx.
 // const ip2 = ip() // '192.168.0.2'
 
 // console.log(ip2)
-const ans = await readFile('./package.json').catch(() => {
-  return 'err'
+const rl = createInterface({
+  input: createReadStream('./aa.txt'),
+  crlfDelay: Infinity
 })
 
-console.log(ans)
+rl.on('line', line => {
+  console.log('line', line)
+})
+
+rl.on('close', () => {
+  // 处理最后可能剩余的单行
+  console.log('close')
+})
+
+rl.on('error', error => {
+  console.error(error)
+})

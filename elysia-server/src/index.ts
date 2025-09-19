@@ -11,7 +11,7 @@ app.use(staticPlugin({ alwaysStatic: true, indexHTML: true }))
 
 app.get('/', () => new Response('Hello Elysia', { headers: { 'content-type': 'text/html' } }))
 app.get('/ff', async () => {
-  const content = await Bun.file('src/20250904-21.log').text()
+  const content = await Bun.file('src/20250905-14.log').text()
 
   console.log('res')
   return new Response(content, {
