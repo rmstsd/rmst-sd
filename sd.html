@@ -1,201 +1,117 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style>
-      .btn {
-        width: 100px;
-        height: 32px;
-        border-radius: 999px;
-        background-color: black;
-        background-image: radial-gradient(at 100% 0%, transparent var(--a), #00f7ff var(--a)),
-          radial-gradient(at 50% 0%, transparent var(--b), #ffb200 var(--b)),
-          radial-gradient(at 20% 0%, transparent var(--c), #ff00cc var(--c));
-
-        position: relative;
-        overflow: hidden;
-        resize: horizontal;
-      }
-
-      .ov {
-        position: absolute;
-        inset: 0;
-        backdrop-filter: blur(6px);
-      }
-
-      .con {
-        display: flex;
-        border: 1px solid #000;
-
-        .item {
-          flex-basis: 50px;
-          height: 50px;
-
-          &.a {
-            background-color: pink;
-            flex-shrink: 1;
-            min-width: 60px;
-          }
-          &.b {
-            background-color: orange;
-            flex-shrink: 1;
-          }
-          &.c {
-            flex-basis: 100px;
-            background-color: purple;
-            flex-shrink: 2;
-          }
-        }
-      }
-    </style>
+    <style></style>
   </head>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
   <body>
-    <div class="btn" style="--a: 70%; --b: 60%; --c: 50%">
-      <div class="ov"></div>
-    </div>
-
-    <div class="con">
-      <div class="item a"></div>
-      <div class="item b"></div>
-      <div class="item c"></div>
-    </div>
-
-    <div style="border: 1px solid #000; font-size: 22px; font-size: 0; line-height: 40px">
-      <img src="./assets/avatar-100x100.png" alt="" height="12" style="vertical-align: middle; margin-right: 4px" />
-
-      <span style="font-size: 20px; vertical-align: middle">大富豪国际东方换个地方</span>
-      <span style="font-size: 20px; vertical-align: middle; color: red">大富豪国际东方换个地方</span>
-    </div>
-
     <script>
-      const btn = document.querySelector('.btn')
-
-      btn.onclick = () => {
-        axios
-          .get('http://localhost:1400/ff', {
-            responseType: 'blob'
-          })
-          .then(async res => {
-            const blob = res.data
-
-            const response = new Response(blob)
-            console.log(response)
-            {
-              let output = []
-              const textDecoder = new TextDecoder()
-              for await (const chunk of response.body) {
-                console.log(chunk)
-
-                const chunkText = textDecoder.decode(chunk)
-                output.push(chunkText)
-              }
-
-              console.log(output)
-
-              return
-            }
-
-            const reader = response.body.getReader()
-
-            const textDecoder = new TextDecoder()
-            let result = true
-            let output = []
-
-            while (result) {
-              const { done, value } = await reader.read()
-
-              if (done) {
-                console.log('Stream ended')
-                result = false
-                break
-              }
-
-              const chunkText = textDecoder.decode(value)
-              output.push(chunkText)
-            }
-
-            console.log('done', output)
-          })
-        // getStream()
-      }
-
-      async function getStream() {
-        let response = await fetch('http://localhost:1400/ff')
-        console.log(response)
-
+      const previewFloors = [
         {
-          console.log(await response.text())
-          return
+          enabled: true,
+          areaName: 'Area-3',
+          floorOrder: 4,
+          code: '434',
+          areaId: 3,
+          switchMapPoints: [
+            {
+              pointName: 'SM100'
+            },
+            {
+              pointName: 'LM500'
+            },
+            {
+              pointName: 'LM507'
+            }
+          ],
+          waitPointNames: []
+        },
+        {
+          enabled: true,
+          areaName: 'Area-4',
+          floorOrder: 2,
+          code: '334',
+          areaId: 4,
+          switchMapPoints: [
+            {
+              pointName: 'AP2021'
+            }
+          ],
+          waitPointNames: []
+        },
+        {
+          enabled: true,
+          areaName: 'F1',
+          floorOrder: 1,
+          code: 'd',
+          areaId: 1,
+          switchMapPoints: [
+            {
+              pointName: 'SM100'
+            }
+          ],
+          waitPointNames: []
+        },
+        {
+          enabled: true,
+          areaName: 'F2',
+          floorOrder: 0,
+          code: '556',
+          areaId: 2,
+          switchMapPoints: [
+            {
+              pointName: 'SM100',
+              pointName: 'LM500'
+            }
+          ],
+          waitPointNames: []
         }
+      ]
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
+      let a = [1, null, 1, 1, 1, null, 1]
 
-        const reader = response.body.getReader()
-        const textDecoder = new TextDecoder()
-        let result = true
-        let output = ''
+      console.log(previewFloors)
 
-        while (result) {
-          const { done, value } = await reader.read()
+      function getAns() {
+        const points = Array.from(
+          new Set(previewFloors.map(item => item.switchMapPoints.map(point => point.pointName)).flat(Infinity))
+        )
+        const ans = points.map(item => {
+          const ansList = []
 
-          if (done) {
-            console.log('Stream ended')
-            result = false
-            break
+          let prevFloor
+          let prevIndex = -1
+
+          for (let index = 0; index < previewFloors.length; index++) {
+            const fItem = previewFloors[index]
+            const same = fItem.switchMapPoints.some(p => p.pointName === item)
+
+            if (same) {
+              if (!prevFloor) {
+                prevFloor = fItem
+                prevIndex = index
+              } else {
+                ansList.push({ pointName: item, start: prevFloor, end: fItem, span: index - prevIndex })
+
+                prevFloor = fItem
+                prevIndex = index
+              }
+            }
           }
 
-          const chunkText = textDecoder.decode(value)
-          console.log(chunkText)
-          output += chunkText
-        }
+          return ansList
+        })
+
+        return ans
       }
 
-      // 除以 100
-      function numToPercent(num) {
-        let str = '00' + num.toString()
-
-        let oldDecimalPointIndex = str.indexOf('.')
-        if (oldDecimalPointIndex === -1) {
-          oldDecimalPointIndex = str.length
-        }
-
-        const oldPart1 = str.slice(0, oldDecimalPointIndex)
-        const oldPart2 = str.slice(oldDecimalPointIndex + 1)
-
-        const dotIndex = oldPart1.length - 2
-        const ansStr = oldPart1.slice(0, dotIndex) + '.' + oldPart1.slice(dotIndex) + oldPart2
-
-        return parseFloat(ansStr)
-      }
-
-      numToPercent(0.9)
-
-      // 0.445 -> 44.5
-      percentToNum(0.8)
-      function percentToNum(num) {
-        let str = num.toString() + '00'
-
-        let oldDecimalPointIndex = str.indexOf('.')
-        if (oldDecimalPointIndex === -1) {
-          oldDecimalPointIndex = str.length
-        }
-
-        const oldPart1 = str.slice(0, oldDecimalPointIndex)
-        const oldPart2 = str.slice(oldDecimalPointIndex + 1)
-
-        const ansStr = oldPart1 + oldPart2.slice(0, 2) + '.' + oldPart2.slice(2)
-
-        // console.log(parseFloat(ansStr))
-      }
+      const ans = getAns(previewFloors)
+      console.log(ans)
     </script>
   </body>
 </html>
