@@ -5,12 +5,14 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "set node_env=dev && nodemon index.mjs"
+    "dev": "set node_env=dev && nodemon index.mjs",
+    "cp": "cp-cli ./a/ b/a/"
   },
   "dependencies": {
     "address": "^2.0.3",
     "axios": "^1.7.2",
     "fast-glob": "^3.3.2",
+    "cp-cli": "2.0.0",
     "filedirname": "^3.4.0",
     "fs-extra": "^11.3.0",
     "https-proxy-agent": "^7.0.5",
