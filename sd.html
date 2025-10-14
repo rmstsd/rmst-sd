@@ -10,41 +10,6 @@
   </head>
 
   <body>
-    <script>
-      ;(async () => {
-        let p
-
-        const getData = async () => {
-          if (!p) {
-            p = new Promise((resolve, reject) => {
-              console.log('fetch')
-
-              setTimeout(() => {
-                resolve('123')
-              }, 1000)
-            })
-          }
-
-          return p
-        }
-
-        getData().then(res => {
-          console.log(res)
-        })
-        getData().then(res => {
-          console.log(res)
-        })
-        getData().then(res => {
-          console.log(res)
-        })
-
-        setTimeout(() => {
-          console.log(p)
-          getData().then(res => {
-            console.log(res)
-          })
-        }, 1200)
-      })()
-    </script>
+    收到防腐剂宏观环境建行卡
   </body>
 </html>
