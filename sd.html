@@ -11,107 +11,40 @@
 
   <body>
     <script>
-      const previewFloors = [
-        {
-          enabled: true,
-          areaName: 'Area-3',
-          floorOrder: 4,
-          code: '434',
-          areaId: 3,
-          switchMapPoints: [
-            {
-              pointName: 'SM100'
-            },
-            {
-              pointName: 'LM500'
-            },
-            {
-              pointName: 'LM507'
-            }
-          ],
-          waitPointNames: []
-        },
-        {
-          enabled: true,
-          areaName: 'Area-4',
-          floorOrder: 2,
-          code: '334',
-          areaId: 4,
-          switchMapPoints: [
-            {
-              pointName: 'AP2021'
-            }
-          ],
-          waitPointNames: []
-        },
-        {
-          enabled: true,
-          areaName: 'F1',
-          floorOrder: 1,
-          code: 'd',
-          areaId: 1,
-          switchMapPoints: [
-            {
-              pointName: 'SM100'
-            }
-          ],
-          waitPointNames: []
-        },
-        {
-          enabled: true,
-          areaName: 'F2',
-          floorOrder: 0,
-          code: '556',
-          areaId: 2,
-          switchMapPoints: [
-            {
-              pointName: 'SM100',
-              pointName: 'LM500'
-            }
-          ],
-          waitPointNames: []
-        }
-      ]
+      ;(async () => {
+        let p
 
-      let a = [1, null, 1, 1, 1, null, 1]
+        const getData = async () => {
+          if (!p) {
+            p = new Promise((resolve, reject) => {
+              console.log('fetch')
 
-      console.log(previewFloors)
-
-      function getAns() {
-        const points = Array.from(
-          new Set(previewFloors.map(item => item.switchMapPoints.map(point => point.pointName)).flat(Infinity))
-        )
-        const ans = points.map(item => {
-          const ansList = []
-
-          let prevFloor
-          let prevIndex = -1
-
-          for (let index = 0; index < previewFloors.length; index++) {
-            const fItem = previewFloors[index]
-            const same = fItem.switchMapPoints.some(p => p.pointName === item)
-
-            if (same) {
-              if (!prevFloor) {
-                prevFloor = fItem
-                prevIndex = index
-              } else {
-                ansList.push({ pointName: item, start: prevFloor, end: fItem, span: index - prevIndex })
-
-                prevFloor = fItem
-                prevIndex = index
-              }
-            }
+              setTimeout(() => {
+                resolve('123')
+              }, 1000)
+            })
           }
 
-          return ansList
+          return p
+        }
+
+        getData().then(res => {
+          console.log(res)
+        })
+        getData().then(res => {
+          console.log(res)
+        })
+        getData().then(res => {
+          console.log(res)
         })
 
-        return ans
-      }
-
-      const ans = getAns(previewFloors)
-      console.log(ans)
+        setTimeout(() => {
+          console.log(p)
+          getData().then(res => {
+            console.log(res)
+          })
+        }, 1200)
+      })()
     </script>
   </body>
 </html>

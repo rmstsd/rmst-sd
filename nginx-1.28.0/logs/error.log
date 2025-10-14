@@ -1,0 +1,4 @@
+2025/10/14 10:26:20 [error] 30204#24160: *14 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 192.168.9.155, server: rmst.sd, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "192.168.9.155"
+2025/10/14 10:26:22 [error] 30204#24160: *14 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 192.168.9.155, server: rmst.sd, request: "GET / HTTP/1.1", upstream: "http://[::1]:3000/", host: "192.168.9.155"
+2025/10/14 10:26:22 [error] 30204#24160: *14 no live upstreams while connecting to upstream, client: 192.168.9.155, server: rmst.sd, request: "GET /favicon.ico HTTP/1.1", upstream: "http://localhost/favicon.ico", host: "192.168.9.155", referrer: "http://192.168.9.155/"
+2025/10/14 10:28:41 [notice] 31920#27028: signal process started
