@@ -4,12 +4,21 @@ import './style.less'
 
 function IndexPopup() {
   const [data, setData] = useState<{ item: chrome.bookmarks.BookmarkTreeNode; icon: string }[]>([])
+  const [selCopy, setSelCopy] = useState(false)
 
   useEffect(() => {
     getBookMarkUi().then(data => {
       setData(data)
     })
+
+    updateSelCopy()
   }, [])
+
+  function updateSelCopy() {
+    chrome.storage.local.get('selCopy', result => {
+      setSelCopy(result.selCopy)
+    })
+  }
 
   return (
     <div>
@@ -31,6 +40,19 @@ function IndexPopup() {
         <button className="toLowercase-btn" onClick={toLowercaseBtn}>
           小写
         </button>
+
+        <label className="sel-copy-label">
+          <input
+            type="checkbox"
+            checked={selCopy}
+            onChange={e => {
+              chrome.storage.local.set({ selCopy: e.target.checked }, () => {
+                updateSelCopy()
+              })
+            }}
+          />
+          <span>选中即复制</span>
+        </label>
       </div>
     </div>
   )

@@ -4,3 +4,7 @@ export const replaceNbspToSpace = text => {
 
   return text
 }
+
+export function copyText(text: string) {
+  navigator.clipboard.writeText(text)
+}
