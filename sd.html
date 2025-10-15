@@ -10,41 +10,64 @@
   </head>
 
   <body>
+    <input type="file" />
     <script>
+      const input = document.querySelector('input')
+
+      input.addEventListener('change', e => {
+        console.log(e.target.files[0])
+
+        read(e.target.files[0].stream())
+      })
       ;(async () => {
-        let p
+        const res = await fetch('./a.log')
 
-        const getData = async () => {
-          if (!p) {
-            p = new Promise((resolve, reject) => {
-              console.log('fetch')
+        read(res.body)
+      })()
 
-              setTimeout(() => {
-                resolve('123')
-              }, 1000)
-            })
-          }
-
-          return p
+      async function read(rs) {
+        let count = 0
+        let array = []
+        const decoder = new TextDecoder()
+        for await (const value of rs) {
+          count += 1
+          let buffer = decoder.decode(value, { stream: true })
+          array.push(buffer)
         }
 
-        getData().then(res => {
-          console.log(res)
-        })
-        getData().then(res => {
-          console.log(res)
-        })
-        getData().then(res => {
-          console.log(res)
-        })
+        console.log(count)
 
-        setTimeout(() => {
-          console.log(p)
-          getData().then(res => {
-            console.log(res)
-          })
-        }, 1200)
-      })()
+        let ans = array.map(txtToLogs)
+
+        for (let i = 0; i < ans.length; i++) {
+          if (i !== ans.length - 1) {
+            console.log(i)
+            const item = ans[i]
+            const nextItem = ans[i + 1]
+
+            const nextChunk = nextItem[0]
+            if (!nextChunk.module || !nextChunk.target) {
+              item.at(-1).content += nextChunk.content
+
+              nextItem.splice(0, 1)
+            }
+          }
+        }
+
+        console.log(ans)
+      }
+
+      function txtToLogs(txt) {
+        const lines = txt.split('\n').filter(Boolean)
+        return lines.map(line => {
+          const i = line.indexOf('|')
+          const head = line.substring(0, i)
+          const content = line.substring(i + 1)
+          const [timeStr, module, target] = head.split(':')
+          const time = timeStr
+          return { time, module, target, content }
+        })
+      }
     </script>
   </body>
 </html>
