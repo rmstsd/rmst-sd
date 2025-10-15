@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "reload": "node script-node/reload.mjs",
+    "start": "node script-node/start.mjs",
+    "quit": "node script-node/quit.mjs",
+    "kill": "node script-node/task-kill.mjs"
+  },
+  "devDependencies": {
+    "iconv-lite": "0.7.0"
+  }
+}
