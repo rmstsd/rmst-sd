@@ -7,90 +7,15 @@
     <title>sd</title>
 
     <style>
-      .a {
-        border: 1px solid #000;
-        align-items: center;
-        display: flex;
+      .item {
+      }
+      img {
+        max-width: 100%;
       }
     </style>
   </head>
 
   <body>
-    <div class="a">
-      <img src="./assets/avatar-100x100.png" alt="" style="flex-shrink: 0" />
-
-      <div style="overflow: auto">
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-        <h1>asdasd</h1>
-      </div>
-    </div>
-
-    <input type="file" />
-    <script>
-      const input = document.querySelector('input')
-
-      input.addEventListener('change', e => {
-        console.log(e.target.files[0])
-
-        read(e.target.files[0].stream())
-      })
-      ;(async () => {
-        const res = await fetch('./a.log')
-
-        read(res.body)
-      })()
-
-      async function read(rs) {
-        let count = 0
-        let array = []
-        const decoder = new TextDecoder()
-        for await (const value of rs) {
-          count += 1
-          let buffer = decoder.decode(value, { stream: true })
-          array.push(buffer)
-        }
-
-        console.log(count)
-
-        let ans = array.map(txtToLogs)
-
-        for (let i = 0; i < ans.length; i++) {
-          if (i !== ans.length - 1) {
-            console.log(i)
-            const item = ans[i]
-            const nextItem = ans[i + 1]
-
-            const nextChunk = nextItem[0]
-            if (!nextChunk.module || !nextChunk.target) {
-              item.at(-1).content += nextChunk.content
-
-              nextItem.splice(0, 1)
-            }
-          }
-        }
-
-        console.log(ans)
-      }
-
-      function txtToLogs(txt) {
-        const lines = txt.split('\n').filter(Boolean)
-        return lines.map(line => {
-          const i = line.indexOf('|')
-          const head = line.substring(0, i)
-          const content = line.substring(i + 1)
-          const [timeStr, module, target] = head.split(':')
-          const time = timeStr
-          return { time, module, target, content }
-        })
-      }
-    </script>
+    <script></script>
   </body>
 </html>
