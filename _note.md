@@ -16,6 +16,12 @@
 $Host.UI.RawUI.WindowTitle = Split-Path -Path $PWD.Path -Leaf
 
 set-alias -name pp -value pnpm
-set-alias -name yy -value yarn
 set-alias -name nn -value npm
+set-alias -name yy -value yarn
+
+$proxy = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' | Select-Object -ExpandProperty ProxyServer
+if ($proxy) {
+    $env:http_proxy = "http://$proxy"
+    $env:https_proxy = "http://$proxy"
+}
 ```
