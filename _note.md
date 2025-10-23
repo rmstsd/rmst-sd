@@ -19,9 +19,15 @@ set-alias -name pp -value pnpm
 set-alias -name nn -value npm
 set-alias -name yy -value yarn
 
-$proxy = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' | Select-Object -ExpandProperty ProxyServer
-if ($proxy) {
+# 读取代理启用状态（1=启用，0=未启用）
+$proxyEnabled = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' | Select-Object -ExpandProperty ProxyEnable -ErrorAction SilentlyContinue
+
+if ($proxyEnabled -eq 1) {
+  # 同时可获取代理服务器地址
+  $proxy = Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' | Select-Object -ExpandProperty ProxyServer
+  if ($proxy) {
     $env:http_proxy = "http://$proxy"
     $env:https_proxy = "http://$proxy"
+  }
 }
 ```
