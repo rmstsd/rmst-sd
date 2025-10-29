@@ -1,0 +1,57 @@
+{
+  "name": "rrrr",
+  "id": 175523765938847,
+  "main": "dist/main.js",
+  "ui": "dist/index.html",
+  "editor_type": [
+    "devMode"
+  ],
+  "capabilities": [
+    "snippetgen"
+  ],
+  "snippetSettings": {
+    "languages": [
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "default": true
+      }
+    ],
+    "units": [
+      {
+        "scaledUnit": "fx",
+        "defaultScaleFactor": 1,
+        "default": true,
+        "value": "fx"
+      }
+    ],
+    "preferences": [
+      {
+        "label": "Style Format",
+        "value": "styleFormat",
+        "options": [
+          {
+            "label": "CSS",
+            "value": "css",
+            "default": true
+          },
+          {
+            "label": "SCSS",
+            "value": "scss",
+            "default": false
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "label": "Copy to Clipboard",
+        "value": "copyToClipboard"
+      },
+      {
+        "label": "Export File",
+        "value": "exportFile"
+      }
+    ]
+  }
+}
