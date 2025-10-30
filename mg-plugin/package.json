@@ -13,6 +13,7 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@mastergo/plugin-typings": "^2.9.0",
     "@rsbuild/core": "^1.5.14",
     "@rsbuild/plugin-react": "^1.4.1",
     "@types/react": "^19.2.2",

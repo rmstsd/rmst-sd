@@ -3,15 +3,33 @@ import './App.css'
 import { sendMsgToPlugin, UIMessage } from '../messages/sender'
 
 function App() {
-  const [mg] = useState('MasterGo')
+  const [mgText] = useState('MasterGo')
+
+  const [data, setData] = useState([])
 
   useEffect(() => {
     sendMsgToPlugin({
       type: UIMessage.HELLO,
       data: 'hello'
     })
+
+    console.log('addEventListener message')
+
+    window.addEventListener('message', evt => {
+      console.log(evt)
+      setData(evt.data)
+    })
   }, [])
 
-  return <div className="hello">Hello {mg}</div>
+  const dataString = JSON.stringify(data, null, 2)
+
+  return (
+    <div className="hello">
+      Hello {mgText}
+      <div></div>
+      <button onClick={() => navigator.clipboard.writeText(dataString)}>复制</button>
+      <pre>{dataString}</pre>
+    </div>
+  )
 }
 export default App

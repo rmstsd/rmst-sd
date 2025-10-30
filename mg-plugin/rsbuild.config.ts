@@ -17,13 +17,21 @@ export default defineConfig({
     filename: {
       js: '[name].js'
     },
-    emitCss: false
+    emitCss: false,
+    inlineScripts: true,
+    inlineStyles: true
   },
   html: {
+    inject: 'body',
     outputStructure: 'flat'
   },
   plugins: [pluginReact()],
   dev: {
     writeToDisk: true
+  },
+  performance: {
+    chunkSplit: {
+      strategy: 'all-in-one'
+    }
   }
 })
