@@ -26,9 +26,6 @@ export default defineConfig({
     outputStructure: 'flat'
   },
   plugins: [pluginReact()],
-  dev: {
-    writeToDisk: true
-  },
   performance: {
     chunkSplit: {
       strategy: 'all-in-one'

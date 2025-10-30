@@ -1,11 +1,11 @@
 {
-  "name": "mg-plugin",
+  "name": "react-tt",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "rsbuild dev",
-    "build": "rsbuild build -w",
+    "build": "rsbuild build",
     "preview": "rsbuild preview"
   },
   "dependencies": {
@@ -13,11 +13,11 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@mastergo/plugin-typings": "^2.9.0",
     "@rsbuild/core": "^1.5.14",
     "@rsbuild/plugin-react": "^1.4.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
+    "tailwindcss": "^3",
     "typescript": "^5.9.3"
   }
 }

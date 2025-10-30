@@ -1,14 +1,10 @@
 {
-  "name": "rrrr",
+  "name": "mg-plugin",
   "id": 175523765938847,
   "main": "dist/main.js",
   "ui": "dist/index.html",
-  "editor_type": [
-    "devMode"
-  ],
-  "capabilities": [
-    "snippetgen"
-  ],
+  "editor_type": ["devMode"],
+  "capabilities": ["snippetgen"],
   "snippetSettings": {
     "languages": [
       {
