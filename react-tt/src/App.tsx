@@ -1,5 +1,8 @@
 import { json } from './json'
 
+import './color'
+import { baseColor, mixColors, overlayList } from './color'
+
 const App = () => {
   const PaintStyles = json.LocalPaintStyles.map(item => {
     if (item.name.includes('Brand')) {
@@ -21,7 +24,6 @@ const App = () => {
     .sort((a, b) => a.name.localeCompare(b.name))
 
   const PaintStylesText = PaintStyles.reduce((acc, item) => acc + item.stylText + '\n', '')
-  console.log(PaintStylesText)
 
   const TextStyles = json.LocalTextStyles.map(item => {
     const name = item.name.split('/')[1]
@@ -40,10 +42,27 @@ const App = () => {
     .sort((a, b) => a.name.localeCompare(b.name))
     .reduce((acc, item) => acc + item.stylText + '\n', '')
 
-  console.log(TextStyles)
+  const rs = overlayList.map(item => mixColors(baseColor, item))
+  const rs_2 = overlayList.map(item => mixColors({ r: 213, g: 244, b: 75 }, item)) // rgba(213, 244, 75, 1)
 
   return (
     <div className="content">
+      <div className="flex">
+        {rs.toReversed().map(item => (
+          <div key={item.r + item.g + item.b} className="flex gap-3 m-2">
+            <div style={{ width: 40, height: 40, backgroundColor: `rgb(${item.r}, ${item.g}, ${item.b})` }}></div>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex">
+        {rs_2.toReversed().map((item, index) => (
+          <div key={index} className="flex gap-3 m-2">
+            <div style={{ width: 40, height: 40, backgroundColor: `rgb(${item.r}, ${item.g}, ${item.b})` }}></div>
+          </div>
+        ))}
+      </div>
+
       <div className="m-4">
         {PaintStyles.map(item => (
           <div key={item.name} className="flex gap-3 m-2">
