@@ -45,6 +45,8 @@ const App = () => {
   const rs = overlayList.map(item => mixColors(baseColor, item))
   const rs_2 = overlayList.map(item => mixColors({ r: 213, g: 244, b: 75 }, item)) // rgba(213, 244, 75, 1)
 
+  return null
+
   return (
     <div className="content">
       <div className="flex">
