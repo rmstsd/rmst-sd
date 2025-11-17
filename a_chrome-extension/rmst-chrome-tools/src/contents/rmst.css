@@ -22,3 +22,10 @@ body > main > div.relative.mx-auto.max-w-screen-xl.px-4.py-10 > nav > div > div.
 *::selection {
   background-color: #b8e8ff;
 }
+
+/* app.mokahr.com 简历全屏视图 */
+.preview-wrapper-TebbN0DRAT div.pdf-resume {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
