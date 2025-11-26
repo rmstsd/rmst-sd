@@ -16,9 +16,7 @@ const imageArray = Object.values(modules).map(o => (o as any).default)
 type ISearchType = 'mess' | 'engine'
 
 const cacheSort: string = localStorage.cacheSort
-const egl: UEngineItem[] = cacheSort
-  ? JSON.parse(cacheSort).map((x: any) => defaultEgl.find(y => y.id === x))
-  : defaultEgl
+const egl: UEngineItem[] = cacheSort ? JSON.parse(cacheSort).map((x: any) => defaultEgl.find(y => y.id === x)) : defaultEgl
 
 function Search() {
   const [messList, setMessList] = useState(msl)
@@ -26,12 +24,6 @@ function Search() {
   const [avatarIdx, setAvatarIdx] = useState(Number(localStorage.avatarIdx) || 0)
   //
   useEffect(() => {
-    const onMouseup = () => {
-      const selectedText = window.getSelection().toString()
-      selectedText && window.navigator.clipboard.writeText(selectedText)
-    }
-    document.addEventListener('mouseup', onMouseup)
-
     let timer = null
     document.addEventListener('visibilitychange', () => {
       if (import.meta.env.DEV) {
@@ -42,11 +34,9 @@ function Search() {
       } else {
         timer = setTimeout(() => {
           window.close()
-        }, 2000)
+        }, 3000)
       }
     })
-
-    return () => document.removeEventListener('mouseup', onMouseup)
   }, [])
 
   const messItemOnChange = (v: string, idx: number) => {

@@ -9,10 +9,13 @@
     "cp": "cp-cli ./a/ b/a/"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.0",
+    "@fortawesome/sharp-duotone-thin-svg-icons": "^7.1.0",
     "address": "^2.0.3",
     "axios": "^1.7.2",
-    "fast-glob": "^3.3.2",
     "cp-cli": "2.0.0",
+    "fast-glob": "^3.3.2",
     "filedirname": "^3.4.0",
     "fs-extra": "^11.3.0",
     "https-proxy-agent": "^7.0.5",
