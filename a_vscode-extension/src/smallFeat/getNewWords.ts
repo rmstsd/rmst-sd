@@ -1,11 +1,15 @@
 import { camelCase as camelcase, deCamelize } from '../npmPackages'
 
-const separator = /-|_|\/|\\/
+const separator = /-| |_|\/|\\/
 const replacement = `$1_$2`
 
 const getNewWords = (wordText: string) => {
   const decamelized = wordText.replace(/([\p{Lowercase_Letter}\d])(\p{Uppercase_Letter})/gu, replacement)
-  const list = decamelized.split(separator).map(item => item.toLowerCase())
+  const list = decamelized
+    .split(separator)
+    .map(item => item.toLowerCase().trim())
+    .filter(Boolean)
+
   const ss = list.join('-')
 
   const ans1 = camelcase(ss)
