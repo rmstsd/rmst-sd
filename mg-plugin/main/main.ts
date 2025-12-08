@@ -1,7 +1,7 @@
 import { sendMsgToUI } from '../messages/sender'
 
 let timer
-mg.snippetgen.on('generate', (data, callback) => {
+mg.snippetgen.on('generate', async (data, callback) => {
   const node = mg.getNodeById(data.layerId)
 
   console.log(mg.getLocalPaintStyles())
@@ -17,22 +17,13 @@ mg.snippetgen.on('generate', (data, callback) => {
   }, 1000)
 
   if (data.language === 'javascript') {
+    const code = await mg.codegen.getDSL(node.id, 'REACT')
     setTimeout(() => {
       callback([
         {
-          language: 'javascript',
-          code: 'console.log("Hello, world!")',
-          title: 'Js'
-        },
-        {
           language: 'css',
-          code: 'body { background-color: red; }',
+          code: JSON.stringify(code, null, 2),
           title: 'CSS'
-        },
-        {
-          language: 'javascript',
-          code: `console.log('${node?.name} 哈哈哈 人美声甜')`,
-          title: 'Node Name'
         }
       ])
     })
@@ -42,4 +33,22 @@ mg.snippetgen.on('generate', (data, callback) => {
 mg.snippetgen.on('action', value => {
   mg.notify(`called action ${value}`)
   mg.showUI(__html__)
+})
+
+setTimeout(() => {
+  mg.showUI(__html__)
+}, 2000)
+
+let cb
+// 监听mg的dsl数据生成
+mg.codegen.on('generateDSL', ({ data, callback }) => {
+  cb = callback
+
+  mg.ui.postMessage(
+    {
+      type: 'dsl',
+      data: data
+    },
+    '*'
+  )
 })

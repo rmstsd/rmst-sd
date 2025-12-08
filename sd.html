@@ -7,44 +7,53 @@
     <title>sd</title>
 
     <style>
-      .p {
-        overflow: auto;
-        height: 500px;
-        border: 1px solid red;
-        position: relative;
+      * {
+        box-sizing: border-box;
       }
-      .m {
-        position: absolute;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.3);
+
+      .container {
         display: flex;
+        border: 6px solid gray;
         align-items: center;
-        justify-content: center;
+        margin-top: 300px;
+        min-width: 0;
+        touch-action: none;
+
+        .item_1 {
+          background-color: orange;
+          padding: 0 10px;
+        }
+        .item_2 {
+          background-color: pink;
+        }
       }
     </style>
   </head>
 
   <body>
-    <section style="position: relative">
-      <div class="p">
-        <div class="c">cc</div>
+    <div class="container">
+      <div class="item_1">红红火火恍恍惚惚哈哈哈哈哈哈哈哈哈哈哈哈红红火火恍恍惚惚哈哈哈哈哈哈哈哈哈哈哈哈</div>
+      <div class="item_2">uuuuu</div>
+    </div>
 
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-        <h1>hh</h1>
-      </div>
+    <script>
+      const container = document.querySelector('.container')
 
-      <div class="m">hhh loading</div>
-    </section>
+      const ob = new ResizeObserver(entries => {
+        console.log('ob')
+      })
+
+      ob.observe(container)
+
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          container.style.width = '500px'
+
+          requestAnimationFrame(() => {
+            container.style.width = '600px'
+          })
+        })
+      }, 2000)
+    </script>
   </body>
 </html>

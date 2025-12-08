@@ -16,7 +16,7 @@ function App() {
     console.log('addEventListener message')
 
     window.addEventListener('message', evt => {
-      console.log(evt)
+      console.log(evt.data)
       setData(evt.data)
     })
   }, [])

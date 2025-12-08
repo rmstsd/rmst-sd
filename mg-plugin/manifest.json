@@ -4,7 +4,7 @@
   "main": "dist/main.js",
   "ui": "dist/index.html",
   "editor_type": ["devMode"],
-  "capabilities": ["snippetgen"],
+  "capabilities": ["snippetgen", "codegen"],
   "snippetSettings": {
     "languages": [
       {
