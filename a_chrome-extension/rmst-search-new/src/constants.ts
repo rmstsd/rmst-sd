@@ -1,3 +1,4 @@
+import Icon_Map from './IconMap'
 import { SearchEngineItem, SearchPriority } from './types'
 
 // Merged and categorized list based on user requirements
@@ -11,16 +12,18 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 101,
     priority: SearchPriority.PRIMARY,
     color: 'blue-600',
-    placeholder: 'Search Google...'
+    placeholder: 'Search Google...',
+    icon: Icon_Map.get('google')
   },
   {
-    id: 'develop',
+    id: 'baiduDevelop',
     name: 'Baidu Dev',
     searchLink: 'https://kaifa.baidu.com/searchPage?wd=',
     logoSeed: 102,
     priority: SearchPriority.PRIMARY,
     color: 'emerald-600',
-    placeholder: 'Search Developer Docs...'
+    placeholder: 'Search Developer Docs...',
+    icon: Icon_Map.get('baiduDevelop')
   },
 
   // --- Secondary (Medium) ---
@@ -31,7 +34,8 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 201,
     priority: SearchPriority.SECONDARY,
     color: 'neutral-800',
-    placeholder: 'Search MDN...'
+    placeholder: 'Search MDN...',
+    icon: Icon_Map.get('mdn')
   },
   {
     id: 'github',
@@ -40,7 +44,8 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 202,
     priority: SearchPriority.SECONDARY,
     color: 'gray-900',
-    placeholder: 'Find repos...'
+    placeholder: 'Find repos...',
+    icon: Icon_Map.get('github')
   },
   {
     id: 'juejin',
@@ -50,7 +55,8 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 203,
     priority: SearchPriority.SECONDARY,
     color: 'blue-500',
-    placeholder: 'Search Articles...'
+    placeholder: 'Search Articles...',
+    icon: Icon_Map.get('juejin')
   },
 
   // --- Tertiary (Small) ---
@@ -62,7 +68,8 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 301,
     priority: SearchPriority.TERTIARY,
     color: 'red-600',
-    placeholder: 'Packages...'
+    placeholder: 'Packages...',
+    icon: Icon_Map.get('npm')
   },
   {
     id: 'zhihu',
@@ -72,7 +79,8 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 302,
     priority: SearchPriority.TERTIARY,
     color: 'blue-400',
-    placeholder: 'Topics...'
+    placeholder: 'Topics...',
+    icon: Icon_Map.get('zhihu')
   },
   {
     id: 'bilibili',
@@ -82,7 +90,8 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 303,
     priority: SearchPriority.TERTIARY,
     color: 'pink-400',
-    placeholder: 'Videos...'
+    placeholder: 'Videos...',
+    icon: Icon_Map.get('bilibili')
   },
   {
     id: 'xiaohongshu',
@@ -92,6 +101,7 @@ export const SEARCH_ENGINES: SearchEngineItem[] = [
     logoSeed: 304,
     priority: SearchPriority.TERTIARY,
     color: 'red-500',
-    placeholder: 'Trends...'
+    placeholder: 'Trends...',
+    icon: Icon_Map.get('xiaohongshu')
   }
 ]

@@ -13,4 +13,5 @@ export interface SearchEngineItem {
   priority: SearchPriority
   placeholder?: string
   color?: string
+  icon?: React.ReactNode
 }

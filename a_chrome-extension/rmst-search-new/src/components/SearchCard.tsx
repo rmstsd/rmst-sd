@@ -45,38 +45,26 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
   // --- PRIMARY LAYOUT (Vertical: Logo Top, Input Bottom) ---
   if (isPrimary) {
     return (
-      <div className="flex flex-col items-center justify-center gap-6 w-full p-8 bg-white rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100 transition-all duration-300 hover:shadow-[0_10px_40px_-4px_rgba(0,0,0,0.1)]">
+      <div className="flex flex-col items-center justify-center gap-6 w-full p-8 bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-200 transition-all duration-300 ">
         {/* Top: Large Logo */}
-        <div
-          className="
-            w-24 h-24 flex-shrink-0
-            bg-slate-50 rounded-3xl 
-            flex items-center justify-center p-5
-            shadow-inner border border-slate-100
-          "
-        >
-          <img
-            src={`https://picsum.photos/seed/${item.logoSeed}/200/200`}
-            alt={item.name}
-            className="w-full h-full object-contain mix-blend-multiply opacity-90"
-          />
-        </div>
+        <div className="h-24 flex-shrink-0 flex items-center justify-center">{item.icon}</div>
 
         {/* Bottom: Search Bar */}
         <div
           className={`
             w-full h-16 relative flex items-center
-            bg-slate-50 rounded-2xl 
-            border border-slate-200/60
+            rounded-xl 
+            border border-slate-300
             transition-all duration-300
             ${
               isFocused
-                ? 'bg-white ring-4 ring-blue-50 border-blue-200 shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)]'
-                : 'hover:bg-white hover:shadow-md hover:border-slate-300'
+                ? 'border-slate-400 bg-white ring-4 ring-blue-50 border-blue-200 shadow-[0_4px_12px_-4px_rgba(0,0,0,0.1)]'
+                : 'hover:bg-white hover:shadow-md hover:border-slate-400'
             }
           `}
         >
           <input
+            autoFocus={item.id === 'google'}
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
@@ -90,6 +78,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
           <div className="flex items-center gap-2 pr-2 absolute right-0">
             {/* Paste Button */}
             <button
+              tabIndex={-1}
               onClick={handlePasteAndSearch}
               className="w-10 h-10 flex items-center justify-center rounded-xl text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
               title="Paste & Search"
@@ -99,6 +88,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
 
             {/* Search Button */}
             <button
+              tabIndex={-1}
               onClick={handleSearch}
               className="h-12 w-16 bg-slate-900 text-white rounded-xl flex items-center justify-center transition-all hover:bg-slate-800 hover:shadow-lg active:scale-95"
               title={`Search ${item.name}`}
@@ -116,10 +106,11 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
     <div className="group relative transition-all duration-300 ease-out">
       <div
         className={`
+          bg-white
           relative flex items-center transition-all duration-300
-          bg-white rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.06)] border border-slate-100 p-1.5
-          hover:shadow-[0_6px_16px_-4px_rgba(0,0,0,0.08)] hover:border-slate-300
-          ${isFocused ? 'ring-2 ring-blue-50 border-blue-300' : ''}
+          rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.06)] border border-slate-300 p-1.5
+          hover:shadow-[0_6px_16px_-4px_rgba(0,0,0,0.08)] hover:border-slate-400
+          ${isFocused ? 'bg-white ring-2 ring-blue-50 border-slate-400' : 'hover:bg-white'}
         `}
       >
         <div className="flex-1 min-w-0 mx-2">
@@ -131,31 +122,27 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder={placeholderText}
-            className="w-full h-12 bg-transparent border-none outline-none focus:ring-0 text-slate-700 placeholder:text-slate-400 font-medium text-base"
+            className="w-full h-12 bg-transparent border-none focus:ring-0 text-slate-700 placeholder:text-slate-400 font-medium text-base"
           />
         </div>
 
         <div className="flex items-center gap-1 pr-0.5">
           <button
+            tabIndex={-1}
             onClick={handlePasteAndSearch}
-            className="w-10 h-10 flex items-center justify-center rounded-lg text-slate-300 hover:text-blue-600 hover:bg-blue-50 transition-all opacity-0 group-hover:opacity-100"
+            className="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all"
             title="Paste & Search"
           >
             <Clipboard size={18} />
           </button>
 
           <button
+            tabIndex={-1}
             onClick={handleSearch}
             className="w-11 h-11 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center overflow-hidden relative transition-all hover:border-blue-200 hover:shadow-sm group-hover:bg-white"
             title={`Search ${item.name}`}
           >
-            <div className="w-6 h-6 rounded-full overflow-hidden relative">
-              <img
-                src={`https://picsum.photos/seed/${item.logoSeed}/100/100`}
-                alt="Go"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
+            <div className="w-8 h-8 overflow-hidden relative flex items-center justify-center">{item.icon}</div>
           </button>
         </div>
       </div>
