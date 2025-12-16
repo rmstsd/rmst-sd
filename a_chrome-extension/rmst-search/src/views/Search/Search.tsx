@@ -16,7 +16,11 @@ const imageArray = Object.values(modules).map(o => (o as any).default)
 type ISearchType = 'mess' | 'engine'
 
 const cacheSort: string = localStorage.cacheSort
-const egl: UEngineItem[] = cacheSort ? JSON.parse(cacheSort).map((x: any) => defaultEgl.find(y => y.id === x)) : defaultEgl
+const egl: UEngineItem[] = cacheSort
+  ? JSON.parse(cacheSort)
+      .map((x: any) => defaultEgl.find(y => y.id === x))
+      .filter(Boolean)
+  : defaultEgl
 
 function Search() {
   const [messList, setMessList] = useState(msl)
@@ -207,7 +211,7 @@ function Search() {
           </div>
         ))}
 
-        <div className="cool-container">
+        {/* <div className="cool-container">
           <Button.Group className="toggle-btn">
             <Button onClick={togglePrev}>上一个</Button>
             <Button onClick={toggleNext}>下一个</Button>
@@ -215,7 +219,7 @@ function Search() {
           <div className="avatar-container">
             <img className="avatar" src={imageArray[avatarIdx]} />
           </div>
-        </div>
+        </div> */}
       </section>
     </div>
   )
