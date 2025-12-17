@@ -56,14 +56,22 @@ const App: React.FC = () => {
     }
   }, [enSentence])
 
-  const [cnThenEn, setCnThenEn] = useState(false) // 是否 cn 更长
+  useEffect(() => {
+    let timer = null
+    document.addEventListener('visibilitychange', () => {
+      if (import.meta.env.DEV) {
+        return
+      }
 
-  useLayoutEffect(() => {
-    const cnSentence = document.querySelector('.cn-sentence') as HTMLDivElement
-    const enSentence = document.querySelector('.en-sentence') as HTMLDivElement
-
-    setCnThenEn(cnSentence.clientWidth > enSentence.clientWidth)
-  }, [enSentence])
+      if (document.visibilityState === 'visible') {
+        clearTimeout(timer)
+      } else {
+        timer = setTimeout(() => {
+          window.close()
+        }, 3000)
+      }
+    })
+  }, [])
 
   return (
     <div className="h-screen w-full bg-slate-50/50 font-sans text-slate-800 selection:bg-blue-100 selection:text-blue-900 overflow-hidden flex flex-col">
@@ -101,7 +109,7 @@ const App: React.FC = () => {
             <span className="text-base font-bold text-slate-700 pl-1">Developer Resources</span>
             <div className="h-px bg-slate-200 flex-1"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {secondaryEngines.map(item => (
               <SearchCard key={item.id} item={item} />
             ))}
@@ -110,7 +118,7 @@ const App: React.FC = () => {
 
         {/* Primary Section */}
         <section className="flex-shrink-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-6">
             {primaryEngines.map(item => (
               <SearchCard key={item.id} item={item} />
             ))}
