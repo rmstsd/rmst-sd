@@ -12,7 +12,7 @@ interface Sentence {
   count: number
 }
 
-const defultSentence = {
+const defaultSentence = {
   cn: '每个人都值得大家站起来为他鼓掌一次。',
   en: ' We all deserve a standing ovation at least once in our lives.',
   audio: 'http://api.kekc.cn/api/yien?act=getaudio&filename=MjAyMS0wMS0xOS5tcDM=',
@@ -34,7 +34,7 @@ const App: React.FC = () => {
 
       // 缓存过期时间 4 小时
       if (Date.now() - data.outOfDate > 1000 * 60 * 60 * 4) {
-        return null
+        return {}
       }
 
       return data.data
@@ -107,7 +107,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="h-screen w-full bg-slate-50/50 font-sans text-slate-800 selection:bg-blue-100 selection:text-blue-900 overflow-hidden flex flex-col">
+    <div className="h-screen w-full font-sans text-slate-800 selection:bg-blue-100 selection:text-blue-900 overflow-hidden flex flex-col">
       {/* Background decoration */}
       <div className="fixed inset-0 -z-10 from-slate-100 via-transparent to-transparent opacity-60"></div>
 
@@ -151,7 +151,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Main Container - Flexible & Centered */}
-      <main className="flex-1 w-full max-w-[1600px] mx-auto px-4 md:px-8 flex flex-col justify-center gap-14 pb-6">
+      <main className="flex-1 w-full max-w-[1600px] mt-5 mx-auto px-4 md:px-8 flex flex-col pb-6">
         {/* Secondary Section */}
         <section className="flex-shrink-0">
           <div className="flex items-center gap-4 mb-4">
@@ -166,8 +166,8 @@ const App: React.FC = () => {
         </section>
 
         {/* Primary Section */}
-        <section className="flex-shrink-0">
-          <div className="grid grid-cols-2 gap-6">
+        <section className="flex-shrink-0 mt-6">
+          <div className="grid grid-cols-2 gap-10">
             {primaryEngines.map(item => (
               <SearchCard key={item.id} item={item} />
             ))}
@@ -175,7 +175,7 @@ const App: React.FC = () => {
         </section>
 
         {/* Tertiary Section */}
-        <section className="flex-shrink-0 ">
+        <section className="flex-shrink-0 mt-16">
           <div className="flex items-center gap-4 mb-4">
             <span className="text-base font-bold text-slate-700 pl-1">Community & Social</span>
             <div className="h-px bg-slate-200 flex-1"></div>

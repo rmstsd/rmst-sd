@@ -11,7 +11,6 @@ export interface SearchEngineItem {
   homeLink?: string
   logoSeed: number
   priority: SearchPriority
-  placeholder?: string
   color?: string
   icon?: React.ReactNode
 }
