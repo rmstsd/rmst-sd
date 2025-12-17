@@ -10,11 +10,15 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
   const [query, setQuery] = useState('')
   const [isFocused, setIsFocused] = useState(false)
 
-  const handleSearch = useCallback(() => {
-    if (!query.trim()) return
+  const handleSearch = () => {
+    if (!query.trim()) {
+      window.open(item.homeLink, '_blank')
+      return
+    }
+
     const url = `${item.searchLink}${encodeURIComponent(query)}`
     window.open(url, '_blank')
-  }, [query, item.searchLink])
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -45,7 +49,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
   // --- PRIMARY LAYOUT (Vertical: Logo Top, Input Bottom) ---
   if (isPrimary) {
     return (
-      <div className="flex flex-col items-center justify-center gap-6 w-full p-8 bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-200 transition-all duration-300 ">
+      <div className="flex flex-col items-center justify-center gap-6 w-full p-6 bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-200 transition-all duration-300 ">
         {/* Top: Large Logo */}
         <div className="h-24 flex-shrink-0 flex items-center justify-center">{item.icon}</div>
 
@@ -58,7 +62,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
             transition-all duration-300
             ${
               isFocused
-                ? 'border-slate-400 bg-white ring-4 ring-blue-50 border-blue-200 shadow-[0_4px_12px_-4px_rgba(0,0,0,0.1)]'
+                ? 'border-slate-400 bg-white ring-4 ring-blue-50 shadow-[0_4px_12px_-4px_rgba(0,0,0,0.1)]'
                 : 'hover:bg-white hover:shadow-md hover:border-slate-400'
             }
           `}
