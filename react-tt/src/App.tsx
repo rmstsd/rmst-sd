@@ -77,4 +77,22 @@ const App = () => {
   )
 }
 
-export default App
+export default function App2() {
+  let ls = []
+  for (let index = 0; index < 100; index++) {
+    const hue = index * 137.508 // use golden angle approximation
+    const color = `hsl(${hue},70%,55%)`
+
+    ls.push(color)
+  }
+
+  return (
+    <div className="flex flex-wrap gap-3 p-3">
+      {ls.map((item, index) => (
+        <div key={index} style={{ width: 40, height: 40, backgroundColor: item }}>
+          {index}
+        </div>
+      ))}
+    </div>
+  )
+}

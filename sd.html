@@ -8,52 +8,25 @@
 
     <style>
       * {
-        box-sizing: border-box;
+        margin: 0;
       }
-
-      .container {
-        display: flex;
-        border: 6px solid gray;
-        align-items: center;
-        margin-top: 300px;
-        min-width: 0;
-        touch-action: none;
-
-        .item_1 {
-          background-color: orange;
-          padding: 0 10px;
-        }
-        .item_2 {
-          background-color: pink;
-        }
+      .div {
+        width: 10ex;
+        height: 10ex;
+        background-color: #ffe0e0;
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
-      <div class="item_1">红红火火恍恍惚惚哈哈哈哈哈哈哈哈哈哈哈哈红红火火恍恍惚惚哈哈哈哈哈哈哈哈哈哈哈哈</div>
-      <div class="item_2">uuuuu</div>
-    </div>
+    <div class="div"></div>
+
+    <svg viewBox="0 0 100 100" width="100" height="100" style="background-color: pink">
+      <rect x="10" y="10" width="80" height="80" fill="red" />
+    </svg>
 
     <script>
-      const container = document.querySelector('.container')
-
-      const ob = new ResizeObserver(entries => {
-        console.log('ob')
-      })
-
-      ob.observe(container)
-
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          container.style.width = '500px'
-
-          requestAnimationFrame(() => {
-            container.style.width = '600px'
-          })
-        })
-      }, 2000)
+      const div = document.querySelector('.div')
     </script>
   </body>
 </html>
