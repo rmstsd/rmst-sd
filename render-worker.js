@@ -1,6 +1,6 @@
 // render-worker.js（Worker线程）
 
-const a = {
+const A = {
   ui: ''
 }
 
@@ -10,7 +10,7 @@ self.onmessage = e => {
   const canvas = e.data.canvas
   const hhh = canvas.getContext('2d')
 
-  a.ui
+  A.ui
 
   hhh.fillStyle = 'red'
   hhh.fillRect(0, 0, 100, 100)
