@@ -39,7 +39,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
     }
   }
 
-  const isPrimary = item.priority === SearchPriority.PRIMARY
+  const isPrimary = item.priority === SearchPriority.Primary
 
   // --- PRIMARY LAYOUT (Vertical: Logo Top, Input Bottom) ---
   if (isPrimary) {

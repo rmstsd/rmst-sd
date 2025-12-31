@@ -1,7 +1,7 @@
 export enum SearchPriority {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary'
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Tertiary = 'tertiary'
 }
 
 export interface SearchEngineItem {

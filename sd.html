@@ -7,26 +7,36 @@
     <title>sd</title>
 
     <style>
-      * {
-        margin: 0;
-      }
-      .div {
-        width: 10ex;
-        height: 10ex;
-        background-color: #ffe0e0;
+      body {
       }
     </style>
   </head>
 
   <body>
-    <div class="div"></div>
-
-    <svg viewBox="0 0 100 100" width="100" height="100" style="background-color: pink">
-      <rect x="10" y="10" width="80" height="80" fill="red" />
-    </svg>
-
+    <div class="container" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: flex">
+      <span style="color: red">aa</span>
+      <span style="color: blue">bb</span>
+      <span style="color: green">cc</span>
+    </div>
     <script>
-      const div = document.querySelector('.div')
+      const p = Promise.resolve('123')
+
+      const p2 = test()
+      p2.then(() => {
+        console.log(3)
+      })
+
+      p.then(() => {
+        console.log(1)
+      })
+
+      p.then(() => {
+        console.log(2)
+      })
+
+      async function test() {
+        return p
+      }
     </script>
   </body>
 </html>

@@ -1,28 +1,14 @@
 import React, { PointerEvent, useEffect, useMemo, useRef, useState } from 'react'
-import { SEARCH_ENGINES } from './constants'
+import { defaultSentence, Search_Engines, Sentence } from './constants'
 import { SearchPriority } from './types'
 import { SearchCard } from './components/SearchCard'
 import { Copy, Flame } from 'lucide-react'
 import clsx from 'clsx'
 
-interface Sentence {
-  cn: string
-  en: string
-  audio: string
-  count: number
-}
-
-const defaultSentence = {
-  cn: '每个人都值得大家站起来为他鼓掌一次。',
-  en: ' We all deserve a standing ovation at least once in our lives.',
-  audio: 'http://api.kekc.cn/api/yien?act=getaudio&filename=MjAyMS0wMS0xOS5tcDM=',
-  count: 2907
-}
-
 const App: React.FC = () => {
-  const primaryEngines = useMemo(() => SEARCH_ENGINES.filter(e => e.priority === SearchPriority.PRIMARY), [])
-  const secondaryEngines = useMemo(() => SEARCH_ENGINES.filter(e => e.priority === SearchPriority.SECONDARY), [])
-  const tertiaryEngines = useMemo(() => SEARCH_ENGINES.filter(e => e.priority === SearchPriority.TERTIARY), [])
+  const primaryEngines = useMemo(() => Search_Engines.filter(e => e.priority === SearchPriority.Primary), [])
+  const secondaryEngines = useMemo(() => Search_Engines.filter(e => e.priority === SearchPriority.Secondary), [])
+  const tertiaryEngines = useMemo(() => Search_Engines.filter(e => e.priority === SearchPriority.Tertiary), [])
 
   const [hasTransition, setHasTransition] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
@@ -40,7 +26,7 @@ const App: React.FC = () => {
       return data.data
     }
 
-    return {}
+    return defaultSentence
   })
 
   useEffect(() => {
@@ -75,13 +61,15 @@ const App: React.FC = () => {
 
     setHasTransition(true)
 
-    fetch('https://api.kekc.cn/api/yien')
+    fetch('https://v2.xxapi.cn/api/randomenglishwords')
       .then(response => response.json())
-      .then(data => {
-        console.log('请求')
+      .then(res => {
+        if (res.code === 200) {
+          const data = res.data
 
-        localStorage.setItem('enSentence', JSON.stringify({ outOfDate: Date.now(), data }))
-        setEnSentence(data)
+          localStorage.setItem('enSentence', JSON.stringify({ outOfDate: Date.now(), data }))
+          setEnSentence(data)
+        }
       })
       .catch(error => console.error('请求失败：', error))
   }
@@ -105,6 +93,8 @@ const App: React.FC = () => {
       refreshSentence()
     }
   }
+
+  const [sentence] = enSentence.sentences ?? []
 
   return (
     <div className="h-screen w-full font-sans text-slate-800 selection:bg-blue-100 selection:text-blue-900 overflow-hidden flex flex-col">
@@ -130,19 +120,19 @@ const App: React.FC = () => {
               style={{ fontSize: 17, transform: isOpen ? 'translateY(0)' : 'translateY(-25px)' }}
             >
               <div className={clsx('cn-sentence flex items-center gap-2 w-max')}>
-                {enSentence.cn}
+                {sentence?.s_cn}
                 <Copy
                   size={16}
                   className="cursor-pointer text-slate-500 hover:text-slate-600"
-                  onClick={() => copy(enSentence.cn)}
+                  onClick={() => copy(sentence?.s_cn)}
                 />
               </div>
               <div className={clsx('en-sentence flex items-center gap-2 w-max ')}>
-                {enSentence.en}
+                {sentence?.s_content}
                 <Copy
                   size={16}
                   className="cursor-pointer text-slate-500 hover:text-slate-600"
-                  onClick={() => copy(enSentence.en)}
+                  onClick={() => copy(sentence?.s_content)}
                 />
               </div>
             </div>
