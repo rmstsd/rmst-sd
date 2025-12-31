@@ -90,7 +90,7 @@ export default function App2() {
     <div className="flex flex-wrap gap-3 p-3">
       {ls.map((item, index) => (
         <div key={index} style={{ width: 40, height: 40, backgroundColor: item }}>
-          {index}
+          {index} 哈哈哈
         </div>
       ))}
     </div>

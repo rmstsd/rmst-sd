@@ -1,4 +1,5 @@
 import * as vscode from 'vscode'
+import * as ts from 'typescript'
 import { readFile } from 'fs/promises'
 
 export async function i18n() {
@@ -15,9 +16,6 @@ export async function i18n() {
     wordText = editor.document.getText(editor.selection)
     location = editor.selection
   }
-
-  console.log('location', location.start)
-  console.log('wordText', wordText)
 
   if (!wordText.trim() || !location) {
     vscode.window.showWarningMessage('请先选中需要国际化的字符串')
@@ -67,22 +65,25 @@ export async function i18n() {
   }
 
   if (options.length === 1) {
-    editor.edit(editBuilder => {
-      editBuilder.replace(location, options[0].label)
-    })
-
+    execReplace(options[0].label)
     return
   }
 
-  vscode.window.showQuickPick(options, { placeHolder: '请选择' }).then(res => {
-    if (!res) {
-      return
-    }
-    const nvWord = res.label
+  const res = await vscode.window.showQuickPick(options, { placeHolder: '请选择' })
+  if (!res) {
+    return
+  }
 
-    editor.edit(editBuilder => {
-      editBuilder.replace(location, nvWord)
-    })
+  execReplace(res.label)
+}
+
+function execReplace(label: string) {
+  const editor = vscode.window.activeTextEditor
+  if (!editor) return
+
+  const { location, nvWord } = getCursorContext(label)
+  editor.edit(editBuilder => {
+    editBuilder.replace(location, nvWord)
   })
 }
 
@@ -114,4 +115,53 @@ function parseI18n(iniString): Record<string, string> {
   }
 
   return result
+}
+
+export function getCursorContext(nvWord: string) {
+  const editor = vscode.window.activeTextEditor
+  if (!editor) return
+
+  const document = editor.document
+  const cursorOffset = document.offsetAt(editor.selection.active) // 获取光标偏移量
+  const sourceCode = document.getText()
+
+  const sourceFile = ts.createSourceFile('temp.tsx', sourceCode, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
+
+  let nodes: ts.Node[] = []
+  function walk(node: ts.Node) {
+    if (cursorOffset >= node.pos && cursorOffset <= node.end) {
+      nodes.push(node)
+    }
+    ts.forEachChild(node, walk)
+  }
+  walk(sourceFile)
+
+  const leafNode = nodes.at(-1)
+
+  const text = leafNode.getText()
+  let location = new vscode.Range(
+    document.positionAt(leafNode.getStart()),
+    document.positionAt(leafNode.getStart() + text.length)
+  )
+
+  switch (leafNode.kind) {
+    case ts.SyntaxKind.JsxText: {
+      console.log('添加 {}')
+      nvWord = `{${nvWord}}`
+      break
+    }
+
+    case ts.SyntaxKind.StringLiteral: {
+      if (leafNode.parent.kind === ts.SyntaxKind.JsxAttribute) {
+        // 处理 title="取消"
+        nvWord = `{${nvWord}}`
+        console.log('添加 {}')
+      } else {
+        console.log('直接替换')
+      }
+      break
+    }
+  }
+
+  return { nvWord, location }
 }
