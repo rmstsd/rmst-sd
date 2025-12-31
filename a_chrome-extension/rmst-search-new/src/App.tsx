@@ -148,7 +148,7 @@ const App: React.FC = () => {
             <span className="text-base font-bold text-slate-700 pl-1">Developer Resources</span>
             <div className="h-px bg-slate-200 flex-1"></div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-4 gap-4">
             {secondaryEngines.map(item => (
               <SearchCard key={item.id} item={item} />
             ))}
@@ -170,7 +170,7 @@ const App: React.FC = () => {
             <span className="text-base font-bold text-slate-700 pl-1">Community & Social</span>
             <div className="h-px bg-slate-200 flex-1"></div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {tertiaryEngines.map(item => (
               <SearchCard key={item.id} item={item} />
             ))}

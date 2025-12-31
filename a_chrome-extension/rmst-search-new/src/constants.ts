@@ -47,6 +47,16 @@ export const Search_Engines: SearchEngineItem[] = [
     icon: Icon_Map.get('github')
   },
   {
+    id: 'npm',
+    name: 'NPM',
+    searchLink: 'https://www.npmjs.com/search?q=',
+    homeLink: 'https://www.npmjs.com/',
+    logoSeed: 301,
+    priority: SearchPriority.Secondary,
+    color: 'red-600',
+    icon: Icon_Map.get('npm')
+  },
+  {
     id: 'juejin',
     name: 'Juejin',
     searchLink: 'https://juejin.cn/search?query=',
@@ -58,16 +68,6 @@ export const Search_Engines: SearchEngineItem[] = [
   },
 
   // --- Tertiary (Small) ---
-  {
-    id: 'npm',
-    name: 'NPM',
-    searchLink: 'https://www.npmjs.com/search?q=',
-    homeLink: 'https://www.npmjs.com/',
-    logoSeed: 301,
-    priority: SearchPriority.Tertiary,
-    color: 'red-600',
-    icon: Icon_Map.get('npm')
-  },
   {
     id: 'zhihu',
     name: 'Zhihu',
