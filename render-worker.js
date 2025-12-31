@@ -1,12 +1,19 @@
 // render-worker.js（Worker线程）
+
+const a = {
+  ui: ''
+}
+
 self.onmessage = e => {
   console.log(e)
 
   const canvas = e.data.canvas
-  const ctx = canvas.getContext('2d')
+  const hhh = canvas.getContext('2d')
 
-  ctx.fillStyle = 'red'
-  ctx.fillRect(0, 0, 100, 100)
+  a.ui
+
+  hhh.fillStyle = 'red'
+  hhh.fillRect(0, 0, 100, 100)
 
   // 在Worker中执行绘制（不会阻塞主线程）
   // setInterval(() => {

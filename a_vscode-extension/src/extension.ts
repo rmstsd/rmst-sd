@@ -6,6 +6,7 @@ import { exec } from 'child_process'
 import path = require('path')
 import { readFile } from 'fs/promises'
 import { parseI18n } from './smallFeat/parseI18n'
+import { performLspRename } from './smallFeat/performRename'
 
 // 命令触发的时候调用
 export function activate(context: vscode.ExtensionContext) {
@@ -36,7 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
     })
   })
 
-  vscode.commands.registerCommand('convert-word', () => {
+  vscode.commands.registerCommand('convert-word', async () => {
     const editor = vscode.window.activeTextEditor
     if (!editor) return
 
@@ -55,21 +56,23 @@ export function activate(context: vscode.ExtensionContext) {
 
     if (!wordText.trim() || !location) {
       vscode.window.showWarningMessage('请先选中字符串')
-
       return
     }
 
-    const options: vscode.QuickPickItem[] = getNewWords(wordText).map(item => ({ label: item }))
-    vscode.window.showQuickPick(options, { placeHolder: '请选择新单词' }).then(res => {
-      if (!res) {
-        return
-      }
-      const nvWord = res.label
+    const options: vscode.QuickPickItem[] = Array.from(new Set(getNewWords(wordText))).map(item => ({ label: item }))
+    const res = await vscode.window.showQuickPick(options, { placeHolder: '请选择新单词' })
+    if (!res) {
+      return
+    }
 
+    const nvWord = res.label
+
+    const success = await performLspRename(nvWord)
+    if (!success) {
       editor.edit(editBuilder => {
         editBuilder.replace(location, nvWord)
       })
-    })
+    }
   })
 
   vscode.commands.registerCommand('openFolderInNewWindow', uri => {
