@@ -3,7 +3,7 @@
   "displayName": "rmst-vscode-tools",
   "description": "rmst-vscode-tools",
   "repository": {},
-  "version": "0.2.10",
+  "version": "0.2.11",
   "icon": "icon.png",
   "publisher": "rmst",
   "main": "./out/extension.js",
