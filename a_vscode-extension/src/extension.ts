@@ -7,6 +7,7 @@ import { MyFoldingRangeProvider } from './utils/MyFoldingRangeProvider'
 // import { i18n } from './command/i18n'
 import { convertWord } from './command/convertWord'
 import deleteFunc from './command/deleteFunc'
+import { i18n } from './command/i18n'
 
 // 命令触发的时候调用
 export function activate(context: vscode.ExtensionContext) {
@@ -36,7 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
   })
 
   vscode.commands.registerCommand('i18n', async uri => {
-    // i18n()
+    i18n()
   })
 
   // 注册针对 'plaintext' (txt文件) 的折叠提供者
