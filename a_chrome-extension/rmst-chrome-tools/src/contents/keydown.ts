@@ -11,8 +11,9 @@ document.addEventListener('keydown', evt => {
     evt.preventDefault()
   }
 
-  // 阻止 ctrl + d 会触发收藏书签的默认事件
+  // 阻止 ctrl + d // 会触发收藏书签的默认事件
   if (evt.ctrlKey && evt.key === 'd') {
+    evt.preventDefault()
   }
 
   if (evt.altKey && evt.altKey && evt.key === 'c') {
