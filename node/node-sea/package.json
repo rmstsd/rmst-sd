@@ -1,0 +1,43 @@
+{
+  "bin": "./index.cjs",
+  "name": "z2",
+  "version": "1.0.0",
+  "description": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch ./index.cjs",
+    "pkg": "pkg . --targets node18-win",
+    "bun": "bun build ./index.js --compile --outfile my-app",
+    "nexe": "nexe index.js -o myapp.exe",
+    "node-esa": "node --experimental-sea-config sea-config.json",
+    "vite-build": "vite build -w",
+    "--": "--",
+    "sea": "node --experimental-sea-config sea-config.json",
+    "cp": "cp $(command -v node) hello.exe",
+    "cp2": "node -e \"require('fs').copyFileSync(process.execPath, 'hello.exe')\"",
+    "cs": "codesign --remove-signature hello.exe'",
+    "postject": "npm exec postject hello.exe NODE_SEA_BLOB sea-prep.blob --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2 --macho-segment-name NODE_SEA",
+    "build": "npm run sea && npm run cp2 && node script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^3.1.1",
+    "koa-static": "^5.0.0",
+    "nexe": "5.0.0-beta.4",
+    "pkg": "^5.8.1"
+  },
+  "devDependencies": {
+    "postject": "^1.0.0-alpha.6",
+    "vite": "^6.0.1"
+  },
+  "pkg": {
+    "assets": "ui/**/*",
+    "targets": [
+      "node18-win"
+    ],
+    "outputPath": "dist"
+  }
+}
