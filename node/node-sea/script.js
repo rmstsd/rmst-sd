@@ -17,3 +17,6 @@ execSync(
 //     })
 //   })()
 // }
+
+// macos 需要
+// `lipo hello.exe -thin $(uname -m) -output hello.exe'
