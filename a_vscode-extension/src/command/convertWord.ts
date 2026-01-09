@@ -24,7 +24,8 @@ export async function convertWord() {
     return
   }
 
-  const options: vscode.QuickPickItem[] = Array.from(new Set(getNewWords(wordText))).map(item => ({ label: item }))
+  const { ansList } = getNewWords(wordText)
+  const options: vscode.QuickPickItem[] = Array.from(new Set(ansList)).map(item => ({ label: item }))
   const res = await vscode.window.showQuickPick(options, { placeHolder: '请选择新单词' })
   if (!res) {
     return

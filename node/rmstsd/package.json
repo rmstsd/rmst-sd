@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "exec": "ts-node-transpile-only ./index.ts",
-    "http": "nodemon ./http.mjs"
+    "koa": "tsx watch ./koa.ts"
   },
   "dependencies": {
     "@babel/generator": "^7.20.14",
@@ -18,7 +18,7 @@
     "express": "^4.18.2",
     "fs-extra": "^11.1.0",
     "json-to-ast": "^2.1.0",
-    "nodemon": "^2.0.20",
+    "koa": "^3.1.1",
     "ts-node": "^10.9.1",
     "tsx": "^4.19.4",
     "vscode-json-languageservice": "^5.5.0"
@@ -27,6 +27,7 @@
     "@types/babel__generator": "^7.6.4",
     "@types/babel__traverse": "^7.18.3",
     "@types/fs-extra": "^11.0.1",
+    "@types/koa": "^3.0.1",
     "typescript": "^4.9.5"
   }
 }

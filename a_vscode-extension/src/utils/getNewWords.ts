@@ -20,7 +20,10 @@ const getNewWords = (wordText: string) => {
 
   const ansList = [ans1, ans2, ans3, ans4, ans5].filter(item => item !== wordText)
 
-  return ansList
+  return {
+    ansList,
+    componentName: ans2 // 大驼峰形式 ComponentName
+  }
 }
 
 export default getNewWords

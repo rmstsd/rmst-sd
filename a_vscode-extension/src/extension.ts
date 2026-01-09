@@ -1,16 +1,19 @@
 import * as vscode from 'vscode'
-
+import * as path from 'path'
 import { exec } from 'child_process'
-import path = require('path')
+
 import { MyFoldingRangeProvider } from './utils/MyFoldingRangeProvider'
 
-// import { i18n } from './command/i18n'
 import { convertWord } from './command/convertWord'
 import deleteFunc from './command/deleteFunc'
 import { i18n } from './command/i18n'
 
+import { watcherAutoTsxTemplate } from './watcher/autoTsxTemplate'
+
 // 命令触发的时候调用
 export function activate(context: vscode.ExtensionContext) {
+  watcherAutoTsxTemplate(context)
+
   vscode.commands.registerCommand('delete-func', () => {
     deleteFunc()
   })
