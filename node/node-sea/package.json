@@ -7,6 +7,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node --watch ./index.cjs",
+    "sys": "tsx watch ./sys.ts",
+    "sys2": "tsx watch ./sys2.ts",
     "pkg": "pkg . --targets node18-win",
     "bun": "bun build ./index.js --compile --outfile my-app",
     "nexe": "nexe index.js -o myapp.exe",
@@ -27,7 +29,9 @@
     "koa": "^3.1.1",
     "koa-static": "^5.0.0",
     "nexe": "5.0.0-beta.4",
-    "pkg": "^5.8.1"
+    "node-systray-v2": "github:Edgar-P-yan/node-systray-v2",
+    "pkg": "^5.8.1",
+    "systray2": "^2.1.4"
   },
   "devDependencies": {
     "postject": "^1.0.0-alpha.6",

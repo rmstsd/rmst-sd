@@ -6,64 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>sd</title>
 
-    <style>
-      body {
-      }
-
-      .content {
-        background-color: red;
-        height: 100px;
-        width: 300px;
-        position: absolute;
-        top: 600px;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <div class="container" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: flex">
-      <span style="color: red">aa</span>
-      <span style="color: blue">bb</span>
-      <span style="color: green">cc</span>
+    <div class="cc" style="height: 600px; overflow: auto; border: 1px solid red; margin-top: 100px; position: relative">
+      <div style="height: 1000px"></div>
+
+      <div class="hh">哈哈哈</div>
+
+      <div style="height: 1000px"></div>
     </div>
 
-    <div style="height: 100px; overflow: auto">
-      <h1>asdasdasd</h1>
-      <h1>asdasdasd</h1>
-      <h1>asdasdasd</h1>
-      <h1>asdasdasd</h1>
-      <h1>asdasdasd</h1>
-      <h1>asdasdasd</h1>
-
-      <div class="content"></div>
-    </div>
     <script>
-      document.addEventListener(
-        'scroll',
-        evt => {
-          console.log(evt)
-          console.log('scroll')
-        },
-        { capture: true }
-      )
+      const cc = document.querySelector('.cc')
+      const hh = document.querySelector('.hh')
 
-      const p = Promise.resolve('123')
+      function calc() {
+        const ccRect = cc.getBoundingClientRect()
+        const hhRect = hh.getBoundingClientRect()
 
-      const p2 = test()
-      p2.then(() => {
-        console.log(3)
-      })
+        const ans = hhRect.top - ccRect.top + cc.scrollTop
 
-      p.then(() => {
-        console.log(1)
-      })
+        return ans
+      }
 
-      p.then(() => {
-        console.log(2)
-      })
+      let div = document.createElement('div')
+      div.style.height = '1px'
+      div.style.left = '0px'
+      div.style.width = '100%'
+      div.style.position = 'absolute'
+      div.style.backgroundColor = 'red'
 
-      async function test() {
-        return p
+      cc.appendChild(div)
+
+      cc.onclick = () => {
+        const ans = calc()
+
+        div.style.top = `${ans - 1}px`
       }
     </script>
   </body>
