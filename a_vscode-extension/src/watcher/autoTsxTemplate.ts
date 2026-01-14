@@ -23,6 +23,7 @@ export function watcherAutoTsxTemplate(context: vscode.ExtensionContext) {
       const fsPath = uri.fsPath
       const content = readFileSync(fsPath, 'utf8')
 
+      console.log('content', content.trim())
       if (content.trim() === '') {
         const fileName = basename(fsPath, '.tsx')
         const { componentName } = getNewWords(fileName)
@@ -47,6 +48,8 @@ export function watcherAutoTsxTemplate(context: vscode.ExtensionContext) {
           } else if (keys.includes('mobx')) {
             const pkgName = keys.includes('mobx-react') ? 'mobx-react' : 'mobx-react-lite'
             tsxTemplate = genMobx(componentName, pkgName)
+          } else {
+            tsxTemplate = genDefault(componentName)
           }
 
           writeFileSync(fsPath, tsxTemplate)
