@@ -1,15 +1,15 @@
 import * as vscode from 'vscode'
 import { readFileSync, writeFileSync } from 'fs'
 import getNewWords from '../utils/getNewWords'
-import { basename } from 'node:path'
+import { basename, extname } from 'node:path'
 import * as path from 'path'
 import * as fs from 'fs'
 
 export function watcherAutoTsxTemplate(context: vscode.ExtensionContext) {
-  const watcher = vscode.workspace.createFileSystemWatcher('**/*.{tsx,jsx}', false, true, true)
+  const watcher = vscode.workspace.createFileSystemWatcher('**/*.{tsx,jsx,html}', false, true, true)
 
   watcher.onDidCreate(uri => {
-    console.log(`tsx 文件被创建了: ${uri.fsPath}`)
+    console.log(`文件被创建了: ${uri.fsPath}`)
 
     if (uri.fsPath.includes('node_modules')) {
       return
@@ -20,7 +20,7 @@ export function watcherAutoTsxTemplate(context: vscode.ExtensionContext) {
     }
 
     const fsPath = uri.fsPath
-    const fileName = basename(fsPath, '.tsx')
+    const fileName = basename(fsPath, extname(fsPath))
     const { componentName } = getNewWords(fileName)
     const content = readFileSync(fsPath, 'utf8')
 
@@ -152,8 +152,7 @@ function findClosestPackageJson(filePath: string): string | null {
 }
 
 function genHtml(componentName: string) {
-  return `
-<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
