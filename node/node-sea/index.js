@@ -5,8 +5,6 @@ import path from 'path'
 
 console.log('node version', process.version)
 
-console.log('-- start')
-
 setTimeout(() => {
   console.log('set-timeout')
 }, 3000)

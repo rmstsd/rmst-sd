@@ -19,42 +19,44 @@ export function watcherAutoTsxTemplate(context: vscode.ExtensionContext) {
       return
     }
 
+    const fsPath = uri.fsPath
+    const fileName = basename(fsPath, '.tsx')
+    const { componentName } = getNewWords(fileName)
+    const content = readFileSync(fsPath, 'utf8')
+
+    if (content.trim()) {
+      return
+    }
+
     if (uri.fsPath.endsWith('.tsx')) {
-      const fsPath = uri.fsPath
-      const content = readFileSync(fsPath, 'utf8')
+      const packageJsonPath = findClosestPackageJson(fsPath)
+      if (!packageJsonPath) {
+        writeFileSync(fsPath, genDefault(componentName))
+      } else {
+        const packageJsonContent = readFileSync(packageJsonPath, 'utf8')
+        const packageJson = JSON.parse(packageJsonContent)
 
-      console.log('content', content.trim())
-      if (content.trim() === '') {
-        const fileName = basename(fsPath, '.tsx')
-        const { componentName } = getNewWords(fileName)
-        const packageJsonPath = findClosestPackageJson(fsPath)
+        const keys = Object.keys(packageJson.dependencies).concat(Object.keys(packageJson.devDependencies))
 
-        if (!packageJsonPath) {
-          writeFileSync(fsPath, genDefault(componentName))
-        } else {
-          const packageJsonContent = readFileSync(packageJsonPath, 'utf8')
-          const packageJson = JSON.parse(packageJsonContent)
+        let tsxTemplate = ''
 
-          const keys = Object.keys(packageJson.dependencies).concat(Object.keys(packageJson.devDependencies))
-
-          let tsxTemplate = ''
-
-          if (keys.includes('next')) {
-            if (fsPath.includes(path.join('src', 'app'))) {
-              tsxTemplate = genNextjs(componentName)
-            } else {
-              tsxTemplate = genDefault(componentName)
-            }
-          } else if (keys.includes('mobx')) {
-            const pkgName = keys.includes('mobx-react') ? 'mobx-react' : 'mobx-react-lite'
-            tsxTemplate = genMobx(componentName, pkgName)
+        if (keys.includes('next')) {
+          if (fsPath.includes(path.join('src', 'app'))) {
+            tsxTemplate = genNextjs(componentName)
           } else {
             tsxTemplate = genDefault(componentName)
           }
-
-          writeFileSync(fsPath, tsxTemplate)
+        } else if (keys.includes('mobx')) {
+          const pkgName = keys.includes('mobx-react') ? 'mobx-react' : 'mobx-react-lite'
+          tsxTemplate = genMobx(componentName, pkgName)
+        } else {
+          tsxTemplate = genDefault(componentName)
         }
+
+        writeFileSync(fsPath, tsxTemplate)
       }
+    } else if (uri.fsPath.endsWith('.html')) {
+      writeFileSync(fsPath, genHtml(componentName))
     }
   })
 
@@ -147,4 +149,30 @@ function findClosestPackageJson(filePath: string): string | null {
     // 继续向上一层
     currentDir = parentDir
   }
+}
+
+function genHtml(componentName: string) {
+  return `
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>${componentName}</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+  <script>
+
+  </script>
+</body>
+</html>
+`
 }

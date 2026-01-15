@@ -20,7 +20,9 @@
     "cp2": "node -e \"require('fs').copyFileSync(process.execPath, 'hello.exe')\"",
     "cs": "codesign --remove-signature hello.exe'",
     "postject": "npm exec postject hello.exe NODE_SEA_BLOB sea-prep.blob --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2 --macho-segment-name NODE_SEA",
-    "build": "npm run sea && npm run cp2 && node script.js"
+    "build": "npm run sea && npm run cp2 && node script.js",
+    "---": "--",
+    "node-windows": "tsx node-windows.ts"
   },
   "keywords": [],
   "author": "",
@@ -30,10 +32,12 @@
     "koa-static": "^5.0.0",
     "nexe": "5.0.0-beta.4",
     "node-systray-v2": "github:Edgar-P-yan/node-systray-v2",
+    "node-windows": "1.0.0-beta.8",
     "pkg": "^5.8.1",
     "systray2": "^2.1.4"
   },
   "devDependencies": {
+    "@types/node-windows": "^0.1.6",
     "postject": "^1.0.0-alpha.6",
     "vite": "^6.0.1"
   },

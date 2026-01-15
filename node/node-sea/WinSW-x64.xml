@@ -1,0 +1,23 @@
+<service>
+  <id>A_Rmst_MyNodeApp</id>
+  <!-- 服务名称，服务列表中显示的名称 -->
+  <name>A_My Node.js SEA Service</name>
+  <!-- 服务描述 -->
+  <description>这是一个由 Node.js SEA 打包的服务。</description>
+
+  <!-- 【重点】这里直接指向你的 SEA 可执行文件 -->
+  <!-- %BASE% 代表当前目录 -->
+  <executable>%BASE%\hello.exe</executable>
+  
+  <!-- 如果需要传递参数 -->
+  <!-- <argument>_-port=8080</argument> -->
+
+  <!-- 设置日志路径 (自动重定向 stdout/stderr) -->
+  <log mode="roll-by-size">
+    <sizeThreshold>10240</sizeThreshold>
+    <keepFiles>8</keepFiles>
+  </log>
+
+  <!-- 自动重启策略 -->
+  <onfailure action="restart" delay="10 sec"/>
+</service>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <title>Canvas 2D Semantic Zoom Demo</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #222;
+      }
+      canvas {
+        display: block;
+      }
+      #ui {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        font-family: sans-serif;
+        pointer-events: none;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 8px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body style="touch-action: none">
+    <div id="ui">
+      Canvas 2D: 10,000 Points
+      <br />
+      Scroll to Zoom, Drag to Pan
+    </div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      const canvas = document.getElementById('canvas')
+      const ctx = canvas.getContext('2d', { alpha: false }) // alpha: false 稍微提升性能
+
+      // ==========================================
+      // 1. 初始化数据
+      // ==========================================
+      let width, height
+      const count = 5_0000
+      const points = new Float32Array(count * 2) // 使用 TypedArray 优化内存
+
+      // 随机分布在 -2000 到 2000 的范围内
+      for (let i = 0; i < count; i++) {
+        points[i * 2] = (Math.random() - 0.5) * 4000 // x
+        points[i * 2 + 1] = (Math.random() - 0.5) * 4000 // y
+      }
+
+      // ==========================================
+      // 2. 预渲染 "图章" (Sprite)
+      // ==========================================
+      const radius = 5
+      const spriteSize = radius * 2
+      const sprite = document.createElement('canvas')
+      sprite.width = spriteSize
+      sprite.height = spriteSize
+      const sCtx = sprite.getContext('2d')
+
+      // 画一个圆
+      sCtx.beginPath()
+      sCtx.arc(radius, radius, radius, 0, Math.PI * 2)
+      sCtx.fillStyle = '#00ffcc'
+      sCtx.fill()
+
+      // ==========================================
+      // 3. 视图状态 (Virtual Camera)
+      // ==========================================
+      const camera = {
+        x: 0, // 摄像机中心的世界坐标 x
+        y: 0, // 摄像机中心的世界坐标 y
+        zoom: 0.1 // 缩放倍率
+      }
+
+      // 处理窗口大小
+      function resize() {
+        width = window.innerWidth
+        height = window.innerHeight
+        canvas.width = width
+        canvas.height = height
+
+        console.time()
+        draw()
+        console.timeEnd()
+      }
+      window.addEventListener('resize', resize)
+      resize()
+
+      // ==========================================
+      // 4. 核心绘制循环
+      // ==========================================
+      function draw() {
+        // 清空画布
+        ctx.fillStyle = '#222'
+        ctx.fillRect(0, 0, width, height)
+
+        // 计算视口边界 (World Space) 用于剔除
+        // 屏幕中心对应 camera.x, camera.y
+        // 屏幕左边缘 = camera.x - (width / 2) / zoom
+        const halfW = width / 2 / camera.zoom
+        const halfH = height / 2 / camera.zoom
+
+        const viewLeft = camera.x - halfW
+        const viewRight = camera.x + halfW
+        const viewTop = camera.y - halfH
+        const viewBottom = camera.y + halfH
+
+        // 稍微扩大一点剔除范围，防止圆刚到边缘就消失了一半
+        const padding = radius / camera.zoom
+
+        // 预先计算屏幕中心偏移量，减少循环内的计算
+        const screenCenterX = width / 2
+        const screenCenterY = height / 2
+
+        for (let i = 0; i < count; i++) {
+          const px = points[i * 2]
+          const py = points[i * 2 + 1]
+
+          // 剔除 (Culling): 如果点不在视口内，直接跳过
+          if (px < viewLeft - padding || px > viewRight + padding || py < viewTop - padding || py > viewBottom + padding) {
+            continue
+          }
+
+          // 坐标转换: World -> Screen
+          // 公式: (worldPos - cameraPos) * zoom + screenCenter
+          const screenX = (px - camera.x) * camera.zoom + screenCenterX
+          const screenY = (py - camera.y) * camera.zoom + screenCenterY
+
+          // 绘制图章
+          // 关键点：我们没有 scale ctx，所以 sprite 原样画上去，大小不变
+          // Math.round 也是可选的，有时候整数坐标绘制更快，但牺牲平滑度
+          ctx.drawImage(sprite, screenX - radius, screenY - radius)
+
+          // ctx.beginPath()
+          // ctx.fillStyle = '#00ffcc'
+          // ctx.rect(screenX - radius, screenY - radius, spriteSize, spriteSize)
+          // ctx.fill()
+        }
+      }
+
+      // ==========================================
+      // 5. 交互逻辑
+      // ==========================================
+
+      // 拖拽
+      let isDragging = false
+      let lastX, lastY
+
+      canvas.addEventListener('pointerdown', e => {
+        isDragging = true
+        lastX = e.clientX
+        lastY = e.clientY
+      })
+
+      window.addEventListener('pointermove', e => {
+        if (!isDragging) return
+        const dx = e.clientX - lastX
+        const dy = e.clientY - lastY
+
+        // 移动相机 (注意反向，鼠标往左移，相机往右走，且受 zoom 影响)
+        camera.x -= dx / camera.zoom
+        camera.y -= dy / camera.zoom
+
+        lastX = e.clientX
+        lastY = e.clientY
+
+        requestAnimationFrame(draw)
+      })
+
+      window.addEventListener('pointerup', () => (isDragging = false))
+
+      // 缩放
+      canvas.addEventListener(
+        'wheel',
+        e => {
+          e.preventDefault()
+          const zoomSensitivity = 0.001
+          const delta = Math.exp(-e.deltaY * zoomSensitivity) // 平滑缩放系数
+
+          // 以鼠标为中心缩放的数学逻辑
+          // 1. 计算鼠标当前对应的世界坐标
+          const mouseWorldX = camera.x + (e.clientX - width / 2) / camera.zoom
+          const mouseWorldY = camera.y + (e.clientY - height / 2) / camera.zoom
+
+          // 2. 应用缩放
+          // 限制最小最大缩放
+          const newZoom = Math.max(0.1, Math.min(camera.zoom * delta, 50))
+          camera.zoom = newZoom
+
+          // 3. 修正相机位置，使得鼠标指向的世界坐标保持不变
+          // 新的相机位置 = 鼠标世界坐标 - (鼠标屏幕偏移 / 新缩放)
+          camera.x = mouseWorldX - (e.clientX - width / 2) / camera.zoom
+          camera.y = mouseWorldY - (e.clientY - height / 2) / camera.zoom
+
+          requestAnimationFrame(draw)
+        },
+        { passive: false }
+      )
+
+      // 初始绘制
+      draw()
+    </script>
+  </body>
+</html>

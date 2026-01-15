@@ -1,0 +1,10 @@
+(node:10756) ExperimentalWarning: Single executable application is an experimental feature and might change at any time
+(Use `hello --trace-warnings ...` to show where the warning was created)
+(node:4160) ExperimentalWarning: Single executable application is an experimental feature and might change at any time
+(Use `hello --trace-warnings ...` to show where the warning was created)
+(node:5268) ExperimentalWarning: Single executable application is an experimental feature and might change at any time
+(Use `hello --trace-warnings ...` to show where the warning was created)
+(node:8120) ExperimentalWarning: Single executable application is an experimental feature and might change at any time
+(Use `hello --trace-warnings ...` to show where the warning was created)
+(node:8208) ExperimentalWarning: Single executable application is an experimental feature and might change at any time
+(Use `hello --trace-warnings ...` to show where the warning was created)
