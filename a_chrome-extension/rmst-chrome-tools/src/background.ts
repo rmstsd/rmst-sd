@@ -13,3 +13,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.sendMessage(tab.id, 'copy', { frameId: info.frameId }, () => {})
   }
 })
+
+chrome.commands.onCommand.addListener(command => {
+  console.log(`接收到命令: ${command}，但我不做任何事。`)
+  // 这里不写任何逻辑，即可实现“屏蔽”效果
+})

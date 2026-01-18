@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
-    "package": "plasmo package"
+    "package": "plasmo package",
+    "command": "tsx watch scripts/command.ts"
   },
   "dependencies": {
     "plasmo": "0.90.5",
@@ -27,7 +28,6 @@
       "http://*/*"
     ],
     "permissions": [
-      "debugger",
       "tabs",
       "bookmarks",
       "contextMenus",
@@ -50,6 +50,38 @@
           "*"
         ]
       }
-    ]
+    ],
+    "commands": {
+      "command_0": {
+        "description": "屏蔽 0"
+      },
+      "command_1": {
+        "description": "屏蔽 1"
+      },
+      "command_2": {
+        "description": "屏蔽 2"
+      },
+      "command_3": {
+        "description": "屏蔽 3"
+      },
+      "command_4": {
+        "description": "屏蔽 4"
+      },
+      "command_5": {
+        "description": "屏蔽 5"
+      },
+      "command_6": {
+        "description": "屏蔽 6"
+      },
+      "command_7": {
+        "description": "屏蔽 7"
+      },
+      "command_8": {
+        "description": "屏蔽 8"
+      },
+      "command_9": {
+        "description": "屏蔽 9"
+      }
+    }
   }
 }
