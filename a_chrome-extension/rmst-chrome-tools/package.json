@@ -31,12 +31,9 @@
       "tabs",
       "bookmarks",
       "contextMenus",
-      "activeTab",
       "cookies",
       "storage",
-      "webRequest",
-      "favicon",
-      "scripting"
+      "favicon"
     ],
     "web_accessible_resources": [
       {

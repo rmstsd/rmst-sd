@@ -18,10 +18,3 @@ chrome.runtime.onMessage.addListener(message => {
     return rootDomain
   }
 })
-
-// 动态注入脚本
-// const script = document.createElement('script')
-// script.setAttribute('src', chrome.runtime.getURL('js/send-method.js'))
-
-// document.head.appendChild(script)
-//取cookies
