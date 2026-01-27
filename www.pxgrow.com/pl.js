@@ -43,15 +43,16 @@ function runPlaygroundCode() {
       console.log(ViewportLighter)
 
       const app = new App({ view: window, editor: {} })
+
       let vl = new ViewportLighter(app.tree, {
-        sliceRender: 10000 // 每个切片1万个元素
+        sliceRender: 1_0000 // 每个切片1万个元素
       })
       console.log(vl)
 
       create(app.tree, 10) // 创建10万个矩形
       app.tree.zoom('fit')
 
-      function create(view, num) {
+      async function create(view, num) {
         const groupSize = 10 * 100 * 1.5
         const column = num > 25 ? 10 : 5
         for (let i = 0; i < num; i++) {
@@ -60,6 +61,8 @@ function runPlaygroundCode() {
           group.y = groupSize * Math.floor(i / column)
 
           view.add(group)
+
+          // await new Promise(resolve => setTimeout(resolve, 1000))
           createRects(group, 0, 0, `hsl(${(i * 10) % 360},70%,50%)`)
         }
       }

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Index</title>
+
+    <style></style>
+  </head>
+
+  <body style="touch-action: none">
+    <canvas id="myCanvas" width="600" height="600" style="border: 1px solid red"></canvas>
+
+    <script src="../utils/util.js"></script>
+    <script>
+      const canvas = document.getElementById('myCanvas')
+
+      let scale = 1
+      let tx = 0
+      let ty = 0
+
+      canvas.addEventListener('wheel', e => {
+        e.preventDefault()
+        const { deltaY } = e
+        scale = deltaY > 0 ? scale * 0.8 : scale * 1.2
+
+        worker.postMessage({ action: 'scale', scale, tx, ty })
+      })
+
+      canvas.addEventListener('pointerdown', downEvt => {
+        let ntx
+        let nty
+        startDrag(downEvt, {
+          onDragStart: downEvt => {},
+          onDragMove: moveEvt => {
+            ntx = tx + moveEvt.clientX - downEvt.clientX
+            nty = ty + moveEvt.clientY - downEvt.clientY
+
+            worker.postMessage({ action: 'translate', tx: ntx, ty: nty, scale })
+          },
+          onDragEnd: upEvt => {
+            tx = ntx
+            ty = nty
+          }
+        })
+      })
+
+      // 1. 将控制权转移给 OffscreenCanvas
+      // 注意：此时原 canvas 无法再调用 getContext
+      const offscreen = canvas.transferControlToOffscreen()
+
+      const worker = new Worker('worker.js')
+
+      // 2. 将 OffscreenCanvas 对象传递给 Worker
+      // 第二个参数 [offscreen] 是必须的，表示所有权转移（Zero-copy）
+      worker.postMessage({ action: 'init', canvas: offscreen }, [offscreen])
+    </script>
+  </body>
+</html>

@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>WebGL 50k Interactive (Bug Fixed)</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: #222;
+      }
+      canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        touch-action: none;
+        cursor: crosshair;
+      }
+      #ui {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: lime;
+        font-family: monospace;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        pointer-events: none;
+        user-select: none;
+        border-radius: 4px;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ui">
+      FPS: 0
+      <br />
+      状态: 请点击矩形
+      <br />
+      选中的ID: -1
+    </div>
+    <canvas id="glcanvas"></canvas>
+
+    <script>
+      const canvas = document.getElementById('glcanvas')
+      const gl = canvas.getContext('webgl2', { alpha: false, antialias: false })
+
+      if (!gl) alert('WebGL 2 不支持')
+
+      // === 1. Shaders ===
+      const vsSource = `#version 300 es
+precision highp float;
+
+layout(location = 0) in vec2 a_vertexPos;
+layout(location = 1) in vec2 a_instancePos;
+layout(location = 2) in vec3 a_color;
+
+uniform vec2 u_resolution;
+uniform vec2 u_scale;  // 这里的 scale 现在包含了 dpr
+uniform vec2 u_offset; // 这里的 offset 包含了 dpr
+uniform float u_pointSize;
+uniform float u_clickId;
+
+out vec3 v_color;
+
+void main() {
+    bool isSelected = (float(gl_InstanceID) == u_clickId);
+    float size = isSelected ? u_pointSize * 2.0 : u_pointSize;
+    
+    // 关键公式：(世界坐标 * 缩放) + 偏移
+    // 现在 u_scale 和 u_offset 都是基于物理像素的，单位统一了
+    vec2 viewPos = (a_instancePos * u_scale) + u_offset;
+    
+    vec2 clipCenter = viewPos / (u_resolution / 2.0); 
+    vec2 clipSize = (vec2(size) / u_resolution) * 2.0;
+
+    gl_Position = vec4(clipCenter + (a_vertexPos * clipSize), 0.0, 1.0);
+    v_color = isSelected ? vec3(1.0, 1.0, 1.0) : a_color;
+}
+`
+
+      const fsSource = `#version 300 es
+precision mediump float;
+in vec3 v_color;
+out vec4 outColor;
+void main() {
+    outColor = vec4(v_color, 1.0);
+}
+`
+
+      function createShader(gl, type, src) {
+        const s = gl.createShader(type)
+        gl.shaderSource(s, src)
+        gl.compileShader(s)
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) return null
+        return s
+      }
+
+      const program = gl.createProgram()
+      gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vsSource))
+      gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fsSource))
+      gl.linkProgram(program)
+      gl.useProgram(program)
+
+      // === 2. Data ===
+      const INSTANCE_COUNT = 50000
+      const RECT_SIZE_CSS = 10.0
+      const RANGE = 5000
+
+      const instanceData = new Float32Array(INSTANCE_COUNT * 5)
+      for (let i = 0; i < INSTANCE_COUNT; i++) {
+        const k = i * 5
+        instanceData[k] = (Math.random() - 0.5) * RANGE
+        instanceData[k + 1] = (Math.random() - 0.5) * RANGE
+        instanceData[k + 2] = Math.random()
+        instanceData[k + 3] = Math.random()
+        instanceData[k + 4] = Math.random()
+      }
+
+      const quadVerts = new Float32Array([-0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5])
+
+      // === 3. Buffers ===
+      const vao = gl.createVertexArray()
+      gl.bindVertexArray(vao)
+
+      const vboGeo = gl.createBuffer()
+      gl.bindBuffer(gl.ARRAY_BUFFER, vboGeo)
+      gl.bufferData(gl.ARRAY_BUFFER, quadVerts, gl.STATIC_DRAW)
+      gl.enableVertexAttribArray(0)
+      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0)
+
+      const vboInst = gl.createBuffer()
+      gl.bindBuffer(gl.ARRAY_BUFFER, vboInst)
+      gl.bufferData(gl.ARRAY_BUFFER, instanceData, gl.STATIC_DRAW)
+      gl.enableVertexAttribArray(1)
+      gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 20, 0)
+      gl.vertexAttribDivisor(1, 1)
+      gl.enableVertexAttribArray(2)
+      gl.vertexAttribPointer(2, 3, gl.FLOAT, false, 20, 8)
+      gl.vertexAttribDivisor(2, 1)
+
+      // === 4. 交互逻辑 ===
+      const state = {
+        scale: 0.2,
+        offsetX: 0,
+        offsetY: 0,
+        isDragging: false,
+        lastX: 0,
+        lastY: 0,
+        selectedId: -1,
+
+        // 缩放相关
+        startDist: 0, // 双指初始距离
+        startScale: 0.2, // 双指开始时的缩放值
+        isPinching: false
+      }
+
+      function findRectAt(screenX, screenY) {
+        const centerX = window.innerWidth / 2
+        const centerY = window.innerHeight / 2
+
+        const relativeX = screenX - centerX
+        const relativeY = centerY - screenY // Y轴反转
+        const viewX = relativeX - state.offsetX
+        const viewY = relativeY - state.offsetY
+
+        // 半径稍微大一点点，方便点击
+        const hitRadius = RECT_SIZE_CSS / 2 + 2
+
+        // 【修改点2】倒序遍历，实现“所见即所得”，选中最上层的
+        for (let i = INSTANCE_COUNT - 1; i >= 0; i--) {
+          const k = i * 5
+          const worldX = instanceData[k]
+          const worldY = instanceData[k + 1]
+
+          // 这里的计算是纯逻辑像素，与 Shader 里的 (World*Scale*DPR + Offset*DPR)/DPR 是等价的
+          const currentScreenX = worldX * state.scale
+          const currentScreenY = worldY * state.scale
+
+          if (Math.abs(currentScreenX - viewX) < hitRadius && Math.abs(currentScreenY - viewY) < hitRadius) {
+            return i
+          }
+        }
+        return -1
+      }
+
+      canvas.addEventListener('click', e => {
+        if (state.wasDrag) {
+          state.wasDrag = false
+          return
+        }
+        const id = findRectAt(e.clientX, e.clientY)
+        state.selectedId = id
+
+        const ui = document.getElementById('ui')
+        if (id !== -1) {
+          const x = instanceData[id * 5].toFixed(0)
+          const y = instanceData[id * 5 + 1].toFixed(0)
+          ui.innerHTML = `FPS: -<br>选中 ID: <span style="color:yellow; font-weight:bold; font-size:1.2em">${id}</span><br>坐标: (${x}, ${y})`
+        } else {
+          ui.innerHTML = `FPS: -<br>未选中 (点击任意点取消)`
+        }
+      })
+
+      // --- 事件监听 ---
+
+      canvas.addEventListener(
+        'touchstart',
+        e => {
+          if (e.touches.length === 2) {
+            state.isDragging = false // 双指时禁止平移，防止抖动
+            state.isPinching = true
+
+            // 1. 记录初始距离
+            state.startDist = getDistance(e.touches[0], e.touches[1])
+            // 2. 记录当前缩放值作为基准
+            state.startScale = state.scale
+          }
+        },
+        { passive: false }
+      )
+
+      // 工具：计算两个触点之间的距离
+      function getDistance(t1, t2) {
+        const dx = t1.clientX - t2.clientX
+        const dy = t1.clientY - t2.clientY
+        return Math.hypot(dx, dy) // Math.sqrt(dx*dx + dy*dy)
+      }
+
+      // --- 事件监听 ---
+
+      canvas.addEventListener(
+        'touchstart',
+        e => {
+          // 情况 A: 单指 -> 开始平移
+          if (e.touches.length === 1) {
+            state.isDragging = true
+            state.isPinching = false // 确保不冲突
+            state.lastX = e.touches[0].clientX
+            state.lastY = e.touches[0].clientY
+          }
+          // 情况 B: 双指 -> 开始缩放
+          else if (e.touches.length === 2) {
+            state.isDragging = false // 双指时禁止平移，防止抖动
+            state.isPinching = true
+
+            // 1. 记录初始距离
+            state.startDist = getDistance(e.touches[0], e.touches[1])
+            // 2. 记录当前缩放值作为基准
+            state.startScale = state.scale
+          }
+        },
+        { passive: false }
+      )
+
+      canvas.addEventListener(
+        'touchmove',
+        e => {
+          // 必须阻止默认行为(滚动网页)
+          if (e.cancelable) e.preventDefault()
+
+          // 情况 A: 单指平移
+          if (state.isDragging && e.touches.length === 1) {
+            const x = e.touches[0].clientX
+            const y = e.touches[0].clientY
+            const dx = x - state.lastX
+            const dy = y - state.lastY
+
+            state.offsetX += dx
+            state.offsetY -= dy // WebGL Y轴反转
+            state.lastX = x
+            state.lastY = y
+          }
+          // === 新增：双指缩放逻辑 ===
+          // 情况 B: 双指缩放
+          else if (state.isPinching && e.touches.length === 2) {
+            // 1. 计算当前距离
+            const currDist = getDistance(e.touches[0], e.touches[1])
+
+            if (state.startDist > 0) {
+              // 2. 计算缩放比例 (当前距离 / 初始距离)
+              const zoomFactor = currDist / state.startDist
+
+              // 3. 应用缩放 (基于初始缩放值 * 比例)
+              let newScale = state.startScale * zoomFactor
+
+              // 限制缩放范围
+              state.scale = Math.max(0.01, Math.min(newScale, 50.0))
+            }
+          }
+        },
+        { passive: false }
+      )
+
+      canvas.addEventListener('touchend', e => {
+        // 当手指抬起，重置状态
+        state.isDragging = false
+        state.isPinching = false
+
+        // 优化体验：如果从双指变成单指，通常如果不重置，剩下的那个手指会触发大幅度跳跃
+        // 所以这里简单的逻辑是：只要有手指抬起，就暂停所有操作，等待下一次点击
+        // 这样最稳定，不会“跳屏”
+      })
+
+      canvas.addEventListener('pointerdown', e => {
+        state.isDragging = true
+        state.lastX = e.clientX
+        state.lastY = e.clientY
+        state.wasDrag = false
+      })
+      window.addEventListener('pointermove', e => {
+        if (!state.isDragging) return
+        const dx = e.clientX - state.lastX
+        const dy = e.clientY - state.lastY
+        if (Math.abs(dx) > 2 || Math.abs(dy) > 2) state.wasDrag = true
+        state.offsetX += dx
+        state.offsetY -= dy
+        state.lastX = e.clientX
+        state.lastY = e.clientY
+      })
+      window.addEventListener('pointerup', () => (state.isDragging = false))
+      canvas.addEventListener(
+        'wheel',
+        e => {
+          e.preventDefault()
+          state.scale = Math.max(0.01, Math.min(state.scale * (1 - e.deltaY * 0.001), 50.0))
+        },
+        { passive: false }
+      )
+
+      // === 5. Render Loop ===
+      const locRes = gl.getUniformLocation(program, 'u_resolution')
+      const locScale = gl.getUniformLocation(program, 'u_scale')
+      const locOffset = gl.getUniformLocation(program, 'u_offset')
+      const locSize = gl.getUniformLocation(program, 'u_pointSize')
+      const locClickId = gl.getUniformLocation(program, 'u_clickId')
+
+      function resize() {
+        const dpr = window.devicePixelRatio || 1
+        canvas.width = window.innerWidth * dpr
+        canvas.height = window.innerHeight * dpr
+        gl.viewport(0, 0, canvas.width, canvas.height)
+      }
+      window.addEventListener('resize', resize)
+      resize()
+
+      let frameCount = 0
+      let lastTime = performance.now()
+
+      function loop(now) {
+        frameCount++
+        if (now - lastTime >= 1000) {
+          if (state.selectedId === -1) {
+            document.getElementById('ui').innerHTML = `FPS: ${frameCount}<br>请点击任意矩形`
+          }
+          frameCount = 0
+          lastTime = now
+        }
+
+        gl.clearColor(0.1, 0.1, 0.1, 1.0)
+        gl.clear(gl.COLOR_BUFFER_BIT)
+
+        const dpr = window.devicePixelRatio || 1
+
+        gl.uniform2f(locRes, canvas.width, canvas.height)
+
+        // 【修改点1】关键修复：缩放系数也要乘以 DPR
+        // 这样 Shader 里的坐标系就变成了完全的“物理像素”坐标系，与 JS 的逻辑像素坐标系通过 DPR 完美对应
+        gl.uniform2f(locScale, state.scale * dpr, state.scale * dpr)
+
+        gl.uniform2f(locOffset, state.offsetX * dpr, state.offsetY * dpr)
+        gl.uniform1f(locSize, RECT_SIZE_CSS * dpr)
+        gl.uniform1f(locClickId, state.selectedId)
+
+        gl.bindVertexArray(vao)
+        gl.drawArraysInstanced(gl.TRIANGLES, 0, 6, INSTANCE_COUNT)
+
+        requestAnimationFrame(loop)
+      }
+      requestAnimationFrame(loop)
+    </script>
+  </body>
+</html>
