@@ -27,7 +27,9 @@ function runPlaygroundCode() {
   PxGrow.tiler = LeaferUI
   PxGrow.viewportLighter = LeaferUI
   PxGrow.pathEditor = LeaferUI
+
   try {
+    let rects = []
     ;(function () {
       LeaferUI.Debug.enable = false
       LeaferUI.Debug.showRepaint = false
@@ -40,18 +42,16 @@ function runPlaygroundCode() {
         Group = LeaferUI.Group,
         IGroup = LeaferUI.IGroup
       const ViewportLighter = PxGrow.viewportLighter.ViewportLighter
-      console.log(ViewportLighter)
 
       const app = new App({ view: window, editor: {} })
 
       let vl = new ViewportLighter(app.tree, {
         sliceRender: 1_0000 // 每个切片1万个元素
       })
-      console.log(vl)
 
       create(app.tree, 10) // 创建10万个矩形
-      app.tree.zoom('fit')
 
+      app.tree.zoom('fit')
       async function create(view, num) {
         const groupSize = 10 * 100 * 1.5
         const column = num > 25 ? 10 : 5
@@ -82,6 +82,8 @@ function runPlaygroundCode() {
             rect.fill = color
             rect.editable = true
             group.add(rect)
+
+            rects.push(rect)
             y += 12
           }
           startX += 12
@@ -89,7 +91,6 @@ function runPlaygroundCode() {
       }
     })()
   } catch (e) {
-    console.log(e)
     document.body.childNodes.forEach(item => item.remove())
   }
 }
