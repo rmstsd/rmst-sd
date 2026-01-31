@@ -36,6 +36,7 @@ interface SearchCardProps {
 
 export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
   const [query, setQuery] = useState('')
+  const [typedQuery, setTypedQuery] = useState('')
   const [isFocused, setIsFocused] = useState(false)
   const [suggestions, setSuggestions] = useState<Option[]>([])
   const [isSuggestionsLoading, setIsSuggestionsLoading] = useState(false)
@@ -64,7 +65,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
   }, [isDropdownOpen])
 
   useEffect(() => {
-    if (!query.trim()) {
+    if (!typedQuery.trim()) {
       setSuggestions([])
       setIsSuggestionsLoading(false)
       return
@@ -72,11 +73,11 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
     const requestId = performance.now()
     requestIdRef.current = requestId
     setIsSuggestionsLoading(true)
-    fetchSuggestions(query)
+    fetchSuggestions(typedQuery)
       .then(list => {
         if (requestIdRef.current !== requestId) return
         setSuggestions(list)
-        setHighlightedIndex(list.length > 0 ? 0 : -1)
+        setHighlightedIndex(-1)
       })
       .catch(() => {
         if (requestIdRef.current === requestId) setSuggestions([])
@@ -84,7 +85,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
       .finally(() => {
         if (requestIdRef.current === requestId) setIsSuggestionsLoading(false)
       })
-  }, [query])
+  }, [typedQuery])
 
   useEffect(() => {
     const onOutside = (e: MouseEvent) => {
@@ -102,6 +103,7 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
   const searchWithQuery = useCallback(
     (queryText: string) => {
       setQuery(queryText)
+      setTypedQuery(queryText)
       closeDropdown()
       openSearchUrl(queryText)
     },
@@ -118,6 +120,8 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value
     setQuery(val)
+    setTypedQuery(val)
+    setHighlightedIndex(-1) // Reset highlight on input change
     setIsDropdownOpen(true)
     if (!val) setSuggestions([])
   }, [])
@@ -133,35 +137,51 @@ export const SearchCard: React.FC<SearchCardProps> = ({ item }) => {
         switch (e.key) {
           case 'ArrowDown': {
             e.preventDefault()
-            const next = highlightedIndex < suggestions.length - 1 ? highlightedIndex + 1 : 0
+            const next = highlightedIndex < suggestions.length - 1 ? highlightedIndex + 1 : -1
             setHighlightedIndex(next)
-            scrollHighlightIntoView(next)
+            if (next !== -1) {
+              setQuery(suggestions[next].label)
+              scrollHighlightIntoView(next)
+            } else {
+              setQuery(typedQuery)
+            }
             return
           }
           case 'ArrowUp': {
             e.preventDefault()
-            const prev = highlightedIndex > 0 ? highlightedIndex - 1 : suggestions.length - 1
+            let prev = -1
+            if (highlightedIndex === -1) {
+              prev = suggestions.length - 1
+            } else {
+              prev = highlightedIndex > 0 ? highlightedIndex - 1 : -1
+            }
+
             setHighlightedIndex(prev)
-            scrollHighlightIntoView(prev)
+            if (prev !== -1) {
+              setQuery(suggestions[prev].label)
+              scrollHighlightIntoView(prev)
+            } else {
+              setQuery(typedQuery)
+            }
             return
           }
           case 'Enter':
             e.preventDefault()
-            if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
-              searchWithQuery(suggestions[highlightedIndex].label)
-            } else {
-              handleSearch()
-            }
+            handleSearch()
             return
           case 'Escape':
             e.preventDefault()
+            setQuery(typedQuery)
             closeDropdown()
             return
         }
       }
-      if (e.key === 'Enter') handleSearch()
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        handleSearch()
+      }
     },
-    [isDropdownOpen, suggestions, highlightedIndex, scrollHighlightIntoView, searchWithQuery, handleSearch, closeDropdown]
+    [isDropdownOpen, suggestions, highlightedIndex, scrollHighlightIntoView, handleSearch, closeDropdown, typedQuery]
   )
 
   const handleFocus = useCallback(() => {
