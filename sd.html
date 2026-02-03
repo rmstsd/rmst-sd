@@ -6,25 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>Sd</title>
 
-    <style></style>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
   </head>
 
   <body>
-    <script src="https://suggestqueries.google.com/complete/search?client=chrome&q=react"></script>
     <canvas width="600" height="600" style="border: 1px solid red"></canvas>
 
     <script>
       const canvas = document.querySelector('canvas')
       const ctx = canvas.getContext('2d')
 
-      const offscreenCanvas = new OffscreenCanvas(600, 600)
-      const offscreenCtx = offscreenCanvas.getContext('2d')
+      let mt = new DOMMatrix()
 
-      offscreenCtx.fillRect(10, 10, 200, 100)
-      ctx.drawImage(offscreenCanvas.transferToImageBitmap(), 0, 0)
+      draw()
+      function draw() {
+        ctx.resetTransform()
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      offscreenCtx.fillRect(100, 200, 200, 100)
-      ctx.drawImage(offscreenCanvas.transferToImageBitmap(), 0, 0)
+        ctx.setTransform(mt)
+        ctx.fillRect(10, 10, 200, 100)
+      }
+
+      canvas.addEventListener('wheel', evt => {
+        evt.preventDefault()
+
+        let zoom = Math.exp(-evt.deltaY * 0.002)
+
+        const origin = { x: evt.clientX, y: evt.clientY }
+
+        mt.preMultiplySelf(
+          new DOMMatrix().translateSelf(origin.x, origin.y).scaleSelf(zoom, zoom).translateSelf(-origin.x, -origin.y)
+        )
+
+        draw()
+      })
     </script>
   </body>
 </html>
