@@ -33,12 +33,29 @@
       "contextMenus",
       "cookies",
       "storage",
-      "favicon"
+      "favicon",
+      "declarativeNetRequest",
+      "downloads",
+      "tabs",
+      "declarativeNetRequestFeedback",
+      "webNavigation",
+      "history"
     ],
+    "declarative_net_request": {
+      "rule_resources": [
+        {
+          "id": "redirect_rules",
+          "enabled": true,
+          "path": "~rules/rules.json"
+        }
+      ]
+    },
     "web_accessible_resources": [
       {
         "resources": [
-          "_favicon/*"
+          "_favicon/*",
+          "assets/*",
+          "rules/*"
         ],
         "matches": [
           "<all_urls>"

@@ -10,7 +10,29 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(info => {
   // 注意：此时请求已经被掐断了，你救不回来了，只能做记录
 })
 
-chrome.downloads.onCreated.addListener(downloadItem => {
+chrome.bookmarks.getTree(treeNodes => {
+  console.log(treeNodes) // 遍历这个树来找到你需要的节点
+
+  // dfs 深度遍历  treeNodes children， 打印书签
+  dfs(treeNodes)
+  function dfs(treeNodes) {
+    treeNodes.forEach(node => {
+      if (node.title && node.url) {
+        console.log(node)
+
+        let newUrl = new URL(node.url)
+        newUrl.username = 'rmst'
+
+        chrome.bookmarks.update(node.id, { url: newUrl.toString() }, updated => {})
+      }
+      if (node.children) {
+        dfs(node.children)
+      }
+    })
+  }
+})
+
+chrome.downloads.onCreated.addListener(async downloadItem => {
   // 1. 检查是否是我们触发的重定向下载
 
   console.log(downloadItem)
@@ -30,7 +52,14 @@ chrome.downloads.onCreated.addListener(downloadItem => {
     const url = new URL(downloadItem.url)
     url.username = ''
 
-    chrome.tabs.create({ url: url.toString(), active: true })
+    // 查询当前窗口中处于活动状态的标签页
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+
+    if (tab) {
+      console.log('当前标签页的索引是:', tab.index)
+      chrome.tabs.create({ url: url.toString(), active: true, index: tab.index + 1 })
+    }
+
     return
 
     // 4. 解析原始 URL

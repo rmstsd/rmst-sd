@@ -3,7 +3,7 @@
   "name": "New Tab Redirector",
   "version": "1.0",
   "description": "Intercepts  to open them in a new tab.",
-  "permissions": ["declarativeNetRequest", "downloads", "tabs", "declarativeNetRequestFeedback"],
+  "permissions": ["declarativeNetRequest", "downloads", "tabs", "declarativeNetRequestFeedback", "bookmarks"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
