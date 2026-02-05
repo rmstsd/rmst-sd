@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "data:application/zip;base64,UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    "condition": {
+      "regexFilter": "^(https?)://newtab@(.*)",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]

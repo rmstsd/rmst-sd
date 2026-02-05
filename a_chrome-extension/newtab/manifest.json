@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "New Tab Redirector",
+  "version": "1.0",
+  "description": "Intercepts  to open them in a new tab.",
+  "permissions": ["declarativeNetRequest", "downloads", "tabs", "declarativeNetRequestFeedback"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "redirect_rules",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  }
+}
