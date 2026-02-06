@@ -89,6 +89,12 @@ chrome.commands.onCommand.addListener(command => {
           let newUrl = new URL(node.url)
           newUrl.username = 'rmst'
 
+          if (newUrl.hostname === 'bookmarks-evz.pages.dev') {
+            const tt = newUrl.searchParams.get('url')
+            console.log(decodeURIComponent(tt))
+            newUrl = new URL(decodeURIComponent(tt))
+          }
+
           chrome.bookmarks.update(node.id, { url: newUrl.toString() }, updated => {})
         }
         if (node.children) {
