@@ -35,6 +35,7 @@ export async function convertWord() {
 
   const success = await performLspRename(nvWord)
   if (!success) {
+    console.log('lsp 替换失败, 直接替换此处')
     editor.edit(editBuilder => {
       editBuilder.replace(location, nvWord)
     })
