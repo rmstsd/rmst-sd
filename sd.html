@@ -18,6 +18,10 @@
 
     <script>
       const canvas = document.querySelector('canvas')
+
+      document.addEventListener('wheel', e => {
+        console.log(e.deltaY)
+      })
     </script>
   </body>
 </html>
