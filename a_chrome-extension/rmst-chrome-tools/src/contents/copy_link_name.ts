@@ -1,4 +1,4 @@
-import { replaceNbspToSpace } from '@/util.ts'
+import { replaceNbspToSpace } from '@/utils'
 import type { PlasmoCSConfig } from 'plasmo'
 
 export const config: PlasmoCSConfig = {}

@@ -1,6 +1,6 @@
 import type { PlasmoCSConfig } from 'plasmo'
 
-import { replaceNbspToSpace } from '@/util.ts'
+import { replaceNbspToSpace } from '@/utils'
 
 export const config: PlasmoCSConfig = {
   world: 'MAIN'

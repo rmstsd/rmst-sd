@@ -19,6 +19,14 @@ chrome.commands.onCommand.addListener(command => {
   // 这里不写任何逻辑，即可实现“屏蔽”效果
 })
 
+updateBookmarkUrl()
+
+chrome.runtime.onStartup.addListener(() => {
+  console.log('onStartup')
+
+  updateBookmarkUrl()
+})
+
 {
   // 这是 rules.json 中定义的那个空的 Zip 文件头
   const ZIP_MARKER = 'data:application/zip;base64,UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA=='
@@ -78,6 +86,23 @@ chrome.commands.onCommand.addListener(command => {
     // 注意：此时请求已经被掐断了，你救不回来了，只能做记录
   })
 
+  chrome.bookmarks.onCreated.addListener((id, bookmark) => {
+    if (bookmark.url) {
+      console.log('这是一个网页书签')
+      let newUrl = new URL(bookmark.url)
+      newUrl.username = 'rmst'
+
+      chrome.bookmarks.update(bookmark.id, { url: newUrl.toString() }, updated => {})
+    } else {
+      console.log('这是一个新文件夹')
+    }
+  })
+
+  chrome.webNavigation.onBeforeNavigate.addListener(details => {})
+}
+
+// 修正书签链接
+function updateBookmarkUrl() {
   chrome.bookmarks.getTree(treeNodes => {
     console.log(treeNodes) // 遍历这个树来找到你需要的节点
 
@@ -103,18 +128,4 @@ chrome.commands.onCommand.addListener(command => {
       })
     }
   })
-
-  chrome.bookmarks.onCreated.addListener((id, bookmark) => {
-    if (bookmark.url) {
-      console.log('这是一个网页书签')
-      let newUrl = new URL(bookmark.url)
-      newUrl.username = 'rmst'
-
-      chrome.bookmarks.update(bookmark.id, { url: newUrl.toString() }, updated => {})
-    } else {
-      console.log('这是一个新文件夹')
-    }
-  })
-
-  chrome.webNavigation.onBeforeNavigate.addListener(details => {})
 }

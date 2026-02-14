@@ -1,27 +1,94 @@
 <!doctype html>
-<html lang="zh-CN">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Sd</title>
-
+    <meta charset="utf-8" />
+    <title>Projection to y = x</title>
     <style>
       body {
         margin: 0;
+        background: #111;
+      }
+      canvas {
+        display: block;
       }
     </style>
   </head>
-
   <body>
-    <canvas width="600" height="600" style="border: 1px solid red"></canvas>
+    <canvas id="c"></canvas>
 
     <script>
-      const canvas = document.querySelector('canvas')
+      const canvas = document.getElementById('c')
+      const ctx = canvas.getContext('2d')
 
-      document.addEventListener('wheel', e => {
-        console.log(e.deltaY)
+      function resize() {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+      }
+      window.addEventListener('resize', resize)
+      resize()
+
+      let mouse = { x: 0, y: 0 }
+
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect()
+        mouse.x = e.clientX - rect.left
+        mouse.y = e.clientY - rect.top
       })
+
+      // 将 (x, y) 投影到经过 (x0, y0)、45° 方向的直线上
+      function projectTo45(x, y, x0, y0) {
+        const t = (x - x0 + (y - y0)) / 2
+
+        return { x: x0 + t, y: y0 + t }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        const w = canvas.width
+        const h = canvas.height
+
+        ctx.save()
+
+        const mx = mouse.x
+        const my = mouse.y
+
+        const p = projectTo45(mx, my, 100, 0)
+
+        // 画 y = x
+        ctx.strokeStyle = '#444'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.moveTo(-w, -w)
+        ctx.lineTo(w, w)
+        ctx.stroke()
+
+        // 鼠标点
+        ctx.fillStyle = '#ff5555'
+        ctx.beginPath()
+        ctx.arc(mx, my, 6, 0, Math.PI * 2)
+        ctx.fill()
+
+        // 投影点
+        ctx.fillStyle = '#55ff55'
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, 6, 0, Math.PI * 2)
+        ctx.fillStyle = 'pink'
+        ctx.fill()
+
+        // 垂线
+        ctx.strokeStyle = '#66aaff'
+        ctx.beginPath()
+        ctx.moveTo(mx, my)
+        ctx.lineTo(p.x, p.y)
+        ctx.stroke()
+
+        ctx.restore()
+
+        requestAnimationFrame(draw)
+      }
+
+      draw()
     </script>
   </body>
 </html>

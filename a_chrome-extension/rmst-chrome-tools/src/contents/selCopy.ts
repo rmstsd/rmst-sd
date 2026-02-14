@@ -1,4 +1,4 @@
-import { copyText } from '@/util.ts'
+import { copyText } from '@/utils'
 
 document.addEventListener('pointerup', () => {
   chrome.storage.local.get('selCopy', result => {
