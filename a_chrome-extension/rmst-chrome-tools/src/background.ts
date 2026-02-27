@@ -78,14 +78,6 @@ chrome.runtime.onStartup.addListener(() => {
     }
   })
 
-  chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(info => {
-    // console.log('拦截成功！详细信息：', info)
-    // console.log('被拦截的 URL:', info.request.url)
-    // console.log('触发规则 ID:', info.rule.ruleId)
-    // 在这里执行你想要的后台 JS 逻辑
-    // 注意：此时请求已经被掐断了，你救不回来了，只能做记录
-  })
-
   chrome.bookmarks.onCreated.addListener((id, bookmark) => {
     if (bookmark.url) {
       console.log('这是一个网页书签')
@@ -97,8 +89,6 @@ chrome.runtime.onStartup.addListener(() => {
       console.log('这是一个新文件夹')
     }
   })
-
-  chrome.webNavigation.onBeforeNavigate.addListener(details => {})
 }
 
 // 修正书签链接
