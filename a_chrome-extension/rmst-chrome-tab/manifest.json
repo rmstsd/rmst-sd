@@ -8,10 +8,10 @@
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["<all_urls>", "https://suggestqueries.google.com/*"],
+  "host_permissions": ["https://suggestqueries.google.com/*"],
   "chrome_url_overrides": {
     "newtab": "./dist/index.html"
   },
-  "permissions": ["debugger", "tabs", "bookmarks", "contextMenus", "activeTab", "cookies", "storage", "webRequest"],
+  "permissions": [],
   "web_accessible_resources": []
 }
