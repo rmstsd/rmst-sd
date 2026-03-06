@@ -1,13 +1,13 @@
 {
   "name": "rmst-chrome-tools",
   "displayName": "rmst-chrome-tools",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "author": "",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
-    "package": "npm run build && plasmo package",
+    "release-package": "release-it patch && npm run build && plasmo package",
     "command": "tsx watch scripts/command.ts"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "@types/node": "20.11.5",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
+    "release-it": "^19.2.4",
     "typescript": "5.3.3"
   },
   "manifest": {
@@ -36,7 +37,8 @@
       "favicon",
       "declarativeNetRequest",
       "downloads",
-      "tabs"
+      "tabs",
+      "alarms"
     ],
     "declarative_net_request": {
       "rule_resources": [

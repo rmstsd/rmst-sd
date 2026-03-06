@@ -1,5 +1,20 @@
 export {}
 
+// background.js
+
+{
+  // 保活
+  // 创建一个定时器
+  chrome.alarms.create('myPeriodicTask', { periodInMinutes: 0.5 })
+  // 监听定时器触发
+  chrome.alarms.onAlarm.addListener(alarm => {
+    if (alarm.name === 'myPeriodicTask') {
+      console.log('Service Worker 醒来进行工作...')
+      // 执行你的逻辑
+    }
+  })
+}
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: 'copy-link-name',
