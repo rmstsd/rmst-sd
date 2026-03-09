@@ -1,10 +1,7 @@
 {
-  // "brackets": [["[", "]"]],
-  // "autoClosingPairs": [{ "open": "[", "close": "]" }],
-  // "surroundingPairs": [["[", "]"]],
   "folding": {
     "markers": {
-      "start": "^\\[.+\\]$",
+      "start": "^\\[.*\\]",
       "end": "^\\s*$"
     }
   }

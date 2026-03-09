@@ -1,5 +1,20 @@
 export {}
 
+// background.js
+
+{
+  // 保活
+  // 创建一个定时器
+  chrome.alarms.create('myPeriodicTask', { periodInMinutes: 0.5 })
+  // 监听定时器触发
+  chrome.alarms.onAlarm.addListener(alarm => {
+    if (alarm.name === 'myPeriodicTask') {
+      console.log('Service Worker 醒来进行工作...')
+      // 执行你的逻辑
+    }
+  })
+}
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: 'copy-link-name',
@@ -13,3 +28,109 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.sendMessage(tab.id, 'copy', { frameId: info.frameId }, () => {})
   }
 })
+
+chrome.commands.onCommand.addListener(command => {
+  console.log(`接收到命令: ${command}，但我不做任何事。`)
+  // 这里不写任何逻辑，即可实现“屏蔽”效果
+})
+
+updateBookmarkUrl()
+
+chrome.runtime.onStartup.addListener(() => {
+  console.log('onStartup')
+
+  updateBookmarkUrl()
+})
+
+{
+  // 这是 rules.json 中定义的那个空的 Zip 文件头
+  const ZIP_MARKER = 'data:application/zip;base64,UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA=='
+  chrome.downloads.onCreated.addListener(async downloadItem => {
+    console.log('downloadItem', downloadItem)
+
+    if (downloadItem.finalUrl.startsWith(ZIP_MARKER)) {
+      // 2. 立即取消下载
+      chrome.downloads.cancel(downloadItem.id, () => {
+        if (chrome.runtime.lastError) {
+          console.error('Cancel failed:', chrome.runtime.lastError)
+        }
+      })
+      // 3. 从下载历史中抹除（让用户无感知）
+      chrome.downloads.erase({ id: downloadItem.id })
+
+      const targetUrl = downloadItem.url
+      if (!targetUrl.startsWith('http')) {
+        return
+      }
+
+      const url = new URL(targetUrl)
+      url.username = ''
+
+      // 查询当前窗口中处于活动状态的标签页
+      let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+
+      if (tab) {
+        console.log('当前标签页的索引是:', tab.index)
+        chrome.tabs.create({ url: url.toString(), active: true, index: tab.index + 1 })
+      }
+
+      return
+
+      // 4. 解析原始 URL
+      // 我们在 rules.json 里构造的格式是: ...zip?originalUrl=https://example.com
+      // 注意：由于 regexSubstitution 是直接拼接，所以我们取参数之后的所有字符
+      const paramKey = '?originalUrl='
+      const splitIndex = downloadItem.url.indexOf(paramKey)
+
+      if (splitIndex !== -1) {
+        const originalUrl = downloadItem.url.substring(splitIndex + paramKey.length)
+
+        // 5. 在新标签页打开原始链接
+        if (originalUrl) {
+          chrome.tabs.create({ url: originalUrl, active: true })
+        }
+      }
+    }
+  })
+
+  chrome.bookmarks.onCreated.addListener((id, bookmark) => {
+    if (bookmark.url) {
+      console.log('这是一个网页书签')
+      let newUrl = new URL(bookmark.url)
+      newUrl.username = 'rmst'
+
+      chrome.bookmarks.update(bookmark.id, { url: newUrl.toString() }, updated => {})
+    } else {
+      console.log('这是一个新文件夹')
+    }
+  })
+}
+
+// 修正书签链接
+function updateBookmarkUrl() {
+  chrome.bookmarks.getTree(treeNodes => {
+    console.log(treeNodes) // 遍历这个树来找到你需要的节点
+
+    // dfs 深度遍历  treeNodes children， 打印书签
+    dfs(treeNodes)
+    function dfs(treeNodes) {
+      treeNodes.forEach(node => {
+        if (node.title && node.url) {
+          let newUrl = new URL(node.url)
+          newUrl.username = 'rmst'
+
+          if (newUrl.hostname === 'bookmarks-evz.pages.dev') {
+            const tt = newUrl.searchParams.get('url')
+            console.log(decodeURIComponent(tt))
+            newUrl = new URL(decodeURIComponent(tt))
+          }
+
+          chrome.bookmarks.update(node.id, { url: newUrl.toString() }, updated => {})
+        }
+        if (node.children) {
+          dfs(node.children)
+        }
+      })
+    }
+  })
+}

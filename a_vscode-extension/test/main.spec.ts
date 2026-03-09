@@ -1,6 +1,7 @@
 import { test, expect } from 'vitest'
-import { code, pureFunc } from '../src/pure-func'
+import getNewWords from '../src/utils/getNewWords'
 
 test('匿名函数', () => {
-  pureFunc(code)
+  const { ansList, componentName } = getNewWords('rmst-sd')
+  console.log('- componentName', componentName)
 })

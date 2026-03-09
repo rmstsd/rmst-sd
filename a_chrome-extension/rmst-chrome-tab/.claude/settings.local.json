@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -f vite.config.ts index.html src/main.tsx src/App.tsx src/vite-env.d.ts src/index.css public/background.js public/ss.js public/favicon.ico)",
+      "Bash(rmdir public)",
+      "Bash(pnpm *)",
+      "Bash(pnpm run dev)"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+2026-01-15 11:25:35,360 DEBUG - Starting WinSW in console mode
+2026-01-15 11:25:35,389 INFO  - Installing service 'My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 11:25:35,433 INFO  - Service 'My Node.js SEA Service (A_Rmst_MyNodeApp)' was installed successfully.
+2026-01-15 11:26:20,546 DEBUG - Starting WinSW in service mode
+2026-01-15 11:26:20,673 INFO  - Starting E:\rmst-sd\node\node-sea\hello.exe 
+2026-01-15 11:26:20,697 INFO  - Started process 10756
+2026-01-15 11:26:20,717 DEBUG - Forwarding logs of the process System.Diagnostics.Process (hello) to WinSW.SizeBasedRollingLogAppender
+2026-01-15 11:26:24,013 INFO  - Stopping A_Rmst_MyNodeApp
+2026-01-15 11:26:24,014 DEBUG - ProcessKill 10756
+2026-01-15 11:26:24,016 DEBUG - Stopping process 10756...
+2026-01-15 11:26:24,023 DEBUG - Process 10756 canceled with code -1073741510.
+2026-01-15 11:26:24,027 INFO  - Finished A_Rmst_MyNodeApp
+2026-01-15 11:26:26,659 DEBUG - Starting WinSW in service mode
+2026-01-15 11:26:26,784 INFO  - Starting E:\rmst-sd\node\node-sea\hello.exe 
+2026-01-15 11:26:26,808 INFO  - Started process 4160
+2026-01-15 11:26:26,826 DEBUG - Forwarding logs of the process System.Diagnostics.Process (hello) to WinSW.SizeBasedRollingLogAppender
+2026-01-15 11:28:04,639 DEBUG - Starting WinSW in console mode
+2026-01-15 11:28:04,674 INFO  - Stopping service 'My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 11:28:04,681 INFO  - Service 'My Node.js SEA Service (A_Rmst_MyNodeApp)' stopped successfully.
+2026-01-15 11:28:04,682 INFO  - Stopping A_Rmst_MyNodeApp
+2026-01-15 11:28:04,682 DEBUG - ProcessKill 4160
+2026-01-15 11:28:04,684 DEBUG - Stopping process 4160...
+2026-01-15 11:28:04,692 DEBUG - Process 4160 canceled with code -1073741510.
+2026-01-15 11:28:04,695 INFO  - Finished A_Rmst_MyNodeApp
+2026-01-15 11:28:13,615 DEBUG - Starting WinSW in console mode
+2026-01-15 11:28:13,643 INFO  - Uninstalling service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 11:28:13,648 INFO  - Service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)' was uninstalled successfully.
+2026-01-15 11:28:50,133 DEBUG - Starting WinSW in console mode
+2026-01-15 11:28:54,235 DEBUG - Starting WinSW in console mode
+2026-01-15 11:28:54,267 INFO  - Installing service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 11:28:54,293 INFO  - Service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)' was installed successfully.
+2026-01-15 11:28:56,144 DEBUG - Starting WinSW in console mode
+2026-01-15 12:02:37,340 DEBUG - Starting WinSW in service mode
+2026-01-15 12:02:37,483 INFO  - Starting E:\rmst-sd\node\node-sea\hello.exe 
+2026-01-15 12:02:37,517 INFO  - Started process 5268
+2026-01-15 12:02:37,528 DEBUG - Forwarding logs of the process System.Diagnostics.Process (hello) to WinSW.SizeBasedRollingLogAppender
+2026-01-15 12:57:08,072 INFO  - Stopping A_Rmst_MyNodeApp
+2026-01-15 12:57:08,072 DEBUG - ProcessKill 5268
+2026-01-15 12:57:08,075 DEBUG - Stopping process 5268...
+2026-01-15 12:57:08,081 DEBUG - Process 5268 canceled with code -1073741510.
+2026-01-15 12:57:08,084 INFO  - Finished A_Rmst_MyNodeApp
+2026-01-15 13:03:53,788 DEBUG - Starting WinSW in service mode
+2026-01-15 13:03:53,931 INFO  - Starting E:\rmst-sd\node\node-sea\hello.exe 
+2026-01-15 13:03:53,960 INFO  - Started process 8120
+2026-01-15 13:03:53,971 DEBUG - Forwarding logs of the process System.Diagnostics.Process (hello) to WinSW.SizeBasedRollingLogAppender
+2026-01-15 13:05:54,826 DEBUG - Starting WinSW in console mode
+2026-01-15 13:05:54,858 INFO  - Uninstalling service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 13:05:54,862 WARN  - Service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)' is started. It may be impossible to uninstall it.
+2026-01-15 13:05:54,863 INFO  - Service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)' was uninstalled successfully.
+2026-01-15 13:06:03,319 INFO  - Stopping A_Rmst_MyNodeApp
+2026-01-15 13:06:03,320 DEBUG - ProcessKill 8120
+2026-01-15 13:06:03,323 DEBUG - Stopping process 8120...
+2026-01-15 13:06:03,329 DEBUG - Process 8120 canceled with code -1073741510.
+2026-01-15 13:06:03,334 INFO  - Finished A_Rmst_MyNodeApp
+2026-01-15 13:06:16,938 DEBUG - Starting WinSW in console mode
+2026-01-15 13:06:16,973 INFO  - Installing service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 13:06:17,000 INFO  - Service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)' was installed successfully.
+2026-01-15 13:07:45,702 DEBUG - Starting WinSW in service mode
+2026-01-15 13:07:45,845 INFO  - Starting E:\rmst-sd\node\node-sea\hello.exe 
+2026-01-15 13:07:45,875 INFO  - Started process 8208
+2026-01-15 13:07:45,886 DEBUG - Forwarding logs of the process System.Diagnostics.Process (hello) to WinSW.SizeBasedRollingLogAppender
+2026-01-15 13:13:42,977 DEBUG - Starting WinSW in console mode
+2026-01-15 13:13:43,121 INFO  - Stopping service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 13:13:43,128 INFO  - Service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)' stopped successfully.
+2026-01-15 13:13:43,129 INFO  - Stopping A_Rmst_MyNodeApp
+2026-01-15 13:13:43,129 DEBUG - ProcessKill 8208
+2026-01-15 13:13:43,131 DEBUG - Stopping process 8208...
+2026-01-15 13:13:43,137 DEBUG - Process 8208 canceled with code -1073741510.
+2026-01-15 13:13:43,143 INFO  - Finished A_Rmst_MyNodeApp
+2026-01-15 13:13:51,122 DEBUG - Starting WinSW in console mode
+2026-01-15 13:13:51,150 INFO  - Uninstalling service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)'...
+2026-01-15 13:13:51,155 INFO  - Service 'A_My Node.js SEA Service (A_Rmst_MyNodeApp)' was uninstalled successfully.

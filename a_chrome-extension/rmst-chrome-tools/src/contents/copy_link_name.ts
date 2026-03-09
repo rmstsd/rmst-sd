@@ -1,4 +1,4 @@
-import { replaceNbspToSpace } from '@/util.ts'
+import { replaceNbspToSpace } from '@/utils'
 import type { PlasmoCSConfig } from 'plasmo'
 
 export const config: PlasmoCSConfig = {}
@@ -20,8 +20,6 @@ document.addEventListener(
 )
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log(copyLinkNameLastTarget)
-
   if (message === 'copy' && copyLinkNameLastTarget != null) {
     console.log('copyLinkNameLastTarget.innerText', copyLinkNameLastTarget.innerText)
 

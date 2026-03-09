@@ -1,13 +1,14 @@
 {
   "name": "rmst-chrome-tools",
-  "displayName": "Rmst chrome tools",
-  "version": "0.0.1",
+  "displayName": "rmst-chrome-tools",
+  "version": "0.0.3",
   "description": "",
   "author": "",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
-    "package": "plasmo package"
+    "release-package": "release-it patch && npm run build && plasmo package",
+    "command": "tsx watch scripts/command.ts"
   },
   "dependencies": {
     "plasmo": "0.90.5",
@@ -19,6 +20,7 @@
     "@types/node": "20.11.5",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
+    "release-it": "^19.2.4",
     "typescript": "5.3.3"
   },
   "manifest": {
@@ -27,21 +29,32 @@
       "http://*/*"
     ],
     "permissions": [
-      "debugger",
       "tabs",
       "bookmarks",
       "contextMenus",
-      "activeTab",
       "cookies",
       "storage",
-      "webRequest",
       "favicon",
-      "scripting"
+      "declarativeNetRequest",
+      "downloads",
+      "tabs",
+      "alarms"
     ],
+    "declarative_net_request": {
+      "rule_resources": [
+        {
+          "id": "redirect_rules",
+          "enabled": true,
+          "path": "~rules/rules.json"
+        }
+      ]
+    },
     "web_accessible_resources": [
       {
         "resources": [
-          "_favicon/*"
+          "_favicon/*",
+          "assets/*",
+          "rules/*"
         ],
         "matches": [
           "<all_urls>"
@@ -50,6 +63,38 @@
           "*"
         ]
       }
-    ]
+    ],
+    "commands": {
+      "command_0": {
+        "description": "屏蔽 0"
+      },
+      "command_1": {
+        "description": "屏蔽 1"
+      },
+      "command_2": {
+        "description": "屏蔽 2"
+      },
+      "command_3": {
+        "description": "屏蔽 3"
+      },
+      "command_4": {
+        "description": "屏蔽 4"
+      },
+      "command_5": {
+        "description": "屏蔽 5"
+      },
+      "command_6": {
+        "description": "屏蔽 6"
+      },
+      "command_7": {
+        "description": "屏蔽 7"
+      },
+      "command_8": {
+        "description": "屏蔽 8"
+      },
+      "command_9": {
+        "description": "屏蔽 9"
+      }
+    }
   }
 }
