@@ -14,7 +14,9 @@
     "pretest": "yarn run compile",
     "vsce-build-vsix": "vsce package",
     "test": "vitest",
-    "publish": "vsce publish patch"
+    "--": "----------",
+    "vscode-publish": "vsce publish patch",
+    "ovsx-publish": "ovsx publish -p ovsxat_082b7242-2d94-4e6f-8258-86980669a364"
   },
   "dependencies": {
     "@babel/parser": "^7.20.0",
@@ -31,6 +33,7 @@
     "@vscode/vsce": "^3.3.2",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
+    "ovsx": "^0.10.9",
     "vitest": "^0.24.3"
   },
   "engines": {
