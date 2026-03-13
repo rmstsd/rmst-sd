@@ -11,32 +11,18 @@
 
   <body>
     <script>
-      document.addEventListener('click', () => {
-        console.log('move')
-
-        setTimeout(() => {
-          console.log(1)
-        })
-
-        requestAnimationFrame(() => {
-          console.log('raf')
-        })
-        // render()
-      })
-
-      let isTask = false
-      function render() {
-        if (isTask) {
-          return
+      // 监听鼠标按下事件（防止某些基于按下触发的默认行为，如特殊文本选择）
+      document.addEventListener('keyup', function (event) {
+        if (event.altKey) {
+          event.preventDefault()
         }
-
-        isTask = true
-        setTimeout(() => {
-          console.log('render UI')
-
-          isTask = false
-        })
-      }
+      })
+      document.addEventListener('keydown', function (event) {
+        // alt + F
+        if (event.altKey && event.keyCode === 70) {
+          event.preventDefault()
+        }
+      })
     </script>
   </body>
 </html>

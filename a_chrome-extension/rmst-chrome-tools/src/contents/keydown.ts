@@ -15,4 +15,15 @@ document.addEventListener('keydown', evt => {
       navigator.clipboard.writeText(replaceNbspToSpace(selText))
     }
   }
+
+  // alt + F
+  if (evt.altKey && evt.keyCode === 70) {
+    evt.preventDefault()
+  }
+})
+
+document.addEventListener('keyup', function (event) {
+  if (event.altKey) {
+    event.preventDefault()
+  }
 })
